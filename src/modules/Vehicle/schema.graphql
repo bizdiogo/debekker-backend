@@ -1,0 +1,5 @@
+# import Veichle from "./generated/prisma.graphql"
+
+type Query {
+  vehiclesAvailable(startTime: DateTime, endTime: DateTime, orderBy: VehicleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vehicle]!
+}

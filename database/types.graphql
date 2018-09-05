@@ -240,6 +240,6 @@ type Vehicle {
   events: [Event!]!
   id: ID! @unique
   name: String!
-  iteme: String!
+  plate: String!
   year: Int
 }

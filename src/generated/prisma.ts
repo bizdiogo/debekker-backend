@@ -9662,7 +9662,7 @@ type Vehicle implements Node {
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event!]
   id: ID!
   name: String!
-  iteme: String!
+  plate: String!
   year: Int
 }
 
@@ -9680,7 +9680,7 @@ input VehicleCreateInput {
   color: String
   description: String
   name: String!
-  iteme: String!
+  plate: String!
   year: Int
   events: EventCreateManyWithoutVehiclesInput
 }
@@ -9694,7 +9694,7 @@ input VehicleCreateWithoutEventsInput {
   color: String
   description: String
   name: String!
-  iteme: String!
+  plate: String!
   year: Int
 }
 
@@ -9716,8 +9716,8 @@ enum VehicleOrderByInput {
   id_DESC
   name_ASC
   name_DESC
-  iteme_ASC
-  iteme_DESC
+  plate_ASC
+  plate_DESC
   year_ASC
   year_DESC
   updatedAt_ASC
@@ -9731,7 +9731,7 @@ type VehiclePreviousValues {
   description: String
   id: ID!
   name: String!
-  iteme: String!
+  plate: String!
   year: Int
 }
 
@@ -9778,7 +9778,7 @@ input VehicleUpdateInput {
   color: String
   description: String
   name: String
-  iteme: String
+  plate: String
   year: Int
   events: EventUpdateManyWithoutVehiclesInput
 }
@@ -9796,7 +9796,7 @@ input VehicleUpdateWithoutEventsDataInput {
   color: String
   description: String
   name: String
-  iteme: String
+  plate: String
   year: Int
 }
 
@@ -9980,46 +9980,46 @@ input VehicleWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  iteme: String
+  plate: String
 
   """All values that are not equal to given value."""
-  iteme_not: String
+  plate_not: String
 
   """All values that are contained in given list."""
-  iteme_in: [String!]
+  plate_in: [String!]
 
   """All values that are not contained in given list."""
-  iteme_not_in: [String!]
+  plate_not_in: [String!]
 
   """All values less than the given value."""
-  iteme_lt: String
+  plate_lt: String
 
   """All values less than or equal the given value."""
-  iteme_lte: String
+  plate_lte: String
 
   """All values greater than the given value."""
-  iteme_gt: String
+  plate_gt: String
 
   """All values greater than or equal the given value."""
-  iteme_gte: String
+  plate_gte: String
 
   """All values containing the given string."""
-  iteme_contains: String
+  plate_contains: String
 
   """All values not containing the given string."""
-  iteme_not_contains: String
+  plate_not_contains: String
 
   """All values starting with the given string."""
-  iteme_starts_with: String
+  plate_starts_with: String
 
   """All values not starting with the given string."""
-  iteme_not_starts_with: String
+  plate_not_starts_with: String
 
   """All values ending with the given string."""
-  iteme_ends_with: String
+  plate_ends_with: String
 
   """All values not ending with the given string."""
-  iteme_not_ends_with: String
+  plate_not_ends_with: String
   year: Int
 
   """All values that are not equal to given value."""
@@ -10417,8 +10417,8 @@ export type VehicleOrderByInput =   'color_ASC' |
   'id_DESC' |
   'name_ASC' |
   'name_DESC' |
-  'iteme_ASC' |
-  'iteme_DESC' |
+  'plate_ASC' |
+  'plate_DESC' |
   'year_ASC' |
   'year_DESC' |
   'updatedAt_ASC' |
@@ -11869,7 +11869,7 @@ export interface VehicleUpdateInput {
   color?: String
   description?: String
   name?: String
-  iteme?: String
+  plate?: String
   year?: Int
   events?: EventUpdateManyWithoutVehiclesInput
 }
@@ -12309,7 +12309,7 @@ export interface VehicleCreateInput {
   color?: String
   description?: String
   name: String
-  iteme: String
+  plate: String
   year?: Int
   events?: EventCreateManyWithoutVehiclesInput
 }
@@ -12531,20 +12531,20 @@ export interface VehicleWhereInput {
   name_not_starts_with?: String
   name_ends_with?: String
   name_not_ends_with?: String
-  iteme?: String
-  iteme_not?: String
-  iteme_in?: String[] | String
-  iteme_not_in?: String[] | String
-  iteme_lt?: String
-  iteme_lte?: String
-  iteme_gt?: String
-  iteme_gte?: String
-  iteme_contains?: String
-  iteme_not_contains?: String
-  iteme_starts_with?: String
-  iteme_not_starts_with?: String
-  iteme_ends_with?: String
-  iteme_not_ends_with?: String
+  plate?: String
+  plate_not?: String
+  plate_in?: String[] | String
+  plate_not_in?: String[] | String
+  plate_lt?: String
+  plate_lte?: String
+  plate_gt?: String
+  plate_gte?: String
+  plate_contains?: String
+  plate_not_contains?: String
+  plate_starts_with?: String
+  plate_not_starts_with?: String
+  plate_ends_with?: String
+  plate_not_ends_with?: String
   year?: Int
   year_not?: Int
   year_in?: Int[] | Int
@@ -13089,7 +13089,7 @@ export interface VehicleCreateWithoutEventsInput {
   color?: String
   description?: String
   name: String
-  iteme: String
+  plate: String
   year?: Int
 }
 
@@ -14011,7 +14011,7 @@ export interface VehicleUpdateWithoutEventsDataInput {
   color?: String
   description?: String
   name?: String
-  iteme?: String
+  plate?: String
   year?: Int
 }
 
@@ -15301,7 +15301,7 @@ export interface VehiclePreviousValues {
   description?: String
   id: ID_Output
   name: String
-  iteme: String
+  plate: String
   year?: Int
 }
 
@@ -15523,7 +15523,7 @@ export interface Vehicle extends Node {
   events?: Event[]
   id: ID_Output
   name: String
-  iteme: String
+  plate: String
   year?: Int
 }
 
