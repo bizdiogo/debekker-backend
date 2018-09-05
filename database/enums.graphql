@@ -1,0 +1,53 @@
+enum SectionTypes {
+  Title
+  Subtitle
+  Subheading
+  Text
+  Items
+}
+
+enum VehicleType {
+  Motorcycle
+  Car
+  Van
+}
+
+enum LanguageEnum {
+  FR
+  NL
+  EN
+}
+
+enum Role {
+  Admin
+  Freelance
+  Employee
+}
+
+enum StatusOffer {
+  Accepted
+  Rejected
+  Pending
+  Template
+}
+
+enum EmailSender {
+  Debekker
+  Client
+}
+
+enum ClientType {
+  Prive
+  Societe
+}
+
+enum Channel {
+  Email
+  Phone
+  Call
+  Message
+}
+
+enum Country {
+  BE
+}

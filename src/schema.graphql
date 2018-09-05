@@ -1,0 +1,27 @@
+# import User from "./generated/prisma.graphql"
+
+type Query {
+  me: User
+}
+
+type Mutation {
+  login(email: String!, password: String!): Auth!
+}
+
+type User {
+  createdAt: DateTime!
+  id: ID!
+  role: Role!
+  updatedAt: DateTime!
+  email: String!
+  image: String
+  name: String!
+  employee: Employee
+  jobs: [Job!]!
+  language: Language
+}
+
+type Auth {
+  token: String!
+  user: User!
+}

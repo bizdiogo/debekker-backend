@@ -1,0 +1,245 @@
+type Client {
+  address: String
+  createdAt: DateTime!
+  email: String!
+  events: [Event!]!
+  id: ID! @unique
+  name: String!
+  offers: [Offer!]!
+  phone: String!
+  tva: String
+  clientContacts: [ClientContact!]!
+  language: Language
+  communications: [Communication!]!
+  type: ClientType
+}
+
+type Communication {
+  id: ID! @unique
+  message: String!
+  subject: String!
+  channel: Channel!
+  client: Client
+  date: DateTime!
+  gmtOffset: String!
+}
+
+type Event {
+  client: Client
+  id: ID! @unique
+  offer: Offer
+  employees: [Employee!]!
+  endTime: DateTime!
+  gmtOffset: String!
+  startTime: DateTime!
+  stuffs: [Stuff!]!
+  vehicles: [Vehicle!]!
+}
+
+type File {
+  contentType: String!
+  createdAt: DateTime!
+  id: ID! @unique
+  name: String!
+  secret: String! @unique
+  size: Int!
+  updatedAt: DateTime!
+  url: String! @unique
+}
+
+type Language {
+  id: ID! @unique
+  type: LanguageEnum!
+  itemTranslations: [ItemTranslation!]!
+  clients: [Client!]!
+  offers: [Offer!]!
+  items: [Item!]!
+  users: [User!]!
+}
+
+type Offer {
+  version: Int @default(value: 1)
+  client: Client
+  createdAt: DateTime!
+  customMessage: String
+  event: Event
+  id: ID! @unique
+  status: StatusOffer!
+  language: Language
+  address: String!
+  budgetLines: [BudgetLine!]!
+  city: String!
+  clientContact: ClientContact
+  employeeEstimations: [EmployeeEstimation!]!
+  endTime: DateTime
+  eventType: EventType
+  gmtOffset: String!
+  maxPersons: Int
+  minPersons: Int
+  name: String!
+  place: Place
+  postalCode: String!
+  sectionItems: [SectionItem!]!
+  startTime: DateTime
+}
+
+type ItemTranslation {
+  description: String!
+  id: ID! @unique
+  language: Language
+  items: Item
+}
+
+type Item {
+  description: String!
+  id: ID! @unique
+  name: String!
+  itemTranslations: [ItemTranslation!]!
+  internalDescription: String
+  language: Language
+  sectionItems: [SectionItem!]!
+}
+
+type User {
+  createdAt: DateTime!
+  id: ID! @unique
+  role: Role!
+  updatedAt: DateTime!
+  email: String! @unique
+  image: String
+  name: String!
+  password: String!
+  employee: Employee
+  jobs: [Job!]!
+  language: Language
+}
+
+type ClientContact {
+  client: Client
+  email: String!
+  id: ID! @unique
+  mobilePhone: String
+  name: String!
+  phoneNumber: String
+  offers: [Offer!]!
+}
+
+type Place {
+  address: String!
+  city: String!
+  id: ID! @unique
+  name: String!
+  postalCode: String!
+  country: Country @default(value: BE)
+  note: String
+  offer: Offer
+  placeContacts: [PlaceContact!]!
+}
+
+type Temiteme {
+  id: ID! @unique
+}
+
+type BudgetLine {
+  description: String!
+  id: ID! @unique
+  offer: Offer
+  quantity: Int
+  tax: Tax
+  unitPrice: Float
+  value: Float!
+}
+
+type Employee {
+  endedAt: DateTime
+  estimatedEndAt: DateTime!
+  estimatedStartAt: DateTime!
+  event: Event
+  id: ID! @unique
+  job: Job
+  startedAt: DateTime
+  user: User
+}
+
+type EmployeeEstimation {
+  estimatedEndAt: DateTime!
+  estimatedStartAt: DateTime!
+  id: ID! @unique
+  job: Job
+  number: Int!
+  offer: Offer
+  pricePerHour: Float! @default(value: 0.0)
+  total: Float! @default(value: 0.0)
+}
+
+type EventType {
+  id: ID! @unique
+  name: String!
+  offers: [Offer!]!
+}
+
+type Job {
+  employeeEstimations: [EmployeeEstimation!]!
+  employees: [Employee!]!
+  id: ID! @unique
+  name: String!
+  users: [User!]!
+}
+
+type PlaceContact {
+  email: String
+  id: ID! @unique
+  mobilePhone: String
+  name: String!
+  phoneNumber: String
+  place: Place
+}
+
+type SectionItem {
+  content: String @default(value: "''")
+  h: Int!
+  i: String!
+  id: ID! @unique
+  isDraggable: Boolean @default(value: true)
+  isResizable: Boolean @default(value: false)
+  maxH: Int
+  maxW: Int
+  minH: Int
+  minW: Int
+  moved: Boolean @default(value: false)
+  offer: Offer
+  persons: Int @default(value: 0)
+  items: [Item!]!
+  price: Float @default(value: 0.0)
+  static: Boolean @default(value: false)
+  time: DateTime
+  title: String @default(value: "''")
+  type: SectionTypes! @default(value: Title)
+  w: Int!
+  x: Int!
+  y: Int! @default(value: 0)
+}
+
+type Stuff {
+  events: [Event!]!
+  id: ID! @unique
+  name: String!
+  quantity: Int! @default(value: 0)
+}
+
+type Tax {
+  budgetLines: [BudgetLine!]!
+  id: ID! @unique
+  name: String!
+  value: Float!
+}
+
+type Vehicle {
+  color: String
+  description: String
+  events: [Event!]!
+  id: ID! @unique
+  name: String!
+  iteme: String!
+  year: Int
+}
