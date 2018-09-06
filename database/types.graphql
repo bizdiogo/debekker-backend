@@ -36,21 +36,9 @@ type Event {
   vehicles: [Vehicle!]!
 }
 
-type File {
-  contentType: String!
-  createdAt: DateTime!
-  id: ID! @unique
-  name: String!
-  secret: String! @unique
-  size: Int!
-  updatedAt: DateTime!
-  url: String! @unique
-}
-
 type Language {
   id: ID! @unique
   type: LanguageEnum!
-  itemTranslations: [ItemTranslation!]!
   clients: [Client!]!
   offers: [Offer!]!
   items: [Item!]!
@@ -83,18 +71,10 @@ type Offer {
   startTime: DateTime
 }
 
-type ItemTranslation {
-  description: String!
-  id: ID! @unique
-  language: Language
-  items: Item
-}
-
 type Item {
   description: String!
   id: ID! @unique
   name: String!
-  itemTranslations: [ItemTranslation!]!
   internalDescription: String
   language: Language
   sectionItems: [SectionItem!]!
@@ -134,10 +114,6 @@ type Place {
   note: String
   offer: Offer
   placeContacts: [PlaceContact!]!
-}
-
-type Temiteme {
-  id: ID! @unique
 }
 
 type BudgetLine {

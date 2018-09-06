@@ -1,5 +1,5 @@
 # source: http://localhost:4466
-# timestamp: Wed Sep 05 2018 11:28:45 GMT-0300 (GMT-03:00)
+# timestamp: Thu Sep 06 2018 17:09:51 GMT-0300 (GMT-03:00)
 
 type AggregateBudgetLine {
   count: Int!
@@ -33,15 +33,7 @@ type AggregateEventType {
   count: Int!
 }
 
-type AggregateFile {
-  count: Int!
-}
-
 type AggregateItem {
-  count: Int!
-}
-
-type AggregateItemTranslation {
   count: Int!
 }
 
@@ -74,10 +66,6 @@ type AggregateStuff {
 }
 
 type AggregateTax {
-  count: Int!
-}
-
-type AggregateTemiteme {
   count: Int!
 }
 
@@ -3347,409 +3335,10 @@ input EventWhereUniqueInput {
   id: ID
 }
 
-type File implements Node {
-  contentType: String!
-  createdAt: DateTime!
-  id: ID!
-  name: String!
-  secret: String!
-  size: Int!
-  updatedAt: DateTime!
-  url: String!
-}
-
-"""A connection to a list of items."""
-type FileConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [FileEdge]!
-  aggregate: AggregateFile!
-}
-
-input FileCreateInput {
-  contentType: String!
-  name: String!
-  secret: String!
-  size: Int!
-  url: String!
-}
-
-"""An edge in a connection."""
-type FileEdge {
-  """The item at the end of the edge."""
-  node: File!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum FileOrderByInput {
-  contentType_ASC
-  contentType_DESC
-  createdAt_ASC
-  createdAt_DESC
-  id_ASC
-  id_DESC
-  name_ASC
-  name_DESC
-  secret_ASC
-  secret_DESC
-  size_ASC
-  size_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  url_ASC
-  url_DESC
-}
-
-type FilePreviousValues {
-  contentType: String!
-  createdAt: DateTime!
-  id: ID!
-  name: String!
-  secret: String!
-  size: Int!
-  updatedAt: DateTime!
-  url: String!
-}
-
-type FileSubscriptionPayload {
-  mutation: MutationType!
-  node: File
-  updatedFields: [String!]
-  previousValues: FilePreviousValues
-}
-
-input FileSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [FileSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [FileSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [FileSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: FileWhereInput
-}
-
-input FileUpdateInput {
-  contentType: String
-  name: String
-  secret: String
-  size: Int
-  url: String
-}
-
-input FileWhereInput {
-  """Logical AND on all given filters."""
-  AND: [FileWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [FileWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [FileWhereInput!]
-  contentType: String
-
-  """All values that are not equal to given value."""
-  contentType_not: String
-
-  """All values that are contained in given list."""
-  contentType_in: [String!]
-
-  """All values that are not contained in given list."""
-  contentType_not_in: [String!]
-
-  """All values less than the given value."""
-  contentType_lt: String
-
-  """All values less than or equal the given value."""
-  contentType_lte: String
-
-  """All values greater than the given value."""
-  contentType_gt: String
-
-  """All values greater than or equal the given value."""
-  contentType_gte: String
-
-  """All values containing the given string."""
-  contentType_contains: String
-
-  """All values not containing the given string."""
-  contentType_not_contains: String
-
-  """All values starting with the given string."""
-  contentType_starts_with: String
-
-  """All values not starting with the given string."""
-  contentType_not_starts_with: String
-
-  """All values ending with the given string."""
-  contentType_ends_with: String
-
-  """All values not ending with the given string."""
-  contentType_not_ends_with: String
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  name: String
-
-  """All values that are not equal to given value."""
-  name_not: String
-
-  """All values that are contained in given list."""
-  name_in: [String!]
-
-  """All values that are not contained in given list."""
-  name_not_in: [String!]
-
-  """All values less than the given value."""
-  name_lt: String
-
-  """All values less than or equal the given value."""
-  name_lte: String
-
-  """All values greater than the given value."""
-  name_gt: String
-
-  """All values greater than or equal the given value."""
-  name_gte: String
-
-  """All values containing the given string."""
-  name_contains: String
-
-  """All values not containing the given string."""
-  name_not_contains: String
-
-  """All values starting with the given string."""
-  name_starts_with: String
-
-  """All values not starting with the given string."""
-  name_not_starts_with: String
-
-  """All values ending with the given string."""
-  name_ends_with: String
-
-  """All values not ending with the given string."""
-  name_not_ends_with: String
-  secret: String
-
-  """All values that are not equal to given value."""
-  secret_not: String
-
-  """All values that are contained in given list."""
-  secret_in: [String!]
-
-  """All values that are not contained in given list."""
-  secret_not_in: [String!]
-
-  """All values less than the given value."""
-  secret_lt: String
-
-  """All values less than or equal the given value."""
-  secret_lte: String
-
-  """All values greater than the given value."""
-  secret_gt: String
-
-  """All values greater than or equal the given value."""
-  secret_gte: String
-
-  """All values containing the given string."""
-  secret_contains: String
-
-  """All values not containing the given string."""
-  secret_not_contains: String
-
-  """All values starting with the given string."""
-  secret_starts_with: String
-
-  """All values not starting with the given string."""
-  secret_not_starts_with: String
-
-  """All values ending with the given string."""
-  secret_ends_with: String
-
-  """All values not ending with the given string."""
-  secret_not_ends_with: String
-  size: Int
-
-  """All values that are not equal to given value."""
-  size_not: Int
-
-  """All values that are contained in given list."""
-  size_in: [Int!]
-
-  """All values that are not contained in given list."""
-  size_not_in: [Int!]
-
-  """All values less than the given value."""
-  size_lt: Int
-
-  """All values less than or equal the given value."""
-  size_lte: Int
-
-  """All values greater than the given value."""
-  size_gt: Int
-
-  """All values greater than or equal the given value."""
-  size_gte: Int
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  url: String
-
-  """All values that are not equal to given value."""
-  url_not: String
-
-  """All values that are contained in given list."""
-  url_in: [String!]
-
-  """All values that are not contained in given list."""
-  url_not_in: [String!]
-
-  """All values less than the given value."""
-  url_lt: String
-
-  """All values less than or equal the given value."""
-  url_lte: String
-
-  """All values greater than the given value."""
-  url_gt: String
-
-  """All values greater than or equal the given value."""
-  url_gte: String
-
-  """All values containing the given string."""
-  url_contains: String
-
-  """All values not containing the given string."""
-  url_not_contains: String
-
-  """All values starting with the given string."""
-  url_starts_with: String
-
-  """All values not starting with the given string."""
-  url_not_starts_with: String
-
-  """All values ending with the given string."""
-  url_ends_with: String
-
-  """All values not ending with the given string."""
-  url_not_ends_with: String
-}
-
-input FileWhereUniqueInput {
-  id: ID
-  secret: String
-  url: String
-}
-
 type Item implements Node {
   description: String!
   id: ID!
   name: String!
-  itemTranslations(where: ItemTranslationWhereInput, orderBy: ItemTranslationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ItemTranslation!]
   internalDescription: String
   language(where: LanguageWhereInput): Language
   sectionItems(where: SectionItemWhereInput, orderBy: SectionItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SectionItem!]
@@ -3769,7 +3358,6 @@ input ItemCreateInput {
   description: String!
   name: String!
   internalDescription: String
-  itemTranslations: ItemTranslationCreateManyWithoutItemsInput
   language: LanguageCreateOneWithoutItemsInput
   sectionItems: SectionItemCreateManyWithoutItemsInput
 }
@@ -3784,24 +3372,10 @@ input ItemCreateManyWithoutSectionItemsInput {
   connect: [ItemWhereUniqueInput!]
 }
 
-input ItemCreateOneWithoutItemTranslationsInput {
-  create: ItemCreateWithoutItemTranslationsInput
-  connect: ItemWhereUniqueInput
-}
-
-input ItemCreateWithoutItemTranslationsInput {
-  description: String!
-  name: String!
-  internalDescription: String
-  language: LanguageCreateOneWithoutItemsInput
-  sectionItems: SectionItemCreateManyWithoutItemsInput
-}
-
 input ItemCreateWithoutLanguageInput {
   description: String!
   name: String!
   internalDescription: String
-  itemTranslations: ItemTranslationCreateManyWithoutItemsInput
   sectionItems: SectionItemCreateManyWithoutItemsInput
 }
 
@@ -3809,7 +3383,6 @@ input ItemCreateWithoutSectionItemsInput {
   description: String!
   name: String!
   internalDescription: String
-  itemTranslations: ItemTranslationCreateManyWithoutItemsInput
   language: LanguageCreateOneWithoutItemsInput
 }
 
@@ -3883,271 +3456,10 @@ input ItemSubscriptionWhereInput {
   node: ItemWhereInput
 }
 
-type ItemTranslation implements Node {
-  description: String!
-  id: ID!
-  language(where: LanguageWhereInput): Language
-  items(where: ItemWhereInput): Item
-}
-
-"""A connection to a list of items."""
-type ItemTranslationConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [ItemTranslationEdge]!
-  aggregate: AggregateItemTranslation!
-}
-
-input ItemTranslationCreateInput {
-  description: String!
-  language: LanguageCreateOneWithoutItemTranslationsInput
-  items: ItemCreateOneWithoutItemTranslationsInput
-}
-
-input ItemTranslationCreateManyWithoutItemsInput {
-  create: [ItemTranslationCreateWithoutItemsInput!]
-  connect: [ItemTranslationWhereUniqueInput!]
-}
-
-input ItemTranslationCreateManyWithoutLanguageInput {
-  create: [ItemTranslationCreateWithoutLanguageInput!]
-  connect: [ItemTranslationWhereUniqueInput!]
-}
-
-input ItemTranslationCreateWithoutItemsInput {
-  description: String!
-  language: LanguageCreateOneWithoutItemTranslationsInput
-}
-
-input ItemTranslationCreateWithoutLanguageInput {
-  description: String!
-  items: ItemCreateOneWithoutItemTranslationsInput
-}
-
-"""An edge in a connection."""
-type ItemTranslationEdge {
-  """The item at the end of the edge."""
-  node: ItemTranslation!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum ItemTranslationOrderByInput {
-  description_ASC
-  description_DESC
-  id_ASC
-  id_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type ItemTranslationPreviousValues {
-  description: String!
-  id: ID!
-}
-
-type ItemTranslationSubscriptionPayload {
-  mutation: MutationType!
-  node: ItemTranslation
-  updatedFields: [String!]
-  previousValues: ItemTranslationPreviousValues
-}
-
-input ItemTranslationSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ItemTranslationSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ItemTranslationSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ItemTranslationSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: ItemTranslationWhereInput
-}
-
-input ItemTranslationUpdateInput {
-  description: String
-  language: LanguageUpdateOneWithoutItemTranslationsInput
-  items: ItemUpdateOneWithoutItemTranslationsInput
-}
-
-input ItemTranslationUpdateManyWithoutItemsInput {
-  create: [ItemTranslationCreateWithoutItemsInput!]
-  connect: [ItemTranslationWhereUniqueInput!]
-  disconnect: [ItemTranslationWhereUniqueInput!]
-  delete: [ItemTranslationWhereUniqueInput!]
-  update: [ItemTranslationUpdateWithWhereUniqueWithoutItemsInput!]
-  upsert: [ItemTranslationUpsertWithWhereUniqueWithoutItemsInput!]
-}
-
-input ItemTranslationUpdateManyWithoutLanguageInput {
-  create: [ItemTranslationCreateWithoutLanguageInput!]
-  connect: [ItemTranslationWhereUniqueInput!]
-  disconnect: [ItemTranslationWhereUniqueInput!]
-  delete: [ItemTranslationWhereUniqueInput!]
-  update: [ItemTranslationUpdateWithWhereUniqueWithoutLanguageInput!]
-  upsert: [ItemTranslationUpsertWithWhereUniqueWithoutLanguageInput!]
-}
-
-input ItemTranslationUpdateWithoutItemsDataInput {
-  description: String
-  language: LanguageUpdateOneWithoutItemTranslationsInput
-}
-
-input ItemTranslationUpdateWithoutLanguageDataInput {
-  description: String
-  items: ItemUpdateOneWithoutItemTranslationsInput
-}
-
-input ItemTranslationUpdateWithWhereUniqueWithoutItemsInput {
-  where: ItemTranslationWhereUniqueInput!
-  data: ItemTranslationUpdateWithoutItemsDataInput!
-}
-
-input ItemTranslationUpdateWithWhereUniqueWithoutLanguageInput {
-  where: ItemTranslationWhereUniqueInput!
-  data: ItemTranslationUpdateWithoutLanguageDataInput!
-}
-
-input ItemTranslationUpsertWithWhereUniqueWithoutItemsInput {
-  where: ItemTranslationWhereUniqueInput!
-  update: ItemTranslationUpdateWithoutItemsDataInput!
-  create: ItemTranslationCreateWithoutItemsInput!
-}
-
-input ItemTranslationUpsertWithWhereUniqueWithoutLanguageInput {
-  where: ItemTranslationWhereUniqueInput!
-  update: ItemTranslationUpdateWithoutLanguageDataInput!
-  create: ItemTranslationCreateWithoutLanguageInput!
-}
-
-input ItemTranslationWhereInput {
-  """Logical AND on all given filters."""
-  AND: [ItemTranslationWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [ItemTranslationWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [ItemTranslationWhereInput!]
-  description: String
-
-  """All values that are not equal to given value."""
-  description_not: String
-
-  """All values that are contained in given list."""
-  description_in: [String!]
-
-  """All values that are not contained in given list."""
-  description_not_in: [String!]
-
-  """All values less than the given value."""
-  description_lt: String
-
-  """All values less than or equal the given value."""
-  description_lte: String
-
-  """All values greater than the given value."""
-  description_gt: String
-
-  """All values greater than or equal the given value."""
-  description_gte: String
-
-  """All values containing the given string."""
-  description_contains: String
-
-  """All values not containing the given string."""
-  description_not_contains: String
-
-  """All values starting with the given string."""
-  description_starts_with: String
-
-  """All values not starting with the given string."""
-  description_not_starts_with: String
-
-  """All values ending with the given string."""
-  description_ends_with: String
-
-  """All values not ending with the given string."""
-  description_not_ends_with: String
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  language: LanguageWhereInput
-  items: ItemWhereInput
-}
-
-input ItemTranslationWhereUniqueInput {
-  id: ID
-}
-
 input ItemUpdateInput {
   description: String
   name: String
   internalDescription: String
-  itemTranslations: ItemTranslationUpdateManyWithoutItemsInput
   language: LanguageUpdateOneWithoutItemsInput
   sectionItems: SectionItemUpdateManyWithoutItemsInput
 }
@@ -4170,28 +3482,10 @@ input ItemUpdateManyWithoutSectionItemsInput {
   upsert: [ItemUpsertWithWhereUniqueWithoutSectionItemsInput!]
 }
 
-input ItemUpdateOneWithoutItemTranslationsInput {
-  create: ItemCreateWithoutItemTranslationsInput
-  connect: ItemWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: ItemUpdateWithoutItemTranslationsDataInput
-  upsert: ItemUpsertWithoutItemTranslationsInput
-}
-
-input ItemUpdateWithoutItemTranslationsDataInput {
-  description: String
-  name: String
-  internalDescription: String
-  language: LanguageUpdateOneWithoutItemsInput
-  sectionItems: SectionItemUpdateManyWithoutItemsInput
-}
-
 input ItemUpdateWithoutLanguageDataInput {
   description: String
   name: String
   internalDescription: String
-  itemTranslations: ItemTranslationUpdateManyWithoutItemsInput
   sectionItems: SectionItemUpdateManyWithoutItemsInput
 }
 
@@ -4199,7 +3493,6 @@ input ItemUpdateWithoutSectionItemsDataInput {
   description: String
   name: String
   internalDescription: String
-  itemTranslations: ItemTranslationUpdateManyWithoutItemsInput
   language: LanguageUpdateOneWithoutItemsInput
 }
 
@@ -4211,11 +3504,6 @@ input ItemUpdateWithWhereUniqueWithoutLanguageInput {
 input ItemUpdateWithWhereUniqueWithoutSectionItemsInput {
   where: ItemWhereUniqueInput!
   data: ItemUpdateWithoutSectionItemsDataInput!
-}
-
-input ItemUpsertWithoutItemTranslationsInput {
-  update: ItemUpdateWithoutItemTranslationsDataInput!
-  create: ItemCreateWithoutItemTranslationsInput!
 }
 
 input ItemUpsertWithWhereUniqueWithoutLanguageInput {
@@ -4399,9 +3687,6 @@ input ItemWhereInput {
 
   """All values not ending with the given string."""
   internalDescription_not_ends_with: String
-  itemTranslations_every: ItemTranslationWhereInput
-  itemTranslations_some: ItemTranslationWhereInput
-  itemTranslations_none: ItemTranslationWhereInput
   language: LanguageWhereInput
   sectionItems_every: SectionItemWhereInput
   sectionItems_some: SectionItemWhereInput
@@ -4714,7 +3999,6 @@ input JobWhereUniqueInput {
 type Language implements Node {
   id: ID!
   type: LanguageEnum!
-  itemTranslations(where: ItemTranslationWhereInput, orderBy: ItemTranslationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ItemTranslation!]
   clients(where: ClientWhereInput, orderBy: ClientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Client!]
   offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer!]
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item!]
@@ -4733,7 +4017,6 @@ type LanguageConnection {
 
 input LanguageCreateInput {
   type: LanguageEnum!
-  itemTranslations: ItemTranslationCreateManyWithoutLanguageInput
   clients: ClientCreateManyWithoutLanguageInput
   offers: OfferCreateManyWithoutLanguageInput
   items: ItemCreateManyWithoutLanguageInput
@@ -4750,11 +4033,6 @@ input LanguageCreateOneWithoutItemsInput {
   connect: LanguageWhereUniqueInput
 }
 
-input LanguageCreateOneWithoutItemTranslationsInput {
-  create: LanguageCreateWithoutItemTranslationsInput
-  connect: LanguageWhereUniqueInput
-}
-
 input LanguageCreateOneWithoutOffersInput {
   create: LanguageCreateWithoutOffersInput
   connect: LanguageWhereUniqueInput
@@ -4767,7 +4045,6 @@ input LanguageCreateOneWithoutUsersInput {
 
 input LanguageCreateWithoutClientsInput {
   type: LanguageEnum!
-  itemTranslations: ItemTranslationCreateManyWithoutLanguageInput
   offers: OfferCreateManyWithoutLanguageInput
   items: ItemCreateManyWithoutLanguageInput
   users: UserCreateManyWithoutLanguageInput
@@ -4775,23 +4052,13 @@ input LanguageCreateWithoutClientsInput {
 
 input LanguageCreateWithoutItemsInput {
   type: LanguageEnum!
-  itemTranslations: ItemTranslationCreateManyWithoutLanguageInput
   clients: ClientCreateManyWithoutLanguageInput
   offers: OfferCreateManyWithoutLanguageInput
-  users: UserCreateManyWithoutLanguageInput
-}
-
-input LanguageCreateWithoutItemTranslationsInput {
-  type: LanguageEnum!
-  clients: ClientCreateManyWithoutLanguageInput
-  offers: OfferCreateManyWithoutLanguageInput
-  items: ItemCreateManyWithoutLanguageInput
   users: UserCreateManyWithoutLanguageInput
 }
 
 input LanguageCreateWithoutOffersInput {
   type: LanguageEnum!
-  itemTranslations: ItemTranslationCreateManyWithoutLanguageInput
   clients: ClientCreateManyWithoutLanguageInput
   items: ItemCreateManyWithoutLanguageInput
   users: UserCreateManyWithoutLanguageInput
@@ -4799,7 +4066,6 @@ input LanguageCreateWithoutOffersInput {
 
 input LanguageCreateWithoutUsersInput {
   type: LanguageEnum!
-  itemTranslations: ItemTranslationCreateManyWithoutLanguageInput
   clients: ClientCreateManyWithoutLanguageInput
   offers: OfferCreateManyWithoutLanguageInput
   items: ItemCreateManyWithoutLanguageInput
@@ -4877,7 +4143,6 @@ input LanguageSubscriptionWhereInput {
 
 input LanguageUpdateInput {
   type: LanguageEnum
-  itemTranslations: ItemTranslationUpdateManyWithoutLanguageInput
   clients: ClientUpdateManyWithoutLanguageInput
   offers: OfferUpdateManyWithoutLanguageInput
   items: ItemUpdateManyWithoutLanguageInput
@@ -4902,15 +4167,6 @@ input LanguageUpdateOneWithoutItemsInput {
   upsert: LanguageUpsertWithoutItemsInput
 }
 
-input LanguageUpdateOneWithoutItemTranslationsInput {
-  create: LanguageCreateWithoutItemTranslationsInput
-  connect: LanguageWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: LanguageUpdateWithoutItemTranslationsDataInput
-  upsert: LanguageUpsertWithoutItemTranslationsInput
-}
-
 input LanguageUpdateOneWithoutOffersInput {
   create: LanguageCreateWithoutOffersInput
   connect: LanguageWhereUniqueInput
@@ -4931,7 +4187,6 @@ input LanguageUpdateOneWithoutUsersInput {
 
 input LanguageUpdateWithoutClientsDataInput {
   type: LanguageEnum
-  itemTranslations: ItemTranslationUpdateManyWithoutLanguageInput
   offers: OfferUpdateManyWithoutLanguageInput
   items: ItemUpdateManyWithoutLanguageInput
   users: UserUpdateManyWithoutLanguageInput
@@ -4939,23 +4194,13 @@ input LanguageUpdateWithoutClientsDataInput {
 
 input LanguageUpdateWithoutItemsDataInput {
   type: LanguageEnum
-  itemTranslations: ItemTranslationUpdateManyWithoutLanguageInput
   clients: ClientUpdateManyWithoutLanguageInput
   offers: OfferUpdateManyWithoutLanguageInput
-  users: UserUpdateManyWithoutLanguageInput
-}
-
-input LanguageUpdateWithoutItemTranslationsDataInput {
-  type: LanguageEnum
-  clients: ClientUpdateManyWithoutLanguageInput
-  offers: OfferUpdateManyWithoutLanguageInput
-  items: ItemUpdateManyWithoutLanguageInput
   users: UserUpdateManyWithoutLanguageInput
 }
 
 input LanguageUpdateWithoutOffersDataInput {
   type: LanguageEnum
-  itemTranslations: ItemTranslationUpdateManyWithoutLanguageInput
   clients: ClientUpdateManyWithoutLanguageInput
   items: ItemUpdateManyWithoutLanguageInput
   users: UserUpdateManyWithoutLanguageInput
@@ -4963,7 +4208,6 @@ input LanguageUpdateWithoutOffersDataInput {
 
 input LanguageUpdateWithoutUsersDataInput {
   type: LanguageEnum
-  itemTranslations: ItemTranslationUpdateManyWithoutLanguageInput
   clients: ClientUpdateManyWithoutLanguageInput
   offers: OfferUpdateManyWithoutLanguageInput
   items: ItemUpdateManyWithoutLanguageInput
@@ -4977,11 +4221,6 @@ input LanguageUpsertWithoutClientsInput {
 input LanguageUpsertWithoutItemsInput {
   update: LanguageUpdateWithoutItemsDataInput!
   create: LanguageCreateWithoutItemsInput!
-}
-
-input LanguageUpsertWithoutItemTranslationsInput {
-  update: LanguageUpdateWithoutItemTranslationsDataInput!
-  create: LanguageCreateWithoutItemTranslationsInput!
 }
 
 input LanguageUpsertWithoutOffersInput {
@@ -5053,9 +4292,6 @@ input LanguageWhereInput {
 
   """All values that are not contained in given list."""
   type_not_in: [LanguageEnum!]
-  itemTranslations_every: ItemTranslationWhereInput
-  itemTranslations_some: ItemTranslationWhereInput
-  itemTranslations_none: ItemTranslationWhereInput
   clients_every: ClientWhereInput
   clients_some: ClientWhereInput
   clients_none: ClientWhereInput
@@ -5084,15 +4320,12 @@ type Mutation {
   createClient(data: ClientCreateInput!): Client!
   createCommunication(data: CommunicationCreateInput!): Communication!
   createEvent(data: EventCreateInput!): Event!
-  createFile(data: FileCreateInput!): File!
   createLanguage(data: LanguageCreateInput!): Language!
   createOffer(data: OfferCreateInput!): Offer!
-  createItemTranslation(data: ItemTranslationCreateInput!): ItemTranslation!
   createItem(data: ItemCreateInput!): Item!
   createUser(data: UserCreateInput!): User!
   createClientContact(data: ClientContactCreateInput!): ClientContact!
   createPlace(data: PlaceCreateInput!): Place!
-  createTemiteme: Temiteme!
   createBudgetLine(data: BudgetLineCreateInput!): BudgetLine!
   createEmployee(data: EmployeeCreateInput!): Employee!
   createEmployeeEstimation(data: EmployeeEstimationCreateInput!): EmployeeEstimation!
@@ -5106,10 +4339,8 @@ type Mutation {
   updateClient(data: ClientUpdateInput!, where: ClientWhereUniqueInput!): Client
   updateCommunication(data: CommunicationUpdateInput!, where: CommunicationWhereUniqueInput!): Communication
   updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
-  updateFile(data: FileUpdateInput!, where: FileWhereUniqueInput!): File
   updateLanguage(data: LanguageUpdateInput!, where: LanguageWhereUniqueInput!): Language
   updateOffer(data: OfferUpdateInput!, where: OfferWhereUniqueInput!): Offer
-  updateItemTranslation(data: ItemTranslationUpdateInput!, where: ItemTranslationWhereUniqueInput!): ItemTranslation
   updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateClientContact(data: ClientContactUpdateInput!, where: ClientContactWhereUniqueInput!): ClientContact
@@ -5127,15 +4358,12 @@ type Mutation {
   deleteClient(where: ClientWhereUniqueInput!): Client
   deleteCommunication(where: CommunicationWhereUniqueInput!): Communication
   deleteEvent(where: EventWhereUniqueInput!): Event
-  deleteFile(where: FileWhereUniqueInput!): File
   deleteLanguage(where: LanguageWhereUniqueInput!): Language
   deleteOffer(where: OfferWhereUniqueInput!): Offer
-  deleteItemTranslation(where: ItemTranslationWhereUniqueInput!): ItemTranslation
   deleteItem(where: ItemWhereUniqueInput!): Item
   deleteUser(where: UserWhereUniqueInput!): User
   deleteClientContact(where: ClientContactWhereUniqueInput!): ClientContact
   deletePlace(where: PlaceWhereUniqueInput!): Place
-  deleteTemiteme(where: TemitemeWhereUniqueInput!): Temiteme
   deleteBudgetLine(where: BudgetLineWhereUniqueInput!): BudgetLine
   deleteEmployee(where: EmployeeWhereUniqueInput!): Employee
   deleteEmployeeEstimation(where: EmployeeEstimationWhereUniqueInput!): EmployeeEstimation
@@ -5149,10 +4377,8 @@ type Mutation {
   upsertClient(where: ClientWhereUniqueInput!, create: ClientCreateInput!, update: ClientUpdateInput!): Client!
   upsertCommunication(where: CommunicationWhereUniqueInput!, create: CommunicationCreateInput!, update: CommunicationUpdateInput!): Communication!
   upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
-  upsertFile(where: FileWhereUniqueInput!, create: FileCreateInput!, update: FileUpdateInput!): File!
   upsertLanguage(where: LanguageWhereUniqueInput!, create: LanguageCreateInput!, update: LanguageUpdateInput!): Language!
   upsertOffer(where: OfferWhereUniqueInput!, create: OfferCreateInput!, update: OfferUpdateInput!): Offer!
-  upsertItemTranslation(where: ItemTranslationWhereUniqueInput!, create: ItemTranslationCreateInput!, update: ItemTranslationUpdateInput!): ItemTranslation!
   upsertItem(where: ItemWhereUniqueInput!, create: ItemCreateInput!, update: ItemUpdateInput!): Item!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertClientContact(where: ClientContactWhereUniqueInput!, create: ClientContactCreateInput!, update: ClientContactUpdateInput!): ClientContact!
@@ -5170,10 +4396,8 @@ type Mutation {
   updateManyClients(data: ClientUpdateInput!, where: ClientWhereInput): BatchPayload!
   updateManyCommunications(data: CommunicationUpdateInput!, where: CommunicationWhereInput): BatchPayload!
   updateManyEvents(data: EventUpdateInput!, where: EventWhereInput): BatchPayload!
-  updateManyFiles(data: FileUpdateInput!, where: FileWhereInput): BatchPayload!
   updateManyLanguages(data: LanguageUpdateInput!, where: LanguageWhereInput): BatchPayload!
   updateManyOffers(data: OfferUpdateInput!, where: OfferWhereInput): BatchPayload!
-  updateManyItemTranslations(data: ItemTranslationUpdateInput!, where: ItemTranslationWhereInput): BatchPayload!
   updateManyItems(data: ItemUpdateInput!, where: ItemWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyClientContacts(data: ClientContactUpdateInput!, where: ClientContactWhereInput): BatchPayload!
@@ -5191,15 +4415,12 @@ type Mutation {
   deleteManyClients(where: ClientWhereInput): BatchPayload!
   deleteManyCommunications(where: CommunicationWhereInput): BatchPayload!
   deleteManyEvents(where: EventWhereInput): BatchPayload!
-  deleteManyFiles(where: FileWhereInput): BatchPayload!
   deleteManyLanguages(where: LanguageWhereInput): BatchPayload!
   deleteManyOffers(where: OfferWhereInput): BatchPayload!
-  deleteManyItemTranslations(where: ItemTranslationWhereInput): BatchPayload!
   deleteManyItems(where: ItemWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyClientContacts(where: ClientContactWhereInput): BatchPayload!
   deleteManyPlaces(where: PlaceWhereInput): BatchPayload!
-  deleteManyTemitemes(where: TemitemeWhereInput): BatchPayload!
   deleteManyBudgetLines(where: BudgetLineWhereInput): BatchPayload!
   deleteManyEmployees(where: EmployeeWhereInput): BatchPayload!
   deleteManyEmployeeEstimations(where: EmployeeEstimationWhereInput): BatchPayload!
@@ -7319,15 +6540,12 @@ type Query {
   clients(where: ClientWhereInput, orderBy: ClientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Client]!
   communications(where: CommunicationWhereInput, orderBy: CommunicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Communication]!
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
-  files(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [File]!
   languages(where: LanguageWhereInput, orderBy: LanguageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Language]!
   offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer]!
-  itemTranslations(where: ItemTranslationWhereInput, orderBy: ItemTranslationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ItemTranslation]!
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   clientContacts(where: ClientContactWhereInput, orderBy: ClientContactOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ClientContact]!
   places(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Place]!
-  temitemes(where: TemitemeWhereInput, orderBy: TemitemeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Temiteme]!
   budgetLines(where: BudgetLineWhereInput, orderBy: BudgetLineOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BudgetLine]!
   employees(where: EmployeeWhereInput, orderBy: EmployeeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Employee]!
   employeeEstimations(where: EmployeeEstimationWhereInput, orderBy: EmployeeEstimationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EmployeeEstimation]!
@@ -7341,15 +6559,12 @@ type Query {
   client(where: ClientWhereUniqueInput!): Client
   communication(where: CommunicationWhereUniqueInput!): Communication
   event(where: EventWhereUniqueInput!): Event
-  file(where: FileWhereUniqueInput!): File
   language(where: LanguageWhereUniqueInput!): Language
   offer(where: OfferWhereUniqueInput!): Offer
-  itemTranslation(where: ItemTranslationWhereUniqueInput!): ItemTranslation
   item(where: ItemWhereUniqueInput!): Item
   user(where: UserWhereUniqueInput!): User
   clientContact(where: ClientContactWhereUniqueInput!): ClientContact
   place(where: PlaceWhereUniqueInput!): Place
-  temiteme(where: TemitemeWhereUniqueInput!): Temiteme
   budgetLine(where: BudgetLineWhereUniqueInput!): BudgetLine
   employee(where: EmployeeWhereUniqueInput!): Employee
   employeeEstimation(where: EmployeeEstimationWhereUniqueInput!): EmployeeEstimation
@@ -7363,15 +6578,12 @@ type Query {
   clientsConnection(where: ClientWhereInput, orderBy: ClientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClientConnection!
   communicationsConnection(where: CommunicationWhereInput, orderBy: CommunicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommunicationConnection!
   eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
-  filesConnection(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FileConnection!
   languagesConnection(where: LanguageWhereInput, orderBy: LanguageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LanguageConnection!
   offersConnection(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OfferConnection!
-  itemTranslationsConnection(where: ItemTranslationWhereInput, orderBy: ItemTranslationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemTranslationConnection!
   itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   clientContactsConnection(where: ClientContactWhereInput, orderBy: ClientContactOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClientContactConnection!
   placesConnection(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlaceConnection!
-  temitemesConnection(where: TemitemeWhereInput, orderBy: TemitemeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TemitemeConnection!
   budgetLinesConnection(where: BudgetLineWhereInput, orderBy: BudgetLineOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BudgetLineConnection!
   employeesConnection(where: EmployeeWhereInput, orderBy: EmployeeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EmployeeConnection!
   employeeEstimationsConnection(where: EmployeeEstimationWhereInput, orderBy: EmployeeEstimationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EmployeeEstimationConnection!
@@ -8456,15 +7668,12 @@ type Subscription {
   client(where: ClientSubscriptionWhereInput): ClientSubscriptionPayload
   communication(where: CommunicationSubscriptionWhereInput): CommunicationSubscriptionPayload
   event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
-  file(where: FileSubscriptionWhereInput): FileSubscriptionPayload
   language(where: LanguageSubscriptionWhereInput): LanguageSubscriptionPayload
   offer(where: OfferSubscriptionWhereInput): OfferSubscriptionPayload
-  itemTranslation(where: ItemTranslationSubscriptionWhereInput): ItemTranslationSubscriptionPayload
   item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   clientContact(where: ClientContactSubscriptionWhereInput): ClientContactSubscriptionPayload
   place(where: PlaceSubscriptionWhereInput): PlaceSubscriptionPayload
-  temiteme(where: TemitemeSubscriptionWhereInput): TemitemeSubscriptionPayload
   budgetLine(where: BudgetLineSubscriptionWhereInput): BudgetLineSubscriptionPayload
   employee(where: EmployeeSubscriptionWhereInput): EmployeeSubscriptionPayload
   employeeEstimation(where: EmployeeEstimationSubscriptionWhereInput): EmployeeEstimationSubscriptionPayload
@@ -8719,136 +7928,6 @@ input TaxWhereInput {
 }
 
 input TaxWhereUniqueInput {
-  id: ID
-}
-
-type Temiteme implements Node {
-  id: ID!
-}
-
-"""A connection to a list of items."""
-type TemitemeConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [TemitemeEdge]!
-  aggregate: AggregateTemiteme!
-}
-
-"""An edge in a connection."""
-type TemitemeEdge {
-  """The item at the end of the edge."""
-  node: Temiteme!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum TemitemeOrderByInput {
-  id_ASC
-  id_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type TemitemePreviousValues {
-  id: ID!
-}
-
-type TemitemeSubscriptionPayload {
-  mutation: MutationType!
-  node: Temiteme
-  updatedFields: [String!]
-  previousValues: TemitemePreviousValues
-}
-
-input TemitemeSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [TemitemeSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [TemitemeSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [TemitemeSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: TemitemeWhereInput
-}
-
-input TemitemeWhereInput {
-  """Logical AND on all given filters."""
-  AND: [TemitemeWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [TemitemeWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [TemitemeWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-}
-
-input TemitemeWhereUniqueInput {
   id: ID
 }
 
