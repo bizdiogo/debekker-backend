@@ -5,6 +5,7 @@ import allVechile from './Vehicle'
 export default {
   vehicle: forwardTo('db'),
   vehicles: forwardTo('db'),
+  vehiclesConnection: forwardTo('db'),
   vehiclesAvailable: async (parent, { startTime, endTime, }, ctx: Context, info) => {
     validateTwoDate(startTime, endTime)
     return ctx.db.query.vehicles({

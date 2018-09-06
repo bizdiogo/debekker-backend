@@ -7,5 +7,6 @@ export default {
     return ctx.db.query.user({ where: { id } }, info)
   },
   user: forwardTo('db'),
-  users: forwardTo('db')
+  users: forwardTo('db'),
+  usersConnection: forwardTo('db'),
 }

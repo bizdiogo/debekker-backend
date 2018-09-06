@@ -5,6 +5,7 @@ import allStuff from './Stuff'
 export default {
   stuff: forwardTo('db'),
   stuffs: forwardTo('db'),
+  stuffsConnection: forwardTo('db'),
   stuffsAvailable: async (parent, { startTime, endTime, ...args }, ctx: Context, info) => {
     validateTwoDate(startTime, endTime)
     return ctx.db.query.stuffs({
