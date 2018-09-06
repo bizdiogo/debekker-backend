@@ -1,11 +1,12 @@
 import { forwardTo } from 'prisma-binding'
-import { Context } from '../../utils'
+import { Context, validateTwoDate } from '../../utils'
 import allVechile from './Vehicle'
 
 export default {
   vehicle: forwardTo('db'),
   vehicles: forwardTo('db'),
-  vehiclesAvailable: (parent, { startTime, endTime, gmtOffset }, ctx: Context, info) => {
+  vehiclesAvailable: async (parent, { startTime, endTime, }, ctx: Context, info) => {
+    validateTwoDate(startTime, endTime)
     return ctx.db.query.vehicles({
       where: {
         events_every: {
