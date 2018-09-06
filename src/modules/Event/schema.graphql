@@ -1,0 +1,3 @@
+type Query {
+  eventsCalendar(startTime: DateTime, endTime: DateTime, name: String): [Event]!
+}

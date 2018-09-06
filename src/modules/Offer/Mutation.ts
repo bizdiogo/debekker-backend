@@ -6,14 +6,14 @@ import allOffer from './Offer'
 
 export default {
   createOffer: async (parent, { data }, ctx: Context, info) => {
-    validateTwoDate(data.startTime, data.endTime)
+    !!data.startTime && !!data.endTime && validateTwoDate(data.startTime, data.endTime)
     return ctx.db.mutation.createOffer({ data }, info)
   },
   deleteOffer: forwardTo('db'),
   updateOffer: async (parent, { where: { id }, data: { ...args } }, ctx: Context, info) => {
     const offer = await ctx.db.query.offer({ where: { id } }, allOffer)
 
-    validateTwoDate(args.startTime, args.endTime)
+    !!args.startTime && !!args.endTime && validateTwoDate(args.startTime, args.endTime)
 
     if (!!args.status && args.status === StatusOffer.Accepted) {
       const event = {
