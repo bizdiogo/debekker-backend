@@ -1,5 +1,15 @@
 import * as moment from 'moment'
+import gql from 'graphql-tag'
+import { StatusOffer } from '../../enums/status'
 import { Context } from '../../utils'
+
+const count = gql`
+  query {
+    aggregate {
+      count
+    }
+  }
+`
 
 export default {
   eventsLast30Days: async (parent, {}, ctx: Context, info) => {
@@ -31,5 +41,15 @@ export default {
         ]
       }
     }, info)
+  },
+  currentOffers: async (parent, {}, ctx: Context, info) => {
+    return ctx.db.query.offersConnection({
+      where: {
+        status: StatusOffer.Pending
+      }
+    }, count)
+  },
+  countClients: async (parent, {}, ctx: Context, info) => {
+    return ctx.db.query.clientsConnection({}, count)
   },
 }

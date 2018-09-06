@@ -4,4 +4,6 @@ type Query {
   eventsLast30Days: [Event]!
   eventsNext30Days: [Event]!
   eventsToday: [Event]!
+  currentOffers: OfferConnection
+  countClients: ClientConnection
 }
