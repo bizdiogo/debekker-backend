@@ -1,0 +1,7 @@
+# import Event from "./generated/prisma.graphql"
+
+type Query {
+  eventsLast30Days: [Event]!
+  eventsNext30Days: [Event]!
+  eventsToday: [Event]!
+}
