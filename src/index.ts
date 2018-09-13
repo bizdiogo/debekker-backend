@@ -1,14 +1,17 @@
 import { GraphQLServer } from 'graphql-yoga'
+import { join } from 'path'
 import { Prisma } from './generated/prisma'
 import resolvers from './modules'
-import { default as typeDefs } from './typeDefs'
+import { getTypes } from './utils'
 import permissions from './middlewares/permissions'
+
+const typeDefs = getTypes(join(__dirname, "./modules/**/*.graphql"))
 
 const server = new GraphQLServer({
   typeDefs,
   resolvers,
   middlewares: [permissions],
-  resolverValidationOptions :{
+  resolverValidationOptions: {
     requireResolversForResolveType: false
   },
   context: req => ({

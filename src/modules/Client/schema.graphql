@@ -1,0 +1,17 @@
+# import Client from "../../generated/prisma.graphql"
+
+type Query {
+  client(where: ClientWhereUniqueInput!): Client
+  clients(where: ClientWhereInput, orderBy: ClientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Client]!
+  clientsConnection(where: ClientWhereInput, orderBy: ClientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClientConnection!
+}
+
+type Mutation {
+  createClient(data: ClientCreateInput!): Client!
+  updateClient(data: ClientUpdateInput!, where: ClientWhereUniqueInput!): Client
+  deleteClient(where: ClientWhereUniqueInput!): Client
+}
+
+type Subscription {
+  client(where: ClientSubscriptionWhereInput): ClientSubscriptionPayload
+}

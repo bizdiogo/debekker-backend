@@ -1,0 +1,17 @@
+# import Place from "../../generated/prisma.graphql"
+
+type Query {
+  place(where: PlaceWhereUniqueInput!): Place
+  places(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Place]!
+  placesConnection(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlaceConnection!
+}
+
+type Mutation {
+  createPlace(data: PlaceCreateInput!): Place!
+  updatePlace(data: PlaceUpdateInput!, where: PlaceWhereUniqueInput!): Place
+  deletePlace(where: PlaceWhereUniqueInput!): Place
+}
+
+type Subscription {
+  place(where: PlaceSubscriptionWhereInput): PlaceSubscriptionPayload
+}

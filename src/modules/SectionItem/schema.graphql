@@ -1,0 +1,17 @@
+# import SectionItem from "../../generated/prisma.graphql"
+
+type Query {
+  sectionItem(where: SectionItemWhereUniqueInput!): SectionItem
+  sectionItems(where: SectionItemWhereInput, orderBy: SectionItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SectionItem]!
+  sectionItemsConnection(where: SectionItemWhereInput, orderBy: SectionItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SectionItemConnection!
+}
+
+type Mutation {
+  createSectionItem(data: SectionItemCreateInput!): SectionItem!
+  updateSectionItem(data: SectionItemUpdateInput!, where: SectionItemWhereUniqueInput!): SectionItem
+  deleteSectionItem(where: SectionItemWhereUniqueInput!): SectionItem
+}
+
+type Subscription {
+  sectionItem(where: SectionItemSubscriptionWhereInput): SectionItemSubscriptionPayload
+}

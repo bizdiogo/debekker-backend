@@ -1,0 +1,17 @@
+# import Job from "../../generated/prisma.graphql"
+
+type Query {
+  job(where: JobWhereUniqueInput!): Job
+  jobs(where: JobWhereInput, orderBy: JobOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Job]!
+  jobsConnection(where: JobWhereInput, orderBy: JobOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): JobConnection!
+}
+
+type Mutation {
+  createJob(data: JobCreateInput!): Job!
+  updateJob(data: JobUpdateInput!, where: JobWhereUniqueInput!): Job
+  deleteJob(where: JobWhereUniqueInput!): Job
+}
+
+type Subscription {
+  job(where: JobSubscriptionWhereInput): JobSubscriptionPayload
+}

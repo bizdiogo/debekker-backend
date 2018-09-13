@@ -1,5 +1,18 @@
 # import Stuff from "../../generated/prisma.graphql"
 
 type Query {
+  stuff(where: StuffWhereUniqueInput!): Stuff
+  stuffs(where: StuffWhereInput, orderBy: StuffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Stuff]!
+  stuffsConnection(where: StuffWhereInput, orderBy: StuffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StuffConnection!
   stuffsAvailable(startTime: DateTime, endTime: DateTime, orderBy: VehicleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Stuff]!
+}
+
+type Mutation {
+  createStuff(data: StuffCreateInput!): Stuff!
+  updateStuff(data: StuffUpdateInput!, where: StuffWhereUniqueInput!): Stuff
+  deleteStuff(where: StuffWhereUniqueInput!): Stuff
+}
+
+type Subscription {
+  stuff(where: StuffSubscriptionWhereInput): StuffSubscriptionPayload
 }

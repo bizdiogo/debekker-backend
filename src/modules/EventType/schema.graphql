@@ -1,0 +1,17 @@
+# import EventType from "../../generated/prisma.graphql"
+
+type Query {
+  eventType(where: EventTypeWhereUniqueInput!): EventType
+  eventTypes(where: EventTypeWhereInput, orderBy: EventTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EventType]!
+  eventTypesConnection(where: EventTypeWhereInput, orderBy: EventTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventTypeConnection!
+}
+
+type Mutation {
+  createEventType(data: EventTypeCreateInput!): EventType!
+  updateEventType(data: EventTypeUpdateInput!, where: EventTypeWhereUniqueInput!): EventType
+  deleteEventType(where: EventTypeWhereUniqueInput!): EventType
+}
+
+type Subscription {
+  eventType(where: EventTypeSubscriptionWhereInput): EventTypeSubscriptionPayload
+}

@@ -1,0 +1,17 @@
+# import EmployeeEstimation from "../../generated/prisma.graphql"
+
+type Query {
+  employeeEstimation(where: EmployeeEstimationWhereUniqueInput!): EmployeeEstimation
+  employeeEstimations(where: EmployeeEstimationWhereInput, orderBy: EmployeeEstimationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EmployeeEstimation]!
+  employeeEstimationsConnection(where: EmployeeEstimationWhereInput, orderBy: EmployeeEstimationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EmployeeEstimationConnection!
+}
+
+type Mutation {
+  createEmployeeEstimation(data: EmployeeEstimationCreateInput!): EmployeeEstimation!
+  updateEmployeeEstimation(data: EmployeeEstimationUpdateInput!, where: EmployeeEstimationWhereUniqueInput!): EmployeeEstimation
+  deleteEmployeeEstimation(where: EmployeeEstimationWhereUniqueInput!): EmployeeEstimation
+}
+
+type Subscription {
+  employeeEstimation(where: EmployeeEstimationSubscriptionWhereInput): EmployeeEstimationSubscriptionPayload
+}

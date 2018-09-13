@@ -1,0 +1,17 @@
+# import Communication from "../../generated/prisma.graphql"
+
+type Query {
+  communication(where: CommunicationWhereUniqueInput!): Communication
+  communications(where: CommunicationWhereInput, orderBy: CommunicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Communication]!
+  communicationsConnection(where: CommunicationWhereInput, orderBy: CommunicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommunicationConnection!
+}
+
+type Mutation {
+  createCommunication(data: CommunicationCreateInput!): Communication!
+  updateCommunication(data: CommunicationUpdateInput!, where: CommunicationWhereUniqueInput!): Communication
+  deleteCommunication(where: CommunicationWhereUniqueInput!): Communication
+}
+
+type Subscription {
+  communication(where: CommunicationSubscriptionWhereInput): CommunicationSubscriptionPayload
+}

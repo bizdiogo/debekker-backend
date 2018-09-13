@@ -1,0 +1,17 @@
+# import Offer from "../../generated/prisma.graphql"
+
+type Query {
+  offer(where: OfferWhereUniqueInput!): Offer
+  offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer]!
+  offersConnection(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OfferConnection!
+}
+
+type Mutation {
+  createOffer(data: OfferCreateInput!): Offer!
+  updateOffer(data: OfferUpdateInput!, where: OfferWhereUniqueInput!): Offer
+  deleteOffer(where: OfferWhereUniqueInput!): Offer
+}
+
+type Subscription {
+  offer(where: OfferSubscriptionWhereInput): OfferSubscriptionPayload
+}

@@ -1,0 +1,17 @@
+# import BudgetLine from "../../generated/prisma.graphql"
+
+type Query {
+  budgetLine(where: BudgetLineWhereUniqueInput!): BudgetLine
+  budgetLines(where: BudgetLineWhereInput, orderBy: BudgetLineOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BudgetLine]!
+  budgetLinesConnection(where: BudgetLineWhereInput, orderBy: BudgetLineOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BudgetLineConnection!
+}
+
+type Mutation {
+  createBudgetLine(data: BudgetLineCreateInput!): BudgetLine!
+  updateBudgetLine(data: BudgetLineUpdateInput!, where: BudgetLineWhereUniqueInput!): BudgetLine
+  deleteBudgetLine(where: BudgetLineWhereUniqueInput!): BudgetLine
+}
+
+type Subscription {
+  budgetLine(where: BudgetLineSubscriptionWhereInput): BudgetLineSubscriptionPayload
+}
