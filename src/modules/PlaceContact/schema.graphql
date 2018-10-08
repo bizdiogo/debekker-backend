@@ -1,5 +1,3 @@
-# import PlaceContact from "../../generated/prisma.graphql"
-
 type Query {
   placeContact(where: PlaceContactWhereUniqueInput!): PlaceContact
   placeContacts(where: PlaceContactWhereInput, orderBy: PlaceContactOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PlaceContact]!

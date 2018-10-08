@@ -17,9 +17,7 @@ export default gql`
     clientContact {
       id
     }
-    language {
-      id
-    }
+    language
     eventType {
       id
     }

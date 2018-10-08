@@ -1,9 +1,23 @@
-# import Tax from "../../generated/prisma.graphql"
-
 type Query {
   tax(where: TaxWhereUniqueInput!): Tax
-  taxs(where: TaxWhereInput, orderBy: TaxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Tax]!
-  taxsConnection(where: TaxWhereInput, orderBy: TaxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TaxConnection!
+  taxes(
+    where: TaxWhereInput
+    orderBy: TaxOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Tax]!
+  taxesConnection(
+    where: TaxWhereInput
+    orderBy: TaxOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): TaxConnection!
 }
 
 type Mutation {

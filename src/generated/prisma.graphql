@@ -1,7 +1,11 @@
 # source: http://localhost:4466
-# timestamp: Thu Sep 06 2018 17:09:51 GMT-0300 (GMT-03:00)
+# timestamp: Mon Oct 08 2018 15:55:48 GMT-0300 (GMT-03:00)
 
 type AggregateBudgetLine {
+  count: Int!
+}
+
+type AggregateCategory {
   count: Int!
 }
 
@@ -29,6 +33,10 @@ type AggregateEvent {
   count: Int!
 }
 
+type AggregateEventStuff {
+  count: Int!
+}
+
 type AggregateEventType {
   count: Int!
 }
@@ -37,11 +45,11 @@ type AggregateItem {
   count: Int!
 }
 
-type AggregateJob {
+type AggregateItemTranslation {
   count: Int!
 }
 
-type AggregateLanguage {
+type AggregateJob {
   count: Int!
 }
 
@@ -88,6 +96,7 @@ type BudgetLine implements Node {
   offer(where: OfferWhereInput): Offer
   quantity: Int
   tax(where: TaxWhereInput): Tax
+  total: Float
   unitPrice: Float
   value: Float!
 }
@@ -105,6 +114,7 @@ type BudgetLineConnection {
 input BudgetLineCreateInput {
   description: String!
   quantity: Int
+  total: Float
   unitPrice: Float
   value: Float!
   offer: OfferCreateOneWithoutBudgetLinesInput
@@ -124,6 +134,7 @@ input BudgetLineCreateManyWithoutTaxInput {
 input BudgetLineCreateWithoutOfferInput {
   description: String!
   quantity: Int
+  total: Float
   unitPrice: Float
   value: Float!
   tax: TaxCreateOneWithoutBudgetLinesInput
@@ -132,6 +143,7 @@ input BudgetLineCreateWithoutOfferInput {
 input BudgetLineCreateWithoutTaxInput {
   description: String!
   quantity: Int
+  total: Float
   unitPrice: Float
   value: Float!
   offer: OfferCreateOneWithoutBudgetLinesInput
@@ -153,6 +165,8 @@ enum BudgetLineOrderByInput {
   id_DESC
   quantity_ASC
   quantity_DESC
+  total_ASC
+  total_DESC
   unitPrice_ASC
   unitPrice_DESC
   value_ASC
@@ -167,6 +181,7 @@ type BudgetLinePreviousValues {
   description: String!
   id: ID!
   quantity: Int
+  total: Float
   unitPrice: Float
   value: Float!
 }
@@ -213,6 +228,7 @@ input BudgetLineSubscriptionWhereInput {
 input BudgetLineUpdateInput {
   description: String
   quantity: Int
+  total: Float
   unitPrice: Float
   value: Float
   offer: OfferUpdateOneWithoutBudgetLinesInput
@@ -240,6 +256,7 @@ input BudgetLineUpdateManyWithoutTaxInput {
 input BudgetLineUpdateWithoutOfferDataInput {
   description: String
   quantity: Int
+  total: Float
   unitPrice: Float
   value: Float
   tax: TaxUpdateOneWithoutBudgetLinesInput
@@ -248,6 +265,7 @@ input BudgetLineUpdateWithoutOfferDataInput {
 input BudgetLineUpdateWithoutTaxDataInput {
   description: String
   quantity: Int
+  total: Float
   unitPrice: Float
   value: Float
   offer: OfferUpdateOneWithoutBudgetLinesInput
@@ -386,6 +404,28 @@ input BudgetLineWhereInput {
 
   """All values greater than or equal the given value."""
   quantity_gte: Int
+  total: Float
+
+  """All values that are not equal to given value."""
+  total_not: Float
+
+  """All values that are contained in given list."""
+  total_in: [Float!]
+
+  """All values that are not contained in given list."""
+  total_not_in: [Float!]
+
+  """All values less than the given value."""
+  total_lt: Float
+
+  """All values less than or equal the given value."""
+  total_lte: Float
+
+  """All values greater than the given value."""
+  total_gt: Float
+
+  """All values greater than or equal the given value."""
+  total_gte: Float
   unitPrice: Float
 
   """All values that are not equal to given value."""
@@ -438,6 +478,227 @@ input BudgetLineWhereUniqueInput {
   id: ID
 }
 
+type Category implements Node {
+  id: ID!
+  name: String!
+  items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item!]
+}
+
+"""A connection to a list of items."""
+type CategoryConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CategoryEdge]!
+  aggregate: AggregateCategory!
+}
+
+input CategoryCreateInput {
+  name: String!
+  items: ItemCreateManyWithoutCategoriesInput
+}
+
+input CategoryCreateManyWithoutItemsInput {
+  create: [CategoryCreateWithoutItemsInput!]
+  connect: [CategoryWhereUniqueInput!]
+}
+
+input CategoryCreateWithoutItemsInput {
+  name: String!
+}
+
+"""An edge in a connection."""
+type CategoryEdge {
+  """The item at the end of the edge."""
+  node: Category!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CategoryOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type CategoryPreviousValues {
+  id: ID!
+  name: String!
+}
+
+type CategorySubscriptionPayload {
+  mutation: MutationType!
+  node: Category
+  updatedFields: [String!]
+  previousValues: CategoryPreviousValues
+}
+
+input CategorySubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CategorySubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CategorySubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CategorySubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CategoryWhereInput
+}
+
+input CategoryUpdateInput {
+  name: String
+  items: ItemUpdateManyWithoutCategoriesInput
+}
+
+input CategoryUpdateManyWithoutItemsInput {
+  create: [CategoryCreateWithoutItemsInput!]
+  connect: [CategoryWhereUniqueInput!]
+  disconnect: [CategoryWhereUniqueInput!]
+  delete: [CategoryWhereUniqueInput!]
+  update: [CategoryUpdateWithWhereUniqueWithoutItemsInput!]
+  upsert: [CategoryUpsertWithWhereUniqueWithoutItemsInput!]
+}
+
+input CategoryUpdateWithoutItemsDataInput {
+  name: String
+}
+
+input CategoryUpdateWithWhereUniqueWithoutItemsInput {
+  where: CategoryWhereUniqueInput!
+  data: CategoryUpdateWithoutItemsDataInput!
+}
+
+input CategoryUpsertWithWhereUniqueWithoutItemsInput {
+  where: CategoryWhereUniqueInput!
+  update: CategoryUpdateWithoutItemsDataInput!
+  create: CategoryCreateWithoutItemsInput!
+}
+
+input CategoryWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CategoryWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CategoryWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CategoryWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  items_every: ItemWhereInput
+  items_some: ItemWhereInput
+  items_none: ItemWhereInput
+}
+
+input CategoryWhereUniqueInput {
+  id: ID
+}
+
 enum Channel {
   Email
   Phone
@@ -456,7 +717,7 @@ type Client implements Node {
   phone: String!
   tva: String
   clientContacts(where: ClientContactWhereInput, orderBy: ClientContactOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ClientContact!]
-  language(where: LanguageWhereInput): Language
+  language: LanguageEnum
   communications(where: CommunicationWhereInput, orderBy: CommunicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Communication!]
   type: ClientType
 }
@@ -883,26 +1144,16 @@ input ClientCreateInput {
   name: String!
   phone: String!
   tva: String
+  language: LanguageEnum
   type: ClientType
   events: EventCreateManyWithoutClientInput
   offers: OfferCreateManyWithoutClientInput
   clientContacts: ClientContactCreateManyWithoutClientInput
-  language: LanguageCreateOneWithoutClientsInput
-  communications: CommunicationCreateManyWithoutClientInput
-}
-
-input ClientCreateManyWithoutLanguageInput {
-  create: [ClientCreateWithoutLanguageInput!]
-  connect: [ClientWhereUniqueInput!]
+  communications: CommunicationCreateManyInput
 }
 
 input ClientCreateOneWithoutClientContactsInput {
   create: ClientCreateWithoutClientContactsInput
-  connect: ClientWhereUniqueInput
-}
-
-input ClientCreateOneWithoutCommunicationsInput {
-  create: ClientCreateWithoutCommunicationsInput
   connect: ClientWhereUniqueInput
 }
 
@@ -922,24 +1173,11 @@ input ClientCreateWithoutClientContactsInput {
   name: String!
   phone: String!
   tva: String
+  language: LanguageEnum
   type: ClientType
   events: EventCreateManyWithoutClientInput
   offers: OfferCreateManyWithoutClientInput
-  language: LanguageCreateOneWithoutClientsInput
-  communications: CommunicationCreateManyWithoutClientInput
-}
-
-input ClientCreateWithoutCommunicationsInput {
-  address: String
-  email: String!
-  name: String!
-  phone: String!
-  tva: String
-  type: ClientType
-  events: EventCreateManyWithoutClientInput
-  offers: OfferCreateManyWithoutClientInput
-  clientContacts: ClientContactCreateManyWithoutClientInput
-  language: LanguageCreateOneWithoutClientsInput
+  communications: CommunicationCreateManyInput
 }
 
 input ClientCreateWithoutEventsInput {
@@ -948,24 +1186,11 @@ input ClientCreateWithoutEventsInput {
   name: String!
   phone: String!
   tva: String
+  language: LanguageEnum
   type: ClientType
   offers: OfferCreateManyWithoutClientInput
   clientContacts: ClientContactCreateManyWithoutClientInput
-  language: LanguageCreateOneWithoutClientsInput
-  communications: CommunicationCreateManyWithoutClientInput
-}
-
-input ClientCreateWithoutLanguageInput {
-  address: String
-  email: String!
-  name: String!
-  phone: String!
-  tva: String
-  type: ClientType
-  events: EventCreateManyWithoutClientInput
-  offers: OfferCreateManyWithoutClientInput
-  clientContacts: ClientContactCreateManyWithoutClientInput
-  communications: CommunicationCreateManyWithoutClientInput
+  communications: CommunicationCreateManyInput
 }
 
 input ClientCreateWithoutOffersInput {
@@ -974,11 +1199,11 @@ input ClientCreateWithoutOffersInput {
   name: String!
   phone: String!
   tva: String
+  language: LanguageEnum
   type: ClientType
   events: EventCreateManyWithoutClientInput
   clientContacts: ClientContactCreateManyWithoutClientInput
-  language: LanguageCreateOneWithoutClientsInput
-  communications: CommunicationCreateManyWithoutClientInput
+  communications: CommunicationCreateManyInput
 }
 
 """An edge in a connection."""
@@ -1005,6 +1230,8 @@ enum ClientOrderByInput {
   phone_DESC
   tva_ASC
   tva_DESC
+  language_ASC
+  language_DESC
   type_ASC
   type_DESC
   updatedAt_ASC
@@ -1019,6 +1246,7 @@ type ClientPreviousValues {
   name: String!
   phone: String!
   tva: String
+  language: LanguageEnum
   type: ClientType
 }
 
@@ -1072,21 +1300,12 @@ input ClientUpdateInput {
   name: String
   phone: String
   tva: String
+  language: LanguageEnum
   type: ClientType
   events: EventUpdateManyWithoutClientInput
   offers: OfferUpdateManyWithoutClientInput
   clientContacts: ClientContactUpdateManyWithoutClientInput
-  language: LanguageUpdateOneWithoutClientsInput
-  communications: CommunicationUpdateManyWithoutClientInput
-}
-
-input ClientUpdateManyWithoutLanguageInput {
-  create: [ClientCreateWithoutLanguageInput!]
-  connect: [ClientWhereUniqueInput!]
-  disconnect: [ClientWhereUniqueInput!]
-  delete: [ClientWhereUniqueInput!]
-  update: [ClientUpdateWithWhereUniqueWithoutLanguageInput!]
-  upsert: [ClientUpsertWithWhereUniqueWithoutLanguageInput!]
+  communications: CommunicationUpdateManyInput
 }
 
 input ClientUpdateOneWithoutClientContactsInput {
@@ -1096,15 +1315,6 @@ input ClientUpdateOneWithoutClientContactsInput {
   delete: Boolean
   update: ClientUpdateWithoutClientContactsDataInput
   upsert: ClientUpsertWithoutClientContactsInput
-}
-
-input ClientUpdateOneWithoutCommunicationsInput {
-  create: ClientCreateWithoutCommunicationsInput
-  connect: ClientWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: ClientUpdateWithoutCommunicationsDataInput
-  upsert: ClientUpsertWithoutCommunicationsInput
 }
 
 input ClientUpdateOneWithoutEventsInput {
@@ -1131,24 +1341,11 @@ input ClientUpdateWithoutClientContactsDataInput {
   name: String
   phone: String
   tva: String
+  language: LanguageEnum
   type: ClientType
   events: EventUpdateManyWithoutClientInput
   offers: OfferUpdateManyWithoutClientInput
-  language: LanguageUpdateOneWithoutClientsInput
-  communications: CommunicationUpdateManyWithoutClientInput
-}
-
-input ClientUpdateWithoutCommunicationsDataInput {
-  address: String
-  email: String
-  name: String
-  phone: String
-  tva: String
-  type: ClientType
-  events: EventUpdateManyWithoutClientInput
-  offers: OfferUpdateManyWithoutClientInput
-  clientContacts: ClientContactUpdateManyWithoutClientInput
-  language: LanguageUpdateOneWithoutClientsInput
+  communications: CommunicationUpdateManyInput
 }
 
 input ClientUpdateWithoutEventsDataInput {
@@ -1157,24 +1354,11 @@ input ClientUpdateWithoutEventsDataInput {
   name: String
   phone: String
   tva: String
+  language: LanguageEnum
   type: ClientType
   offers: OfferUpdateManyWithoutClientInput
   clientContacts: ClientContactUpdateManyWithoutClientInput
-  language: LanguageUpdateOneWithoutClientsInput
-  communications: CommunicationUpdateManyWithoutClientInput
-}
-
-input ClientUpdateWithoutLanguageDataInput {
-  address: String
-  email: String
-  name: String
-  phone: String
-  tva: String
-  type: ClientType
-  events: EventUpdateManyWithoutClientInput
-  offers: OfferUpdateManyWithoutClientInput
-  clientContacts: ClientContactUpdateManyWithoutClientInput
-  communications: CommunicationUpdateManyWithoutClientInput
+  communications: CommunicationUpdateManyInput
 }
 
 input ClientUpdateWithoutOffersDataInput {
@@ -1183,26 +1367,16 @@ input ClientUpdateWithoutOffersDataInput {
   name: String
   phone: String
   tva: String
+  language: LanguageEnum
   type: ClientType
   events: EventUpdateManyWithoutClientInput
   clientContacts: ClientContactUpdateManyWithoutClientInput
-  language: LanguageUpdateOneWithoutClientsInput
-  communications: CommunicationUpdateManyWithoutClientInput
-}
-
-input ClientUpdateWithWhereUniqueWithoutLanguageInput {
-  where: ClientWhereUniqueInput!
-  data: ClientUpdateWithoutLanguageDataInput!
+  communications: CommunicationUpdateManyInput
 }
 
 input ClientUpsertWithoutClientContactsInput {
   update: ClientUpdateWithoutClientContactsDataInput!
   create: ClientCreateWithoutClientContactsInput!
-}
-
-input ClientUpsertWithoutCommunicationsInput {
-  update: ClientUpdateWithoutCommunicationsDataInput!
-  create: ClientCreateWithoutCommunicationsInput!
 }
 
 input ClientUpsertWithoutEventsInput {
@@ -1213,12 +1387,6 @@ input ClientUpsertWithoutEventsInput {
 input ClientUpsertWithoutOffersInput {
   update: ClientUpdateWithoutOffersDataInput!
   create: ClientCreateWithoutOffersInput!
-}
-
-input ClientUpsertWithWhereUniqueWithoutLanguageInput {
-  where: ClientWhereUniqueInput!
-  update: ClientUpdateWithoutLanguageDataInput!
-  create: ClientCreateWithoutLanguageInput!
 }
 
 input ClientWhereInput {
@@ -1492,6 +1660,16 @@ input ClientWhereInput {
 
   """All values not ending with the given string."""
   tva_not_ends_with: String
+  language: LanguageEnum
+
+  """All values that are not equal to given value."""
+  language_not: LanguageEnum
+
+  """All values that are contained in given list."""
+  language_in: [LanguageEnum!]
+
+  """All values that are not contained in given list."""
+  language_not_in: [LanguageEnum!]
   type: ClientType
 
   """All values that are not equal to given value."""
@@ -1511,7 +1689,6 @@ input ClientWhereInput {
   clientContacts_every: ClientContactWhereInput
   clientContacts_some: ClientContactWhereInput
   clientContacts_none: ClientContactWhereInput
-  language: LanguageWhereInput
   communications_every: CommunicationWhereInput
   communications_some: CommunicationWhereInput
   communications_none: CommunicationWhereInput
@@ -1526,9 +1703,9 @@ type Communication implements Node {
   message: String!
   subject: String!
   channel: Channel!
-  client(where: ClientWhereInput): Client
   date: DateTime!
   gmtOffset: String!
+  offer(where: OfferWhereInput): Offer
 }
 
 """A connection to a list of items."""
@@ -1547,20 +1724,12 @@ input CommunicationCreateInput {
   channel: Channel!
   date: DateTime!
   gmtOffset: String!
-  client: ClientCreateOneWithoutCommunicationsInput
+  offer: OfferCreateOneInput
 }
 
-input CommunicationCreateManyWithoutClientInput {
-  create: [CommunicationCreateWithoutClientInput!]
+input CommunicationCreateManyInput {
+  create: [CommunicationCreateInput!]
   connect: [CommunicationWhereUniqueInput!]
-}
-
-input CommunicationCreateWithoutClientInput {
-  message: String!
-  subject: String!
-  channel: Channel!
-  date: DateTime!
-  gmtOffset: String!
 }
 
 """An edge in a connection."""
@@ -1639,41 +1808,42 @@ input CommunicationSubscriptionWhereInput {
   node: CommunicationWhereInput
 }
 
+input CommunicationUpdateDataInput {
+  message: String
+  subject: String
+  channel: Channel
+  date: DateTime
+  gmtOffset: String
+  offer: OfferUpdateOneInput
+}
+
 input CommunicationUpdateInput {
   message: String
   subject: String
   channel: Channel
   date: DateTime
   gmtOffset: String
-  client: ClientUpdateOneWithoutCommunicationsInput
+  offer: OfferUpdateOneInput
 }
 
-input CommunicationUpdateManyWithoutClientInput {
-  create: [CommunicationCreateWithoutClientInput!]
+input CommunicationUpdateManyInput {
+  create: [CommunicationCreateInput!]
   connect: [CommunicationWhereUniqueInput!]
   disconnect: [CommunicationWhereUniqueInput!]
   delete: [CommunicationWhereUniqueInput!]
-  update: [CommunicationUpdateWithWhereUniqueWithoutClientInput!]
-  upsert: [CommunicationUpsertWithWhereUniqueWithoutClientInput!]
+  update: [CommunicationUpdateWithWhereUniqueNestedInput!]
+  upsert: [CommunicationUpsertWithWhereUniqueNestedInput!]
 }
 
-input CommunicationUpdateWithoutClientDataInput {
-  message: String
-  subject: String
-  channel: Channel
-  date: DateTime
-  gmtOffset: String
-}
-
-input CommunicationUpdateWithWhereUniqueWithoutClientInput {
+input CommunicationUpdateWithWhereUniqueNestedInput {
   where: CommunicationWhereUniqueInput!
-  data: CommunicationUpdateWithoutClientDataInput!
+  data: CommunicationUpdateDataInput!
 }
 
-input CommunicationUpsertWithWhereUniqueWithoutClientInput {
+input CommunicationUpsertWithWhereUniqueNestedInput {
   where: CommunicationWhereUniqueInput!
-  update: CommunicationUpdateWithoutClientDataInput!
-  create: CommunicationCreateWithoutClientInput!
+  update: CommunicationUpdateDataInput!
+  create: CommunicationCreateInput!
 }
 
 input CommunicationWhereInput {
@@ -1877,7 +2047,7 @@ input CommunicationWhereInput {
 
   """All values not ending with the given string."""
   gmtOffset_not_ends_with: String
-  client: ClientWhereInput
+  offer: OfferWhereInput
 }
 
 input CommunicationWhereUniqueInput {
@@ -2648,9 +2818,6 @@ type Event implements Node {
   id: ID!
   offer(where: OfferWhereInput): Offer
   employees(where: EmployeeWhereInput, orderBy: EmployeeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Employee!]
-  endTime: DateTime!
-  gmtOffset: String!
-  startTime: DateTime!
   stuffs(where: StuffWhereInput, orderBy: StuffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Stuff!]
   vehicles(where: VehicleWhereInput, orderBy: VehicleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vehicle!]
 }
@@ -2666,13 +2833,10 @@ type EventConnection {
 }
 
 input EventCreateInput {
-  endTime: DateTime!
-  gmtOffset: String!
-  startTime: DateTime!
   client: ClientCreateOneWithoutEventsInput
   offer: OfferCreateOneWithoutEventInput
   employees: EmployeeCreateManyWithoutEventInput
-  stuffs: StuffCreateManyWithoutEventsInput
+  stuffs: StuffCreateManyInput
   vehicles: VehicleCreateManyWithoutEventsInput
 }
 
@@ -2681,14 +2845,14 @@ input EventCreateManyWithoutClientInput {
   connect: [EventWhereUniqueInput!]
 }
 
-input EventCreateManyWithoutStuffsInput {
-  create: [EventCreateWithoutStuffsInput!]
-  connect: [EventWhereUniqueInput!]
-}
-
 input EventCreateManyWithoutVehiclesInput {
   create: [EventCreateWithoutVehiclesInput!]
   connect: [EventWhereUniqueInput!]
+}
+
+input EventCreateOneInput {
+  create: EventCreateInput
+  connect: EventWhereUniqueInput
 }
 
 input EventCreateOneWithoutEmployeesInput {
@@ -2702,53 +2866,31 @@ input EventCreateOneWithoutOfferInput {
 }
 
 input EventCreateWithoutClientInput {
-  endTime: DateTime!
-  gmtOffset: String!
-  startTime: DateTime!
   offer: OfferCreateOneWithoutEventInput
   employees: EmployeeCreateManyWithoutEventInput
-  stuffs: StuffCreateManyWithoutEventsInput
+  stuffs: StuffCreateManyInput
   vehicles: VehicleCreateManyWithoutEventsInput
 }
 
 input EventCreateWithoutEmployeesInput {
-  endTime: DateTime!
-  gmtOffset: String!
-  startTime: DateTime!
   client: ClientCreateOneWithoutEventsInput
   offer: OfferCreateOneWithoutEventInput
-  stuffs: StuffCreateManyWithoutEventsInput
+  stuffs: StuffCreateManyInput
   vehicles: VehicleCreateManyWithoutEventsInput
 }
 
 input EventCreateWithoutOfferInput {
-  endTime: DateTime!
-  gmtOffset: String!
-  startTime: DateTime!
   client: ClientCreateOneWithoutEventsInput
   employees: EmployeeCreateManyWithoutEventInput
-  stuffs: StuffCreateManyWithoutEventsInput
-  vehicles: VehicleCreateManyWithoutEventsInput
-}
-
-input EventCreateWithoutStuffsInput {
-  endTime: DateTime!
-  gmtOffset: String!
-  startTime: DateTime!
-  client: ClientCreateOneWithoutEventsInput
-  offer: OfferCreateOneWithoutEventInput
-  employees: EmployeeCreateManyWithoutEventInput
+  stuffs: StuffCreateManyInput
   vehicles: VehicleCreateManyWithoutEventsInput
 }
 
 input EventCreateWithoutVehiclesInput {
-  endTime: DateTime!
-  gmtOffset: String!
-  startTime: DateTime!
   client: ClientCreateOneWithoutEventsInput
   offer: OfferCreateOneWithoutEventInput
   employees: EmployeeCreateManyWithoutEventInput
-  stuffs: StuffCreateManyWithoutEventsInput
+  stuffs: StuffCreateManyInput
 }
 
 """An edge in a connection."""
@@ -2763,12 +2905,6 @@ type EventEdge {
 enum EventOrderByInput {
   id_ASC
   id_DESC
-  endTime_ASC
-  endTime_DESC
-  gmtOffset_ASC
-  gmtOffset_DESC
-  startTime_ASC
-  startTime_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -2777,9 +2913,213 @@ enum EventOrderByInput {
 
 type EventPreviousValues {
   id: ID!
-  endTime: DateTime!
-  gmtOffset: String!
-  startTime: DateTime!
+}
+
+type EventStuff implements Node {
+  event(where: EventWhereInput): Event
+  id: ID!
+  quantity: Int!
+  stuff(where: StuffWhereInput): Stuff
+}
+
+"""A connection to a list of items."""
+type EventStuffConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [EventStuffEdge]!
+  aggregate: AggregateEventStuff!
+}
+
+input EventStuffCreateInput {
+  quantity: Int
+  event: EventCreateOneInput
+  stuff: StuffCreateOneWithoutEventStuffsInput
+}
+
+input EventStuffCreateManyWithoutStuffInput {
+  create: [EventStuffCreateWithoutStuffInput!]
+  connect: [EventStuffWhereUniqueInput!]
+}
+
+input EventStuffCreateWithoutStuffInput {
+  quantity: Int
+  event: EventCreateOneInput
+}
+
+"""An edge in a connection."""
+type EventStuffEdge {
+  """The item at the end of the edge."""
+  node: EventStuff!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum EventStuffOrderByInput {
+  id_ASC
+  id_DESC
+  quantity_ASC
+  quantity_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type EventStuffPreviousValues {
+  id: ID!
+  quantity: Int!
+}
+
+type EventStuffSubscriptionPayload {
+  mutation: MutationType!
+  node: EventStuff
+  updatedFields: [String!]
+  previousValues: EventStuffPreviousValues
+}
+
+input EventStuffSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [EventStuffSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [EventStuffSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [EventStuffSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: EventStuffWhereInput
+}
+
+input EventStuffUpdateInput {
+  quantity: Int
+  event: EventUpdateOneInput
+  stuff: StuffUpdateOneWithoutEventStuffsInput
+}
+
+input EventStuffUpdateManyWithoutStuffInput {
+  create: [EventStuffCreateWithoutStuffInput!]
+  connect: [EventStuffWhereUniqueInput!]
+  disconnect: [EventStuffWhereUniqueInput!]
+  delete: [EventStuffWhereUniqueInput!]
+  update: [EventStuffUpdateWithWhereUniqueWithoutStuffInput!]
+  upsert: [EventStuffUpsertWithWhereUniqueWithoutStuffInput!]
+}
+
+input EventStuffUpdateWithoutStuffDataInput {
+  quantity: Int
+  event: EventUpdateOneInput
+}
+
+input EventStuffUpdateWithWhereUniqueWithoutStuffInput {
+  where: EventStuffWhereUniqueInput!
+  data: EventStuffUpdateWithoutStuffDataInput!
+}
+
+input EventStuffUpsertWithWhereUniqueWithoutStuffInput {
+  where: EventStuffWhereUniqueInput!
+  update: EventStuffUpdateWithoutStuffDataInput!
+  create: EventStuffCreateWithoutStuffInput!
+}
+
+input EventStuffWhereInput {
+  """Logical AND on all given filters."""
+  AND: [EventStuffWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [EventStuffWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [EventStuffWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  quantity: Int
+
+  """All values that are not equal to given value."""
+  quantity_not: Int
+
+  """All values that are contained in given list."""
+  quantity_in: [Int!]
+
+  """All values that are not contained in given list."""
+  quantity_not_in: [Int!]
+
+  """All values less than the given value."""
+  quantity_lt: Int
+
+  """All values less than or equal the given value."""
+  quantity_lte: Int
+
+  """All values greater than the given value."""
+  quantity_gt: Int
+
+  """All values greater than or equal the given value."""
+  quantity_gte: Int
+  event: EventWhereInput
+  stuff: StuffWhereInput
+}
+
+input EventStuffWhereUniqueInput {
+  id: ID
 }
 
 type EventSubscriptionPayload {
@@ -3036,14 +3376,19 @@ input EventTypeWhereUniqueInput {
   id: ID
 }
 
-input EventUpdateInput {
-  endTime: DateTime
-  gmtOffset: String
-  startTime: DateTime
+input EventUpdateDataInput {
   client: ClientUpdateOneWithoutEventsInput
   offer: OfferUpdateOneWithoutEventInput
   employees: EmployeeUpdateManyWithoutEventInput
-  stuffs: StuffUpdateManyWithoutEventsInput
+  stuffs: StuffUpdateManyInput
+  vehicles: VehicleUpdateManyWithoutEventsInput
+}
+
+input EventUpdateInput {
+  client: ClientUpdateOneWithoutEventsInput
+  offer: OfferUpdateOneWithoutEventInput
+  employees: EmployeeUpdateManyWithoutEventInput
+  stuffs: StuffUpdateManyInput
   vehicles: VehicleUpdateManyWithoutEventsInput
 }
 
@@ -3056,15 +3401,6 @@ input EventUpdateManyWithoutClientInput {
   upsert: [EventUpsertWithWhereUniqueWithoutClientInput!]
 }
 
-input EventUpdateManyWithoutStuffsInput {
-  create: [EventCreateWithoutStuffsInput!]
-  connect: [EventWhereUniqueInput!]
-  disconnect: [EventWhereUniqueInput!]
-  delete: [EventWhereUniqueInput!]
-  update: [EventUpdateWithWhereUniqueWithoutStuffsInput!]
-  upsert: [EventUpsertWithWhereUniqueWithoutStuffsInput!]
-}
-
 input EventUpdateManyWithoutVehiclesInput {
   create: [EventCreateWithoutVehiclesInput!]
   connect: [EventWhereUniqueInput!]
@@ -3072,6 +3408,15 @@ input EventUpdateManyWithoutVehiclesInput {
   delete: [EventWhereUniqueInput!]
   update: [EventUpdateWithWhereUniqueWithoutVehiclesInput!]
   upsert: [EventUpsertWithWhereUniqueWithoutVehiclesInput!]
+}
+
+input EventUpdateOneInput {
+  create: EventCreateInput
+  connect: EventWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: EventUpdateDataInput
+  upsert: EventUpsertNestedInput
 }
 
 input EventUpdateOneWithoutEmployeesInput {
@@ -3093,53 +3438,31 @@ input EventUpdateOneWithoutOfferInput {
 }
 
 input EventUpdateWithoutClientDataInput {
-  endTime: DateTime
-  gmtOffset: String
-  startTime: DateTime
   offer: OfferUpdateOneWithoutEventInput
   employees: EmployeeUpdateManyWithoutEventInput
-  stuffs: StuffUpdateManyWithoutEventsInput
+  stuffs: StuffUpdateManyInput
   vehicles: VehicleUpdateManyWithoutEventsInput
 }
 
 input EventUpdateWithoutEmployeesDataInput {
-  endTime: DateTime
-  gmtOffset: String
-  startTime: DateTime
   client: ClientUpdateOneWithoutEventsInput
   offer: OfferUpdateOneWithoutEventInput
-  stuffs: StuffUpdateManyWithoutEventsInput
+  stuffs: StuffUpdateManyInput
   vehicles: VehicleUpdateManyWithoutEventsInput
 }
 
 input EventUpdateWithoutOfferDataInput {
-  endTime: DateTime
-  gmtOffset: String
-  startTime: DateTime
   client: ClientUpdateOneWithoutEventsInput
   employees: EmployeeUpdateManyWithoutEventInput
-  stuffs: StuffUpdateManyWithoutEventsInput
-  vehicles: VehicleUpdateManyWithoutEventsInput
-}
-
-input EventUpdateWithoutStuffsDataInput {
-  endTime: DateTime
-  gmtOffset: String
-  startTime: DateTime
-  client: ClientUpdateOneWithoutEventsInput
-  offer: OfferUpdateOneWithoutEventInput
-  employees: EmployeeUpdateManyWithoutEventInput
+  stuffs: StuffUpdateManyInput
   vehicles: VehicleUpdateManyWithoutEventsInput
 }
 
 input EventUpdateWithoutVehiclesDataInput {
-  endTime: DateTime
-  gmtOffset: String
-  startTime: DateTime
   client: ClientUpdateOneWithoutEventsInput
   offer: OfferUpdateOneWithoutEventInput
   employees: EmployeeUpdateManyWithoutEventInput
-  stuffs: StuffUpdateManyWithoutEventsInput
+  stuffs: StuffUpdateManyInput
 }
 
 input EventUpdateWithWhereUniqueWithoutClientInput {
@@ -3147,14 +3470,14 @@ input EventUpdateWithWhereUniqueWithoutClientInput {
   data: EventUpdateWithoutClientDataInput!
 }
 
-input EventUpdateWithWhereUniqueWithoutStuffsInput {
-  where: EventWhereUniqueInput!
-  data: EventUpdateWithoutStuffsDataInput!
-}
-
 input EventUpdateWithWhereUniqueWithoutVehiclesInput {
   where: EventWhereUniqueInput!
   data: EventUpdateWithoutVehiclesDataInput!
+}
+
+input EventUpsertNestedInput {
+  update: EventUpdateDataInput!
+  create: EventCreateInput!
 }
 
 input EventUpsertWithoutEmployeesInput {
@@ -3171,12 +3494,6 @@ input EventUpsertWithWhereUniqueWithoutClientInput {
   where: EventWhereUniqueInput!
   update: EventUpdateWithoutClientDataInput!
   create: EventCreateWithoutClientInput!
-}
-
-input EventUpsertWithWhereUniqueWithoutStuffsInput {
-  where: EventWhereUniqueInput!
-  update: EventUpdateWithoutStuffsDataInput!
-  create: EventCreateWithoutStuffsInput!
 }
 
 input EventUpsertWithWhereUniqueWithoutVehiclesInput {
@@ -3234,90 +3551,6 @@ input EventWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  endTime: DateTime
-
-  """All values that are not equal to given value."""
-  endTime_not: DateTime
-
-  """All values that are contained in given list."""
-  endTime_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  endTime_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  endTime_lt: DateTime
-
-  """All values less than or equal the given value."""
-  endTime_lte: DateTime
-
-  """All values greater than the given value."""
-  endTime_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  endTime_gte: DateTime
-  gmtOffset: String
-
-  """All values that are not equal to given value."""
-  gmtOffset_not: String
-
-  """All values that are contained in given list."""
-  gmtOffset_in: [String!]
-
-  """All values that are not contained in given list."""
-  gmtOffset_not_in: [String!]
-
-  """All values less than the given value."""
-  gmtOffset_lt: String
-
-  """All values less than or equal the given value."""
-  gmtOffset_lte: String
-
-  """All values greater than the given value."""
-  gmtOffset_gt: String
-
-  """All values greater than or equal the given value."""
-  gmtOffset_gte: String
-
-  """All values containing the given string."""
-  gmtOffset_contains: String
-
-  """All values not containing the given string."""
-  gmtOffset_not_contains: String
-
-  """All values starting with the given string."""
-  gmtOffset_starts_with: String
-
-  """All values not starting with the given string."""
-  gmtOffset_not_starts_with: String
-
-  """All values ending with the given string."""
-  gmtOffset_ends_with: String
-
-  """All values not ending with the given string."""
-  gmtOffset_not_ends_with: String
-  startTime: DateTime
-
-  """All values that are not equal to given value."""
-  startTime_not: DateTime
-
-  """All values that are contained in given list."""
-  startTime_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  startTime_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  startTime_lt: DateTime
-
-  """All values less than or equal the given value."""
-  startTime_lte: DateTime
-
-  """All values greater than the given value."""
-  startTime_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  startTime_gte: DateTime
   client: ClientWhereInput
   offer: OfferWhereInput
   employees_every: EmployeeWhereInput
@@ -3336,11 +3569,9 @@ input EventWhereUniqueInput {
 }
 
 type Item implements Node {
-  description: String!
   id: ID!
-  name: String!
-  internalDescription: String
-  language(where: LanguageWhereInput): Language
+  platTranslations(where: ItemTranslationWhereInput, orderBy: ItemTranslationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ItemTranslation!]
+  categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category!]
   sectionItems(where: SectionItemWhereInput, orderBy: SectionItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SectionItem!]
 }
 
@@ -3355,15 +3586,13 @@ type ItemConnection {
 }
 
 input ItemCreateInput {
-  description: String!
-  name: String!
-  internalDescription: String
-  language: LanguageCreateOneWithoutItemsInput
+  platTranslations: ItemTranslationCreateManyWithoutItemsInput
+  categories: CategoryCreateManyWithoutItemsInput
   sectionItems: SectionItemCreateManyWithoutItemsInput
 }
 
-input ItemCreateManyWithoutLanguageInput {
-  create: [ItemCreateWithoutLanguageInput!]
+input ItemCreateManyWithoutCategoriesInput {
+  create: [ItemCreateWithoutCategoriesInput!]
   connect: [ItemWhereUniqueInput!]
 }
 
@@ -3372,18 +3601,24 @@ input ItemCreateManyWithoutSectionItemsInput {
   connect: [ItemWhereUniqueInput!]
 }
 
-input ItemCreateWithoutLanguageInput {
-  description: String!
-  name: String!
-  internalDescription: String
+input ItemCreateOneWithoutPlatTranslationsInput {
+  create: ItemCreateWithoutPlatTranslationsInput
+  connect: ItemWhereUniqueInput
+}
+
+input ItemCreateWithoutCategoriesInput {
+  platTranslations: ItemTranslationCreateManyWithoutItemsInput
+  sectionItems: SectionItemCreateManyWithoutItemsInput
+}
+
+input ItemCreateWithoutPlatTranslationsInput {
+  categories: CategoryCreateManyWithoutItemsInput
   sectionItems: SectionItemCreateManyWithoutItemsInput
 }
 
 input ItemCreateWithoutSectionItemsInput {
-  description: String!
-  name: String!
-  internalDescription: String
-  language: LanguageCreateOneWithoutItemsInput
+  platTranslations: ItemTranslationCreateManyWithoutItemsInput
+  categories: CategoryCreateManyWithoutItemsInput
 }
 
 """An edge in a connection."""
@@ -3396,14 +3631,8 @@ type ItemEdge {
 }
 
 enum ItemOrderByInput {
-  description_ASC
-  description_DESC
   id_ASC
   id_DESC
-  name_ASC
-  name_DESC
-  internalDescription_ASC
-  internalDescription_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -3411,10 +3640,7 @@ enum ItemOrderByInput {
 }
 
 type ItemPreviousValues {
-  description: String!
   id: ID!
-  name: String!
-  internalDescription: String
 }
 
 type ItemSubscriptionPayload {
@@ -3456,77 +3682,162 @@ input ItemSubscriptionWhereInput {
   node: ItemWhereInput
 }
 
-input ItemUpdateInput {
+type ItemTranslation implements Node {
   description: String
-  name: String
+  id: ID!
+  items(where: ItemWhereInput): Item
   internalDescription: String
-  language: LanguageUpdateOneWithoutItemsInput
-  sectionItems: SectionItemUpdateManyWithoutItemsInput
+  language: LanguageEnum!
+  name: String
 }
 
-input ItemUpdateManyWithoutLanguageInput {
-  create: [ItemCreateWithoutLanguageInput!]
-  connect: [ItemWhereUniqueInput!]
-  disconnect: [ItemWhereUniqueInput!]
-  delete: [ItemWhereUniqueInput!]
-  update: [ItemUpdateWithWhereUniqueWithoutLanguageInput!]
-  upsert: [ItemUpsertWithWhereUniqueWithoutLanguageInput!]
+"""A connection to a list of items."""
+type ItemTranslationConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ItemTranslationEdge]!
+  aggregate: AggregateItemTranslation!
 }
 
-input ItemUpdateManyWithoutSectionItemsInput {
-  create: [ItemCreateWithoutSectionItemsInput!]
-  connect: [ItemWhereUniqueInput!]
-  disconnect: [ItemWhereUniqueInput!]
-  delete: [ItemWhereUniqueInput!]
-  update: [ItemUpdateWithWhereUniqueWithoutSectionItemsInput!]
-  upsert: [ItemUpsertWithWhereUniqueWithoutSectionItemsInput!]
-}
-
-input ItemUpdateWithoutLanguageDataInput {
+input ItemTranslationCreateInput {
   description: String
-  name: String
   internalDescription: String
-  sectionItems: SectionItemUpdateManyWithoutItemsInput
+  language: LanguageEnum!
+  name: String
+  items: ItemCreateOneWithoutPlatTranslationsInput
 }
 
-input ItemUpdateWithoutSectionItemsDataInput {
+input ItemTranslationCreateManyWithoutItemsInput {
+  create: [ItemTranslationCreateWithoutItemsInput!]
+  connect: [ItemTranslationWhereUniqueInput!]
+}
+
+input ItemTranslationCreateWithoutItemsInput {
   description: String
-  name: String
   internalDescription: String
-  language: LanguageUpdateOneWithoutItemsInput
+  language: LanguageEnum!
+  name: String
 }
 
-input ItemUpdateWithWhereUniqueWithoutLanguageInput {
-  where: ItemWhereUniqueInput!
-  data: ItemUpdateWithoutLanguageDataInput!
+"""An edge in a connection."""
+type ItemTranslationEdge {
+  """The item at the end of the edge."""
+  node: ItemTranslation!
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
-input ItemUpdateWithWhereUniqueWithoutSectionItemsInput {
-  where: ItemWhereUniqueInput!
-  data: ItemUpdateWithoutSectionItemsDataInput!
+enum ItemTranslationOrderByInput {
+  description_ASC
+  description_DESC
+  id_ASC
+  id_DESC
+  internalDescription_ASC
+  internalDescription_DESC
+  language_ASC
+  language_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
-input ItemUpsertWithWhereUniqueWithoutLanguageInput {
-  where: ItemWhereUniqueInput!
-  update: ItemUpdateWithoutLanguageDataInput!
-  create: ItemCreateWithoutLanguageInput!
+type ItemTranslationPreviousValues {
+  description: String
+  id: ID!
+  internalDescription: String
+  language: LanguageEnum!
+  name: String
 }
 
-input ItemUpsertWithWhereUniqueWithoutSectionItemsInput {
-  where: ItemWhereUniqueInput!
-  update: ItemUpdateWithoutSectionItemsDataInput!
-  create: ItemCreateWithoutSectionItemsInput!
+type ItemTranslationSubscriptionPayload {
+  mutation: MutationType!
+  node: ItemTranslation
+  updatedFields: [String!]
+  previousValues: ItemTranslationPreviousValues
 }
 
-input ItemWhereInput {
+input ItemTranslationSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [ItemWhereInput!]
+  AND: [ItemTranslationSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ItemWhereInput!]
+  OR: [ItemTranslationSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ItemWhereInput!]
+  NOT: [ItemTranslationSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ItemTranslationWhereInput
+}
+
+input ItemTranslationUpdateInput {
+  description: String
+  internalDescription: String
+  language: LanguageEnum
+  name: String
+  items: ItemUpdateOneWithoutPlatTranslationsInput
+}
+
+input ItemTranslationUpdateManyWithoutItemsInput {
+  create: [ItemTranslationCreateWithoutItemsInput!]
+  connect: [ItemTranslationWhereUniqueInput!]
+  disconnect: [ItemTranslationWhereUniqueInput!]
+  delete: [ItemTranslationWhereUniqueInput!]
+  update: [ItemTranslationUpdateWithWhereUniqueWithoutItemsInput!]
+  upsert: [ItemTranslationUpsertWithWhereUniqueWithoutItemsInput!]
+}
+
+input ItemTranslationUpdateWithoutItemsDataInput {
+  description: String
+  internalDescription: String
+  language: LanguageEnum
+  name: String
+}
+
+input ItemTranslationUpdateWithWhereUniqueWithoutItemsInput {
+  where: ItemTranslationWhereUniqueInput!
+  data: ItemTranslationUpdateWithoutItemsDataInput!
+}
+
+input ItemTranslationUpsertWithWhereUniqueWithoutItemsInput {
+  where: ItemTranslationWhereUniqueInput!
+  update: ItemTranslationUpdateWithoutItemsDataInput!
+  create: ItemTranslationCreateWithoutItemsInput!
+}
+
+input ItemTranslationWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ItemTranslationWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ItemTranslationWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ItemTranslationWhereInput!]
   description: String
 
   """All values that are not equal to given value."""
@@ -3607,46 +3918,6 @@ input ItemWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  name: String
-
-  """All values that are not equal to given value."""
-  name_not: String
-
-  """All values that are contained in given list."""
-  name_in: [String!]
-
-  """All values that are not contained in given list."""
-  name_not_in: [String!]
-
-  """All values less than the given value."""
-  name_lt: String
-
-  """All values less than or equal the given value."""
-  name_lte: String
-
-  """All values greater than the given value."""
-  name_gt: String
-
-  """All values greater than or equal the given value."""
-  name_gte: String
-
-  """All values containing the given string."""
-  name_contains: String
-
-  """All values not containing the given string."""
-  name_not_contains: String
-
-  """All values starting with the given string."""
-  name_starts_with: String
-
-  """All values not starting with the given string."""
-  name_not_starts_with: String
-
-  """All values ending with the given string."""
-  name_ends_with: String
-
-  """All values not ending with the given string."""
-  name_not_ends_with: String
   internalDescription: String
 
   """All values that are not equal to given value."""
@@ -3687,7 +3958,193 @@ input ItemWhereInput {
 
   """All values not ending with the given string."""
   internalDescription_not_ends_with: String
-  language: LanguageWhereInput
+  language: LanguageEnum
+
+  """All values that are not equal to given value."""
+  language_not: LanguageEnum
+
+  """All values that are contained in given list."""
+  language_in: [LanguageEnum!]
+
+  """All values that are not contained in given list."""
+  language_not_in: [LanguageEnum!]
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  items: ItemWhereInput
+}
+
+input ItemTranslationWhereUniqueInput {
+  id: ID
+}
+
+input ItemUpdateInput {
+  platTranslations: ItemTranslationUpdateManyWithoutItemsInput
+  categories: CategoryUpdateManyWithoutItemsInput
+  sectionItems: SectionItemUpdateManyWithoutItemsInput
+}
+
+input ItemUpdateManyWithoutCategoriesInput {
+  create: [ItemCreateWithoutCategoriesInput!]
+  connect: [ItemWhereUniqueInput!]
+  disconnect: [ItemWhereUniqueInput!]
+  delete: [ItemWhereUniqueInput!]
+  update: [ItemUpdateWithWhereUniqueWithoutCategoriesInput!]
+  upsert: [ItemUpsertWithWhereUniqueWithoutCategoriesInput!]
+}
+
+input ItemUpdateManyWithoutSectionItemsInput {
+  create: [ItemCreateWithoutSectionItemsInput!]
+  connect: [ItemWhereUniqueInput!]
+  disconnect: [ItemWhereUniqueInput!]
+  delete: [ItemWhereUniqueInput!]
+  update: [ItemUpdateWithWhereUniqueWithoutSectionItemsInput!]
+  upsert: [ItemUpsertWithWhereUniqueWithoutSectionItemsInput!]
+}
+
+input ItemUpdateOneWithoutPlatTranslationsInput {
+  create: ItemCreateWithoutPlatTranslationsInput
+  connect: ItemWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ItemUpdateWithoutPlatTranslationsDataInput
+  upsert: ItemUpsertWithoutPlatTranslationsInput
+}
+
+input ItemUpdateWithoutCategoriesDataInput {
+  platTranslations: ItemTranslationUpdateManyWithoutItemsInput
+  sectionItems: SectionItemUpdateManyWithoutItemsInput
+}
+
+input ItemUpdateWithoutPlatTranslationsDataInput {
+  categories: CategoryUpdateManyWithoutItemsInput
+  sectionItems: SectionItemUpdateManyWithoutItemsInput
+}
+
+input ItemUpdateWithoutSectionItemsDataInput {
+  platTranslations: ItemTranslationUpdateManyWithoutItemsInput
+  categories: CategoryUpdateManyWithoutItemsInput
+}
+
+input ItemUpdateWithWhereUniqueWithoutCategoriesInput {
+  where: ItemWhereUniqueInput!
+  data: ItemUpdateWithoutCategoriesDataInput!
+}
+
+input ItemUpdateWithWhereUniqueWithoutSectionItemsInput {
+  where: ItemWhereUniqueInput!
+  data: ItemUpdateWithoutSectionItemsDataInput!
+}
+
+input ItemUpsertWithoutPlatTranslationsInput {
+  update: ItemUpdateWithoutPlatTranslationsDataInput!
+  create: ItemCreateWithoutPlatTranslationsInput!
+}
+
+input ItemUpsertWithWhereUniqueWithoutCategoriesInput {
+  where: ItemWhereUniqueInput!
+  update: ItemUpdateWithoutCategoriesDataInput!
+  create: ItemCreateWithoutCategoriesInput!
+}
+
+input ItemUpsertWithWhereUniqueWithoutSectionItemsInput {
+  where: ItemWhereUniqueInput!
+  update: ItemUpdateWithoutSectionItemsDataInput!
+  create: ItemCreateWithoutSectionItemsInput!
+}
+
+input ItemWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ItemWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ItemWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ItemWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  platTranslations_every: ItemTranslationWhereInput
+  platTranslations_some: ItemTranslationWhereInput
+  platTranslations_none: ItemTranslationWhereInput
+  categories_every: CategoryWhereInput
+  categories_some: CategoryWhereInput
+  categories_none: CategoryWhereInput
   sectionItems_every: SectionItemWhereInput
   sectionItems_some: SectionItemWhereInput
   sectionItems_none: SectionItemWhereInput
@@ -3996,318 +4453,10 @@ input JobWhereUniqueInput {
   id: ID
 }
 
-type Language implements Node {
-  id: ID!
-  type: LanguageEnum!
-  clients(where: ClientWhereInput, orderBy: ClientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Client!]
-  offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer!]
-  items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item!]
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
-}
-
-"""A connection to a list of items."""
-type LanguageConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [LanguageEdge]!
-  aggregate: AggregateLanguage!
-}
-
-input LanguageCreateInput {
-  type: LanguageEnum!
-  clients: ClientCreateManyWithoutLanguageInput
-  offers: OfferCreateManyWithoutLanguageInput
-  items: ItemCreateManyWithoutLanguageInput
-  users: UserCreateManyWithoutLanguageInput
-}
-
-input LanguageCreateOneWithoutClientsInput {
-  create: LanguageCreateWithoutClientsInput
-  connect: LanguageWhereUniqueInput
-}
-
-input LanguageCreateOneWithoutItemsInput {
-  create: LanguageCreateWithoutItemsInput
-  connect: LanguageWhereUniqueInput
-}
-
-input LanguageCreateOneWithoutOffersInput {
-  create: LanguageCreateWithoutOffersInput
-  connect: LanguageWhereUniqueInput
-}
-
-input LanguageCreateOneWithoutUsersInput {
-  create: LanguageCreateWithoutUsersInput
-  connect: LanguageWhereUniqueInput
-}
-
-input LanguageCreateWithoutClientsInput {
-  type: LanguageEnum!
-  offers: OfferCreateManyWithoutLanguageInput
-  items: ItemCreateManyWithoutLanguageInput
-  users: UserCreateManyWithoutLanguageInput
-}
-
-input LanguageCreateWithoutItemsInput {
-  type: LanguageEnum!
-  clients: ClientCreateManyWithoutLanguageInput
-  offers: OfferCreateManyWithoutLanguageInput
-  users: UserCreateManyWithoutLanguageInput
-}
-
-input LanguageCreateWithoutOffersInput {
-  type: LanguageEnum!
-  clients: ClientCreateManyWithoutLanguageInput
-  items: ItemCreateManyWithoutLanguageInput
-  users: UserCreateManyWithoutLanguageInput
-}
-
-input LanguageCreateWithoutUsersInput {
-  type: LanguageEnum!
-  clients: ClientCreateManyWithoutLanguageInput
-  offers: OfferCreateManyWithoutLanguageInput
-  items: ItemCreateManyWithoutLanguageInput
-}
-
-"""An edge in a connection."""
-type LanguageEdge {
-  """The item at the end of the edge."""
-  node: Language!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
 enum LanguageEnum {
   FR
   NL
   EN
-}
-
-enum LanguageOrderByInput {
-  id_ASC
-  id_DESC
-  type_ASC
-  type_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type LanguagePreviousValues {
-  id: ID!
-  type: LanguageEnum!
-}
-
-type LanguageSubscriptionPayload {
-  mutation: MutationType!
-  node: Language
-  updatedFields: [String!]
-  previousValues: LanguagePreviousValues
-}
-
-input LanguageSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [LanguageSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [LanguageSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [LanguageSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: LanguageWhereInput
-}
-
-input LanguageUpdateInput {
-  type: LanguageEnum
-  clients: ClientUpdateManyWithoutLanguageInput
-  offers: OfferUpdateManyWithoutLanguageInput
-  items: ItemUpdateManyWithoutLanguageInput
-  users: UserUpdateManyWithoutLanguageInput
-}
-
-input LanguageUpdateOneWithoutClientsInput {
-  create: LanguageCreateWithoutClientsInput
-  connect: LanguageWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: LanguageUpdateWithoutClientsDataInput
-  upsert: LanguageUpsertWithoutClientsInput
-}
-
-input LanguageUpdateOneWithoutItemsInput {
-  create: LanguageCreateWithoutItemsInput
-  connect: LanguageWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: LanguageUpdateWithoutItemsDataInput
-  upsert: LanguageUpsertWithoutItemsInput
-}
-
-input LanguageUpdateOneWithoutOffersInput {
-  create: LanguageCreateWithoutOffersInput
-  connect: LanguageWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: LanguageUpdateWithoutOffersDataInput
-  upsert: LanguageUpsertWithoutOffersInput
-}
-
-input LanguageUpdateOneWithoutUsersInput {
-  create: LanguageCreateWithoutUsersInput
-  connect: LanguageWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: LanguageUpdateWithoutUsersDataInput
-  upsert: LanguageUpsertWithoutUsersInput
-}
-
-input LanguageUpdateWithoutClientsDataInput {
-  type: LanguageEnum
-  offers: OfferUpdateManyWithoutLanguageInput
-  items: ItemUpdateManyWithoutLanguageInput
-  users: UserUpdateManyWithoutLanguageInput
-}
-
-input LanguageUpdateWithoutItemsDataInput {
-  type: LanguageEnum
-  clients: ClientUpdateManyWithoutLanguageInput
-  offers: OfferUpdateManyWithoutLanguageInput
-  users: UserUpdateManyWithoutLanguageInput
-}
-
-input LanguageUpdateWithoutOffersDataInput {
-  type: LanguageEnum
-  clients: ClientUpdateManyWithoutLanguageInput
-  items: ItemUpdateManyWithoutLanguageInput
-  users: UserUpdateManyWithoutLanguageInput
-}
-
-input LanguageUpdateWithoutUsersDataInput {
-  type: LanguageEnum
-  clients: ClientUpdateManyWithoutLanguageInput
-  offers: OfferUpdateManyWithoutLanguageInput
-  items: ItemUpdateManyWithoutLanguageInput
-}
-
-input LanguageUpsertWithoutClientsInput {
-  update: LanguageUpdateWithoutClientsDataInput!
-  create: LanguageCreateWithoutClientsInput!
-}
-
-input LanguageUpsertWithoutItemsInput {
-  update: LanguageUpdateWithoutItemsDataInput!
-  create: LanguageCreateWithoutItemsInput!
-}
-
-input LanguageUpsertWithoutOffersInput {
-  update: LanguageUpdateWithoutOffersDataInput!
-  create: LanguageCreateWithoutOffersInput!
-}
-
-input LanguageUpsertWithoutUsersInput {
-  update: LanguageUpdateWithoutUsersDataInput!
-  create: LanguageCreateWithoutUsersInput!
-}
-
-input LanguageWhereInput {
-  """Logical AND on all given filters."""
-  AND: [LanguageWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [LanguageWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [LanguageWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  type: LanguageEnum
-
-  """All values that are not equal to given value."""
-  type_not: LanguageEnum
-
-  """All values that are contained in given list."""
-  type_in: [LanguageEnum!]
-
-  """All values that are not contained in given list."""
-  type_not_in: [LanguageEnum!]
-  clients_every: ClientWhereInput
-  clients_some: ClientWhereInput
-  clients_none: ClientWhereInput
-  offers_every: OfferWhereInput
-  offers_some: OfferWhereInput
-  offers_none: OfferWhereInput
-  items_every: ItemWhereInput
-  items_some: ItemWhereInput
-  items_none: ItemWhereInput
-  users_every: UserWhereInput
-  users_some: UserWhereInput
-  users_none: UserWhereInput
-}
-
-input LanguageWhereUniqueInput {
-  id: ID
 }
 
 """
@@ -4318,119 +4467,131 @@ scalar Long
 
 type Mutation {
   createClient(data: ClientCreateInput!): Client!
-  createCommunication(data: CommunicationCreateInput!): Communication!
-  createEvent(data: EventCreateInput!): Event!
-  createLanguage(data: LanguageCreateInput!): Language!
-  createOffer(data: OfferCreateInput!): Offer!
+  createItemTranslation(data: ItemTranslationCreateInput!): ItemTranslation!
   createItem(data: ItemCreateInput!): Item!
   createUser(data: UserCreateInput!): User!
   createClientContact(data: ClientContactCreateInput!): ClientContact!
   createPlace(data: PlaceCreateInput!): Place!
   createBudgetLine(data: BudgetLineCreateInput!): BudgetLine!
+  createCategory(data: CategoryCreateInput!): Category!
   createEmployee(data: EmployeeCreateInput!): Employee!
   createEmployeeEstimation(data: EmployeeEstimationCreateInput!): EmployeeEstimation!
+  createEventStuff(data: EventStuffCreateInput!): EventStuff!
   createEventType(data: EventTypeCreateInput!): EventType!
   createJob(data: JobCreateInput!): Job!
   createPlaceContact(data: PlaceContactCreateInput!): PlaceContact!
   createSectionItem(data: SectionItemCreateInput!): SectionItem!
-  createStuff(data: StuffCreateInput!): Stuff!
   createTax(data: TaxCreateInput!): Tax!
   createVehicle(data: VehicleCreateInput!): Vehicle!
+  createCommunication(data: CommunicationCreateInput!): Communication!
+  createStuff(data: StuffCreateInput!): Stuff!
+  createEvent(data: EventCreateInput!): Event!
+  createOffer(data: OfferCreateInput!): Offer!
   updateClient(data: ClientUpdateInput!, where: ClientWhereUniqueInput!): Client
-  updateCommunication(data: CommunicationUpdateInput!, where: CommunicationWhereUniqueInput!): Communication
-  updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
-  updateLanguage(data: LanguageUpdateInput!, where: LanguageWhereUniqueInput!): Language
-  updateOffer(data: OfferUpdateInput!, where: OfferWhereUniqueInput!): Offer
+  updateItemTranslation(data: ItemTranslationUpdateInput!, where: ItemTranslationWhereUniqueInput!): ItemTranslation
   updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateClientContact(data: ClientContactUpdateInput!, where: ClientContactWhereUniqueInput!): ClientContact
   updatePlace(data: PlaceUpdateInput!, where: PlaceWhereUniqueInput!): Place
   updateBudgetLine(data: BudgetLineUpdateInput!, where: BudgetLineWhereUniqueInput!): BudgetLine
+  updateCategory(data: CategoryUpdateInput!, where: CategoryWhereUniqueInput!): Category
   updateEmployee(data: EmployeeUpdateInput!, where: EmployeeWhereUniqueInput!): Employee
   updateEmployeeEstimation(data: EmployeeEstimationUpdateInput!, where: EmployeeEstimationWhereUniqueInput!): EmployeeEstimation
+  updateEventStuff(data: EventStuffUpdateInput!, where: EventStuffWhereUniqueInput!): EventStuff
   updateEventType(data: EventTypeUpdateInput!, where: EventTypeWhereUniqueInput!): EventType
   updateJob(data: JobUpdateInput!, where: JobWhereUniqueInput!): Job
   updatePlaceContact(data: PlaceContactUpdateInput!, where: PlaceContactWhereUniqueInput!): PlaceContact
   updateSectionItem(data: SectionItemUpdateInput!, where: SectionItemWhereUniqueInput!): SectionItem
-  updateStuff(data: StuffUpdateInput!, where: StuffWhereUniqueInput!): Stuff
   updateTax(data: TaxUpdateInput!, where: TaxWhereUniqueInput!): Tax
   updateVehicle(data: VehicleUpdateInput!, where: VehicleWhereUniqueInput!): Vehicle
+  updateCommunication(data: CommunicationUpdateInput!, where: CommunicationWhereUniqueInput!): Communication
+  updateStuff(data: StuffUpdateInput!, where: StuffWhereUniqueInput!): Stuff
+  updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
+  updateOffer(data: OfferUpdateInput!, where: OfferWhereUniqueInput!): Offer
   deleteClient(where: ClientWhereUniqueInput!): Client
-  deleteCommunication(where: CommunicationWhereUniqueInput!): Communication
-  deleteEvent(where: EventWhereUniqueInput!): Event
-  deleteLanguage(where: LanguageWhereUniqueInput!): Language
-  deleteOffer(where: OfferWhereUniqueInput!): Offer
+  deleteItemTranslation(where: ItemTranslationWhereUniqueInput!): ItemTranslation
   deleteItem(where: ItemWhereUniqueInput!): Item
   deleteUser(where: UserWhereUniqueInput!): User
   deleteClientContact(where: ClientContactWhereUniqueInput!): ClientContact
   deletePlace(where: PlaceWhereUniqueInput!): Place
   deleteBudgetLine(where: BudgetLineWhereUniqueInput!): BudgetLine
+  deleteCategory(where: CategoryWhereUniqueInput!): Category
   deleteEmployee(where: EmployeeWhereUniqueInput!): Employee
   deleteEmployeeEstimation(where: EmployeeEstimationWhereUniqueInput!): EmployeeEstimation
+  deleteEventStuff(where: EventStuffWhereUniqueInput!): EventStuff
   deleteEventType(where: EventTypeWhereUniqueInput!): EventType
   deleteJob(where: JobWhereUniqueInput!): Job
   deletePlaceContact(where: PlaceContactWhereUniqueInput!): PlaceContact
   deleteSectionItem(where: SectionItemWhereUniqueInput!): SectionItem
-  deleteStuff(where: StuffWhereUniqueInput!): Stuff
   deleteTax(where: TaxWhereUniqueInput!): Tax
   deleteVehicle(where: VehicleWhereUniqueInput!): Vehicle
+  deleteCommunication(where: CommunicationWhereUniqueInput!): Communication
+  deleteStuff(where: StuffWhereUniqueInput!): Stuff
+  deleteEvent(where: EventWhereUniqueInput!): Event
+  deleteOffer(where: OfferWhereUniqueInput!): Offer
   upsertClient(where: ClientWhereUniqueInput!, create: ClientCreateInput!, update: ClientUpdateInput!): Client!
-  upsertCommunication(where: CommunicationWhereUniqueInput!, create: CommunicationCreateInput!, update: CommunicationUpdateInput!): Communication!
-  upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
-  upsertLanguage(where: LanguageWhereUniqueInput!, create: LanguageCreateInput!, update: LanguageUpdateInput!): Language!
-  upsertOffer(where: OfferWhereUniqueInput!, create: OfferCreateInput!, update: OfferUpdateInput!): Offer!
+  upsertItemTranslation(where: ItemTranslationWhereUniqueInput!, create: ItemTranslationCreateInput!, update: ItemTranslationUpdateInput!): ItemTranslation!
   upsertItem(where: ItemWhereUniqueInput!, create: ItemCreateInput!, update: ItemUpdateInput!): Item!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertClientContact(where: ClientContactWhereUniqueInput!, create: ClientContactCreateInput!, update: ClientContactUpdateInput!): ClientContact!
   upsertPlace(where: PlaceWhereUniqueInput!, create: PlaceCreateInput!, update: PlaceUpdateInput!): Place!
   upsertBudgetLine(where: BudgetLineWhereUniqueInput!, create: BudgetLineCreateInput!, update: BudgetLineUpdateInput!): BudgetLine!
+  upsertCategory(where: CategoryWhereUniqueInput!, create: CategoryCreateInput!, update: CategoryUpdateInput!): Category!
   upsertEmployee(where: EmployeeWhereUniqueInput!, create: EmployeeCreateInput!, update: EmployeeUpdateInput!): Employee!
   upsertEmployeeEstimation(where: EmployeeEstimationWhereUniqueInput!, create: EmployeeEstimationCreateInput!, update: EmployeeEstimationUpdateInput!): EmployeeEstimation!
+  upsertEventStuff(where: EventStuffWhereUniqueInput!, create: EventStuffCreateInput!, update: EventStuffUpdateInput!): EventStuff!
   upsertEventType(where: EventTypeWhereUniqueInput!, create: EventTypeCreateInput!, update: EventTypeUpdateInput!): EventType!
   upsertJob(where: JobWhereUniqueInput!, create: JobCreateInput!, update: JobUpdateInput!): Job!
   upsertPlaceContact(where: PlaceContactWhereUniqueInput!, create: PlaceContactCreateInput!, update: PlaceContactUpdateInput!): PlaceContact!
   upsertSectionItem(where: SectionItemWhereUniqueInput!, create: SectionItemCreateInput!, update: SectionItemUpdateInput!): SectionItem!
-  upsertStuff(where: StuffWhereUniqueInput!, create: StuffCreateInput!, update: StuffUpdateInput!): Stuff!
   upsertTax(where: TaxWhereUniqueInput!, create: TaxCreateInput!, update: TaxUpdateInput!): Tax!
   upsertVehicle(where: VehicleWhereUniqueInput!, create: VehicleCreateInput!, update: VehicleUpdateInput!): Vehicle!
+  upsertCommunication(where: CommunicationWhereUniqueInput!, create: CommunicationCreateInput!, update: CommunicationUpdateInput!): Communication!
+  upsertStuff(where: StuffWhereUniqueInput!, create: StuffCreateInput!, update: StuffUpdateInput!): Stuff!
+  upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
+  upsertOffer(where: OfferWhereUniqueInput!, create: OfferCreateInput!, update: OfferUpdateInput!): Offer!
   updateManyClients(data: ClientUpdateInput!, where: ClientWhereInput): BatchPayload!
-  updateManyCommunications(data: CommunicationUpdateInput!, where: CommunicationWhereInput): BatchPayload!
-  updateManyEvents(data: EventUpdateInput!, where: EventWhereInput): BatchPayload!
-  updateManyLanguages(data: LanguageUpdateInput!, where: LanguageWhereInput): BatchPayload!
-  updateManyOffers(data: OfferUpdateInput!, where: OfferWhereInput): BatchPayload!
+  updateManyItemTranslations(data: ItemTranslationUpdateInput!, where: ItemTranslationWhereInput): BatchPayload!
   updateManyItems(data: ItemUpdateInput!, where: ItemWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyClientContacts(data: ClientContactUpdateInput!, where: ClientContactWhereInput): BatchPayload!
   updateManyPlaces(data: PlaceUpdateInput!, where: PlaceWhereInput): BatchPayload!
   updateManyBudgetLines(data: BudgetLineUpdateInput!, where: BudgetLineWhereInput): BatchPayload!
+  updateManyCategories(data: CategoryUpdateInput!, where: CategoryWhereInput): BatchPayload!
   updateManyEmployees(data: EmployeeUpdateInput!, where: EmployeeWhereInput): BatchPayload!
   updateManyEmployeeEstimations(data: EmployeeEstimationUpdateInput!, where: EmployeeEstimationWhereInput): BatchPayload!
+  updateManyEventStuffs(data: EventStuffUpdateInput!, where: EventStuffWhereInput): BatchPayload!
   updateManyEventTypes(data: EventTypeUpdateInput!, where: EventTypeWhereInput): BatchPayload!
   updateManyJobs(data: JobUpdateInput!, where: JobWhereInput): BatchPayload!
   updateManyPlaceContacts(data: PlaceContactUpdateInput!, where: PlaceContactWhereInput): BatchPayload!
   updateManySectionItems(data: SectionItemUpdateInput!, where: SectionItemWhereInput): BatchPayload!
-  updateManyStuffs(data: StuffUpdateInput!, where: StuffWhereInput): BatchPayload!
   updateManyTaxes(data: TaxUpdateInput!, where: TaxWhereInput): BatchPayload!
   updateManyVehicles(data: VehicleUpdateInput!, where: VehicleWhereInput): BatchPayload!
+  updateManyCommunications(data: CommunicationUpdateInput!, where: CommunicationWhereInput): BatchPayload!
+  updateManyStuffs(data: StuffUpdateInput!, where: StuffWhereInput): BatchPayload!
+  updateManyEvents(data: EventUpdateInput!, where: EventWhereInput): BatchPayload!
+  updateManyOffers(data: OfferUpdateInput!, where: OfferWhereInput): BatchPayload!
   deleteManyClients(where: ClientWhereInput): BatchPayload!
-  deleteManyCommunications(where: CommunicationWhereInput): BatchPayload!
-  deleteManyEvents(where: EventWhereInput): BatchPayload!
-  deleteManyLanguages(where: LanguageWhereInput): BatchPayload!
-  deleteManyOffers(where: OfferWhereInput): BatchPayload!
+  deleteManyItemTranslations(where: ItemTranslationWhereInput): BatchPayload!
   deleteManyItems(where: ItemWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyClientContacts(where: ClientContactWhereInput): BatchPayload!
   deleteManyPlaces(where: PlaceWhereInput): BatchPayload!
   deleteManyBudgetLines(where: BudgetLineWhereInput): BatchPayload!
+  deleteManyCategories(where: CategoryWhereInput): BatchPayload!
   deleteManyEmployees(where: EmployeeWhereInput): BatchPayload!
   deleteManyEmployeeEstimations(where: EmployeeEstimationWhereInput): BatchPayload!
+  deleteManyEventStuffs(where: EventStuffWhereInput): BatchPayload!
   deleteManyEventTypes(where: EventTypeWhereInput): BatchPayload!
   deleteManyJobs(where: JobWhereInput): BatchPayload!
   deleteManyPlaceContacts(where: PlaceContactWhereInput): BatchPayload!
   deleteManySectionItems(where: SectionItemWhereInput): BatchPayload!
-  deleteManyStuffs(where: StuffWhereInput): BatchPayload!
   deleteManyTaxes(where: TaxWhereInput): BatchPayload!
   deleteManyVehicles(where: VehicleWhereInput): BatchPayload!
+  deleteManyCommunications(where: CommunicationWhereInput): BatchPayload!
+  deleteManyStuffs(where: StuffWhereInput): BatchPayload!
+  deleteManyEvents(where: EventWhereInput): BatchPayload!
+  deleteManyOffers(where: OfferWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -4446,14 +4607,13 @@ interface Node {
 }
 
 type Offer implements Node {
-  version: Int
   client(where: ClientWhereInput): Client
   createdAt: DateTime!
   customMessage: String
   event(where: EventWhereInput): Event
   id: ID!
   status: StatusOffer!
-  language(where: LanguageWhereInput): Language
+  language: LanguageEnum
   address: String!
   budgetLines(where: BudgetLineWhereInput, orderBy: BudgetLineOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BudgetLine!]
   city: String!
@@ -4468,7 +4628,9 @@ type Offer implements Node {
   place(where: PlaceWhereInput): Place
   postalCode: String!
   sectionItems(where: SectionItemWhereInput, orderBy: SectionItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SectionItem!]
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
+  version: Int
 }
 
 """A connection to a list of items."""
@@ -4482,9 +4644,9 @@ type OfferConnection {
 }
 
 input OfferCreateInput {
-  version: Int
   customMessage: String
-  status: StatusOffer!
+  status: StatusOffer
+  language: LanguageEnum
   address: String!
   city: String!
   endTime: DateTime
@@ -4493,10 +4655,11 @@ input OfferCreateInput {
   minPersons: Int
   name: String!
   postalCode: String!
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
+  version: Int
   client: ClientCreateOneWithoutOffersInput
   event: EventCreateOneWithoutOfferInput
-  language: LanguageCreateOneWithoutOffersInput
   budgetLines: BudgetLineCreateManyWithoutOfferInput
   clientContact: ClientContactCreateOneWithoutOffersInput
   employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
@@ -4520,9 +4683,9 @@ input OfferCreateManyWithoutEventTypeInput {
   connect: [OfferWhereUniqueInput!]
 }
 
-input OfferCreateManyWithoutLanguageInput {
-  create: [OfferCreateWithoutLanguageInput!]
-  connect: [OfferWhereUniqueInput!]
+input OfferCreateOneInput {
+  create: OfferCreateInput
+  connect: OfferWhereUniqueInput
 }
 
 input OfferCreateOneWithoutBudgetLinesInput {
@@ -4551,9 +4714,9 @@ input OfferCreateOneWithoutSectionItemsInput {
 }
 
 input OfferCreateWithoutBudgetLinesInput {
-  version: Int
   customMessage: String
-  status: StatusOffer!
+  status: StatusOffer
+  language: LanguageEnum
   address: String!
   city: String!
   endTime: DateTime
@@ -4562,10 +4725,11 @@ input OfferCreateWithoutBudgetLinesInput {
   minPersons: Int
   name: String!
   postalCode: String!
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
+  version: Int
   client: ClientCreateOneWithoutOffersInput
   event: EventCreateOneWithoutOfferInput
-  language: LanguageCreateOneWithoutOffersInput
   clientContact: ClientContactCreateOneWithoutOffersInput
   employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
   eventType: EventTypeCreateOneWithoutOffersInput
@@ -4574,9 +4738,9 @@ input OfferCreateWithoutBudgetLinesInput {
 }
 
 input OfferCreateWithoutClientContactInput {
-  version: Int
   customMessage: String
-  status: StatusOffer!
+  status: StatusOffer
+  language: LanguageEnum
   address: String!
   city: String!
   endTime: DateTime
@@ -4585,10 +4749,11 @@ input OfferCreateWithoutClientContactInput {
   minPersons: Int
   name: String!
   postalCode: String!
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
+  version: Int
   client: ClientCreateOneWithoutOffersInput
   event: EventCreateOneWithoutOfferInput
-  language: LanguageCreateOneWithoutOffersInput
   budgetLines: BudgetLineCreateManyWithoutOfferInput
   employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
   eventType: EventTypeCreateOneWithoutOffersInput
@@ -4597,9 +4762,9 @@ input OfferCreateWithoutClientContactInput {
 }
 
 input OfferCreateWithoutClientInput {
-  version: Int
   customMessage: String
-  status: StatusOffer!
+  status: StatusOffer
+  language: LanguageEnum
   address: String!
   city: String!
   endTime: DateTime
@@ -4608,9 +4773,10 @@ input OfferCreateWithoutClientInput {
   minPersons: Int
   name: String!
   postalCode: String!
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
+  version: Int
   event: EventCreateOneWithoutOfferInput
-  language: LanguageCreateOneWithoutOffersInput
   budgetLines: BudgetLineCreateManyWithoutOfferInput
   clientContact: ClientContactCreateOneWithoutOffersInput
   employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
@@ -4620,9 +4786,9 @@ input OfferCreateWithoutClientInput {
 }
 
 input OfferCreateWithoutEmployeeEstimationsInput {
-  version: Int
   customMessage: String
-  status: StatusOffer!
+  status: StatusOffer
+  language: LanguageEnum
   address: String!
   city: String!
   endTime: DateTime
@@ -4631,10 +4797,11 @@ input OfferCreateWithoutEmployeeEstimationsInput {
   minPersons: Int
   name: String!
   postalCode: String!
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
+  version: Int
   client: ClientCreateOneWithoutOffersInput
   event: EventCreateOneWithoutOfferInput
-  language: LanguageCreateOneWithoutOffersInput
   budgetLines: BudgetLineCreateManyWithoutOfferInput
   clientContact: ClientContactCreateOneWithoutOffersInput
   eventType: EventTypeCreateOneWithoutOffersInput
@@ -4643,9 +4810,9 @@ input OfferCreateWithoutEmployeeEstimationsInput {
 }
 
 input OfferCreateWithoutEventInput {
-  version: Int
   customMessage: String
-  status: StatusOffer!
+  status: StatusOffer
+  language: LanguageEnum
   address: String!
   city: String!
   endTime: DateTime
@@ -4654,9 +4821,10 @@ input OfferCreateWithoutEventInput {
   minPersons: Int
   name: String!
   postalCode: String!
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
+  version: Int
   client: ClientCreateOneWithoutOffersInput
-  language: LanguageCreateOneWithoutOffersInput
   budgetLines: BudgetLineCreateManyWithoutOfferInput
   clientContact: ClientContactCreateOneWithoutOffersInput
   employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
@@ -4666,9 +4834,9 @@ input OfferCreateWithoutEventInput {
 }
 
 input OfferCreateWithoutEventTypeInput {
-  version: Int
   customMessage: String
-  status: StatusOffer!
+  status: StatusOffer
+  language: LanguageEnum
   address: String!
   city: String!
   endTime: DateTime
@@ -4677,44 +4845,22 @@ input OfferCreateWithoutEventTypeInput {
   minPersons: Int
   name: String!
   postalCode: String!
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
-  client: ClientCreateOneWithoutOffersInput
-  event: EventCreateOneWithoutOfferInput
-  language: LanguageCreateOneWithoutOffersInput
-  budgetLines: BudgetLineCreateManyWithoutOfferInput
-  clientContact: ClientContactCreateOneWithoutOffersInput
-  employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
-  place: PlaceCreateOneWithoutOfferInput
-  sectionItems: SectionItemCreateManyWithoutOfferInput
-}
-
-input OfferCreateWithoutLanguageInput {
   version: Int
-  customMessage: String
-  status: StatusOffer!
-  address: String!
-  city: String!
-  endTime: DateTime
-  gmtOffset: String!
-  maxPersons: Int
-  minPersons: Int
-  name: String!
-  postalCode: String!
-  startTime: DateTime
   client: ClientCreateOneWithoutOffersInput
   event: EventCreateOneWithoutOfferInput
   budgetLines: BudgetLineCreateManyWithoutOfferInput
   clientContact: ClientContactCreateOneWithoutOffersInput
   employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
-  eventType: EventTypeCreateOneWithoutOffersInput
   place: PlaceCreateOneWithoutOfferInput
   sectionItems: SectionItemCreateManyWithoutOfferInput
 }
 
 input OfferCreateWithoutPlaceInput {
-  version: Int
   customMessage: String
-  status: StatusOffer!
+  status: StatusOffer
+  language: LanguageEnum
   address: String!
   city: String!
   endTime: DateTime
@@ -4723,10 +4869,11 @@ input OfferCreateWithoutPlaceInput {
   minPersons: Int
   name: String!
   postalCode: String!
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
+  version: Int
   client: ClientCreateOneWithoutOffersInput
   event: EventCreateOneWithoutOfferInput
-  language: LanguageCreateOneWithoutOffersInput
   budgetLines: BudgetLineCreateManyWithoutOfferInput
   clientContact: ClientContactCreateOneWithoutOffersInput
   employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
@@ -4735,9 +4882,9 @@ input OfferCreateWithoutPlaceInput {
 }
 
 input OfferCreateWithoutSectionItemsInput {
-  version: Int
   customMessage: String
-  status: StatusOffer!
+  status: StatusOffer
+  language: LanguageEnum
   address: String!
   city: String!
   endTime: DateTime
@@ -4746,10 +4893,11 @@ input OfferCreateWithoutSectionItemsInput {
   minPersons: Int
   name: String!
   postalCode: String!
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
+  version: Int
   client: ClientCreateOneWithoutOffersInput
   event: EventCreateOneWithoutOfferInput
-  language: LanguageCreateOneWithoutOffersInput
   budgetLines: BudgetLineCreateManyWithoutOfferInput
   clientContact: ClientContactCreateOneWithoutOffersInput
   employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
@@ -4767,8 +4915,6 @@ type OfferEdge {
 }
 
 enum OfferOrderByInput {
-  version_ASC
-  version_DESC
   createdAt_ASC
   createdAt_DESC
   customMessage_ASC
@@ -4777,6 +4923,8 @@ enum OfferOrderByInput {
   id_DESC
   status_ASC
   status_DESC
+  language_ASC
+  language_DESC
   address_ASC
   address_DESC
   city_ASC
@@ -4793,18 +4941,22 @@ enum OfferOrderByInput {
   name_DESC
   postalCode_ASC
   postalCode_DESC
+  showTotalBudgetsPdf_ASC
+  showTotalBudgetsPdf_DESC
   startTime_ASC
   startTime_DESC
+  version_ASC
+  version_DESC
   updatedAt_ASC
   updatedAt_DESC
 }
 
 type OfferPreviousValues {
-  version: Int
   createdAt: DateTime!
   customMessage: String
   id: ID!
   status: StatusOffer!
+  language: LanguageEnum
   address: String!
   city: String!
   endTime: DateTime
@@ -4813,7 +4965,9 @@ type OfferPreviousValues {
   minPersons: Int
   name: String!
   postalCode: String!
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
+  version: Int
 }
 
 type OfferSubscriptionPayload {
@@ -4855,10 +5009,10 @@ input OfferSubscriptionWhereInput {
   node: OfferWhereInput
 }
 
-input OfferUpdateInput {
-  version: Int
+input OfferUpdateDataInput {
   customMessage: String
   status: StatusOffer
+  language: LanguageEnum
   address: String
   city: String
   endTime: DateTime
@@ -4867,10 +5021,36 @@ input OfferUpdateInput {
   minPersons: Int
   name: String
   postalCode: String
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
+  version: Int
   client: ClientUpdateOneWithoutOffersInput
   event: EventUpdateOneWithoutOfferInput
-  language: LanguageUpdateOneWithoutOffersInput
+  budgetLines: BudgetLineUpdateManyWithoutOfferInput
+  clientContact: ClientContactUpdateOneWithoutOffersInput
+  employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
+  eventType: EventTypeUpdateOneWithoutOffersInput
+  place: PlaceUpdateOneWithoutOfferInput
+  sectionItems: SectionItemUpdateManyWithoutOfferInput
+}
+
+input OfferUpdateInput {
+  customMessage: String
+  status: StatusOffer
+  language: LanguageEnum
+  address: String
+  city: String
+  endTime: DateTime
+  gmtOffset: String
+  maxPersons: Int
+  minPersons: Int
+  name: String
+  postalCode: String
+  showTotalBudgetsPdf: Boolean
+  startTime: DateTime
+  version: Int
+  client: ClientUpdateOneWithoutOffersInput
+  event: EventUpdateOneWithoutOfferInput
   budgetLines: BudgetLineUpdateManyWithoutOfferInput
   clientContact: ClientContactUpdateOneWithoutOffersInput
   employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
@@ -4906,13 +5086,13 @@ input OfferUpdateManyWithoutEventTypeInput {
   upsert: [OfferUpsertWithWhereUniqueWithoutEventTypeInput!]
 }
 
-input OfferUpdateManyWithoutLanguageInput {
-  create: [OfferCreateWithoutLanguageInput!]
-  connect: [OfferWhereUniqueInput!]
-  disconnect: [OfferWhereUniqueInput!]
-  delete: [OfferWhereUniqueInput!]
-  update: [OfferUpdateWithWhereUniqueWithoutLanguageInput!]
-  upsert: [OfferUpsertWithWhereUniqueWithoutLanguageInput!]
+input OfferUpdateOneInput {
+  create: OfferCreateInput
+  connect: OfferWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: OfferUpdateDataInput
+  upsert: OfferUpsertNestedInput
 }
 
 input OfferUpdateOneWithoutBudgetLinesInput {
@@ -4961,9 +5141,9 @@ input OfferUpdateOneWithoutSectionItemsInput {
 }
 
 input OfferUpdateWithoutBudgetLinesDataInput {
-  version: Int
   customMessage: String
   status: StatusOffer
+  language: LanguageEnum
   address: String
   city: String
   endTime: DateTime
@@ -4972,10 +5152,11 @@ input OfferUpdateWithoutBudgetLinesDataInput {
   minPersons: Int
   name: String
   postalCode: String
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
+  version: Int
   client: ClientUpdateOneWithoutOffersInput
   event: EventUpdateOneWithoutOfferInput
-  language: LanguageUpdateOneWithoutOffersInput
   clientContact: ClientContactUpdateOneWithoutOffersInput
   employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
   eventType: EventTypeUpdateOneWithoutOffersInput
@@ -4984,9 +5165,9 @@ input OfferUpdateWithoutBudgetLinesDataInput {
 }
 
 input OfferUpdateWithoutClientContactDataInput {
-  version: Int
   customMessage: String
   status: StatusOffer
+  language: LanguageEnum
   address: String
   city: String
   endTime: DateTime
@@ -4995,10 +5176,11 @@ input OfferUpdateWithoutClientContactDataInput {
   minPersons: Int
   name: String
   postalCode: String
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
+  version: Int
   client: ClientUpdateOneWithoutOffersInput
   event: EventUpdateOneWithoutOfferInput
-  language: LanguageUpdateOneWithoutOffersInput
   budgetLines: BudgetLineUpdateManyWithoutOfferInput
   employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
   eventType: EventTypeUpdateOneWithoutOffersInput
@@ -5007,9 +5189,9 @@ input OfferUpdateWithoutClientContactDataInput {
 }
 
 input OfferUpdateWithoutClientDataInput {
-  version: Int
   customMessage: String
   status: StatusOffer
+  language: LanguageEnum
   address: String
   city: String
   endTime: DateTime
@@ -5018,9 +5200,10 @@ input OfferUpdateWithoutClientDataInput {
   minPersons: Int
   name: String
   postalCode: String
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
+  version: Int
   event: EventUpdateOneWithoutOfferInput
-  language: LanguageUpdateOneWithoutOffersInput
   budgetLines: BudgetLineUpdateManyWithoutOfferInput
   clientContact: ClientContactUpdateOneWithoutOffersInput
   employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
@@ -5030,9 +5213,9 @@ input OfferUpdateWithoutClientDataInput {
 }
 
 input OfferUpdateWithoutEmployeeEstimationsDataInput {
-  version: Int
   customMessage: String
   status: StatusOffer
+  language: LanguageEnum
   address: String
   city: String
   endTime: DateTime
@@ -5041,10 +5224,11 @@ input OfferUpdateWithoutEmployeeEstimationsDataInput {
   minPersons: Int
   name: String
   postalCode: String
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
+  version: Int
   client: ClientUpdateOneWithoutOffersInput
   event: EventUpdateOneWithoutOfferInput
-  language: LanguageUpdateOneWithoutOffersInput
   budgetLines: BudgetLineUpdateManyWithoutOfferInput
   clientContact: ClientContactUpdateOneWithoutOffersInput
   eventType: EventTypeUpdateOneWithoutOffersInput
@@ -5053,9 +5237,9 @@ input OfferUpdateWithoutEmployeeEstimationsDataInput {
 }
 
 input OfferUpdateWithoutEventDataInput {
-  version: Int
   customMessage: String
   status: StatusOffer
+  language: LanguageEnum
   address: String
   city: String
   endTime: DateTime
@@ -5064,9 +5248,10 @@ input OfferUpdateWithoutEventDataInput {
   minPersons: Int
   name: String
   postalCode: String
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
+  version: Int
   client: ClientUpdateOneWithoutOffersInput
-  language: LanguageUpdateOneWithoutOffersInput
   budgetLines: BudgetLineUpdateManyWithoutOfferInput
   clientContact: ClientContactUpdateOneWithoutOffersInput
   employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
@@ -5076,9 +5261,9 @@ input OfferUpdateWithoutEventDataInput {
 }
 
 input OfferUpdateWithoutEventTypeDataInput {
-  version: Int
   customMessage: String
   status: StatusOffer
+  language: LanguageEnum
   address: String
   city: String
   endTime: DateTime
@@ -5087,44 +5272,22 @@ input OfferUpdateWithoutEventTypeDataInput {
   minPersons: Int
   name: String
   postalCode: String
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
-  client: ClientUpdateOneWithoutOffersInput
-  event: EventUpdateOneWithoutOfferInput
-  language: LanguageUpdateOneWithoutOffersInput
-  budgetLines: BudgetLineUpdateManyWithoutOfferInput
-  clientContact: ClientContactUpdateOneWithoutOffersInput
-  employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
-  place: PlaceUpdateOneWithoutOfferInput
-  sectionItems: SectionItemUpdateManyWithoutOfferInput
-}
-
-input OfferUpdateWithoutLanguageDataInput {
   version: Int
-  customMessage: String
-  status: StatusOffer
-  address: String
-  city: String
-  endTime: DateTime
-  gmtOffset: String
-  maxPersons: Int
-  minPersons: Int
-  name: String
-  postalCode: String
-  startTime: DateTime
   client: ClientUpdateOneWithoutOffersInput
   event: EventUpdateOneWithoutOfferInput
   budgetLines: BudgetLineUpdateManyWithoutOfferInput
   clientContact: ClientContactUpdateOneWithoutOffersInput
   employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
-  eventType: EventTypeUpdateOneWithoutOffersInput
   place: PlaceUpdateOneWithoutOfferInput
   sectionItems: SectionItemUpdateManyWithoutOfferInput
 }
 
 input OfferUpdateWithoutPlaceDataInput {
-  version: Int
   customMessage: String
   status: StatusOffer
+  language: LanguageEnum
   address: String
   city: String
   endTime: DateTime
@@ -5133,10 +5296,11 @@ input OfferUpdateWithoutPlaceDataInput {
   minPersons: Int
   name: String
   postalCode: String
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
+  version: Int
   client: ClientUpdateOneWithoutOffersInput
   event: EventUpdateOneWithoutOfferInput
-  language: LanguageUpdateOneWithoutOffersInput
   budgetLines: BudgetLineUpdateManyWithoutOfferInput
   clientContact: ClientContactUpdateOneWithoutOffersInput
   employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
@@ -5145,9 +5309,9 @@ input OfferUpdateWithoutPlaceDataInput {
 }
 
 input OfferUpdateWithoutSectionItemsDataInput {
-  version: Int
   customMessage: String
   status: StatusOffer
+  language: LanguageEnum
   address: String
   city: String
   endTime: DateTime
@@ -5156,10 +5320,11 @@ input OfferUpdateWithoutSectionItemsDataInput {
   minPersons: Int
   name: String
   postalCode: String
+  showTotalBudgetsPdf: Boolean
   startTime: DateTime
+  version: Int
   client: ClientUpdateOneWithoutOffersInput
   event: EventUpdateOneWithoutOfferInput
-  language: LanguageUpdateOneWithoutOffersInput
   budgetLines: BudgetLineUpdateManyWithoutOfferInput
   clientContact: ClientContactUpdateOneWithoutOffersInput
   employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
@@ -5182,9 +5347,9 @@ input OfferUpdateWithWhereUniqueWithoutEventTypeInput {
   data: OfferUpdateWithoutEventTypeDataInput!
 }
 
-input OfferUpdateWithWhereUniqueWithoutLanguageInput {
-  where: OfferWhereUniqueInput!
-  data: OfferUpdateWithoutLanguageDataInput!
+input OfferUpsertNestedInput {
+  update: OfferUpdateDataInput!
+  create: OfferCreateInput!
 }
 
 input OfferUpsertWithoutBudgetLinesInput {
@@ -5230,12 +5395,6 @@ input OfferUpsertWithWhereUniqueWithoutEventTypeInput {
   create: OfferCreateWithoutEventTypeInput!
 }
 
-input OfferUpsertWithWhereUniqueWithoutLanguageInput {
-  where: OfferWhereUniqueInput!
-  update: OfferUpdateWithoutLanguageDataInput!
-  create: OfferCreateWithoutLanguageInput!
-}
-
 input OfferWhereInput {
   """Logical AND on all given filters."""
   AND: [OfferWhereInput!]
@@ -5245,28 +5404,6 @@ input OfferWhereInput {
 
   """Logical NOT on all given filters combined by AND."""
   NOT: [OfferWhereInput!]
-  version: Int
-
-  """All values that are not equal to given value."""
-  version_not: Int
-
-  """All values that are contained in given list."""
-  version_in: [Int!]
-
-  """All values that are not contained in given list."""
-  version_not_in: [Int!]
-
-  """All values less than the given value."""
-  version_lt: Int
-
-  """All values less than or equal the given value."""
-  version_lte: Int
-
-  """All values greater than the given value."""
-  version_gt: Int
-
-  """All values greater than or equal the given value."""
-  version_gte: Int
   createdAt: DateTime
 
   """All values that are not equal to given value."""
@@ -5379,6 +5516,16 @@ input OfferWhereInput {
 
   """All values that are not contained in given list."""
   status_not_in: [StatusOffer!]
+  language: LanguageEnum
+
+  """All values that are not equal to given value."""
+  language_not: LanguageEnum
+
+  """All values that are contained in given list."""
+  language_in: [LanguageEnum!]
+
+  """All values that are not contained in given list."""
+  language_not_in: [LanguageEnum!]
   address: String
 
   """All values that are not equal to given value."""
@@ -5645,6 +5792,10 @@ input OfferWhereInput {
 
   """All values not ending with the given string."""
   postalCode_not_ends_with: String
+  showTotalBudgetsPdf: Boolean
+
+  """All values that are not equal to given value."""
+  showTotalBudgetsPdf_not: Boolean
   startTime: DateTime
 
   """All values that are not equal to given value."""
@@ -5667,9 +5818,30 @@ input OfferWhereInput {
 
   """All values greater than or equal the given value."""
   startTime_gte: DateTime
+  version: Int
+
+  """All values that are not equal to given value."""
+  version_not: Int
+
+  """All values that are contained in given list."""
+  version_in: [Int!]
+
+  """All values that are not contained in given list."""
+  version_not_in: [Int!]
+
+  """All values less than the given value."""
+  version_lt: Int
+
+  """All values less than or equal the given value."""
+  version_lte: Int
+
+  """All values greater than the given value."""
+  version_gt: Int
+
+  """All values greater than or equal the given value."""
+  version_gte: Int
   client: ClientWhereInput
   event: EventWhereInput
-  language: LanguageWhereInput
   budgetLines_every: BudgetLineWhereInput
   budgetLines_some: BudgetLineWhereInput
   budgetLines_none: BudgetLineWhereInput
@@ -6538,62 +6710,68 @@ input PlaceWhereUniqueInput {
 
 type Query {
   clients(where: ClientWhereInput, orderBy: ClientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Client]!
-  communications(where: CommunicationWhereInput, orderBy: CommunicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Communication]!
-  events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
-  languages(where: LanguageWhereInput, orderBy: LanguageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Language]!
-  offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer]!
+  itemTranslations(where: ItemTranslationWhereInput, orderBy: ItemTranslationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ItemTranslation]!
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   clientContacts(where: ClientContactWhereInput, orderBy: ClientContactOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ClientContact]!
   places(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Place]!
   budgetLines(where: BudgetLineWhereInput, orderBy: BudgetLineOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BudgetLine]!
+  categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category]!
   employees(where: EmployeeWhereInput, orderBy: EmployeeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Employee]!
   employeeEstimations(where: EmployeeEstimationWhereInput, orderBy: EmployeeEstimationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EmployeeEstimation]!
+  eventStuffs(where: EventStuffWhereInput, orderBy: EventStuffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EventStuff]!
   eventTypes(where: EventTypeWhereInput, orderBy: EventTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EventType]!
   jobs(where: JobWhereInput, orderBy: JobOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Job]!
   placeContacts(where: PlaceContactWhereInput, orderBy: PlaceContactOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PlaceContact]!
   sectionItems(where: SectionItemWhereInput, orderBy: SectionItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SectionItem]!
-  stuffs(where: StuffWhereInput, orderBy: StuffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Stuff]!
   taxes(where: TaxWhereInput, orderBy: TaxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Tax]!
   vehicles(where: VehicleWhereInput, orderBy: VehicleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vehicle]!
+  communications(where: CommunicationWhereInput, orderBy: CommunicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Communication]!
+  stuffs(where: StuffWhereInput, orderBy: StuffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Stuff]!
+  events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
+  offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer]!
   client(where: ClientWhereUniqueInput!): Client
-  communication(where: CommunicationWhereUniqueInput!): Communication
-  event(where: EventWhereUniqueInput!): Event
-  language(where: LanguageWhereUniqueInput!): Language
-  offer(where: OfferWhereUniqueInput!): Offer
+  itemTranslation(where: ItemTranslationWhereUniqueInput!): ItemTranslation
   item(where: ItemWhereUniqueInput!): Item
   user(where: UserWhereUniqueInput!): User
   clientContact(where: ClientContactWhereUniqueInput!): ClientContact
   place(where: PlaceWhereUniqueInput!): Place
   budgetLine(where: BudgetLineWhereUniqueInput!): BudgetLine
+  category(where: CategoryWhereUniqueInput!): Category
   employee(where: EmployeeWhereUniqueInput!): Employee
   employeeEstimation(where: EmployeeEstimationWhereUniqueInput!): EmployeeEstimation
+  eventStuff(where: EventStuffWhereUniqueInput!): EventStuff
   eventType(where: EventTypeWhereUniqueInput!): EventType
   job(where: JobWhereUniqueInput!): Job
   placeContact(where: PlaceContactWhereUniqueInput!): PlaceContact
   sectionItem(where: SectionItemWhereUniqueInput!): SectionItem
-  stuff(where: StuffWhereUniqueInput!): Stuff
   tax(where: TaxWhereUniqueInput!): Tax
   vehicle(where: VehicleWhereUniqueInput!): Vehicle
+  communication(where: CommunicationWhereUniqueInput!): Communication
+  stuff(where: StuffWhereUniqueInput!): Stuff
+  event(where: EventWhereUniqueInput!): Event
+  offer(where: OfferWhereUniqueInput!): Offer
   clientsConnection(where: ClientWhereInput, orderBy: ClientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClientConnection!
-  communicationsConnection(where: CommunicationWhereInput, orderBy: CommunicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommunicationConnection!
-  eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
-  languagesConnection(where: LanguageWhereInput, orderBy: LanguageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): LanguageConnection!
-  offersConnection(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OfferConnection!
+  itemTranslationsConnection(where: ItemTranslationWhereInput, orderBy: ItemTranslationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemTranslationConnection!
   itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   clientContactsConnection(where: ClientContactWhereInput, orderBy: ClientContactOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClientContactConnection!
   placesConnection(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlaceConnection!
   budgetLinesConnection(where: BudgetLineWhereInput, orderBy: BudgetLineOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BudgetLineConnection!
+  categoriesConnection(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CategoryConnection!
   employeesConnection(where: EmployeeWhereInput, orderBy: EmployeeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EmployeeConnection!
   employeeEstimationsConnection(where: EmployeeEstimationWhereInput, orderBy: EmployeeEstimationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EmployeeEstimationConnection!
+  eventStuffsConnection(where: EventStuffWhereInput, orderBy: EventStuffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventStuffConnection!
   eventTypesConnection(where: EventTypeWhereInput, orderBy: EventTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventTypeConnection!
   jobsConnection(where: JobWhereInput, orderBy: JobOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): JobConnection!
   placeContactsConnection(where: PlaceContactWhereInput, orderBy: PlaceContactOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlaceContactConnection!
   sectionItemsConnection(where: SectionItemWhereInput, orderBy: SectionItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SectionItemConnection!
-  stuffsConnection(where: StuffWhereInput, orderBy: StuffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StuffConnection!
   taxesConnection(where: TaxWhereInput, orderBy: TaxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TaxConnection!
   vehiclesConnection(where: VehicleWhereInput, orderBy: VehicleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): VehicleConnection!
+  communicationsConnection(where: CommunicationWhereInput, orderBy: CommunicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommunicationConnection!
+  stuffsConnection(where: StuffWhereInput, orderBy: StuffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StuffConnection!
+  eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
+  offersConnection(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OfferConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -6610,6 +6788,7 @@ enum Role {
 
 type SectionItem implements Node {
   content: String
+  endTime: DateTime
   h: Int!
   i: String!
   id: ID!
@@ -6625,7 +6804,7 @@ type SectionItem implements Node {
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item!]
   price: Float
   static: Boolean
-  time: DateTime
+  startTime: DateTime
   title: String
   type: SectionTypes!
   w: Int!
@@ -6645,6 +6824,7 @@ type SectionItemConnection {
 
 input SectionItemCreateInput {
   content: String
+  endTime: DateTime
   h: Int!
   i: String!
   isDraggable: Boolean
@@ -6657,7 +6837,7 @@ input SectionItemCreateInput {
   persons: Int
   price: Float
   static: Boolean
-  time: DateTime
+  startTime: DateTime
   title: String
   type: SectionTypes
   w: Int!
@@ -6679,6 +6859,7 @@ input SectionItemCreateManyWithoutOfferInput {
 
 input SectionItemCreateWithoutItemsInput {
   content: String
+  endTime: DateTime
   h: Int!
   i: String!
   isDraggable: Boolean
@@ -6691,7 +6872,7 @@ input SectionItemCreateWithoutItemsInput {
   persons: Int
   price: Float
   static: Boolean
-  time: DateTime
+  startTime: DateTime
   title: String
   type: SectionTypes
   w: Int!
@@ -6702,6 +6883,7 @@ input SectionItemCreateWithoutItemsInput {
 
 input SectionItemCreateWithoutOfferInput {
   content: String
+  endTime: DateTime
   h: Int!
   i: String!
   isDraggable: Boolean
@@ -6714,7 +6896,7 @@ input SectionItemCreateWithoutOfferInput {
   persons: Int
   price: Float
   static: Boolean
-  time: DateTime
+  startTime: DateTime
   title: String
   type: SectionTypes
   w: Int!
@@ -6735,6 +6917,8 @@ type SectionItemEdge {
 enum SectionItemOrderByInput {
   content_ASC
   content_DESC
+  endTime_ASC
+  endTime_DESC
   h_ASC
   h_DESC
   i_ASC
@@ -6761,8 +6945,8 @@ enum SectionItemOrderByInput {
   price_DESC
   static_ASC
   static_DESC
-  time_ASC
-  time_DESC
+  startTime_ASC
+  startTime_DESC
   title_ASC
   title_DESC
   type_ASC
@@ -6781,6 +6965,7 @@ enum SectionItemOrderByInput {
 
 type SectionItemPreviousValues {
   content: String
+  endTime: DateTime
   h: Int!
   i: String!
   id: ID!
@@ -6794,7 +6979,7 @@ type SectionItemPreviousValues {
   persons: Int
   price: Float
   static: Boolean
-  time: DateTime
+  startTime: DateTime
   title: String
   type: SectionTypes!
   w: Int!
@@ -6843,6 +7028,7 @@ input SectionItemSubscriptionWhereInput {
 
 input SectionItemUpdateInput {
   content: String
+  endTime: DateTime
   h: Int
   i: String
   isDraggable: Boolean
@@ -6855,7 +7041,7 @@ input SectionItemUpdateInput {
   persons: Int
   price: Float
   static: Boolean
-  time: DateTime
+  startTime: DateTime
   title: String
   type: SectionTypes
   w: Int
@@ -6885,6 +7071,7 @@ input SectionItemUpdateManyWithoutOfferInput {
 
 input SectionItemUpdateWithoutItemsDataInput {
   content: String
+  endTime: DateTime
   h: Int
   i: String
   isDraggable: Boolean
@@ -6897,7 +7084,7 @@ input SectionItemUpdateWithoutItemsDataInput {
   persons: Int
   price: Float
   static: Boolean
-  time: DateTime
+  startTime: DateTime
   title: String
   type: SectionTypes
   w: Int
@@ -6908,6 +7095,7 @@ input SectionItemUpdateWithoutItemsDataInput {
 
 input SectionItemUpdateWithoutOfferDataInput {
   content: String
+  endTime: DateTime
   h: Int
   i: String
   isDraggable: Boolean
@@ -6920,7 +7108,7 @@ input SectionItemUpdateWithoutOfferDataInput {
   persons: Int
   price: Float
   static: Boolean
-  time: DateTime
+  startTime: DateTime
   title: String
   type: SectionTypes
   w: Int
@@ -7000,6 +7188,28 @@ input SectionItemWhereInput {
 
   """All values not ending with the given string."""
   content_not_ends_with: String
+  endTime: DateTime
+
+  """All values that are not equal to given value."""
+  endTime_not: DateTime
+
+  """All values that are contained in given list."""
+  endTime_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  endTime_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  endTime_lt: DateTime
+
+  """All values less than or equal the given value."""
+  endTime_lte: DateTime
+
+  """All values greater than the given value."""
+  endTime_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  endTime_gte: DateTime
   h: Int
 
   """All values that are not equal to given value."""
@@ -7250,28 +7460,28 @@ input SectionItemWhereInput {
 
   """All values that are not equal to given value."""
   static_not: Boolean
-  time: DateTime
+  startTime: DateTime
 
   """All values that are not equal to given value."""
-  time_not: DateTime
+  startTime_not: DateTime
 
   """All values that are contained in given list."""
-  time_in: [DateTime!]
+  startTime_in: [DateTime!]
 
   """All values that are not contained in given list."""
-  time_not_in: [DateTime!]
+  startTime_not_in: [DateTime!]
 
   """All values less than the given value."""
-  time_lt: DateTime
+  startTime_lt: DateTime
 
   """All values less than or equal the given value."""
-  time_lte: DateTime
+  startTime_lte: DateTime
 
   """All values greater than the given value."""
-  time_gt: DateTime
+  startTime_gt: DateTime
 
   """All values greater than or equal the given value."""
-  time_gte: DateTime
+  startTime_gte: DateTime
   title: String
 
   """All values that are not equal to given value."""
@@ -7411,13 +7621,13 @@ enum StatusOffer {
   Rejected
   Pending
   Template
+  ChangedAfterAccepted
 }
 
 type Stuff implements Node {
-  events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event!]
+  eventStuffs(where: EventStuffWhereInput, orderBy: EventStuffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EventStuff!]
   id: ID!
   name: String!
-  quantity: Int!
 }
 
 """A connection to a list of items."""
@@ -7432,18 +7642,21 @@ type StuffConnection {
 
 input StuffCreateInput {
   name: String!
-  quantity: Int
-  events: EventCreateManyWithoutStuffsInput
+  eventStuffs: EventStuffCreateManyWithoutStuffInput
 }
 
-input StuffCreateManyWithoutEventsInput {
-  create: [StuffCreateWithoutEventsInput!]
+input StuffCreateManyInput {
+  create: [StuffCreateInput!]
   connect: [StuffWhereUniqueInput!]
 }
 
-input StuffCreateWithoutEventsInput {
+input StuffCreateOneWithoutEventStuffsInput {
+  create: StuffCreateWithoutEventStuffsInput
+  connect: StuffWhereUniqueInput
+}
+
+input StuffCreateWithoutEventStuffsInput {
   name: String!
-  quantity: Int
 }
 
 """An edge in a connection."""
@@ -7460,8 +7673,6 @@ enum StuffOrderByInput {
   id_DESC
   name_ASC
   name_DESC
-  quantity_ASC
-  quantity_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -7471,7 +7682,6 @@ enum StuffOrderByInput {
 type StuffPreviousValues {
   id: ID!
   name: String!
-  quantity: Int!
 }
 
 type StuffSubscriptionPayload {
@@ -7513,35 +7723,52 @@ input StuffSubscriptionWhereInput {
   node: StuffWhereInput
 }
 
-input StuffUpdateInput {
+input StuffUpdateDataInput {
   name: String
-  quantity: Int
-  events: EventUpdateManyWithoutStuffsInput
+  eventStuffs: EventStuffUpdateManyWithoutStuffInput
 }
 
-input StuffUpdateManyWithoutEventsInput {
-  create: [StuffCreateWithoutEventsInput!]
+input StuffUpdateInput {
+  name: String
+  eventStuffs: EventStuffUpdateManyWithoutStuffInput
+}
+
+input StuffUpdateManyInput {
+  create: [StuffCreateInput!]
   connect: [StuffWhereUniqueInput!]
   disconnect: [StuffWhereUniqueInput!]
   delete: [StuffWhereUniqueInput!]
-  update: [StuffUpdateWithWhereUniqueWithoutEventsInput!]
-  upsert: [StuffUpsertWithWhereUniqueWithoutEventsInput!]
+  update: [StuffUpdateWithWhereUniqueNestedInput!]
+  upsert: [StuffUpsertWithWhereUniqueNestedInput!]
 }
 
-input StuffUpdateWithoutEventsDataInput {
+input StuffUpdateOneWithoutEventStuffsInput {
+  create: StuffCreateWithoutEventStuffsInput
+  connect: StuffWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: StuffUpdateWithoutEventStuffsDataInput
+  upsert: StuffUpsertWithoutEventStuffsInput
+}
+
+input StuffUpdateWithoutEventStuffsDataInput {
   name: String
-  quantity: Int
 }
 
-input StuffUpdateWithWhereUniqueWithoutEventsInput {
+input StuffUpdateWithWhereUniqueNestedInput {
   where: StuffWhereUniqueInput!
-  data: StuffUpdateWithoutEventsDataInput!
+  data: StuffUpdateDataInput!
 }
 
-input StuffUpsertWithWhereUniqueWithoutEventsInput {
+input StuffUpsertWithoutEventStuffsInput {
+  update: StuffUpdateWithoutEventStuffsDataInput!
+  create: StuffCreateWithoutEventStuffsInput!
+}
+
+input StuffUpsertWithWhereUniqueNestedInput {
   where: StuffWhereUniqueInput!
-  update: StuffUpdateWithoutEventsDataInput!
-  create: StuffCreateWithoutEventsInput!
+  update: StuffUpdateDataInput!
+  create: StuffCreateInput!
 }
 
 input StuffWhereInput {
@@ -7633,31 +7860,9 @@ input StuffWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  quantity: Int
-
-  """All values that are not equal to given value."""
-  quantity_not: Int
-
-  """All values that are contained in given list."""
-  quantity_in: [Int!]
-
-  """All values that are not contained in given list."""
-  quantity_not_in: [Int!]
-
-  """All values less than the given value."""
-  quantity_lt: Int
-
-  """All values less than or equal the given value."""
-  quantity_lte: Int
-
-  """All values greater than the given value."""
-  quantity_gt: Int
-
-  """All values greater than or equal the given value."""
-  quantity_gte: Int
-  events_every: EventWhereInput
-  events_some: EventWhereInput
-  events_none: EventWhereInput
+  eventStuffs_every: EventStuffWhereInput
+  eventStuffs_some: EventStuffWhereInput
+  eventStuffs_none: EventStuffWhereInput
 }
 
 input StuffWhereUniqueInput {
@@ -7666,24 +7871,26 @@ input StuffWhereUniqueInput {
 
 type Subscription {
   client(where: ClientSubscriptionWhereInput): ClientSubscriptionPayload
-  communication(where: CommunicationSubscriptionWhereInput): CommunicationSubscriptionPayload
-  event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
-  language(where: LanguageSubscriptionWhereInput): LanguageSubscriptionPayload
-  offer(where: OfferSubscriptionWhereInput): OfferSubscriptionPayload
+  itemTranslation(where: ItemTranslationSubscriptionWhereInput): ItemTranslationSubscriptionPayload
   item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   clientContact(where: ClientContactSubscriptionWhereInput): ClientContactSubscriptionPayload
   place(where: PlaceSubscriptionWhereInput): PlaceSubscriptionPayload
   budgetLine(where: BudgetLineSubscriptionWhereInput): BudgetLineSubscriptionPayload
+  category(where: CategorySubscriptionWhereInput): CategorySubscriptionPayload
   employee(where: EmployeeSubscriptionWhereInput): EmployeeSubscriptionPayload
   employeeEstimation(where: EmployeeEstimationSubscriptionWhereInput): EmployeeEstimationSubscriptionPayload
+  eventStuff(where: EventStuffSubscriptionWhereInput): EventStuffSubscriptionPayload
   eventType(where: EventTypeSubscriptionWhereInput): EventTypeSubscriptionPayload
   job(where: JobSubscriptionWhereInput): JobSubscriptionPayload
   placeContact(where: PlaceContactSubscriptionWhereInput): PlaceContactSubscriptionPayload
   sectionItem(where: SectionItemSubscriptionWhereInput): SectionItemSubscriptionPayload
-  stuff(where: StuffSubscriptionWhereInput): StuffSubscriptionPayload
   tax(where: TaxSubscriptionWhereInput): TaxSubscriptionPayload
   vehicle(where: VehicleSubscriptionWhereInput): VehicleSubscriptionPayload
+  communication(where: CommunicationSubscriptionWhereInput): CommunicationSubscriptionPayload
+  stuff(where: StuffSubscriptionWhereInput): StuffSubscriptionPayload
+  event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
+  offer(where: OfferSubscriptionWhereInput): OfferSubscriptionPayload
 }
 
 type Tax implements Node {
@@ -7942,7 +8149,7 @@ type User implements Node {
   password: String!
   employee(where: EmployeeWhereInput): Employee
   jobs(where: JobWhereInput, orderBy: JobOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Job!]
-  language(where: LanguageWhereInput): Language
+  language: LanguageEnum
 }
 
 """A connection to a list of items."""
@@ -7961,18 +8168,13 @@ input UserCreateInput {
   image: String
   name: String!
   password: String!
+  language: LanguageEnum
   employee: EmployeeCreateOneWithoutUserInput
   jobs: JobCreateManyWithoutUsersInput
-  language: LanguageCreateOneWithoutUsersInput
 }
 
 input UserCreateManyWithoutJobsInput {
   create: [UserCreateWithoutJobsInput!]
-  connect: [UserWhereUniqueInput!]
-}
-
-input UserCreateManyWithoutLanguageInput {
-  create: [UserCreateWithoutLanguageInput!]
   connect: [UserWhereUniqueInput!]
 }
 
@@ -7987,8 +8189,8 @@ input UserCreateWithoutEmployeeInput {
   image: String
   name: String!
   password: String!
+  language: LanguageEnum
   jobs: JobCreateManyWithoutUsersInput
-  language: LanguageCreateOneWithoutUsersInput
 }
 
 input UserCreateWithoutJobsInput {
@@ -7997,18 +8199,8 @@ input UserCreateWithoutJobsInput {
   image: String
   name: String!
   password: String!
+  language: LanguageEnum
   employee: EmployeeCreateOneWithoutUserInput
-  language: LanguageCreateOneWithoutUsersInput
-}
-
-input UserCreateWithoutLanguageInput {
-  role: Role!
-  email: String!
-  image: String
-  name: String!
-  password: String!
-  employee: EmployeeCreateOneWithoutUserInput
-  jobs: JobCreateManyWithoutUsersInput
 }
 
 """An edge in a connection."""
@@ -8037,6 +8229,8 @@ enum UserOrderByInput {
   name_DESC
   password_ASC
   password_DESC
+  language_ASC
+  language_DESC
 }
 
 type UserPreviousValues {
@@ -8048,6 +8242,7 @@ type UserPreviousValues {
   image: String
   name: String!
   password: String!
+  language: LanguageEnum
 }
 
 type UserSubscriptionPayload {
@@ -8095,9 +8290,9 @@ input UserUpdateInput {
   image: String
   name: String
   password: String
+  language: LanguageEnum
   employee: EmployeeUpdateOneWithoutUserInput
   jobs: JobUpdateManyWithoutUsersInput
-  language: LanguageUpdateOneWithoutUsersInput
 }
 
 input UserUpdateManyWithoutJobsInput {
@@ -8107,15 +8302,6 @@ input UserUpdateManyWithoutJobsInput {
   delete: [UserWhereUniqueInput!]
   update: [UserUpdateWithWhereUniqueWithoutJobsInput!]
   upsert: [UserUpsertWithWhereUniqueWithoutJobsInput!]
-}
-
-input UserUpdateManyWithoutLanguageInput {
-  create: [UserCreateWithoutLanguageInput!]
-  connect: [UserWhereUniqueInput!]
-  disconnect: [UserWhereUniqueInput!]
-  delete: [UserWhereUniqueInput!]
-  update: [UserUpdateWithWhereUniqueWithoutLanguageInput!]
-  upsert: [UserUpsertWithWhereUniqueWithoutLanguageInput!]
 }
 
 input UserUpdateOneWithoutEmployeeInput {
@@ -8133,8 +8319,8 @@ input UserUpdateWithoutEmployeeDataInput {
   image: String
   name: String
   password: String
+  language: LanguageEnum
   jobs: JobUpdateManyWithoutUsersInput
-  language: LanguageUpdateOneWithoutUsersInput
 }
 
 input UserUpdateWithoutJobsDataInput {
@@ -8143,28 +8329,13 @@ input UserUpdateWithoutJobsDataInput {
   image: String
   name: String
   password: String
+  language: LanguageEnum
   employee: EmployeeUpdateOneWithoutUserInput
-  language: LanguageUpdateOneWithoutUsersInput
-}
-
-input UserUpdateWithoutLanguageDataInput {
-  role: Role
-  email: String
-  image: String
-  name: String
-  password: String
-  employee: EmployeeUpdateOneWithoutUserInput
-  jobs: JobUpdateManyWithoutUsersInput
 }
 
 input UserUpdateWithWhereUniqueWithoutJobsInput {
   where: UserWhereUniqueInput!
   data: UserUpdateWithoutJobsDataInput!
-}
-
-input UserUpdateWithWhereUniqueWithoutLanguageInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateWithoutLanguageDataInput!
 }
 
 input UserUpsertWithoutEmployeeInput {
@@ -8176,12 +8347,6 @@ input UserUpsertWithWhereUniqueWithoutJobsInput {
   where: UserWhereUniqueInput!
   update: UserUpdateWithoutJobsDataInput!
   create: UserCreateWithoutJobsInput!
-}
-
-input UserUpsertWithWhereUniqueWithoutLanguageInput {
-  where: UserWhereUniqueInput!
-  update: UserUpdateWithoutLanguageDataInput!
-  create: UserCreateWithoutLanguageInput!
 }
 
 input UserWhereInput {
@@ -8447,11 +8612,20 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   password_not_ends_with: String
+  language: LanguageEnum
+
+  """All values that are not equal to given value."""
+  language_not: LanguageEnum
+
+  """All values that are contained in given list."""
+  language_in: [LanguageEnum!]
+
+  """All values that are not contained in given list."""
+  language_not_in: [LanguageEnum!]
   employee: EmployeeWhereInput
   jobs_every: JobWhereInput
   jobs_some: JobWhereInput
   jobs_none: JobWhereInput
-  language: LanguageWhereInput
 }
 
 input UserWhereUniqueInput {

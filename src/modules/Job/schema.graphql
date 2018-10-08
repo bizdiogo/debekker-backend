@@ -1,5 +1,3 @@
-# import Job from "../../generated/prisma.graphql"
-
 type Query {
   job(where: JobWhereUniqueInput!): Job
   jobs(where: JobWhereInput, orderBy: JobOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Job]!

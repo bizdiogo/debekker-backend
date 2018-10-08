@@ -1,15 +1,18 @@
-enum SectionTypes {
-  Title
-  Subtitle
-  Subheading
-  Text
-  Items
-}
-
 enum VehicleType {
   Motorcycle
   Car
   Van
+}
+
+enum Channel {
+  Email
+  Phone
+  Call
+  Message
+}
+
+enum Country {
+  BE
 }
 
 enum LanguageEnum {
@@ -29,6 +32,7 @@ enum StatusOffer {
   Rejected
   Pending
   Template
+  ChangedAfterAccepted
 }
 
 enum EmailSender {
@@ -41,13 +45,15 @@ enum ClientType {
   Societe
 }
 
-enum Channel {
-  Email
-  Phone
-  Call
-  Message
+enum SectionTypes {
+  Title
+  Subtitle
+  Subheading
+  Text
+  Items
 }
 
-enum Country {
-  BE
-}
+
+
+
+

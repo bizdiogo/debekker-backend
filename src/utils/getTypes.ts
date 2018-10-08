@@ -8,4 +8,4 @@ export default R.compose(
   R.join('\n'),
   R.map(file => fs.readFileSync(file, 'utf-8')),
   glob.sync
- )
+)

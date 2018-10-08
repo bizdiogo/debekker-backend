@@ -1,5 +1,3 @@
-# import ClientContact from "../../generated/prisma.graphql"
-
 type Query {
   clientContact(where: ClientContactWhereUniqueInput!): ClientContact
   clientContacts(where: ClientContactWhereInput, orderBy: ClientContactOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ClientContact]!

@@ -1,5 +1,3 @@
-# import SectionItem from "../../generated/prisma.graphql"
-
 type Query {
   sectionItem(where: SectionItemWhereUniqueInput!): SectionItem
   sectionItems(where: SectionItemWhereInput, orderBy: SectionItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SectionItem]!

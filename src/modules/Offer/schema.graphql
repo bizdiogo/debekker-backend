@@ -1,5 +1,3 @@
-# import Offer from "../../generated/prisma.graphql"
-
 type Query {
   offer(where: OfferWhereUniqueInput!): Offer
   offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer]!

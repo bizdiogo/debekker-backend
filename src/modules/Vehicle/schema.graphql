@@ -1,5 +1,3 @@
-# import Vehicle from "../../generated/prisma.graphql"
-
 type Query {
   vehicle(where: VehicleWhereUniqueInput!): Vehicle
   vehicles(where: VehicleWhereInput, orderBy: VehicleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vehicle]!

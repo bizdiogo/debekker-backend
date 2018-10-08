@@ -1,5 +1,3 @@
-# import Event from "../../generated/prisma.graphql"
-
 type Query {
   event(where: EventWhereUniqueInput!): Event
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!

@@ -9,7 +9,7 @@ type Client {
   phone: String!
   tva: String
   clientContacts: [ClientContact!]!
-  language: Language
+  language: LanguageEnum
   communications: [Communication!]!
   type: ClientType
 }
@@ -19,41 +19,27 @@ type Communication {
   message: String!
   subject: String!
   channel: Channel!
-  client: Client
   date: DateTime!
   gmtOffset: String!
+  offer: Offer
 }
 
 type Event {
-  client: Client
   id: ID! @unique
   offer: Offer
   employees: [Employee!]!
-  endTime: DateTime!
-  gmtOffset: String!
-  startTime: DateTime!
   stuffs: [Stuff!]!
   vehicles: [Vehicle!]!
 }
 
-type Language {
-  id: ID! @unique
-  type: LanguageEnum!
-  clients: [Client!]!
-  offers: [Offer!]!
-  items: [Item!]!
-  users: [User!]!
-}
-
 type Offer {
-  version: Int @default(value: 1)
   client: Client
   createdAt: DateTime!
   customMessage: String
   event: Event
   id: ID! @unique
-  status: StatusOffer!
-  language: Language
+  status: StatusOffer! @default(value: Pending)
+  language: LanguageEnum @default(value: FR)
   address: String!
   budgetLines: [BudgetLine!]!
   city: String!
@@ -62,21 +48,30 @@ type Offer {
   endTime: DateTime
   eventType: EventType
   gmtOffset: String!
-  maxPersons: Int
-  minPersons: Int
+  maxPersons: Int @default(value: 0)
+  minPersons: Int @default(value: 0)
   name: String!
   place: Place
   postalCode: String!
   sectionItems: [SectionItem!]!
+  showTotalBudgetsPdf: Boolean @default(value: false)
   startTime: DateTime
+  version: Int @default(value: 1)
+}
+
+type ItemTranslation {
+  description: String
+  id: ID! @unique
+  items: Item
+  internalDescription: String
+  language: LanguageEnum!
+  name: String
 }
 
 type Item {
-  description: String!
   id: ID! @unique
-  name: String!
-  internalDescription: String
-  language: Language
+  platTranslations: [ItemTranslation!]!
+  categories: [Category!]!
   sectionItems: [SectionItem!]!
 }
 
@@ -91,7 +86,7 @@ type User {
   password: String!
   employee: Employee
   jobs: [Job!]!
-  language: Language
+  language: LanguageEnum
 }
 
 type ClientContact {
@@ -122,8 +117,15 @@ type BudgetLine {
   offer: Offer
   quantity: Int
   tax: Tax
+  total: Float
   unitPrice: Float
   value: Float!
+}
+
+type Category @model {
+  id: ID! @unique
+  name: String!
+  items: [Item!]!
 }
 
 type Employee {
@@ -146,6 +148,13 @@ type EmployeeEstimation {
   offer: Offer
   pricePerHour: Float! @default(value: 0.0)
   total: Float! @default(value: 0.0)
+}
+
+type EventStuff @model {
+  event: Event
+  id: ID! @unique
+  quantity: Int! @default(value: 0)
+  stuff: Stuff
 }
 
 type EventType {
@@ -173,6 +182,7 @@ type PlaceContact {
 
 type SectionItem {
   content: String @default(value: "''")
+  endTime: DateTime
   h: Int!
   i: String!
   id: ID! @unique
@@ -188,7 +198,7 @@ type SectionItem {
   items: [Item!]!
   price: Float @default(value: 0.0)
   static: Boolean @default(value: false)
-  time: DateTime
+  startTime: DateTime
   title: String @default(value: "''")
   type: SectionTypes! @default(value: Title)
   w: Int!
@@ -197,10 +207,9 @@ type SectionItem {
 }
 
 type Stuff {
-  events: [Event!]!
+  eventStuffs: [EventStuff!]!
   id: ID! @unique
   name: String!
-  quantity: Int! @default(value: 0)
 }
 
 type Tax {

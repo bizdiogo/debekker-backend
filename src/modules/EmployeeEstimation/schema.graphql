@@ -1,5 +1,3 @@
-# import EmployeeEstimation from "../../generated/prisma.graphql"
-
 type Query {
   employeeEstimation(where: EmployeeEstimationWhereUniqueInput!): EmployeeEstimation
   employeeEstimations(where: EmployeeEstimationWhereInput, orderBy: EmployeeEstimationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EmployeeEstimation]!

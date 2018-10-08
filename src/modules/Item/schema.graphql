@@ -1,5 +1,3 @@
-# import Item from "../../generated/prisma.graphql"
-
 type Query {
   item(where: ItemWhereUniqueInput!): Item
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!

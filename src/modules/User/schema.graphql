@@ -1,5 +1,3 @@
-# import User from "../../generated/prisma.graphql"
-
 type Query {
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!

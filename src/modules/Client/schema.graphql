@@ -1,5 +1,3 @@
-# import Client from "../../generated/prisma.graphql"
-
 type Query {
   client(where: ClientWhereUniqueInput!): Client
   clients(where: ClientWhereInput, orderBy: ClientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Client]!
