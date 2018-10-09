@@ -1,0 +1,36 @@
+# import Category from "src/generated/prisma.graphql"
+
+type Query {
+  category(where: CategoryWhereUniqueInput!): Category
+  categories(
+    where: CategoryWhereInput
+    orderBy: CategoryOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Category]!
+  categoriesConnection(
+    where: CategoryWhereInput
+    orderBy: CategoryOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): CategoryConnection!
+}
+
+type Mutation {
+  createCategory(data: CategoryCreateInput!): Category!
+  updateCategory(
+    data: CategoryUpdateInput!
+    where: CategoryWhereUniqueInput!
+  ): Category
+  deleteCategory(where: CategoryWhereUniqueInput!): Category
+}
+
+type Subscription {
+  category(where: CategorySubscriptionWhereInput): CategorySubscriptionPayload
+}
