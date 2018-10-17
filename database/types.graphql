@@ -10,8 +10,7 @@ type Client {
   tva: String
   clientContacts: [ClientContact!]!
   language: LanguageEnum
-  communications: [Communication!]!
-  type: ClientType
+  type: ClientType @default(value: Prive)
 }
 
 type Communication {
@@ -28,7 +27,7 @@ type Event {
   id: ID! @unique
   offer: Offer
   employees: [Employee!]!
-  stuffs: [Stuff!]!
+  eventStuffs: [EventStuff!]!
   vehicles: [Vehicle!]!
 }
 
@@ -44,6 +43,7 @@ type Offer {
   budgetLines: [BudgetLine!]!
   city: String!
   clientContact: ClientContact
+  communications: [Communication!]!
   employeeEstimations: [EmployeeEstimation!]!
   endTime: DateTime
   eventType: EventType
@@ -53,6 +53,7 @@ type Offer {
   name: String!
   place: Place
   postalCode: String!
+  rev: String
   sectionItems: [SectionItem!]!
   showTotalBudgetsPdf: Boolean @default(value: false)
   startTime: DateTime
@@ -70,7 +71,7 @@ type ItemTranslation {
 
 type Item {
   id: ID! @unique
-  platTranslations: [ItemTranslation!]!
+  itemTranslations: [ItemTranslation!]!
   categories: [Category!]!
   sectionItems: [SectionItem!]!
 }
@@ -122,7 +123,7 @@ type BudgetLine {
   value: Float!
 }
 
-type Category @model {
+type Category {
   id: ID! @unique
   name: String!
   items: [Item!]!
@@ -150,7 +151,7 @@ type EmployeeEstimation {
   total: Float! @default(value: 0.0)
 }
 
-type EventStuff @model {
+type EventStuff {
   event: Event
   id: ID! @unique
   quantity: Int! @default(value: 0)

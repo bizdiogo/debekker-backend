@@ -1,14 +1,20 @@
 import { forwardTo } from 'prisma-binding'
-import { Context, cloneOffer, throwError, validateTwoDate } from '../../utils'
+import {
+  Context,
+  throwError,
+  validateTwoDate,
+  clearEmpties,
+  cloneOffer
+} from '../../utils'
 import { StatusOffer } from '../../enums/status'
-import allOffer from './Offer'
+import OfferSchema from './Offer'
 
 export default {
   createOffer: async (parent, { data }, ctx: Context, info) => {
     !!data.startTime &&
       !!data.endTime &&
       validateTwoDate(data.startTime, data.endTime)
-    return ctx.db.mutation.createOffer({ data }, info)
+    return ctx.db.mutation.createOffer({ data: clearEmpties(data) }, info)
   },
   deleteOffer: forwardTo('db'),
   updateOffer: async (
@@ -17,49 +23,46 @@ export default {
     ctx: Context,
     info
   ) => {
-    const offer = await ctx.db.query.offer({ where: { id } }, allOffer)
-
     !!args.startTime &&
       !!args.endTime &&
       validateTwoDate(args.startTime, args.endTime)
 
-    if (!!args.status && args.status === StatusOffer.Accepted) {
-      const event = {
-        client: {
-          connect: {
-            id: offer.client.id
-          }
-        },
-        offer: {
-          connect: { id }
-        },
-        startTime: offer.startTime,
-        endTime: offer.endTime,
-        gmtOffset: offer.gmtOffset
-      }
+    return ctx.db.mutation.updateOffer(
+      { where: { id }, data: clearEmpties(args) },
+      info
+    )
+  },
+  acceptAndCreate: async (parent, { id }, ctx: Context, info) => {
+    try {
+      await ctx.db.mutation.updateOffer({
+        where: { id },
+        data: { status: StatusOffer.Accepted }
+      })
+    } catch (e) {
+      throwError(true, new Error(`Fail to accept offer: ${e}`))
+    }
 
-      try {
-        await ctx.db.mutation.createEvent({ data: event })
-      } catch (e) {
-        throwError(true, new Error(`Fail to create Event: ${e}`))
+    const event = {
+      offer: {
+        connect: { id }
       }
     }
 
-    if (
-      !!args.version &&
-      args.version > offer.version &&
-      !!args.status &&
-      args.status === StatusOffer.Rejected
-    ) {
-      try {
-        const clone = cloneOffer(offer)
-        clone.version++
-        await ctx.db.mutation.createOffer({ data: clone })
-      } catch (e) {
-        throwError(true, new Error(`Fail to create create new version: ${e}`))
-      }
+    return ctx.db.mutation.createEvent({ data: event }, info)
+  },
+  rejectAndCreate: async (parent, { id }, ctx: Context, info) => {
+    const offer = await ctx.db.query.offer({ where: { id } }, OfferSchema)
+    const clone = cloneOffer(offer)
+
+    try {
+      await ctx.db.mutation.updateOffer({
+        where: { id },
+        data: { status: StatusOffer.Rejected }
+      })
+    } catch (e) {
+      throwError(true, new Error(`Fail to reject offer: ${e}`))
     }
 
-    return ctx.db.mutation.updateOffer({ where: { id }, data: args }, info)
+    return ctx.db.mutation.createOffer({ data: clearEmpties(clone) }, info)
   }
 }

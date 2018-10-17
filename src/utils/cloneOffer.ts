@@ -59,7 +59,7 @@ const getConnect = arg => ({
 })
 
 export default offer => {
-  return {
+  const clone = {
     budgetLines: {
       create: cloneBudgetLines(offer.budgetLines)
     },
@@ -69,23 +69,33 @@ export default offer => {
     employeeEstimations: {
       create: cloneEmployeeEstimations(offer.employeeEstimations)
     },
-    client: getConnect(!!offer.client ? offer.client.id : undefined),
-    clientContact: getConnect(
-      !!offer.clientContact ? offer.clientContact.id : undefined
-    ),
-    place: getConnect(!!offer.place ? offer.place.id : undefined),
-    eventType: getConnect(!!offer.eventType ? offer.eventType.id : undefined),
-    language: !!offer.language ? offer.language : 1,
-    version: !!offer.version ? offer.version : 1,
+    client: !!offer.client ? getConnect(offer.client.id) : undefined,
+    clientContact: !!offer.clientContact
+      ? getConnect(offer.clientContact.id)
+      : undefined,
+    place: !!offer.place ? getConnect(offer.place.id) : undefined,
+    eventType: !!offer.eventType ? getConnect(offer.eventType.id) : undefined,
+    language: !!offer.language ? offer.language : undefined,
     name: !!offer.name ? offer.name : undefined,
     address: !!offer.address ? offer.address : undefined,
     city: !!offer.city ? offer.city : undefined,
     postalCode: !!offer.postalCode ? offer.postalCode : undefined,
-    startTime: !!offer.startTime ? offer.startTime : moment(),
-    endTime: !!offer.endTime ? offer.endTime : moment(),
-    gmtOffset: !!offer.gmtOffset ? offer.gmtOffset : moment().format('Z'),
+    startTime: !!offer.startTime ? offer.startTime : undefined,
+    endTime: !!offer.endTime ? offer.endTime : undefined,
+    gmtOffset: !!offer.gmtOffset ? offer.gmtOffset : undefined,
     maxPersons: !!offer.maxPersons ? offer.maxPersons : 0,
     minPersons: !!offer.minPersons ? offer.minPersons : 0,
-    status: StatusOffer.Pending
+    rev: !!offer.rev ? offer.rev : undefined,
+    version: !!offer.version ? offer.version : 1,
+    status: StatusOffer.Pending,
+    id: undefined
   }
+
+  if (!!clone.rev) {
+    clone.version = clone.version + 1
+  } else {
+    clone.version = 1
+  }
+
+  return clone
 }

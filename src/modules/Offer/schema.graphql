@@ -1,13 +1,31 @@
 type Query {
   offer(where: OfferWhereUniqueInput!): Offer
-  offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer]!
-  offersConnection(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OfferConnection!
+  offers(
+    where: OfferWhereInput
+    orderBy: OfferOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Offer]!
+  offersConnection(
+    where: OfferWhereInput
+    orderBy: OfferOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): OfferConnection!
 }
 
 type Mutation {
   createOffer(data: OfferCreateInput!): Offer!
   updateOffer(data: OfferUpdateInput!, where: OfferWhereUniqueInput!): Offer
   deleteOffer(where: OfferWhereUniqueInput!): Offer
+  rejectAndCreate(id: ID!): Offer
+  acceptAndCreate(id: ID!): Event
 }
 
 type Subscription {

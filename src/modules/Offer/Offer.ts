@@ -4,6 +4,7 @@ export default gql`
   query {
     id
     version
+    rev
     name
     maxPersons
     minPersons
@@ -29,14 +30,24 @@ export default gql`
     postalCode
     sectionItems {
       content
-      time
+      startTime
+      endTime
       title
       persons
       price
       items {
-        name
-        description
-        internalDescription
+        id
+        categories {
+          id
+          name
+        }
+        itemTranslations {
+          id
+          name
+          description
+          internalDescription
+          language
+        }
       }
       h
       i

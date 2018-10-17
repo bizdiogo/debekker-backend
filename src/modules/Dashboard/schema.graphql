@@ -1,7 +1,7 @@
 type Query {
   eventsLast30Days: [Event]!
   eventsNext30Days: [Event]!
-  eventsToday: [Event]!
+  eventsToday: OfferConnection
   currentOffers: OfferConnection
   countClients: ClientConnection
 }

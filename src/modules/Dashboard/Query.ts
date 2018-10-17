@@ -71,7 +71,7 @@ export default {
     )
   },
   eventsToday: async (parent, {}, ctx: Context, info) => {
-    return ctx.db.query.events(
+    return ctx.db.query.eventsConnection(
       {
         where: {
           AND: [
@@ -94,7 +94,7 @@ export default {
           ]
         }
       },
-      info
+      count
     )
   },
   currentOffers: async (parent, {}, ctx: Context, info) => {

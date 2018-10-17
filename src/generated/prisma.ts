@@ -5,6 +5,8 @@ import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 
 export interface Query {
     clients: <T = Client[]>(args: { where?: ClientWhereInput, orderBy?: ClientOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    communications: <T = Communication[]>(args: { where?: CommunicationWhereInput, orderBy?: CommunicationOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    offers: <T = Offer[]>(args: { where?: OfferWhereInput, orderBy?: OfferOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     itemTranslations: <T = ItemTranslation[]>(args: { where?: ItemTranslationWhereInput, orderBy?: ItemTranslationOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     items: <T = Item[]>(args: { where?: ItemWhereInput, orderBy?: ItemOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     users: <T = User[]>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -21,11 +23,11 @@ export interface Query {
     sectionItems: <T = SectionItem[]>(args: { where?: SectionItemWhereInput, orderBy?: SectionItemOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     taxes: <T = Tax[]>(args: { where?: TaxWhereInput, orderBy?: TaxOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     vehicles: <T = Vehicle[]>(args: { where?: VehicleWhereInput, orderBy?: VehicleOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    communications: <T = Communication[]>(args: { where?: CommunicationWhereInput, orderBy?: CommunicationOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     stuffs: <T = Stuff[]>(args: { where?: StuffWhereInput, orderBy?: StuffOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     events: <T = Event[]>(args: { where?: EventWhereInput, orderBy?: EventOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    offers: <T = Offer[]>(args: { where?: OfferWhereInput, orderBy?: OfferOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     client: <T = Client | null>(args: { where: ClientWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    communication: <T = Communication | null>(args: { where: CommunicationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    offer: <T = Offer | null>(args: { where: OfferWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     itemTranslation: <T = ItemTranslation | null>(args: { where: ItemTranslationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     item: <T = Item | null>(args: { where: ItemWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -42,11 +44,11 @@ export interface Query {
     sectionItem: <T = SectionItem | null>(args: { where: SectionItemWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     tax: <T = Tax | null>(args: { where: TaxWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     vehicle: <T = Vehicle | null>(args: { where: VehicleWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    communication: <T = Communication | null>(args: { where: CommunicationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     stuff: <T = Stuff | null>(args: { where: StuffWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     event: <T = Event | null>(args: { where: EventWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    offer: <T = Offer | null>(args: { where: OfferWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     clientsConnection: <T = ClientConnection>(args: { where?: ClientWhereInput, orderBy?: ClientOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    communicationsConnection: <T = CommunicationConnection>(args: { where?: CommunicationWhereInput, orderBy?: CommunicationOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    offersConnection: <T = OfferConnection>(args: { where?: OfferWhereInput, orderBy?: OfferOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     itemTranslationsConnection: <T = ItemTranslationConnection>(args: { where?: ItemTranslationWhereInput, orderBy?: ItemTranslationOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     itemsConnection: <T = ItemConnection>(args: { where?: ItemWhereInput, orderBy?: ItemOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     usersConnection: <T = UserConnection>(args: { where?: UserWhereInput, orderBy?: UserOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -63,15 +65,15 @@ export interface Query {
     sectionItemsConnection: <T = SectionItemConnection>(args: { where?: SectionItemWhereInput, orderBy?: SectionItemOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     taxesConnection: <T = TaxConnection>(args: { where?: TaxWhereInput, orderBy?: TaxOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     vehiclesConnection: <T = VehicleConnection>(args: { where?: VehicleWhereInput, orderBy?: VehicleOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    communicationsConnection: <T = CommunicationConnection>(args: { where?: CommunicationWhereInput, orderBy?: CommunicationOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     stuffsConnection: <T = StuffConnection>(args: { where?: StuffWhereInput, orderBy?: StuffOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     eventsConnection: <T = EventConnection>(args: { where?: EventWhereInput, orderBy?: EventOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    offersConnection: <T = OfferConnection>(args: { where?: OfferWhereInput, orderBy?: OfferOrderByInput, skip?: Int, after?: String, before?: String, first?: Int, last?: Int }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
 
 export interface Mutation {
     createClient: <T = Client>(args: { data: ClientCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createCommunication: <T = Communication>(args: { data: CommunicationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createOffer: <T = Offer>(args: { data: OfferCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createItemTranslation: <T = ItemTranslation>(args: { data: ItemTranslationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createItem: <T = Item>(args: { data: ItemCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -88,11 +90,11 @@ export interface Mutation {
     createSectionItem: <T = SectionItem>(args: { data: SectionItemCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createTax: <T = Tax>(args: { data: TaxCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createVehicle: <T = Vehicle>(args: { data: VehicleCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createCommunication: <T = Communication>(args: { data: CommunicationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createStuff: <T = Stuff>(args: { data: StuffCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createEvent: <T = Event>(args: { data: EventCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createOffer: <T = Offer>(args: { data: OfferCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateClient: <T = Client | null>(args: { data: ClientUpdateInput, where: ClientWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateCommunication: <T = Communication | null>(args: { data: CommunicationUpdateInput, where: CommunicationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateOffer: <T = Offer | null>(args: { data: OfferUpdateInput, where: OfferWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateItemTranslation: <T = ItemTranslation | null>(args: { data: ItemTranslationUpdateInput, where: ItemTranslationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateItem: <T = Item | null>(args: { data: ItemUpdateInput, where: ItemWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -109,11 +111,11 @@ export interface Mutation {
     updateSectionItem: <T = SectionItem | null>(args: { data: SectionItemUpdateInput, where: SectionItemWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateTax: <T = Tax | null>(args: { data: TaxUpdateInput, where: TaxWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateVehicle: <T = Vehicle | null>(args: { data: VehicleUpdateInput, where: VehicleWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateCommunication: <T = Communication | null>(args: { data: CommunicationUpdateInput, where: CommunicationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateStuff: <T = Stuff | null>(args: { data: StuffUpdateInput, where: StuffWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateEvent: <T = Event | null>(args: { data: EventUpdateInput, where: EventWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateOffer: <T = Offer | null>(args: { data: OfferUpdateInput, where: OfferWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteClient: <T = Client | null>(args: { where: ClientWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteCommunication: <T = Communication | null>(args: { where: CommunicationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteOffer: <T = Offer | null>(args: { where: OfferWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteItemTranslation: <T = ItemTranslation | null>(args: { where: ItemTranslationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteItem: <T = Item | null>(args: { where: ItemWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -130,11 +132,11 @@ export interface Mutation {
     deleteSectionItem: <T = SectionItem | null>(args: { where: SectionItemWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteTax: <T = Tax | null>(args: { where: TaxWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteVehicle: <T = Vehicle | null>(args: { where: VehicleWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteCommunication: <T = Communication | null>(args: { where: CommunicationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteStuff: <T = Stuff | null>(args: { where: StuffWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteEvent: <T = Event | null>(args: { where: EventWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteOffer: <T = Offer | null>(args: { where: OfferWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertClient: <T = Client>(args: { where: ClientWhereUniqueInput, create: ClientCreateInput, update: ClientUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertCommunication: <T = Communication>(args: { where: CommunicationWhereUniqueInput, create: CommunicationCreateInput, update: CommunicationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertOffer: <T = Offer>(args: { where: OfferWhereUniqueInput, create: OfferCreateInput, update: OfferUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertItemTranslation: <T = ItemTranslation>(args: { where: ItemTranslationWhereUniqueInput, create: ItemTranslationCreateInput, update: ItemTranslationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertItem: <T = Item>(args: { where: ItemWhereUniqueInput, create: ItemCreateInput, update: ItemUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -151,11 +153,11 @@ export interface Mutation {
     upsertSectionItem: <T = SectionItem>(args: { where: SectionItemWhereUniqueInput, create: SectionItemCreateInput, update: SectionItemUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertTax: <T = Tax>(args: { where: TaxWhereUniqueInput, create: TaxCreateInput, update: TaxUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertVehicle: <T = Vehicle>(args: { where: VehicleWhereUniqueInput, create: VehicleCreateInput, update: VehicleUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertCommunication: <T = Communication>(args: { where: CommunicationWhereUniqueInput, create: CommunicationCreateInput, update: CommunicationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertStuff: <T = Stuff>(args: { where: StuffWhereUniqueInput, create: StuffCreateInput, update: StuffUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertEvent: <T = Event>(args: { where: EventWhereUniqueInput, create: EventCreateInput, update: EventUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertOffer: <T = Offer>(args: { where: OfferWhereUniqueInput, create: OfferCreateInput, update: OfferUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyClients: <T = BatchPayload>(args: { data: ClientUpdateInput, where?: ClientWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyCommunications: <T = BatchPayload>(args: { data: CommunicationUpdateInput, where?: CommunicationWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyOffers: <T = BatchPayload>(args: { data: OfferUpdateInput, where?: OfferWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyItemTranslations: <T = BatchPayload>(args: { data: ItemTranslationUpdateInput, where?: ItemTranslationWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyItems: <T = BatchPayload>(args: { data: ItemUpdateInput, where?: ItemWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateInput, where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -172,11 +174,11 @@ export interface Mutation {
     updateManySectionItems: <T = BatchPayload>(args: { data: SectionItemUpdateInput, where?: SectionItemWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyTaxes: <T = BatchPayload>(args: { data: TaxUpdateInput, where?: TaxWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyVehicles: <T = BatchPayload>(args: { data: VehicleUpdateInput, where?: VehicleWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyCommunications: <T = BatchPayload>(args: { data: CommunicationUpdateInput, where?: CommunicationWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyStuffs: <T = BatchPayload>(args: { data: StuffUpdateInput, where?: StuffWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyEvents: <T = BatchPayload>(args: { data: EventUpdateInput, where?: EventWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyOffers: <T = BatchPayload>(args: { data: OfferUpdateInput, where?: OfferWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyClients: <T = BatchPayload>(args: { where?: ClientWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyCommunications: <T = BatchPayload>(args: { where?: CommunicationWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyOffers: <T = BatchPayload>(args: { where?: OfferWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyItemTranslations: <T = BatchPayload>(args: { where?: ItemTranslationWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyItems: <T = BatchPayload>(args: { where?: ItemWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -193,14 +195,14 @@ export interface Mutation {
     deleteManySectionItems: <T = BatchPayload>(args: { where?: SectionItemWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyTaxes: <T = BatchPayload>(args: { where?: TaxWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyVehicles: <T = BatchPayload>(args: { where?: VehicleWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyCommunications: <T = BatchPayload>(args: { where?: CommunicationWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyStuffs: <T = BatchPayload>(args: { where?: StuffWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyEvents: <T = BatchPayload>(args: { where?: EventWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyOffers: <T = BatchPayload>(args: { where?: OfferWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
+    deleteManyEvents: <T = BatchPayload>(args: { where?: EventWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
 
 export interface Subscription {
     client: <T = ClientSubscriptionPayload | null>(args: { where?: ClientSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
+    communication: <T = CommunicationSubscriptionPayload | null>(args: { where?: CommunicationSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
+    offer: <T = OfferSubscriptionPayload | null>(args: { where?: OfferSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
     itemTranslation: <T = ItemTranslationSubscriptionPayload | null>(args: { where?: ItemTranslationSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
     item: <T = ItemSubscriptionPayload | null>(args: { where?: ItemSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
     user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
@@ -217,14 +219,14 @@ export interface Subscription {
     sectionItem: <T = SectionItemSubscriptionPayload | null>(args: { where?: SectionItemSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
     tax: <T = TaxSubscriptionPayload | null>(args: { where?: TaxSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
     vehicle: <T = VehicleSubscriptionPayload | null>(args: { where?: VehicleSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
-    communication: <T = CommunicationSubscriptionPayload | null>(args: { where?: CommunicationSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
     stuff: <T = StuffSubscriptionPayload | null>(args: { where?: StuffSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
-    event: <T = EventSubscriptionPayload | null>(args: { where?: EventSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> ,
-    offer: <T = OfferSubscriptionPayload | null>(args: { where?: OfferSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> 
+    event: <T = EventSubscriptionPayload | null>(args: { where?: EventSubscriptionWhereInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T>> 
   }
 
 export interface Exists {
   Client: (where?: ClientWhereInput) => Promise<boolean>
+  Communication: (where?: CommunicationWhereInput) => Promise<boolean>
+  Offer: (where?: OfferWhereInput) => Promise<boolean>
   ItemTranslation: (where?: ItemTranslationWhereInput) => Promise<boolean>
   Item: (where?: ItemWhereInput) => Promise<boolean>
   User: (where?: UserWhereInput) => Promise<boolean>
@@ -241,10 +243,8 @@ export interface Exists {
   SectionItem: (where?: SectionItemWhereInput) => Promise<boolean>
   Tax: (where?: TaxWhereInput) => Promise<boolean>
   Vehicle: (where?: VehicleWhereInput) => Promise<boolean>
-  Communication: (where?: CommunicationWhereInput) => Promise<boolean>
   Stuff: (where?: StuffWhereInput) => Promise<boolean>
   Event: (where?: EventWhereInput) => Promise<boolean>
-  Offer: (where?: OfferWhereInput) => Promise<boolean>
 }
 
 export interface Prisma {
@@ -986,7 +986,6 @@ type Client implements Node {
   tva: String
   clientContacts(where: ClientContactWhereInput, orderBy: ClientContactOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ClientContact!]
   language: LanguageEnum
-  communications(where: CommunicationWhereInput, orderBy: CommunicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Communication!]
   type: ClientType
 }
 
@@ -1414,19 +1413,13 @@ input ClientCreateInput {
   tva: String
   language: LanguageEnum
   type: ClientType
-  events: EventCreateManyWithoutClientInput
+  events: EventCreateManyInput
   offers: OfferCreateManyWithoutClientInput
   clientContacts: ClientContactCreateManyWithoutClientInput
-  communications: CommunicationCreateManyInput
 }
 
 input ClientCreateOneWithoutClientContactsInput {
   create: ClientCreateWithoutClientContactsInput
-  connect: ClientWhereUniqueInput
-}
-
-input ClientCreateOneWithoutEventsInput {
-  create: ClientCreateWithoutEventsInput
   connect: ClientWhereUniqueInput
 }
 
@@ -1443,22 +1436,8 @@ input ClientCreateWithoutClientContactsInput {
   tva: String
   language: LanguageEnum
   type: ClientType
-  events: EventCreateManyWithoutClientInput
+  events: EventCreateManyInput
   offers: OfferCreateManyWithoutClientInput
-  communications: CommunicationCreateManyInput
-}
-
-input ClientCreateWithoutEventsInput {
-  address: String
-  email: String!
-  name: String!
-  phone: String!
-  tva: String
-  language: LanguageEnum
-  type: ClientType
-  offers: OfferCreateManyWithoutClientInput
-  clientContacts: ClientContactCreateManyWithoutClientInput
-  communications: CommunicationCreateManyInput
 }
 
 input ClientCreateWithoutOffersInput {
@@ -1469,9 +1448,8 @@ input ClientCreateWithoutOffersInput {
   tva: String
   language: LanguageEnum
   type: ClientType
-  events: EventCreateManyWithoutClientInput
+  events: EventCreateManyInput
   clientContacts: ClientContactCreateManyWithoutClientInput
-  communications: CommunicationCreateManyInput
 }
 
 """An edge in a connection."""
@@ -1570,10 +1548,9 @@ input ClientUpdateInput {
   tva: String
   language: LanguageEnum
   type: ClientType
-  events: EventUpdateManyWithoutClientInput
+  events: EventUpdateManyInput
   offers: OfferUpdateManyWithoutClientInput
   clientContacts: ClientContactUpdateManyWithoutClientInput
-  communications: CommunicationUpdateManyInput
 }
 
 input ClientUpdateOneWithoutClientContactsInput {
@@ -1583,15 +1560,6 @@ input ClientUpdateOneWithoutClientContactsInput {
   delete: Boolean
   update: ClientUpdateWithoutClientContactsDataInput
   upsert: ClientUpsertWithoutClientContactsInput
-}
-
-input ClientUpdateOneWithoutEventsInput {
-  create: ClientCreateWithoutEventsInput
-  connect: ClientWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: ClientUpdateWithoutEventsDataInput
-  upsert: ClientUpsertWithoutEventsInput
 }
 
 input ClientUpdateOneWithoutOffersInput {
@@ -1611,22 +1579,8 @@ input ClientUpdateWithoutClientContactsDataInput {
   tva: String
   language: LanguageEnum
   type: ClientType
-  events: EventUpdateManyWithoutClientInput
+  events: EventUpdateManyInput
   offers: OfferUpdateManyWithoutClientInput
-  communications: CommunicationUpdateManyInput
-}
-
-input ClientUpdateWithoutEventsDataInput {
-  address: String
-  email: String
-  name: String
-  phone: String
-  tva: String
-  language: LanguageEnum
-  type: ClientType
-  offers: OfferUpdateManyWithoutClientInput
-  clientContacts: ClientContactUpdateManyWithoutClientInput
-  communications: CommunicationUpdateManyInput
 }
 
 input ClientUpdateWithoutOffersDataInput {
@@ -1637,19 +1591,13 @@ input ClientUpdateWithoutOffersDataInput {
   tva: String
   language: LanguageEnum
   type: ClientType
-  events: EventUpdateManyWithoutClientInput
+  events: EventUpdateManyInput
   clientContacts: ClientContactUpdateManyWithoutClientInput
-  communications: CommunicationUpdateManyInput
 }
 
 input ClientUpsertWithoutClientContactsInput {
   update: ClientUpdateWithoutClientContactsDataInput!
   create: ClientCreateWithoutClientContactsInput!
-}
-
-input ClientUpsertWithoutEventsInput {
-  update: ClientUpdateWithoutEventsDataInput!
-  create: ClientCreateWithoutEventsInput!
 }
 
 input ClientUpsertWithoutOffersInput {
@@ -1957,9 +1905,6 @@ input ClientWhereInput {
   clientContacts_every: ClientContactWhereInput
   clientContacts_some: ClientContactWhereInput
   clientContacts_none: ClientContactWhereInput
-  communications_every: CommunicationWhereInput
-  communications_some: CommunicationWhereInput
-  communications_none: CommunicationWhereInput
 }
 
 input ClientWhereUniqueInput {
@@ -1992,12 +1937,20 @@ input CommunicationCreateInput {
   channel: Channel!
   date: DateTime!
   gmtOffset: String!
-  offer: OfferCreateOneInput
+  offer: OfferCreateOneWithoutCommunicationsInput
 }
 
-input CommunicationCreateManyInput {
-  create: [CommunicationCreateInput!]
+input CommunicationCreateManyWithoutOfferInput {
+  create: [CommunicationCreateWithoutOfferInput!]
   connect: [CommunicationWhereUniqueInput!]
+}
+
+input CommunicationCreateWithoutOfferInput {
+  message: String!
+  subject: String!
+  channel: Channel!
+  date: DateTime!
+  gmtOffset: String!
 }
 
 """An edge in a connection."""
@@ -2076,42 +2029,41 @@ input CommunicationSubscriptionWhereInput {
   node: CommunicationWhereInput
 }
 
-input CommunicationUpdateDataInput {
-  message: String
-  subject: String
-  channel: Channel
-  date: DateTime
-  gmtOffset: String
-  offer: OfferUpdateOneInput
-}
-
 input CommunicationUpdateInput {
   message: String
   subject: String
   channel: Channel
   date: DateTime
   gmtOffset: String
-  offer: OfferUpdateOneInput
+  offer: OfferUpdateOneWithoutCommunicationsInput
 }
 
-input CommunicationUpdateManyInput {
-  create: [CommunicationCreateInput!]
+input CommunicationUpdateManyWithoutOfferInput {
+  create: [CommunicationCreateWithoutOfferInput!]
   connect: [CommunicationWhereUniqueInput!]
   disconnect: [CommunicationWhereUniqueInput!]
   delete: [CommunicationWhereUniqueInput!]
-  update: [CommunicationUpdateWithWhereUniqueNestedInput!]
-  upsert: [CommunicationUpsertWithWhereUniqueNestedInput!]
+  update: [CommunicationUpdateWithWhereUniqueWithoutOfferInput!]
+  upsert: [CommunicationUpsertWithWhereUniqueWithoutOfferInput!]
 }
 
-input CommunicationUpdateWithWhereUniqueNestedInput {
-  where: CommunicationWhereUniqueInput!
-  data: CommunicationUpdateDataInput!
+input CommunicationUpdateWithoutOfferDataInput {
+  message: String
+  subject: String
+  channel: Channel
+  date: DateTime
+  gmtOffset: String
 }
 
-input CommunicationUpsertWithWhereUniqueNestedInput {
+input CommunicationUpdateWithWhereUniqueWithoutOfferInput {
   where: CommunicationWhereUniqueInput!
-  update: CommunicationUpdateDataInput!
-  create: CommunicationCreateInput!
+  data: CommunicationUpdateWithoutOfferDataInput!
+}
+
+input CommunicationUpsertWithWhereUniqueWithoutOfferInput {
+  where: CommunicationWhereUniqueInput!
+  update: CommunicationUpdateWithoutOfferDataInput!
+  create: CommunicationCreateWithoutOfferInput!
 }
 
 input CommunicationWhereInput {
@@ -3082,7 +3034,6 @@ input EmployeeWhereUniqueInput {
 }
 
 type Event implements Node {
-  client(where: ClientWhereInput): Client
   id: ID!
   offer(where: OfferWhereInput): Offer
   employees(where: EmployeeWhereInput, orderBy: EmployeeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Employee!]
@@ -3101,15 +3052,14 @@ type EventConnection {
 }
 
 input EventCreateInput {
-  client: ClientCreateOneWithoutEventsInput
   offer: OfferCreateOneWithoutEventInput
   employees: EmployeeCreateManyWithoutEventInput
   stuffs: StuffCreateManyInput
   vehicles: VehicleCreateManyWithoutEventsInput
 }
 
-input EventCreateManyWithoutClientInput {
-  create: [EventCreateWithoutClientInput!]
+input EventCreateManyInput {
+  create: [EventCreateInput!]
   connect: [EventWhereUniqueInput!]
 }
 
@@ -3133,29 +3083,19 @@ input EventCreateOneWithoutOfferInput {
   connect: EventWhereUniqueInput
 }
 
-input EventCreateWithoutClientInput {
-  offer: OfferCreateOneWithoutEventInput
-  employees: EmployeeCreateManyWithoutEventInput
-  stuffs: StuffCreateManyInput
-  vehicles: VehicleCreateManyWithoutEventsInput
-}
-
 input EventCreateWithoutEmployeesInput {
-  client: ClientCreateOneWithoutEventsInput
   offer: OfferCreateOneWithoutEventInput
   stuffs: StuffCreateManyInput
   vehicles: VehicleCreateManyWithoutEventsInput
 }
 
 input EventCreateWithoutOfferInput {
-  client: ClientCreateOneWithoutEventsInput
   employees: EmployeeCreateManyWithoutEventInput
   stuffs: StuffCreateManyInput
   vehicles: VehicleCreateManyWithoutEventsInput
 }
 
 input EventCreateWithoutVehiclesInput {
-  client: ClientCreateOneWithoutEventsInput
   offer: OfferCreateOneWithoutEventInput
   employees: EmployeeCreateManyWithoutEventInput
   stuffs: StuffCreateManyInput
@@ -3645,7 +3585,6 @@ input EventTypeWhereUniqueInput {
 }
 
 input EventUpdateDataInput {
-  client: ClientUpdateOneWithoutEventsInput
   offer: OfferUpdateOneWithoutEventInput
   employees: EmployeeUpdateManyWithoutEventInput
   stuffs: StuffUpdateManyInput
@@ -3653,20 +3592,19 @@ input EventUpdateDataInput {
 }
 
 input EventUpdateInput {
-  client: ClientUpdateOneWithoutEventsInput
   offer: OfferUpdateOneWithoutEventInput
   employees: EmployeeUpdateManyWithoutEventInput
   stuffs: StuffUpdateManyInput
   vehicles: VehicleUpdateManyWithoutEventsInput
 }
 
-input EventUpdateManyWithoutClientInput {
-  create: [EventCreateWithoutClientInput!]
+input EventUpdateManyInput {
+  create: [EventCreateInput!]
   connect: [EventWhereUniqueInput!]
   disconnect: [EventWhereUniqueInput!]
   delete: [EventWhereUniqueInput!]
-  update: [EventUpdateWithWhereUniqueWithoutClientInput!]
-  upsert: [EventUpsertWithWhereUniqueWithoutClientInput!]
+  update: [EventUpdateWithWhereUniqueNestedInput!]
+  upsert: [EventUpsertWithWhereUniqueNestedInput!]
 }
 
 input EventUpdateManyWithoutVehiclesInput {
@@ -3705,37 +3643,27 @@ input EventUpdateOneWithoutOfferInput {
   upsert: EventUpsertWithoutOfferInput
 }
 
-input EventUpdateWithoutClientDataInput {
-  offer: OfferUpdateOneWithoutEventInput
-  employees: EmployeeUpdateManyWithoutEventInput
-  stuffs: StuffUpdateManyInput
-  vehicles: VehicleUpdateManyWithoutEventsInput
-}
-
 input EventUpdateWithoutEmployeesDataInput {
-  client: ClientUpdateOneWithoutEventsInput
   offer: OfferUpdateOneWithoutEventInput
   stuffs: StuffUpdateManyInput
   vehicles: VehicleUpdateManyWithoutEventsInput
 }
 
 input EventUpdateWithoutOfferDataInput {
-  client: ClientUpdateOneWithoutEventsInput
   employees: EmployeeUpdateManyWithoutEventInput
   stuffs: StuffUpdateManyInput
   vehicles: VehicleUpdateManyWithoutEventsInput
 }
 
 input EventUpdateWithoutVehiclesDataInput {
-  client: ClientUpdateOneWithoutEventsInput
   offer: OfferUpdateOneWithoutEventInput
   employees: EmployeeUpdateManyWithoutEventInput
   stuffs: StuffUpdateManyInput
 }
 
-input EventUpdateWithWhereUniqueWithoutClientInput {
+input EventUpdateWithWhereUniqueNestedInput {
   where: EventWhereUniqueInput!
-  data: EventUpdateWithoutClientDataInput!
+  data: EventUpdateDataInput!
 }
 
 input EventUpdateWithWhereUniqueWithoutVehiclesInput {
@@ -3758,10 +3686,10 @@ input EventUpsertWithoutOfferInput {
   create: EventCreateWithoutOfferInput!
 }
 
-input EventUpsertWithWhereUniqueWithoutClientInput {
+input EventUpsertWithWhereUniqueNestedInput {
   where: EventWhereUniqueInput!
-  update: EventUpdateWithoutClientDataInput!
-  create: EventCreateWithoutClientInput!
+  update: EventUpdateDataInput!
+  create: EventCreateInput!
 }
 
 input EventUpsertWithWhereUniqueWithoutVehiclesInput {
@@ -3819,7 +3747,6 @@ input EventWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  client: ClientWhereInput
   offer: OfferWhereInput
   employees_every: EmployeeWhereInput
   employees_some: EmployeeWhereInput
@@ -3838,7 +3765,7 @@ input EventWhereUniqueInput {
 
 type Item implements Node {
   id: ID!
-  platTranslations(where: ItemTranslationWhereInput, orderBy: ItemTranslationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ItemTranslation!]
+  itemTranslations(where: ItemTranslationWhereInput, orderBy: ItemTranslationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ItemTranslation!]
   categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category!]
   sectionItems(where: SectionItemWhereInput, orderBy: SectionItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SectionItem!]
 }
@@ -3854,7 +3781,7 @@ type ItemConnection {
 }
 
 input ItemCreateInput {
-  platTranslations: ItemTranslationCreateManyWithoutItemsInput
+  itemTranslations: ItemTranslationCreateManyWithoutItemsInput
   categories: CategoryCreateManyWithoutItemsInput
   sectionItems: SectionItemCreateManyWithoutItemsInput
 }
@@ -3869,23 +3796,23 @@ input ItemCreateManyWithoutSectionItemsInput {
   connect: [ItemWhereUniqueInput!]
 }
 
-input ItemCreateOneWithoutPlatTranslationsInput {
-  create: ItemCreateWithoutPlatTranslationsInput
+input ItemCreateOneWithoutItemTranslationsInput {
+  create: ItemCreateWithoutItemTranslationsInput
   connect: ItemWhereUniqueInput
 }
 
 input ItemCreateWithoutCategoriesInput {
-  platTranslations: ItemTranslationCreateManyWithoutItemsInput
+  itemTranslations: ItemTranslationCreateManyWithoutItemsInput
   sectionItems: SectionItemCreateManyWithoutItemsInput
 }
 
-input ItemCreateWithoutPlatTranslationsInput {
+input ItemCreateWithoutItemTranslationsInput {
   categories: CategoryCreateManyWithoutItemsInput
   sectionItems: SectionItemCreateManyWithoutItemsInput
 }
 
 input ItemCreateWithoutSectionItemsInput {
-  platTranslations: ItemTranslationCreateManyWithoutItemsInput
+  itemTranslations: ItemTranslationCreateManyWithoutItemsInput
   categories: CategoryCreateManyWithoutItemsInput
 }
 
@@ -3974,7 +3901,7 @@ input ItemTranslationCreateInput {
   internalDescription: String
   language: LanguageEnum!
   name: String
-  items: ItemCreateOneWithoutPlatTranslationsInput
+  items: ItemCreateOneWithoutItemTranslationsInput
 }
 
 input ItemTranslationCreateManyWithoutItemsInput {
@@ -4067,7 +3994,7 @@ input ItemTranslationUpdateInput {
   internalDescription: String
   language: LanguageEnum
   name: String
-  items: ItemUpdateOneWithoutPlatTranslationsInput
+  items: ItemUpdateOneWithoutItemTranslationsInput
 }
 
 input ItemTranslationUpdateManyWithoutItemsInput {
@@ -4284,7 +4211,7 @@ input ItemTranslationWhereUniqueInput {
 }
 
 input ItemUpdateInput {
-  platTranslations: ItemTranslationUpdateManyWithoutItemsInput
+  itemTranslations: ItemTranslationUpdateManyWithoutItemsInput
   categories: CategoryUpdateManyWithoutItemsInput
   sectionItems: SectionItemUpdateManyWithoutItemsInput
 }
@@ -4307,27 +4234,27 @@ input ItemUpdateManyWithoutSectionItemsInput {
   upsert: [ItemUpsertWithWhereUniqueWithoutSectionItemsInput!]
 }
 
-input ItemUpdateOneWithoutPlatTranslationsInput {
-  create: ItemCreateWithoutPlatTranslationsInput
+input ItemUpdateOneWithoutItemTranslationsInput {
+  create: ItemCreateWithoutItemTranslationsInput
   connect: ItemWhereUniqueInput
   disconnect: Boolean
   delete: Boolean
-  update: ItemUpdateWithoutPlatTranslationsDataInput
-  upsert: ItemUpsertWithoutPlatTranslationsInput
+  update: ItemUpdateWithoutItemTranslationsDataInput
+  upsert: ItemUpsertWithoutItemTranslationsInput
 }
 
 input ItemUpdateWithoutCategoriesDataInput {
-  platTranslations: ItemTranslationUpdateManyWithoutItemsInput
+  itemTranslations: ItemTranslationUpdateManyWithoutItemsInput
   sectionItems: SectionItemUpdateManyWithoutItemsInput
 }
 
-input ItemUpdateWithoutPlatTranslationsDataInput {
+input ItemUpdateWithoutItemTranslationsDataInput {
   categories: CategoryUpdateManyWithoutItemsInput
   sectionItems: SectionItemUpdateManyWithoutItemsInput
 }
 
 input ItemUpdateWithoutSectionItemsDataInput {
-  platTranslations: ItemTranslationUpdateManyWithoutItemsInput
+  itemTranslations: ItemTranslationUpdateManyWithoutItemsInput
   categories: CategoryUpdateManyWithoutItemsInput
 }
 
@@ -4341,9 +4268,9 @@ input ItemUpdateWithWhereUniqueWithoutSectionItemsInput {
   data: ItemUpdateWithoutSectionItemsDataInput!
 }
 
-input ItemUpsertWithoutPlatTranslationsInput {
-  update: ItemUpdateWithoutPlatTranslationsDataInput!
-  create: ItemCreateWithoutPlatTranslationsInput!
+input ItemUpsertWithoutItemTranslationsInput {
+  update: ItemUpdateWithoutItemTranslationsDataInput!
+  create: ItemCreateWithoutItemTranslationsInput!
 }
 
 input ItemUpsertWithWhereUniqueWithoutCategoriesInput {
@@ -4407,9 +4334,9 @@ input ItemWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  platTranslations_every: ItemTranslationWhereInput
-  platTranslations_some: ItemTranslationWhereInput
-  platTranslations_none: ItemTranslationWhereInput
+  itemTranslations_every: ItemTranslationWhereInput
+  itemTranslations_some: ItemTranslationWhereInput
+  itemTranslations_none: ItemTranslationWhereInput
   categories_every: CategoryWhereInput
   categories_some: CategoryWhereInput
   categories_none: CategoryWhereInput
@@ -4735,6 +4662,8 @@ scalar Long
 
 type Mutation {
   createClient(data: ClientCreateInput!): Client!
+  createCommunication(data: CommunicationCreateInput!): Communication!
+  createOffer(data: OfferCreateInput!): Offer!
   createItemTranslation(data: ItemTranslationCreateInput!): ItemTranslation!
   createItem(data: ItemCreateInput!): Item!
   createUser(data: UserCreateInput!): User!
@@ -4751,11 +4680,11 @@ type Mutation {
   createSectionItem(data: SectionItemCreateInput!): SectionItem!
   createTax(data: TaxCreateInput!): Tax!
   createVehicle(data: VehicleCreateInput!): Vehicle!
-  createCommunication(data: CommunicationCreateInput!): Communication!
   createStuff(data: StuffCreateInput!): Stuff!
   createEvent(data: EventCreateInput!): Event!
-  createOffer(data: OfferCreateInput!): Offer!
   updateClient(data: ClientUpdateInput!, where: ClientWhereUniqueInput!): Client
+  updateCommunication(data: CommunicationUpdateInput!, where: CommunicationWhereUniqueInput!): Communication
+  updateOffer(data: OfferUpdateInput!, where: OfferWhereUniqueInput!): Offer
   updateItemTranslation(data: ItemTranslationUpdateInput!, where: ItemTranslationWhereUniqueInput!): ItemTranslation
   updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
@@ -4772,11 +4701,11 @@ type Mutation {
   updateSectionItem(data: SectionItemUpdateInput!, where: SectionItemWhereUniqueInput!): SectionItem
   updateTax(data: TaxUpdateInput!, where: TaxWhereUniqueInput!): Tax
   updateVehicle(data: VehicleUpdateInput!, where: VehicleWhereUniqueInput!): Vehicle
-  updateCommunication(data: CommunicationUpdateInput!, where: CommunicationWhereUniqueInput!): Communication
   updateStuff(data: StuffUpdateInput!, where: StuffWhereUniqueInput!): Stuff
   updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
-  updateOffer(data: OfferUpdateInput!, where: OfferWhereUniqueInput!): Offer
   deleteClient(where: ClientWhereUniqueInput!): Client
+  deleteCommunication(where: CommunicationWhereUniqueInput!): Communication
+  deleteOffer(where: OfferWhereUniqueInput!): Offer
   deleteItemTranslation(where: ItemTranslationWhereUniqueInput!): ItemTranslation
   deleteItem(where: ItemWhereUniqueInput!): Item
   deleteUser(where: UserWhereUniqueInput!): User
@@ -4793,11 +4722,11 @@ type Mutation {
   deleteSectionItem(where: SectionItemWhereUniqueInput!): SectionItem
   deleteTax(where: TaxWhereUniqueInput!): Tax
   deleteVehicle(where: VehicleWhereUniqueInput!): Vehicle
-  deleteCommunication(where: CommunicationWhereUniqueInput!): Communication
   deleteStuff(where: StuffWhereUniqueInput!): Stuff
   deleteEvent(where: EventWhereUniqueInput!): Event
-  deleteOffer(where: OfferWhereUniqueInput!): Offer
   upsertClient(where: ClientWhereUniqueInput!, create: ClientCreateInput!, update: ClientUpdateInput!): Client!
+  upsertCommunication(where: CommunicationWhereUniqueInput!, create: CommunicationCreateInput!, update: CommunicationUpdateInput!): Communication!
+  upsertOffer(where: OfferWhereUniqueInput!, create: OfferCreateInput!, update: OfferUpdateInput!): Offer!
   upsertItemTranslation(where: ItemTranslationWhereUniqueInput!, create: ItemTranslationCreateInput!, update: ItemTranslationUpdateInput!): ItemTranslation!
   upsertItem(where: ItemWhereUniqueInput!, create: ItemCreateInput!, update: ItemUpdateInput!): Item!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
@@ -4814,11 +4743,11 @@ type Mutation {
   upsertSectionItem(where: SectionItemWhereUniqueInput!, create: SectionItemCreateInput!, update: SectionItemUpdateInput!): SectionItem!
   upsertTax(where: TaxWhereUniqueInput!, create: TaxCreateInput!, update: TaxUpdateInput!): Tax!
   upsertVehicle(where: VehicleWhereUniqueInput!, create: VehicleCreateInput!, update: VehicleUpdateInput!): Vehicle!
-  upsertCommunication(where: CommunicationWhereUniqueInput!, create: CommunicationCreateInput!, update: CommunicationUpdateInput!): Communication!
   upsertStuff(where: StuffWhereUniqueInput!, create: StuffCreateInput!, update: StuffUpdateInput!): Stuff!
   upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
-  upsertOffer(where: OfferWhereUniqueInput!, create: OfferCreateInput!, update: OfferUpdateInput!): Offer!
   updateManyClients(data: ClientUpdateInput!, where: ClientWhereInput): BatchPayload!
+  updateManyCommunications(data: CommunicationUpdateInput!, where: CommunicationWhereInput): BatchPayload!
+  updateManyOffers(data: OfferUpdateInput!, where: OfferWhereInput): BatchPayload!
   updateManyItemTranslations(data: ItemTranslationUpdateInput!, where: ItemTranslationWhereInput): BatchPayload!
   updateManyItems(data: ItemUpdateInput!, where: ItemWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
@@ -4835,11 +4764,11 @@ type Mutation {
   updateManySectionItems(data: SectionItemUpdateInput!, where: SectionItemWhereInput): BatchPayload!
   updateManyTaxes(data: TaxUpdateInput!, where: TaxWhereInput): BatchPayload!
   updateManyVehicles(data: VehicleUpdateInput!, where: VehicleWhereInput): BatchPayload!
-  updateManyCommunications(data: CommunicationUpdateInput!, where: CommunicationWhereInput): BatchPayload!
   updateManyStuffs(data: StuffUpdateInput!, where: StuffWhereInput): BatchPayload!
   updateManyEvents(data: EventUpdateInput!, where: EventWhereInput): BatchPayload!
-  updateManyOffers(data: OfferUpdateInput!, where: OfferWhereInput): BatchPayload!
   deleteManyClients(where: ClientWhereInput): BatchPayload!
+  deleteManyCommunications(where: CommunicationWhereInput): BatchPayload!
+  deleteManyOffers(where: OfferWhereInput): BatchPayload!
   deleteManyItemTranslations(where: ItemTranslationWhereInput): BatchPayload!
   deleteManyItems(where: ItemWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
@@ -4856,10 +4785,8 @@ type Mutation {
   deleteManySectionItems(where: SectionItemWhereInput): BatchPayload!
   deleteManyTaxes(where: TaxWhereInput): BatchPayload!
   deleteManyVehicles(where: VehicleWhereInput): BatchPayload!
-  deleteManyCommunications(where: CommunicationWhereInput): BatchPayload!
   deleteManyStuffs(where: StuffWhereInput): BatchPayload!
   deleteManyEvents(where: EventWhereInput): BatchPayload!
-  deleteManyOffers(where: OfferWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -4886,6 +4813,7 @@ type Offer implements Node {
   budgetLines(where: BudgetLineWhereInput, orderBy: BudgetLineOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BudgetLine!]
   city: String!
   clientContact(where: ClientContactWhereInput): ClientContact
+  communications(where: CommunicationWhereInput, orderBy: CommunicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Communication!]
   employeeEstimations(where: EmployeeEstimationWhereInput, orderBy: EmployeeEstimationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EmployeeEstimation!]
   endTime: DateTime
   eventType(where: EventTypeWhereInput): EventType
@@ -4895,6 +4823,7 @@ type Offer implements Node {
   name: String!
   place(where: PlaceWhereInput): Place
   postalCode: String!
+  rev: String
   sectionItems(where: SectionItemWhereInput, orderBy: SectionItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SectionItem!]
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
@@ -4923,6 +4852,7 @@ input OfferCreateInput {
   minPersons: Int
   name: String!
   postalCode: String!
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
@@ -4930,6 +4860,7 @@ input OfferCreateInput {
   event: EventCreateOneWithoutOfferInput
   budgetLines: BudgetLineCreateManyWithoutOfferInput
   clientContact: ClientContactCreateOneWithoutOffersInput
+  communications: CommunicationCreateManyWithoutOfferInput
   employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
   eventType: EventTypeCreateOneWithoutOffersInput
   place: PlaceCreateOneWithoutOfferInput
@@ -4951,13 +4882,13 @@ input OfferCreateManyWithoutEventTypeInput {
   connect: [OfferWhereUniqueInput!]
 }
 
-input OfferCreateOneInput {
-  create: OfferCreateInput
+input OfferCreateOneWithoutBudgetLinesInput {
+  create: OfferCreateWithoutBudgetLinesInput
   connect: OfferWhereUniqueInput
 }
 
-input OfferCreateOneWithoutBudgetLinesInput {
-  create: OfferCreateWithoutBudgetLinesInput
+input OfferCreateOneWithoutCommunicationsInput {
+  create: OfferCreateWithoutCommunicationsInput
   connect: OfferWhereUniqueInput
 }
 
@@ -4993,12 +4924,14 @@ input OfferCreateWithoutBudgetLinesInput {
   minPersons: Int
   name: String!
   postalCode: String!
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
   client: ClientCreateOneWithoutOffersInput
   event: EventCreateOneWithoutOfferInput
   clientContact: ClientContactCreateOneWithoutOffersInput
+  communications: CommunicationCreateManyWithoutOfferInput
   employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
   eventType: EventTypeCreateOneWithoutOffersInput
   place: PlaceCreateOneWithoutOfferInput
@@ -5017,12 +4950,14 @@ input OfferCreateWithoutClientContactInput {
   minPersons: Int
   name: String!
   postalCode: String!
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
   client: ClientCreateOneWithoutOffersInput
   event: EventCreateOneWithoutOfferInput
   budgetLines: BudgetLineCreateManyWithoutOfferInput
+  communications: CommunicationCreateManyWithoutOfferInput
   employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
   eventType: EventTypeCreateOneWithoutOffersInput
   place: PlaceCreateOneWithoutOfferInput
@@ -5041,9 +4976,37 @@ input OfferCreateWithoutClientInput {
   minPersons: Int
   name: String!
   postalCode: String!
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
+  event: EventCreateOneWithoutOfferInput
+  budgetLines: BudgetLineCreateManyWithoutOfferInput
+  clientContact: ClientContactCreateOneWithoutOffersInput
+  communications: CommunicationCreateManyWithoutOfferInput
+  employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
+  eventType: EventTypeCreateOneWithoutOffersInput
+  place: PlaceCreateOneWithoutOfferInput
+  sectionItems: SectionItemCreateManyWithoutOfferInput
+}
+
+input OfferCreateWithoutCommunicationsInput {
+  customMessage: String
+  status: StatusOffer
+  language: LanguageEnum
+  address: String!
+  city: String!
+  endTime: DateTime
+  gmtOffset: String!
+  maxPersons: Int
+  minPersons: Int
+  name: String!
+  postalCode: String!
+  rev: String
+  showTotalBudgetsPdf: Boolean
+  startTime: DateTime
+  version: Int
+  client: ClientCreateOneWithoutOffersInput
   event: EventCreateOneWithoutOfferInput
   budgetLines: BudgetLineCreateManyWithoutOfferInput
   clientContact: ClientContactCreateOneWithoutOffersInput
@@ -5065,6 +5028,7 @@ input OfferCreateWithoutEmployeeEstimationsInput {
   minPersons: Int
   name: String!
   postalCode: String!
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
@@ -5072,6 +5036,7 @@ input OfferCreateWithoutEmployeeEstimationsInput {
   event: EventCreateOneWithoutOfferInput
   budgetLines: BudgetLineCreateManyWithoutOfferInput
   clientContact: ClientContactCreateOneWithoutOffersInput
+  communications: CommunicationCreateManyWithoutOfferInput
   eventType: EventTypeCreateOneWithoutOffersInput
   place: PlaceCreateOneWithoutOfferInput
   sectionItems: SectionItemCreateManyWithoutOfferInput
@@ -5089,12 +5054,14 @@ input OfferCreateWithoutEventInput {
   minPersons: Int
   name: String!
   postalCode: String!
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
   client: ClientCreateOneWithoutOffersInput
   budgetLines: BudgetLineCreateManyWithoutOfferInput
   clientContact: ClientContactCreateOneWithoutOffersInput
+  communications: CommunicationCreateManyWithoutOfferInput
   employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
   eventType: EventTypeCreateOneWithoutOffersInput
   place: PlaceCreateOneWithoutOfferInput
@@ -5113,6 +5080,7 @@ input OfferCreateWithoutEventTypeInput {
   minPersons: Int
   name: String!
   postalCode: String!
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
@@ -5120,6 +5088,7 @@ input OfferCreateWithoutEventTypeInput {
   event: EventCreateOneWithoutOfferInput
   budgetLines: BudgetLineCreateManyWithoutOfferInput
   clientContact: ClientContactCreateOneWithoutOffersInput
+  communications: CommunicationCreateManyWithoutOfferInput
   employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
   place: PlaceCreateOneWithoutOfferInput
   sectionItems: SectionItemCreateManyWithoutOfferInput
@@ -5137,6 +5106,7 @@ input OfferCreateWithoutPlaceInput {
   minPersons: Int
   name: String!
   postalCode: String!
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
@@ -5144,6 +5114,7 @@ input OfferCreateWithoutPlaceInput {
   event: EventCreateOneWithoutOfferInput
   budgetLines: BudgetLineCreateManyWithoutOfferInput
   clientContact: ClientContactCreateOneWithoutOffersInput
+  communications: CommunicationCreateManyWithoutOfferInput
   employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
   eventType: EventTypeCreateOneWithoutOffersInput
   sectionItems: SectionItemCreateManyWithoutOfferInput
@@ -5161,6 +5132,7 @@ input OfferCreateWithoutSectionItemsInput {
   minPersons: Int
   name: String!
   postalCode: String!
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
@@ -5168,6 +5140,7 @@ input OfferCreateWithoutSectionItemsInput {
   event: EventCreateOneWithoutOfferInput
   budgetLines: BudgetLineCreateManyWithoutOfferInput
   clientContact: ClientContactCreateOneWithoutOffersInput
+  communications: CommunicationCreateManyWithoutOfferInput
   employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
   eventType: EventTypeCreateOneWithoutOffersInput
   place: PlaceCreateOneWithoutOfferInput
@@ -5209,6 +5182,8 @@ enum OfferOrderByInput {
   name_DESC
   postalCode_ASC
   postalCode_DESC
+  rev_ASC
+  rev_DESC
   showTotalBudgetsPdf_ASC
   showTotalBudgetsPdf_DESC
   startTime_ASC
@@ -5233,6 +5208,7 @@ type OfferPreviousValues {
   minPersons: Int
   name: String!
   postalCode: String!
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
@@ -5277,31 +5253,6 @@ input OfferSubscriptionWhereInput {
   node: OfferWhereInput
 }
 
-input OfferUpdateDataInput {
-  customMessage: String
-  status: StatusOffer
-  language: LanguageEnum
-  address: String
-  city: String
-  endTime: DateTime
-  gmtOffset: String
-  maxPersons: Int
-  minPersons: Int
-  name: String
-  postalCode: String
-  showTotalBudgetsPdf: Boolean
-  startTime: DateTime
-  version: Int
-  client: ClientUpdateOneWithoutOffersInput
-  event: EventUpdateOneWithoutOfferInput
-  budgetLines: BudgetLineUpdateManyWithoutOfferInput
-  clientContact: ClientContactUpdateOneWithoutOffersInput
-  employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
-  eventType: EventTypeUpdateOneWithoutOffersInput
-  place: PlaceUpdateOneWithoutOfferInput
-  sectionItems: SectionItemUpdateManyWithoutOfferInput
-}
-
 input OfferUpdateInput {
   customMessage: String
   status: StatusOffer
@@ -5314,6 +5265,7 @@ input OfferUpdateInput {
   minPersons: Int
   name: String
   postalCode: String
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
@@ -5321,6 +5273,7 @@ input OfferUpdateInput {
   event: EventUpdateOneWithoutOfferInput
   budgetLines: BudgetLineUpdateManyWithoutOfferInput
   clientContact: ClientContactUpdateOneWithoutOffersInput
+  communications: CommunicationUpdateManyWithoutOfferInput
   employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
   eventType: EventTypeUpdateOneWithoutOffersInput
   place: PlaceUpdateOneWithoutOfferInput
@@ -5354,15 +5307,6 @@ input OfferUpdateManyWithoutEventTypeInput {
   upsert: [OfferUpsertWithWhereUniqueWithoutEventTypeInput!]
 }
 
-input OfferUpdateOneInput {
-  create: OfferCreateInput
-  connect: OfferWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: OfferUpdateDataInput
-  upsert: OfferUpsertNestedInput
-}
-
 input OfferUpdateOneWithoutBudgetLinesInput {
   create: OfferCreateWithoutBudgetLinesInput
   connect: OfferWhereUniqueInput
@@ -5370,6 +5314,15 @@ input OfferUpdateOneWithoutBudgetLinesInput {
   delete: Boolean
   update: OfferUpdateWithoutBudgetLinesDataInput
   upsert: OfferUpsertWithoutBudgetLinesInput
+}
+
+input OfferUpdateOneWithoutCommunicationsInput {
+  create: OfferCreateWithoutCommunicationsInput
+  connect: OfferWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: OfferUpdateWithoutCommunicationsDataInput
+  upsert: OfferUpsertWithoutCommunicationsInput
 }
 
 input OfferUpdateOneWithoutEmployeeEstimationsInput {
@@ -5420,12 +5373,14 @@ input OfferUpdateWithoutBudgetLinesDataInput {
   minPersons: Int
   name: String
   postalCode: String
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
   client: ClientUpdateOneWithoutOffersInput
   event: EventUpdateOneWithoutOfferInput
   clientContact: ClientContactUpdateOneWithoutOffersInput
+  communications: CommunicationUpdateManyWithoutOfferInput
   employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
   eventType: EventTypeUpdateOneWithoutOffersInput
   place: PlaceUpdateOneWithoutOfferInput
@@ -5444,12 +5399,14 @@ input OfferUpdateWithoutClientContactDataInput {
   minPersons: Int
   name: String
   postalCode: String
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
   client: ClientUpdateOneWithoutOffersInput
   event: EventUpdateOneWithoutOfferInput
   budgetLines: BudgetLineUpdateManyWithoutOfferInput
+  communications: CommunicationUpdateManyWithoutOfferInput
   employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
   eventType: EventTypeUpdateOneWithoutOffersInput
   place: PlaceUpdateOneWithoutOfferInput
@@ -5468,9 +5425,37 @@ input OfferUpdateWithoutClientDataInput {
   minPersons: Int
   name: String
   postalCode: String
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
+  event: EventUpdateOneWithoutOfferInput
+  budgetLines: BudgetLineUpdateManyWithoutOfferInput
+  clientContact: ClientContactUpdateOneWithoutOffersInput
+  communications: CommunicationUpdateManyWithoutOfferInput
+  employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
+  eventType: EventTypeUpdateOneWithoutOffersInput
+  place: PlaceUpdateOneWithoutOfferInput
+  sectionItems: SectionItemUpdateManyWithoutOfferInput
+}
+
+input OfferUpdateWithoutCommunicationsDataInput {
+  customMessage: String
+  status: StatusOffer
+  language: LanguageEnum
+  address: String
+  city: String
+  endTime: DateTime
+  gmtOffset: String
+  maxPersons: Int
+  minPersons: Int
+  name: String
+  postalCode: String
+  rev: String
+  showTotalBudgetsPdf: Boolean
+  startTime: DateTime
+  version: Int
+  client: ClientUpdateOneWithoutOffersInput
   event: EventUpdateOneWithoutOfferInput
   budgetLines: BudgetLineUpdateManyWithoutOfferInput
   clientContact: ClientContactUpdateOneWithoutOffersInput
@@ -5492,6 +5477,7 @@ input OfferUpdateWithoutEmployeeEstimationsDataInput {
   minPersons: Int
   name: String
   postalCode: String
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
@@ -5499,6 +5485,7 @@ input OfferUpdateWithoutEmployeeEstimationsDataInput {
   event: EventUpdateOneWithoutOfferInput
   budgetLines: BudgetLineUpdateManyWithoutOfferInput
   clientContact: ClientContactUpdateOneWithoutOffersInput
+  communications: CommunicationUpdateManyWithoutOfferInput
   eventType: EventTypeUpdateOneWithoutOffersInput
   place: PlaceUpdateOneWithoutOfferInput
   sectionItems: SectionItemUpdateManyWithoutOfferInput
@@ -5516,12 +5503,14 @@ input OfferUpdateWithoutEventDataInput {
   minPersons: Int
   name: String
   postalCode: String
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
   client: ClientUpdateOneWithoutOffersInput
   budgetLines: BudgetLineUpdateManyWithoutOfferInput
   clientContact: ClientContactUpdateOneWithoutOffersInput
+  communications: CommunicationUpdateManyWithoutOfferInput
   employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
   eventType: EventTypeUpdateOneWithoutOffersInput
   place: PlaceUpdateOneWithoutOfferInput
@@ -5540,6 +5529,7 @@ input OfferUpdateWithoutEventTypeDataInput {
   minPersons: Int
   name: String
   postalCode: String
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
@@ -5547,6 +5537,7 @@ input OfferUpdateWithoutEventTypeDataInput {
   event: EventUpdateOneWithoutOfferInput
   budgetLines: BudgetLineUpdateManyWithoutOfferInput
   clientContact: ClientContactUpdateOneWithoutOffersInput
+  communications: CommunicationUpdateManyWithoutOfferInput
   employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
   place: PlaceUpdateOneWithoutOfferInput
   sectionItems: SectionItemUpdateManyWithoutOfferInput
@@ -5564,6 +5555,7 @@ input OfferUpdateWithoutPlaceDataInput {
   minPersons: Int
   name: String
   postalCode: String
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
@@ -5571,6 +5563,7 @@ input OfferUpdateWithoutPlaceDataInput {
   event: EventUpdateOneWithoutOfferInput
   budgetLines: BudgetLineUpdateManyWithoutOfferInput
   clientContact: ClientContactUpdateOneWithoutOffersInput
+  communications: CommunicationUpdateManyWithoutOfferInput
   employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
   eventType: EventTypeUpdateOneWithoutOffersInput
   sectionItems: SectionItemUpdateManyWithoutOfferInput
@@ -5588,6 +5581,7 @@ input OfferUpdateWithoutSectionItemsDataInput {
   minPersons: Int
   name: String
   postalCode: String
+  rev: String
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
@@ -5595,6 +5589,7 @@ input OfferUpdateWithoutSectionItemsDataInput {
   event: EventUpdateOneWithoutOfferInput
   budgetLines: BudgetLineUpdateManyWithoutOfferInput
   clientContact: ClientContactUpdateOneWithoutOffersInput
+  communications: CommunicationUpdateManyWithoutOfferInput
   employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
   eventType: EventTypeUpdateOneWithoutOffersInput
   place: PlaceUpdateOneWithoutOfferInput
@@ -5615,14 +5610,14 @@ input OfferUpdateWithWhereUniqueWithoutEventTypeInput {
   data: OfferUpdateWithoutEventTypeDataInput!
 }
 
-input OfferUpsertNestedInput {
-  update: OfferUpdateDataInput!
-  create: OfferCreateInput!
-}
-
 input OfferUpsertWithoutBudgetLinesInput {
   update: OfferUpdateWithoutBudgetLinesDataInput!
   create: OfferCreateWithoutBudgetLinesInput!
+}
+
+input OfferUpsertWithoutCommunicationsInput {
+  update: OfferUpdateWithoutCommunicationsDataInput!
+  create: OfferCreateWithoutCommunicationsInput!
 }
 
 input OfferUpsertWithoutEmployeeEstimationsInput {
@@ -6060,6 +6055,46 @@ input OfferWhereInput {
 
   """All values not ending with the given string."""
   postalCode_not_ends_with: String
+  rev: String
+
+  """All values that are not equal to given value."""
+  rev_not: String
+
+  """All values that are contained in given list."""
+  rev_in: [String!]
+
+  """All values that are not contained in given list."""
+  rev_not_in: [String!]
+
+  """All values less than the given value."""
+  rev_lt: String
+
+  """All values less than or equal the given value."""
+  rev_lte: String
+
+  """All values greater than the given value."""
+  rev_gt: String
+
+  """All values greater than or equal the given value."""
+  rev_gte: String
+
+  """All values containing the given string."""
+  rev_contains: String
+
+  """All values not containing the given string."""
+  rev_not_contains: String
+
+  """All values starting with the given string."""
+  rev_starts_with: String
+
+  """All values not starting with the given string."""
+  rev_not_starts_with: String
+
+  """All values ending with the given string."""
+  rev_ends_with: String
+
+  """All values not ending with the given string."""
+  rev_not_ends_with: String
   showTotalBudgetsPdf: Boolean
 
   """All values that are not equal to given value."""
@@ -6114,6 +6149,9 @@ input OfferWhereInput {
   budgetLines_some: BudgetLineWhereInput
   budgetLines_none: BudgetLineWhereInput
   clientContact: ClientContactWhereInput
+  communications_every: CommunicationWhereInput
+  communications_some: CommunicationWhereInput
+  communications_none: CommunicationWhereInput
   employeeEstimations_every: EmployeeEstimationWhereInput
   employeeEstimations_some: EmployeeEstimationWhereInput
   employeeEstimations_none: EmployeeEstimationWhereInput
@@ -6978,6 +7016,8 @@ input PlaceWhereUniqueInput {
 
 type Query {
   clients(where: ClientWhereInput, orderBy: ClientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Client]!
+  communications(where: CommunicationWhereInput, orderBy: CommunicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Communication]!
+  offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer]!
   itemTranslations(where: ItemTranslationWhereInput, orderBy: ItemTranslationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ItemTranslation]!
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
@@ -6994,11 +7034,11 @@ type Query {
   sectionItems(where: SectionItemWhereInput, orderBy: SectionItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SectionItem]!
   taxes(where: TaxWhereInput, orderBy: TaxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Tax]!
   vehicles(where: VehicleWhereInput, orderBy: VehicleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vehicle]!
-  communications(where: CommunicationWhereInput, orderBy: CommunicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Communication]!
   stuffs(where: StuffWhereInput, orderBy: StuffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Stuff]!
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
-  offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer]!
   client(where: ClientWhereUniqueInput!): Client
+  communication(where: CommunicationWhereUniqueInput!): Communication
+  offer(where: OfferWhereUniqueInput!): Offer
   itemTranslation(where: ItemTranslationWhereUniqueInput!): ItemTranslation
   item(where: ItemWhereUniqueInput!): Item
   user(where: UserWhereUniqueInput!): User
@@ -7015,11 +7055,11 @@ type Query {
   sectionItem(where: SectionItemWhereUniqueInput!): SectionItem
   tax(where: TaxWhereUniqueInput!): Tax
   vehicle(where: VehicleWhereUniqueInput!): Vehicle
-  communication(where: CommunicationWhereUniqueInput!): Communication
   stuff(where: StuffWhereUniqueInput!): Stuff
   event(where: EventWhereUniqueInput!): Event
-  offer(where: OfferWhereUniqueInput!): Offer
   clientsConnection(where: ClientWhereInput, orderBy: ClientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClientConnection!
+  communicationsConnection(where: CommunicationWhereInput, orderBy: CommunicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommunicationConnection!
+  offersConnection(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OfferConnection!
   itemTranslationsConnection(where: ItemTranslationWhereInput, orderBy: ItemTranslationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemTranslationConnection!
   itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -7036,10 +7076,8 @@ type Query {
   sectionItemsConnection(where: SectionItemWhereInput, orderBy: SectionItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SectionItemConnection!
   taxesConnection(where: TaxWhereInput, orderBy: TaxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TaxConnection!
   vehiclesConnection(where: VehicleWhereInput, orderBy: VehicleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): VehicleConnection!
-  communicationsConnection(where: CommunicationWhereInput, orderBy: CommunicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommunicationConnection!
   stuffsConnection(where: StuffWhereInput, orderBy: StuffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StuffConnection!
   eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
-  offersConnection(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OfferConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -8139,6 +8177,8 @@ input StuffWhereUniqueInput {
 
 type Subscription {
   client(where: ClientSubscriptionWhereInput): ClientSubscriptionPayload
+  communication(where: CommunicationSubscriptionWhereInput): CommunicationSubscriptionPayload
+  offer(where: OfferSubscriptionWhereInput): OfferSubscriptionPayload
   itemTranslation(where: ItemTranslationSubscriptionWhereInput): ItemTranslationSubscriptionPayload
   item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
@@ -8155,10 +8195,8 @@ type Subscription {
   sectionItem(where: SectionItemSubscriptionWhereInput): SectionItemSubscriptionPayload
   tax(where: TaxSubscriptionWhereInput): TaxSubscriptionPayload
   vehicle(where: VehicleSubscriptionWhereInput): VehicleSubscriptionPayload
-  communication(where: CommunicationSubscriptionWhereInput): CommunicationSubscriptionPayload
   stuff(where: StuffSubscriptionWhereInput): StuffSubscriptionPayload
   event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
-  offer(where: OfferSubscriptionWhereInput): OfferSubscriptionPayload
 }
 
 type Tax implements Node {
@@ -9303,17 +9341,31 @@ export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDe
  * Types
 */
 
-export type ItemOrderByInput =   'id_ASC' |
-  'id_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC'
-
 export type Channel =   'Email' |
   'Phone' |
   'Call' |
   'Message'
+
+export type ClientOrderByInput =   'address_ASC' |
+  'address_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC' |
+  'email_ASC' |
+  'email_DESC' |
+  'id_ASC' |
+  'id_DESC' |
+  'name_ASC' |
+  'name_DESC' |
+  'phone_ASC' |
+  'phone_DESC' |
+  'tva_ASC' |
+  'tva_DESC' |
+  'language_ASC' |
+  'language_DESC' |
+  'type_ASC' |
+  'type_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC'
 
 export type SectionItemOrderByInput =   'content_ASC' |
   'content_DESC' |
@@ -9391,9 +9443,24 @@ export type PlaceContactOrderByInput =   'email_ASC' |
 export type ClientType =   'Prive' |
   'Societe'
 
-export type Role =   'Admin' |
-  'Freelance' |
-  'Employee'
+export type UserOrderByInput =   'createdAt_ASC' |
+  'createdAt_DESC' |
+  'id_ASC' |
+  'id_DESC' |
+  'role_ASC' |
+  'role_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'email_ASC' |
+  'email_DESC' |
+  'image_ASC' |
+  'image_DESC' |
+  'name_ASC' |
+  'name_DESC' |
+  'password_ASC' |
+  'password_DESC' |
+  'language_ASC' |
+  'language_DESC'
 
 export type PlaceOrderByInput =   'address_ASC' |
   'address_DESC' |
@@ -9414,42 +9481,6 @@ export type PlaceOrderByInput =   'address_ASC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
-export type UserOrderByInput =   'createdAt_ASC' |
-  'createdAt_DESC' |
-  'id_ASC' |
-  'id_DESC' |
-  'role_ASC' |
-  'role_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'email_ASC' |
-  'email_DESC' |
-  'image_ASC' |
-  'image_DESC' |
-  'name_ASC' |
-  'name_DESC' |
-  'password_ASC' |
-  'password_DESC' |
-  'language_ASC' |
-  'language_DESC'
-
-export type CommunicationOrderByInput =   'id_ASC' |
-  'id_DESC' |
-  'message_ASC' |
-  'message_DESC' |
-  'subject_ASC' |
-  'subject_DESC' |
-  'channel_ASC' |
-  'channel_DESC' |
-  'date_ASC' |
-  'date_DESC' |
-  'gmtOffset_ASC' |
-  'gmtOffset_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC'
-
 export type JobOrderByInput =   'id_ASC' |
   'id_DESC' |
   'name_ASC' |
@@ -9459,29 +9490,29 @@ export type JobOrderByInput =   'id_ASC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
-export type VehicleOrderByInput =   'color_ASC' |
-  'color_DESC' |
-  'description_ASC' |
-  'description_DESC' |
+export type ClientContactOrderByInput =   'email_ASC' |
+  'email_DESC' |
   'id_ASC' |
   'id_DESC' |
+  'mobilePhone_ASC' |
+  'mobilePhone_DESC' |
   'name_ASC' |
   'name_DESC' |
-  'plate_ASC' |
-  'plate_DESC' |
-  'year_ASC' |
-  'year_DESC' |
+  'phoneNumber_ASC' |
+  'phoneNumber_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
-export type Country =   'BE'
+export type Role =   'Admin' |
+  'Freelance' |
+  'Employee'
 
-export type StuffOrderByInput =   'id_ASC' |
+export type EventStuffOrderByInput =   'id_ASC' |
   'id_DESC' |
-  'name_ASC' |
-  'name_DESC' |
+  'quantity_ASC' |
+  'quantity_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
   'createdAt_ASC' |
@@ -9502,14 +9533,8 @@ export type EmployeeOrderByInput =   'endedAt_ASC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
-export type ItemTranslationOrderByInput =   'description_ASC' |
-  'description_DESC' |
-  'id_ASC' |
+export type CategoryOrderByInput =   'id_ASC' |
   'id_DESC' |
-  'internalDescription_ASC' |
-  'internalDescription_DESC' |
-  'language_ASC' |
-  'language_DESC' |
   'name_ASC' |
   'name_DESC' |
   'updatedAt_ASC' |
@@ -9534,42 +9559,41 @@ export type EmployeeEstimationOrderByInput =   'estimatedEndAt_ASC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
+export type ItemOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
+
+export type Country =   'BE'
+
 export type LanguageEnum =   'FR' |
   'NL' |
   'EN'
 
-export type SectionTypes =   'Title' |
-  'Subtitle' |
-  'Subheading' |
-  'Text' |
-  'Items'
+export type CommunicationOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'message_ASC' |
+  'message_DESC' |
+  'subject_ASC' |
+  'subject_DESC' |
+  'channel_ASC' |
+  'channel_DESC' |
+  'date_ASC' |
+  'date_DESC' |
+  'gmtOffset_ASC' |
+  'gmtOffset_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
 
 export type StatusOffer =   'Accepted' |
   'Rejected' |
   'Pending' |
   'Template' |
   'ChangedAfterAccepted'
-
-export type ClientOrderByInput =   'address_ASC' |
-  'address_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC' |
-  'email_ASC' |
-  'email_DESC' |
-  'id_ASC' |
-  'id_DESC' |
-  'name_ASC' |
-  'name_DESC' |
-  'phone_ASC' |
-  'phone_DESC' |
-  'tva_ASC' |
-  'tva_DESC' |
-  'language_ASC' |
-  'language_DESC' |
-  'type_ASC' |
-  'type_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC'
 
 export type EventOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -9594,6 +9618,12 @@ export type BudgetLineOrderByInput =   'description_ASC' |
   'updatedAt_DESC' |
   'createdAt_ASC' |
   'createdAt_DESC'
+
+export type SectionTypes =   'Title' |
+  'Subtitle' |
+  'Subheading' |
+  'Text' |
+  'Items'
 
 export type OfferOrderByInput =   'createdAt_ASC' |
   'createdAt_DESC' |
@@ -9621,6 +9651,8 @@ export type OfferOrderByInput =   'createdAt_ASC' |
   'name_DESC' |
   'postalCode_ASC' |
   'postalCode_DESC' |
+  'rev_ASC' |
+  'rev_DESC' |
   'showTotalBudgetsPdf_ASC' |
   'showTotalBudgetsPdf_DESC' |
   'startTime_ASC' |
@@ -9630,16 +9662,18 @@ export type OfferOrderByInput =   'createdAt_ASC' |
   'updatedAt_ASC' |
   'updatedAt_DESC'
 
-export type ClientContactOrderByInput =   'email_ASC' |
-  'email_DESC' |
+export type VehicleOrderByInput =   'color_ASC' |
+  'color_DESC' |
+  'description_ASC' |
+  'description_DESC' |
   'id_ASC' |
   'id_DESC' |
-  'mobilePhone_ASC' |
-  'mobilePhone_DESC' |
   'name_ASC' |
   'name_DESC' |
-  'phoneNumber_ASC' |
-  'phoneNumber_DESC' |
+  'plate_ASC' |
+  'plate_DESC' |
+  'year_ASC' |
+  'year_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
   'createdAt_ASC' |
@@ -9658,7 +9692,22 @@ export type MutationType =   'CREATED' |
   'UPDATED' |
   'DELETED'
 
-export type CategoryOrderByInput =   'id_ASC' |
+export type ItemTranslationOrderByInput =   'description_ASC' |
+  'description_DESC' |
+  'id_ASC' |
+  'id_DESC' |
+  'internalDescription_ASC' |
+  'internalDescription_DESC' |
+  'language_ASC' |
+  'language_DESC' |
+  'name_ASC' |
+  'name_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
+
+export type StuffOrderByInput =   'id_ASC' |
   'id_DESC' |
   'name_ASC' |
   'name_DESC' |
@@ -9667,21 +9716,11 @@ export type CategoryOrderByInput =   'id_ASC' |
   'createdAt_ASC' |
   'createdAt_DESC'
 
-export type EventStuffOrderByInput =   'id_ASC' |
-  'id_DESC' |
-  'quantity_ASC' |
-  'quantity_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC'
-
-export interface PlaceContactCreateInput {
-  email?: String
-  mobilePhone?: String
+export interface JobCreateInput {
   name: String
-  phoneNumber?: String
-  place?: PlaceCreateOneWithoutPlaceContactsInput
+  employeeEstimations?: EmployeeEstimationCreateManyWithoutJobInput
+  employees?: EmployeeCreateManyWithoutJobInput
+  users?: UserCreateManyWithoutJobsInput
 }
 
 export interface ClientWhereInput {
@@ -9797,18 +9836,78 @@ export interface ClientWhereInput {
   clientContacts_every?: ClientContactWhereInput
   clientContacts_some?: ClientContactWhereInput
   clientContacts_none?: ClientContactWhereInput
-  communications_every?: CommunicationWhereInput
-  communications_some?: CommunicationWhereInput
-  communications_none?: CommunicationWhereInput
 }
 
-export interface ClientUpdateOneWithoutOffersInput {
-  create?: ClientCreateWithoutOffersInput
-  connect?: ClientWhereUniqueInput
+export interface OfferUpdateOneWithoutEventInput {
+  create?: OfferCreateWithoutEventInput
+  connect?: OfferWhereUniqueInput
   disconnect?: Boolean
   delete?: Boolean
-  update?: ClientUpdateWithoutOffersDataInput
-  upsert?: ClientUpsertWithoutOffersInput
+  update?: OfferUpdateWithoutEventDataInput
+  upsert?: OfferUpsertWithoutEventInput
+}
+
+export interface StuffWhereInput {
+  AND?: StuffWhereInput[] | StuffWhereInput
+  OR?: StuffWhereInput[] | StuffWhereInput
+  NOT?: StuffWhereInput[] | StuffWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  name?: String
+  name_not?: String
+  name_in?: String[] | String
+  name_not_in?: String[] | String
+  name_lt?: String
+  name_lte?: String
+  name_gt?: String
+  name_gte?: String
+  name_contains?: String
+  name_not_contains?: String
+  name_starts_with?: String
+  name_not_starts_with?: String
+  name_ends_with?: String
+  name_not_ends_with?: String
+  eventStuffs_every?: EventStuffWhereInput
+  eventStuffs_some?: EventStuffWhereInput
+  eventStuffs_none?: EventStuffWhereInput
+}
+
+export interface OfferUpdateWithoutEventDataInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address?: String
+  city?: String
+  endTime?: DateTime
+  gmtOffset?: String
+  maxPersons?: Int
+  minPersons?: Int
+  name?: String
+  postalCode?: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  client?: ClientUpdateOneWithoutOffersInput
+  budgetLines?: BudgetLineUpdateManyWithoutOfferInput
+  clientContact?: ClientContactUpdateOneWithoutOffersInput
+  communications?: CommunicationUpdateManyWithoutOfferInput
+  employeeEstimations?: EmployeeEstimationUpdateManyWithoutOfferInput
+  eventType?: EventTypeUpdateOneWithoutOffersInput
+  place?: PlaceUpdateOneWithoutOfferInput
+  sectionItems?: SectionItemUpdateManyWithoutOfferInput
 }
 
 export interface VehicleWhereInput {
@@ -9898,207 +9997,58 @@ export interface VehicleWhereInput {
   events_none?: EventWhereInput
 }
 
-export interface ClientUpdateWithoutOffersDataInput {
-  address?: String
-  email?: String
-  name?: String
-  phone?: String
-  tva?: String
+export interface UserCreateManyWithoutJobsInput {
+  create?: UserCreateWithoutJobsInput[] | UserCreateWithoutJobsInput
+  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
+}
+
+export interface JobUpsertWithoutEmployeesInput {
+  update: JobUpdateWithoutEmployeesDataInput
+  create: JobCreateWithoutEmployeesInput
+}
+
+export interface UserCreateWithoutJobsInput {
+  role: Role
+  email: String
+  image?: String
+  name: String
+  password: String
   language?: LanguageEnum
-  type?: ClientType
-  events?: EventUpdateManyWithoutClientInput
-  clientContacts?: ClientContactUpdateManyWithoutClientInput
-  communications?: CommunicationUpdateManyInput
+  employee?: EmployeeCreateOneWithoutUserInput
 }
 
-export interface EventStuffWhereInput {
-  AND?: EventStuffWhereInput[] | EventStuffWhereInput
-  OR?: EventStuffWhereInput[] | EventStuffWhereInput
-  NOT?: EventStuffWhereInput[] | EventStuffWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  quantity?: Int
-  quantity_not?: Int
-  quantity_in?: Int[] | Int
-  quantity_not_in?: Int[] | Int
-  quantity_lt?: Int
-  quantity_lte?: Int
-  quantity_gt?: Int
-  quantity_gte?: Int
-  event?: EventWhereInput
-  stuff?: StuffWhereInput
+export interface ClientUpdateOneWithoutOffersInput {
+  create?: ClientCreateWithoutOffersInput
+  connect?: ClientWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: ClientUpdateWithoutOffersDataInput
+  upsert?: ClientUpsertWithoutOffersInput
 }
 
-export interface PlaceCreateWithoutOfferInput {
-  address: String
-  city: String
-  name: String
-  postalCode: String
-  country?: Country
-  note?: String
-  placeContacts?: PlaceContactCreateManyWithoutPlaceInput
+export interface EmployeeCreateOneWithoutUserInput {
+  create?: EmployeeCreateWithoutUserInput
+  connect?: EmployeeWhereUniqueInput
 }
 
-export interface CommunicationUpsertWithWhereUniqueNestedInput {
-  where: CommunicationWhereUniqueInput
-  update: CommunicationUpdateDataInput
-  create: CommunicationCreateInput
-}
-
-export interface PlaceContactCreateManyWithoutPlaceInput {
-  create?: PlaceContactCreateWithoutPlaceInput[] | PlaceContactCreateWithoutPlaceInput
-  connect?: PlaceContactWhereUniqueInput[] | PlaceContactWhereUniqueInput
-}
-
-export interface ClientContactUpdateManyWithoutClientInput {
-  create?: ClientContactCreateWithoutClientInput[] | ClientContactCreateWithoutClientInput
-  connect?: ClientContactWhereUniqueInput[] | ClientContactWhereUniqueInput
-  disconnect?: ClientContactWhereUniqueInput[] | ClientContactWhereUniqueInput
-  delete?: ClientContactWhereUniqueInput[] | ClientContactWhereUniqueInput
-  update?: ClientContactUpdateWithWhereUniqueWithoutClientInput[] | ClientContactUpdateWithWhereUniqueWithoutClientInput
-  upsert?: ClientContactUpsertWithWhereUniqueWithoutClientInput[] | ClientContactUpsertWithWhereUniqueWithoutClientInput
-}
-
-export interface PlaceContactCreateWithoutPlaceInput {
-  email?: String
-  mobilePhone?: String
-  name: String
-  phoneNumber?: String
-}
-
-export interface OfferSubscriptionWhereInput {
-  AND?: OfferSubscriptionWhereInput[] | OfferSubscriptionWhereInput
-  OR?: OfferSubscriptionWhereInput[] | OfferSubscriptionWhereInput
-  NOT?: OfferSubscriptionWhereInput[] | OfferSubscriptionWhereInput
+export interface EventSubscriptionWhereInput {
+  AND?: EventSubscriptionWhereInput[] | EventSubscriptionWhereInput
+  OR?: EventSubscriptionWhereInput[] | EventSubscriptionWhereInput
+  NOT?: EventSubscriptionWhereInput[] | EventSubscriptionWhereInput
   mutation_in?: MutationType[] | MutationType
   updatedFields_contains?: String
   updatedFields_contains_every?: String[] | String
   updatedFields_contains_some?: String[] | String
-  node?: OfferWhereInput
+  node?: EventWhereInput
 }
 
-export interface SectionItemCreateManyWithoutOfferInput {
-  create?: SectionItemCreateWithoutOfferInput[] | SectionItemCreateWithoutOfferInput
-  connect?: SectionItemWhereUniqueInput[] | SectionItemWhereUniqueInput
-}
-
-export interface ItemTranslationWhereInput {
-  AND?: ItemTranslationWhereInput[] | ItemTranslationWhereInput
-  OR?: ItemTranslationWhereInput[] | ItemTranslationWhereInput
-  NOT?: ItemTranslationWhereInput[] | ItemTranslationWhereInput
-  description?: String
-  description_not?: String
-  description_in?: String[] | String
-  description_not_in?: String[] | String
-  description_lt?: String
-  description_lte?: String
-  description_gt?: String
-  description_gte?: String
-  description_contains?: String
-  description_not_contains?: String
-  description_starts_with?: String
-  description_not_starts_with?: String
-  description_ends_with?: String
-  description_not_ends_with?: String
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  internalDescription?: String
-  internalDescription_not?: String
-  internalDescription_in?: String[] | String
-  internalDescription_not_in?: String[] | String
-  internalDescription_lt?: String
-  internalDescription_lte?: String
-  internalDescription_gt?: String
-  internalDescription_gte?: String
-  internalDescription_contains?: String
-  internalDescription_not_contains?: String
-  internalDescription_starts_with?: String
-  internalDescription_not_starts_with?: String
-  internalDescription_ends_with?: String
-  internalDescription_not_ends_with?: String
-  language?: LanguageEnum
-  language_not?: LanguageEnum
-  language_in?: LanguageEnum[] | LanguageEnum
-  language_not_in?: LanguageEnum[] | LanguageEnum
-  name?: String
-  name_not?: String
-  name_in?: String[] | String
-  name_not_in?: String[] | String
-  name_lt?: String
-  name_lte?: String
-  name_gt?: String
-  name_gte?: String
-  name_contains?: String
-  name_not_contains?: String
-  name_starts_with?: String
-  name_not_starts_with?: String
-  name_ends_with?: String
-  name_not_ends_with?: String
-  items?: ItemWhereInput
-}
-
-export interface SectionItemCreateWithoutOfferInput {
-  content?: String
-  endTime?: DateTime
-  h: Int
-  i: String
-  isDraggable?: Boolean
-  isResizable?: Boolean
-  maxH?: Int
-  maxW?: Int
-  minH?: Int
-  minW?: Int
-  moved?: Boolean
-  persons?: Int
-  price?: Float
-  static?: Boolean
-  startTime?: DateTime
-  title?: String
-  type?: SectionTypes
-  w: Int
-  x: Int
-  y?: Int
-  items?: ItemCreateManyWithoutSectionItemsInput
-}
-
-export interface CommunicationSubscriptionWhereInput {
-  AND?: CommunicationSubscriptionWhereInput[] | CommunicationSubscriptionWhereInput
-  OR?: CommunicationSubscriptionWhereInput[] | CommunicationSubscriptionWhereInput
-  NOT?: CommunicationSubscriptionWhereInput[] | CommunicationSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: CommunicationWhereInput
-}
-
-export interface ItemCreateManyWithoutSectionItemsInput {
-  create?: ItemCreateWithoutSectionItemsInput[] | ItemCreateWithoutSectionItemsInput
-  connect?: ItemWhereUniqueInput[] | ItemWhereUniqueInput
+export interface EmployeeCreateWithoutUserInput {
+  endedAt?: DateTime
+  estimatedEndAt: DateTime
+  estimatedStartAt: DateTime
+  startedAt?: DateTime
+  event?: EventCreateOneWithoutEmployeesInput
+  job?: JobCreateOneWithoutEmployeesInput
 }
 
 export interface ItemWhereInput {
@@ -10119,9 +10069,9 @@ export interface ItemWhereInput {
   id_not_starts_with?: ID_Input
   id_ends_with?: ID_Input
   id_not_ends_with?: ID_Input
-  platTranslations_every?: ItemTranslationWhereInput
-  platTranslations_some?: ItemTranslationWhereInput
-  platTranslations_none?: ItemTranslationWhereInput
+  itemTranslations_every?: ItemTranslationWhereInput
+  itemTranslations_some?: ItemTranslationWhereInput
+  itemTranslations_none?: ItemTranslationWhereInput
   categories_every?: CategoryWhereInput
   categories_some?: CategoryWhereInput
   categories_none?: CategoryWhereInput
@@ -10130,9 +10080,9 @@ export interface ItemWhereInput {
   sectionItems_none?: SectionItemWhereInput
 }
 
-export interface ItemCreateWithoutSectionItemsInput {
-  platTranslations?: ItemTranslationCreateManyWithoutItemsInput
-  categories?: CategoryCreateManyWithoutItemsInput
+export interface EventTypeCreateOneWithoutOffersInput {
+  create?: EventTypeCreateWithoutOffersInput
+  connect?: EventTypeWhereUniqueInput
 }
 
 export interface TaxSubscriptionWhereInput {
@@ -10146,1957 +10096,8 @@ export interface TaxSubscriptionWhereInput {
   node?: TaxWhereInput
 }
 
-export interface ItemTranslationCreateManyWithoutItemsInput {
-  create?: ItemTranslationCreateWithoutItemsInput[] | ItemTranslationCreateWithoutItemsInput
-  connect?: ItemTranslationWhereUniqueInput[] | ItemTranslationWhereUniqueInput
-}
-
-export interface PlaceContactWhereInput {
-  AND?: PlaceContactWhereInput[] | PlaceContactWhereInput
-  OR?: PlaceContactWhereInput[] | PlaceContactWhereInput
-  NOT?: PlaceContactWhereInput[] | PlaceContactWhereInput
-  email?: String
-  email_not?: String
-  email_in?: String[] | String
-  email_not_in?: String[] | String
-  email_lt?: String
-  email_lte?: String
-  email_gt?: String
-  email_gte?: String
-  email_contains?: String
-  email_not_contains?: String
-  email_starts_with?: String
-  email_not_starts_with?: String
-  email_ends_with?: String
-  email_not_ends_with?: String
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  mobilePhone?: String
-  mobilePhone_not?: String
-  mobilePhone_in?: String[] | String
-  mobilePhone_not_in?: String[] | String
-  mobilePhone_lt?: String
-  mobilePhone_lte?: String
-  mobilePhone_gt?: String
-  mobilePhone_gte?: String
-  mobilePhone_contains?: String
-  mobilePhone_not_contains?: String
-  mobilePhone_starts_with?: String
-  mobilePhone_not_starts_with?: String
-  mobilePhone_ends_with?: String
-  mobilePhone_not_ends_with?: String
-  name?: String
-  name_not?: String
-  name_in?: String[] | String
-  name_not_in?: String[] | String
-  name_lt?: String
-  name_lte?: String
-  name_gt?: String
-  name_gte?: String
-  name_contains?: String
-  name_not_contains?: String
-  name_starts_with?: String
-  name_not_starts_with?: String
-  name_ends_with?: String
-  name_not_ends_with?: String
-  phoneNumber?: String
-  phoneNumber_not?: String
-  phoneNumber_in?: String[] | String
-  phoneNumber_not_in?: String[] | String
-  phoneNumber_lt?: String
-  phoneNumber_lte?: String
-  phoneNumber_gt?: String
-  phoneNumber_gte?: String
-  phoneNumber_contains?: String
-  phoneNumber_not_contains?: String
-  phoneNumber_starts_with?: String
-  phoneNumber_not_starts_with?: String
-  phoneNumber_ends_with?: String
-  phoneNumber_not_ends_with?: String
-  place?: PlaceWhereInput
-}
-
-export interface ItemTranslationCreateWithoutItemsInput {
-  description?: String
-  internalDescription?: String
-  language: LanguageEnum
-  name?: String
-}
-
-export interface JobSubscriptionWhereInput {
-  AND?: JobSubscriptionWhereInput[] | JobSubscriptionWhereInput
-  OR?: JobSubscriptionWhereInput[] | JobSubscriptionWhereInput
-  NOT?: JobSubscriptionWhereInput[] | JobSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: JobWhereInput
-}
-
-export interface CategoryCreateManyWithoutItemsInput {
-  create?: CategoryCreateWithoutItemsInput[] | CategoryCreateWithoutItemsInput
-  connect?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
-}
-
-export interface EventTypeWhereInput {
-  AND?: EventTypeWhereInput[] | EventTypeWhereInput
-  OR?: EventTypeWhereInput[] | EventTypeWhereInput
-  NOT?: EventTypeWhereInput[] | EventTypeWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  name?: String
-  name_not?: String
-  name_in?: String[] | String
-  name_not_in?: String[] | String
-  name_lt?: String
-  name_lte?: String
-  name_gt?: String
-  name_gte?: String
-  name_contains?: String
-  name_not_contains?: String
-  name_starts_with?: String
-  name_not_starts_with?: String
-  name_ends_with?: String
-  name_not_ends_with?: String
-  offers_every?: OfferWhereInput
-  offers_some?: OfferWhereInput
-  offers_none?: OfferWhereInput
-}
-
-export interface CategoryCreateWithoutItemsInput {
-  name: String
-}
-
-export interface EventStuffSubscriptionWhereInput {
-  AND?: EventStuffSubscriptionWhereInput[] | EventStuffSubscriptionWhereInput
-  OR?: EventStuffSubscriptionWhereInput[] | EventStuffSubscriptionWhereInput
-  NOT?: EventStuffSubscriptionWhereInput[] | EventStuffSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: EventStuffWhereInput
-}
-
-export interface UserCreateManyWithoutJobsInput {
-  create?: UserCreateWithoutJobsInput[] | UserCreateWithoutJobsInput
-  connect?: UserWhereUniqueInput[] | UserWhereUniqueInput
-}
-
-export interface EmployeeEstimationSubscriptionWhereInput {
-  AND?: EmployeeEstimationSubscriptionWhereInput[] | EmployeeEstimationSubscriptionWhereInput
-  OR?: EmployeeEstimationSubscriptionWhereInput[] | EmployeeEstimationSubscriptionWhereInput
-  NOT?: EmployeeEstimationSubscriptionWhereInput[] | EmployeeEstimationSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: EmployeeEstimationWhereInput
-}
-
-export interface UserCreateWithoutJobsInput {
-  role: Role
-  email: String
-  image?: String
-  name: String
-  password: String
-  language?: LanguageEnum
-  employee?: EmployeeCreateOneWithoutUserInput
-}
-
-export interface EmployeeSubscriptionWhereInput {
-  AND?: EmployeeSubscriptionWhereInput[] | EmployeeSubscriptionWhereInput
-  OR?: EmployeeSubscriptionWhereInput[] | EmployeeSubscriptionWhereInput
-  NOT?: EmployeeSubscriptionWhereInput[] | EmployeeSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: EmployeeWhereInput
-}
-
-export interface EmployeeCreateOneWithoutUserInput {
-  create?: EmployeeCreateWithoutUserInput
-  connect?: EmployeeWhereUniqueInput
-}
-
-export interface CategorySubscriptionWhereInput {
-  AND?: CategorySubscriptionWhereInput[] | CategorySubscriptionWhereInput
-  OR?: CategorySubscriptionWhereInput[] | CategorySubscriptionWhereInput
-  NOT?: CategorySubscriptionWhereInput[] | CategorySubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: CategoryWhereInput
-}
-
-export interface EmployeeCreateWithoutUserInput {
-  endedAt?: DateTime
-  estimatedEndAt: DateTime
-  estimatedStartAt: DateTime
-  startedAt?: DateTime
-  event?: EventCreateOneWithoutEmployeesInput
-  job?: JobCreateOneWithoutEmployeesInput
-}
-
-export interface BudgetLineSubscriptionWhereInput {
-  AND?: BudgetLineSubscriptionWhereInput[] | BudgetLineSubscriptionWhereInput
-  OR?: BudgetLineSubscriptionWhereInput[] | BudgetLineSubscriptionWhereInput
-  NOT?: BudgetLineSubscriptionWhereInput[] | BudgetLineSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: BudgetLineWhereInput
-}
-
-export interface UserCreateOneWithoutEmployeeInput {
-  create?: UserCreateWithoutEmployeeInput
-  connect?: UserWhereUniqueInput
-}
-
-export interface PlaceSubscriptionWhereInput {
-  AND?: PlaceSubscriptionWhereInput[] | PlaceSubscriptionWhereInput
-  OR?: PlaceSubscriptionWhereInput[] | PlaceSubscriptionWhereInput
-  NOT?: PlaceSubscriptionWhereInput[] | PlaceSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: PlaceWhereInput
-}
-
-export interface UserCreateWithoutEmployeeInput {
-  role: Role
-  email: String
-  image?: String
-  name: String
-  password: String
-  language?: LanguageEnum
-  jobs?: JobCreateManyWithoutUsersInput
-}
-
-export interface ClientContactSubscriptionWhereInput {
-  AND?: ClientContactSubscriptionWhereInput[] | ClientContactSubscriptionWhereInput
-  OR?: ClientContactSubscriptionWhereInput[] | ClientContactSubscriptionWhereInput
-  NOT?: ClientContactSubscriptionWhereInput[] | ClientContactSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: ClientContactWhereInput
-}
-
-export interface JobCreateManyWithoutUsersInput {
-  create?: JobCreateWithoutUsersInput[] | JobCreateWithoutUsersInput
-  connect?: JobWhereUniqueInput[] | JobWhereUniqueInput
-}
-
-export interface ItemSubscriptionWhereInput {
-  AND?: ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput
-  OR?: ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput
-  NOT?: ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: ItemWhereInput
-}
-
-export interface JobCreateWithoutUsersInput {
-  name: String
-  employeeEstimations?: EmployeeEstimationCreateManyWithoutJobInput
-  employees?: EmployeeCreateManyWithoutJobInput
-}
-
-export interface ItemTranslationSubscriptionWhereInput {
-  AND?: ItemTranslationSubscriptionWhereInput[] | ItemTranslationSubscriptionWhereInput
-  OR?: ItemTranslationSubscriptionWhereInput[] | ItemTranslationSubscriptionWhereInput
-  NOT?: ItemTranslationSubscriptionWhereInput[] | ItemTranslationSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: ItemTranslationWhereInput
-}
-
-export interface VehicleCreateManyWithoutEventsInput {
-  create?: VehicleCreateWithoutEventsInput[] | VehicleCreateWithoutEventsInput
-  connect?: VehicleWhereUniqueInput[] | VehicleWhereUniqueInput
-}
-
-export interface OfferUpdateInput {
-  customMessage?: String
-  status?: StatusOffer
-  language?: LanguageEnum
-  address?: String
-  city?: String
-  endTime?: DateTime
-  gmtOffset?: String
-  maxPersons?: Int
-  minPersons?: Int
-  name?: String
-  postalCode?: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  client?: ClientUpdateOneWithoutOffersInput
-  event?: EventUpdateOneWithoutOfferInput
-  budgetLines?: BudgetLineUpdateManyWithoutOfferInput
-  clientContact?: ClientContactUpdateOneWithoutOffersInput
-  employeeEstimations?: EmployeeEstimationUpdateManyWithoutOfferInput
-  eventType?: EventTypeUpdateOneWithoutOffersInput
-  place?: PlaceUpdateOneWithoutOfferInput
-  sectionItems?: SectionItemUpdateManyWithoutOfferInput
-}
-
-export interface VehicleCreateWithoutEventsInput {
-  color?: String
-  description?: String
-  name: String
-  plate: String
-  year?: Int
-}
-
-export interface OfferWhereInput {
-  AND?: OfferWhereInput[] | OfferWhereInput
-  OR?: OfferWhereInput[] | OfferWhereInput
-  NOT?: OfferWhereInput[] | OfferWhereInput
-  createdAt?: DateTime
-  createdAt_not?: DateTime
-  createdAt_in?: DateTime[] | DateTime
-  createdAt_not_in?: DateTime[] | DateTime
-  createdAt_lt?: DateTime
-  createdAt_lte?: DateTime
-  createdAt_gt?: DateTime
-  createdAt_gte?: DateTime
-  customMessage?: String
-  customMessage_not?: String
-  customMessage_in?: String[] | String
-  customMessage_not_in?: String[] | String
-  customMessage_lt?: String
-  customMessage_lte?: String
-  customMessage_gt?: String
-  customMessage_gte?: String
-  customMessage_contains?: String
-  customMessage_not_contains?: String
-  customMessage_starts_with?: String
-  customMessage_not_starts_with?: String
-  customMessage_ends_with?: String
-  customMessage_not_ends_with?: String
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  status?: StatusOffer
-  status_not?: StatusOffer
-  status_in?: StatusOffer[] | StatusOffer
-  status_not_in?: StatusOffer[] | StatusOffer
-  language?: LanguageEnum
-  language_not?: LanguageEnum
-  language_in?: LanguageEnum[] | LanguageEnum
-  language_not_in?: LanguageEnum[] | LanguageEnum
-  address?: String
-  address_not?: String
-  address_in?: String[] | String
-  address_not_in?: String[] | String
-  address_lt?: String
-  address_lte?: String
-  address_gt?: String
-  address_gte?: String
-  address_contains?: String
-  address_not_contains?: String
-  address_starts_with?: String
-  address_not_starts_with?: String
-  address_ends_with?: String
-  address_not_ends_with?: String
-  city?: String
-  city_not?: String
-  city_in?: String[] | String
-  city_not_in?: String[] | String
-  city_lt?: String
-  city_lte?: String
-  city_gt?: String
-  city_gte?: String
-  city_contains?: String
-  city_not_contains?: String
-  city_starts_with?: String
-  city_not_starts_with?: String
-  city_ends_with?: String
-  city_not_ends_with?: String
-  endTime?: DateTime
-  endTime_not?: DateTime
-  endTime_in?: DateTime[] | DateTime
-  endTime_not_in?: DateTime[] | DateTime
-  endTime_lt?: DateTime
-  endTime_lte?: DateTime
-  endTime_gt?: DateTime
-  endTime_gte?: DateTime
-  gmtOffset?: String
-  gmtOffset_not?: String
-  gmtOffset_in?: String[] | String
-  gmtOffset_not_in?: String[] | String
-  gmtOffset_lt?: String
-  gmtOffset_lte?: String
-  gmtOffset_gt?: String
-  gmtOffset_gte?: String
-  gmtOffset_contains?: String
-  gmtOffset_not_contains?: String
-  gmtOffset_starts_with?: String
-  gmtOffset_not_starts_with?: String
-  gmtOffset_ends_with?: String
-  gmtOffset_not_ends_with?: String
-  maxPersons?: Int
-  maxPersons_not?: Int
-  maxPersons_in?: Int[] | Int
-  maxPersons_not_in?: Int[] | Int
-  maxPersons_lt?: Int
-  maxPersons_lte?: Int
-  maxPersons_gt?: Int
-  maxPersons_gte?: Int
-  minPersons?: Int
-  minPersons_not?: Int
-  minPersons_in?: Int[] | Int
-  minPersons_not_in?: Int[] | Int
-  minPersons_lt?: Int
-  minPersons_lte?: Int
-  minPersons_gt?: Int
-  minPersons_gte?: Int
-  name?: String
-  name_not?: String
-  name_in?: String[] | String
-  name_not_in?: String[] | String
-  name_lt?: String
-  name_lte?: String
-  name_gt?: String
-  name_gte?: String
-  name_contains?: String
-  name_not_contains?: String
-  name_starts_with?: String
-  name_not_starts_with?: String
-  name_ends_with?: String
-  name_not_ends_with?: String
-  postalCode?: String
-  postalCode_not?: String
-  postalCode_in?: String[] | String
-  postalCode_not_in?: String[] | String
-  postalCode_lt?: String
-  postalCode_lte?: String
-  postalCode_gt?: String
-  postalCode_gte?: String
-  postalCode_contains?: String
-  postalCode_not_contains?: String
-  postalCode_starts_with?: String
-  postalCode_not_starts_with?: String
-  postalCode_ends_with?: String
-  postalCode_not_ends_with?: String
-  showTotalBudgetsPdf?: Boolean
-  showTotalBudgetsPdf_not?: Boolean
-  startTime?: DateTime
-  startTime_not?: DateTime
-  startTime_in?: DateTime[] | DateTime
-  startTime_not_in?: DateTime[] | DateTime
-  startTime_lt?: DateTime
-  startTime_lte?: DateTime
-  startTime_gt?: DateTime
-  startTime_gte?: DateTime
-  version?: Int
-  version_not?: Int
-  version_in?: Int[] | Int
-  version_not_in?: Int[] | Int
-  version_lt?: Int
-  version_lte?: Int
-  version_gt?: Int
-  version_gte?: Int
-  client?: ClientWhereInput
-  event?: EventWhereInput
-  budgetLines_every?: BudgetLineWhereInput
-  budgetLines_some?: BudgetLineWhereInput
-  budgetLines_none?: BudgetLineWhereInput
-  clientContact?: ClientContactWhereInput
-  employeeEstimations_every?: EmployeeEstimationWhereInput
-  employeeEstimations_some?: EmployeeEstimationWhereInput
-  employeeEstimations_none?: EmployeeEstimationWhereInput
-  eventType?: EventTypeWhereInput
-  place?: PlaceWhereInput
-  sectionItems_every?: SectionItemWhereInput
-  sectionItems_some?: SectionItemWhereInput
-  sectionItems_none?: SectionItemWhereInput
-}
-
-export interface ItemTranslationCreateInput {
-  description?: String
-  internalDescription?: String
-  language: LanguageEnum
-  name?: String
-  items?: ItemCreateOneWithoutPlatTranslationsInput
-}
-
-export interface StuffUpdateInput {
-  name?: String
-  eventStuffs?: EventStuffUpdateManyWithoutStuffInput
-}
-
-export interface ItemCreateOneWithoutPlatTranslationsInput {
-  create?: ItemCreateWithoutPlatTranslationsInput
-  connect?: ItemWhereUniqueInput
-}
-
-export interface ItemTranslationWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface ItemCreateWithoutPlatTranslationsInput {
-  categories?: CategoryCreateManyWithoutItemsInput
-  sectionItems?: SectionItemCreateManyWithoutItemsInput
-}
-
-export interface UserWhereUniqueInput {
-  id?: ID_Input
-  email?: String
-}
-
-export interface SectionItemCreateManyWithoutItemsInput {
-  create?: SectionItemCreateWithoutItemsInput[] | SectionItemCreateWithoutItemsInput
-  connect?: SectionItemWhereUniqueInput[] | SectionItemWhereUniqueInput
-}
-
-export interface PlaceWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface SectionItemCreateWithoutItemsInput {
-  content?: String
-  endTime?: DateTime
-  h: Int
-  i: String
-  isDraggable?: Boolean
-  isResizable?: Boolean
-  maxH?: Int
-  maxW?: Int
-  minH?: Int
-  minW?: Int
-  moved?: Boolean
-  persons?: Int
-  price?: Float
-  static?: Boolean
-  startTime?: DateTime
-  title?: String
-  type?: SectionTypes
-  w: Int
-  x: Int
-  y?: Int
-  offer?: OfferCreateOneWithoutSectionItemsInput
-}
-
-export interface CategoryWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface OfferCreateOneWithoutSectionItemsInput {
-  create?: OfferCreateWithoutSectionItemsInput
-  connect?: OfferWhereUniqueInput
-}
-
-export interface EmployeeEstimationWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface OfferCreateWithoutSectionItemsInput {
-  customMessage?: String
-  status?: StatusOffer
-  language?: LanguageEnum
-  address: String
-  city: String
-  endTime?: DateTime
-  gmtOffset: String
-  maxPersons?: Int
-  minPersons?: Int
-  name: String
-  postalCode: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  client?: ClientCreateOneWithoutOffersInput
-  event?: EventCreateOneWithoutOfferInput
-  budgetLines?: BudgetLineCreateManyWithoutOfferInput
-  clientContact?: ClientContactCreateOneWithoutOffersInput
-  employeeEstimations?: EmployeeEstimationCreateManyWithoutOfferInput
-  eventType?: EventTypeCreateOneWithoutOffersInput
-  place?: PlaceCreateOneWithoutOfferInput
-}
-
-export interface EventTypeWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface ItemCreateInput {
-  platTranslations?: ItemTranslationCreateManyWithoutItemsInput
-  categories?: CategoryCreateManyWithoutItemsInput
-  sectionItems?: SectionItemCreateManyWithoutItemsInput
-}
-
-export interface PlaceContactWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface UserCreateInput {
-  role: Role
-  email: String
-  image?: String
-  name: String
-  password: String
-  language?: LanguageEnum
-  employee?: EmployeeCreateOneWithoutUserInput
-  jobs?: JobCreateManyWithoutUsersInput
-}
-
-export interface TaxWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface ClientContactCreateInput {
-  email: String
-  mobilePhone?: String
-  name: String
-  phoneNumber?: String
-  client?: ClientCreateOneWithoutClientContactsInput
-  offers?: OfferCreateManyWithoutClientContactInput
-}
-
-export interface CommunicationWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface PlaceCreateInput {
-  address: String
-  city: String
-  name: String
-  postalCode: String
-  country?: Country
-  note?: String
-  offer?: OfferCreateOneWithoutPlaceInput
-  placeContacts?: PlaceContactCreateManyWithoutPlaceInput
-}
-
-export interface EventWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface OfferCreateOneWithoutPlaceInput {
-  create?: OfferCreateWithoutPlaceInput
-  connect?: OfferWhereUniqueInput
-}
-
-export interface CommunicationUpdateInput {
-  message?: String
-  subject?: String
-  channel?: Channel
-  date?: DateTime
-  gmtOffset?: String
-  offer?: OfferUpdateOneInput
-}
-
-export interface OfferCreateWithoutPlaceInput {
-  customMessage?: String
-  status?: StatusOffer
-  language?: LanguageEnum
-  address: String
-  city: String
-  endTime?: DateTime
-  gmtOffset: String
-  maxPersons?: Int
-  minPersons?: Int
-  name: String
-  postalCode: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  client?: ClientCreateOneWithoutOffersInput
-  event?: EventCreateOneWithoutOfferInput
-  budgetLines?: BudgetLineCreateManyWithoutOfferInput
-  clientContact?: ClientContactCreateOneWithoutOffersInput
-  employeeEstimations?: EmployeeEstimationCreateManyWithoutOfferInput
-  eventType?: EventTypeCreateOneWithoutOffersInput
-  sectionItems?: SectionItemCreateManyWithoutOfferInput
-}
-
-export interface EventUpdateWithoutVehiclesDataInput {
-  client?: ClientUpdateOneWithoutEventsInput
-  offer?: OfferUpdateOneWithoutEventInput
-  employees?: EmployeeUpdateManyWithoutEventInput
-  stuffs?: StuffUpdateManyInput
-}
-
-export interface BudgetLineCreateInput {
-  description: String
-  quantity?: Int
-  total?: Float
-  unitPrice?: Float
-  value: Float
-  offer?: OfferCreateOneWithoutBudgetLinesInput
-  tax?: TaxCreateOneWithoutBudgetLinesInput
-}
-
-export interface EventUpdateManyWithoutVehiclesInput {
-  create?: EventCreateWithoutVehiclesInput[] | EventCreateWithoutVehiclesInput
-  connect?: EventWhereUniqueInput[] | EventWhereUniqueInput
-  disconnect?: EventWhereUniqueInput[] | EventWhereUniqueInput
-  delete?: EventWhereUniqueInput[] | EventWhereUniqueInput
-  update?: EventUpdateWithWhereUniqueWithoutVehiclesInput[] | EventUpdateWithWhereUniqueWithoutVehiclesInput
-  upsert?: EventUpsertWithWhereUniqueWithoutVehiclesInput[] | EventUpsertWithWhereUniqueWithoutVehiclesInput
-}
-
-export interface OfferCreateOneWithoutBudgetLinesInput {
-  create?: OfferCreateWithoutBudgetLinesInput
-  connect?: OfferWhereUniqueInput
-}
-
-export interface BudgetLineUpsertWithWhereUniqueWithoutTaxInput {
-  where: BudgetLineWhereUniqueInput
-  update: BudgetLineUpdateWithoutTaxDataInput
-  create: BudgetLineCreateWithoutTaxInput
-}
-
-export interface OfferCreateWithoutBudgetLinesInput {
-  customMessage?: String
-  status?: StatusOffer
-  language?: LanguageEnum
-  address: String
-  city: String
-  endTime?: DateTime
-  gmtOffset: String
-  maxPersons?: Int
-  minPersons?: Int
-  name: String
-  postalCode: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  client?: ClientCreateOneWithoutOffersInput
-  event?: EventCreateOneWithoutOfferInput
-  clientContact?: ClientContactCreateOneWithoutOffersInput
-  employeeEstimations?: EmployeeEstimationCreateManyWithoutOfferInput
-  eventType?: EventTypeCreateOneWithoutOffersInput
-  place?: PlaceCreateOneWithoutOfferInput
-  sectionItems?: SectionItemCreateManyWithoutOfferInput
-}
-
-export interface BudgetLineUpdateWithWhereUniqueWithoutTaxInput {
-  where: BudgetLineWhereUniqueInput
-  data: BudgetLineUpdateWithoutTaxDataInput
-}
-
-export interface CategoryCreateInput {
-  name: String
-  items?: ItemCreateManyWithoutCategoriesInput
-}
-
-export interface TaxUpdateInput {
-  name?: String
-  value?: Float
-  budgetLines?: BudgetLineUpdateManyWithoutTaxInput
-}
-
-export interface ItemCreateManyWithoutCategoriesInput {
-  create?: ItemCreateWithoutCategoriesInput[] | ItemCreateWithoutCategoriesInput
-  connect?: ItemWhereUniqueInput[] | ItemWhereUniqueInput
-}
-
-export interface PlaceUpsertWithoutPlaceContactsInput {
-  update: PlaceUpdateWithoutPlaceContactsDataInput
-  create: PlaceCreateWithoutPlaceContactsInput
-}
-
-export interface ItemCreateWithoutCategoriesInput {
-  platTranslations?: ItemTranslationCreateManyWithoutItemsInput
-  sectionItems?: SectionItemCreateManyWithoutItemsInput
-}
-
-export interface PlaceUpdateOneWithoutPlaceContactsInput {
-  create?: PlaceCreateWithoutPlaceContactsInput
-  connect?: PlaceWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: PlaceUpdateWithoutPlaceContactsDataInput
-  upsert?: PlaceUpsertWithoutPlaceContactsInput
-}
-
-export interface EmployeeCreateInput {
-  endedAt?: DateTime
-  estimatedEndAt: DateTime
-  estimatedStartAt: DateTime
-  startedAt?: DateTime
-  event?: EventCreateOneWithoutEmployeesInput
-  job?: JobCreateOneWithoutEmployeesInput
-  user?: UserCreateOneWithoutEmployeeInput
-}
-
-export interface JobUpdateInput {
-  name?: String
-  employeeEstimations?: EmployeeEstimationUpdateManyWithoutJobInput
-  employees?: EmployeeUpdateManyWithoutJobInput
-  users?: UserUpdateManyWithoutJobsInput
-}
-
-export interface EmployeeEstimationCreateInput {
-  estimatedEndAt: DateTime
-  estimatedStartAt: DateTime
-  number: Int
-  pricePerHour?: Float
-  total?: Float
-  job?: JobCreateOneWithoutEmployeeEstimationsInput
-  offer?: OfferCreateOneWithoutEmployeeEstimationsInput
-}
-
-export interface OfferUpdateWithoutEventTypeDataInput {
-  customMessage?: String
-  status?: StatusOffer
-  language?: LanguageEnum
-  address?: String
-  city?: String
-  endTime?: DateTime
-  gmtOffset?: String
-  maxPersons?: Int
-  minPersons?: Int
-  name?: String
-  postalCode?: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  client?: ClientUpdateOneWithoutOffersInput
-  event?: EventUpdateOneWithoutOfferInput
-  budgetLines?: BudgetLineUpdateManyWithoutOfferInput
-  clientContact?: ClientContactUpdateOneWithoutOffersInput
-  employeeEstimations?: EmployeeEstimationUpdateManyWithoutOfferInput
-  place?: PlaceUpdateOneWithoutOfferInput
-  sectionItems?: SectionItemUpdateManyWithoutOfferInput
-}
-
-export interface EventStuffCreateInput {
-  quantity?: Int
-  event?: EventCreateOneInput
-  stuff?: StuffCreateOneWithoutEventStuffsInput
-}
-
-export interface OfferUpdateManyWithoutEventTypeInput {
-  create?: OfferCreateWithoutEventTypeInput[] | OfferCreateWithoutEventTypeInput
-  connect?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
-  disconnect?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
-  delete?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
-  update?: OfferUpdateWithWhereUniqueWithoutEventTypeInput[] | OfferUpdateWithWhereUniqueWithoutEventTypeInput
-  upsert?: OfferUpsertWithWhereUniqueWithoutEventTypeInput[] | OfferUpsertWithWhereUniqueWithoutEventTypeInput
-}
-
-export interface StuffCreateOneWithoutEventStuffsInput {
-  create?: StuffCreateWithoutEventStuffsInput
-  connect?: StuffWhereUniqueInput
-}
-
-export interface StuffUpsertWithoutEventStuffsInput {
-  update: StuffUpdateWithoutEventStuffsDataInput
-  create: StuffCreateWithoutEventStuffsInput
-}
-
-export interface StuffCreateWithoutEventStuffsInput {
-  name: String
-}
-
-export interface StuffUpdateOneWithoutEventStuffsInput {
-  create?: StuffCreateWithoutEventStuffsInput
-  connect?: StuffWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: StuffUpdateWithoutEventStuffsDataInput
-  upsert?: StuffUpsertWithoutEventStuffsInput
-}
-
-export interface EventTypeCreateInput {
-  name: String
-  offers?: OfferCreateManyWithoutEventTypeInput
-}
-
-export interface EmployeeEstimationUpdateInput {
-  estimatedEndAt?: DateTime
-  estimatedStartAt?: DateTime
-  number?: Int
-  pricePerHour?: Float
-  total?: Float
-  job?: JobUpdateOneWithoutEmployeeEstimationsInput
-  offer?: OfferUpdateOneWithoutEmployeeEstimationsInput
-}
-
-export interface OfferCreateManyWithoutEventTypeInput {
-  create?: OfferCreateWithoutEventTypeInput[] | OfferCreateWithoutEventTypeInput
-  connect?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
-}
-
-export interface ItemUpsertWithWhereUniqueWithoutCategoriesInput {
-  where: ItemWhereUniqueInput
-  update: ItemUpdateWithoutCategoriesDataInput
-  create: ItemCreateWithoutCategoriesInput
-}
-
-export interface OfferCreateWithoutEventTypeInput {
-  customMessage?: String
-  status?: StatusOffer
-  language?: LanguageEnum
-  address: String
-  city: String
-  endTime?: DateTime
-  gmtOffset: String
-  maxPersons?: Int
-  minPersons?: Int
-  name: String
-  postalCode: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  client?: ClientCreateOneWithoutOffersInput
-  event?: EventCreateOneWithoutOfferInput
-  budgetLines?: BudgetLineCreateManyWithoutOfferInput
-  clientContact?: ClientContactCreateOneWithoutOffersInput
-  employeeEstimations?: EmployeeEstimationCreateManyWithoutOfferInput
-  place?: PlaceCreateOneWithoutOfferInput
-  sectionItems?: SectionItemCreateManyWithoutOfferInput
-}
-
-export interface ItemUpdateWithWhereUniqueWithoutCategoriesInput {
-  where: ItemWhereUniqueInput
-  data: ItemUpdateWithoutCategoriesDataInput
-}
-
-export interface JobCreateInput {
-  name: String
-  employeeEstimations?: EmployeeEstimationCreateManyWithoutJobInput
-  employees?: EmployeeCreateManyWithoutJobInput
-  users?: UserCreateManyWithoutJobsInput
-}
-
-export interface CategoryUpdateInput {
-  name?: String
-  items?: ItemUpdateManyWithoutCategoriesInput
-}
-
-export interface ClientUpsertWithoutClientContactsInput {
-  update: ClientUpdateWithoutClientContactsDataInput
-  create: ClientCreateWithoutClientContactsInput
-}
-
-export interface OfferUpdateWithoutBudgetLinesDataInput {
-  customMessage?: String
-  status?: StatusOffer
-  language?: LanguageEnum
-  address?: String
-  city?: String
-  endTime?: DateTime
-  gmtOffset?: String
-  maxPersons?: Int
-  minPersons?: Int
-  name?: String
-  postalCode?: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  client?: ClientUpdateOneWithoutOffersInput
-  event?: EventUpdateOneWithoutOfferInput
-  clientContact?: ClientContactUpdateOneWithoutOffersInput
-  employeeEstimations?: EmployeeEstimationUpdateManyWithoutOfferInput
-  eventType?: EventTypeUpdateOneWithoutOffersInput
-  place?: PlaceUpdateOneWithoutOfferInput
-  sectionItems?: SectionItemUpdateManyWithoutOfferInput
-}
-
-export interface PlaceCreateOneWithoutPlaceContactsInput {
-  create?: PlaceCreateWithoutPlaceContactsInput
-  connect?: PlaceWhereUniqueInput
-}
-
-export interface BudgetLineUpdateInput {
-  description?: String
-  quantity?: Int
-  total?: Float
-  unitPrice?: Float
-  value?: Float
-  offer?: OfferUpdateOneWithoutBudgetLinesInput
-  tax?: TaxUpdateOneWithoutBudgetLinesInput
-}
-
-export interface PlaceCreateWithoutPlaceContactsInput {
-  address: String
-  city: String
-  name: String
-  postalCode: String
-  country?: Country
-  note?: String
-  offer?: OfferCreateOneWithoutPlaceInput
-}
-
-export interface OfferUpdateWithoutPlaceDataInput {
-  customMessage?: String
-  status?: StatusOffer
-  language?: LanguageEnum
-  address?: String
-  city?: String
-  endTime?: DateTime
-  gmtOffset?: String
-  maxPersons?: Int
-  minPersons?: Int
-  name?: String
-  postalCode?: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  client?: ClientUpdateOneWithoutOffersInput
-  event?: EventUpdateOneWithoutOfferInput
-  budgetLines?: BudgetLineUpdateManyWithoutOfferInput
-  clientContact?: ClientContactUpdateOneWithoutOffersInput
-  employeeEstimations?: EmployeeEstimationUpdateManyWithoutOfferInput
-  eventType?: EventTypeUpdateOneWithoutOffersInput
-  sectionItems?: SectionItemUpdateManyWithoutOfferInput
-}
-
-export interface SectionItemCreateInput {
-  content?: String
-  endTime?: DateTime
-  h: Int
-  i: String
-  isDraggable?: Boolean
-  isResizable?: Boolean
-  maxH?: Int
-  maxW?: Int
-  minH?: Int
-  minW?: Int
-  moved?: Boolean
-  persons?: Int
-  price?: Float
-  static?: Boolean
-  startTime?: DateTime
-  title?: String
-  type?: SectionTypes
-  w: Int
-  x: Int
-  y?: Int
-  offer?: OfferCreateOneWithoutSectionItemsInput
-  items?: ItemCreateManyWithoutSectionItemsInput
-}
-
-export interface PlaceUpdateInput {
-  address?: String
-  city?: String
-  name?: String
-  postalCode?: String
-  country?: Country
-  note?: String
-  offer?: OfferUpdateOneWithoutPlaceInput
-  placeContacts?: PlaceContactUpdateManyWithoutPlaceInput
-}
-
-export interface TaxCreateInput {
-  name: String
-  value: Float
-  budgetLines?: BudgetLineCreateManyWithoutTaxInput
-}
-
-export interface UserUpdateInput {
-  role?: Role
-  email?: String
-  image?: String
-  name?: String
-  password?: String
-  language?: LanguageEnum
-  employee?: EmployeeUpdateOneWithoutUserInput
-  jobs?: JobUpdateManyWithoutUsersInput
-}
-
-export interface BudgetLineCreateManyWithoutTaxInput {
-  create?: BudgetLineCreateWithoutTaxInput[] | BudgetLineCreateWithoutTaxInput
-  connect?: BudgetLineWhereUniqueInput[] | BudgetLineWhereUniqueInput
-}
-
-export interface ItemUpsertWithoutPlatTranslationsInput {
-  update: ItemUpdateWithoutPlatTranslationsDataInput
-  create: ItemCreateWithoutPlatTranslationsInput
-}
-
-export interface BudgetLineCreateWithoutTaxInput {
-  description: String
-  quantity?: Int
-  total?: Float
-  unitPrice?: Float
-  value: Float
-  offer?: OfferCreateOneWithoutBudgetLinesInput
-}
-
-export interface OfferUpsertWithoutSectionItemsInput {
-  update: OfferUpdateWithoutSectionItemsDataInput
-  create: OfferCreateWithoutSectionItemsInput
-}
-
-export interface VehicleCreateInput {
-  color?: String
-  description?: String
-  name: String
-  plate: String
-  year?: Int
-  events?: EventCreateManyWithoutVehiclesInput
-}
-
-export interface OfferUpdateOneWithoutSectionItemsInput {
-  create?: OfferCreateWithoutSectionItemsInput
-  connect?: OfferWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: OfferUpdateWithoutSectionItemsDataInput
-  upsert?: OfferUpsertWithoutSectionItemsInput
-}
-
-export interface EventCreateManyWithoutVehiclesInput {
-  create?: EventCreateWithoutVehiclesInput[] | EventCreateWithoutVehiclesInput
-  connect?: EventWhereUniqueInput[] | EventWhereUniqueInput
-}
-
-export interface SectionItemUpdateWithWhereUniqueWithoutItemsInput {
-  where: SectionItemWhereUniqueInput
-  data: SectionItemUpdateWithoutItemsDataInput
-}
-
-export interface EventCreateWithoutVehiclesInput {
-  client?: ClientCreateOneWithoutEventsInput
-  offer?: OfferCreateOneWithoutEventInput
-  employees?: EmployeeCreateManyWithoutEventInput
-  stuffs?: StuffCreateManyInput
-}
-
-export interface ItemUpdateWithoutPlatTranslationsDataInput {
-  categories?: CategoryUpdateManyWithoutItemsInput
-  sectionItems?: SectionItemUpdateManyWithoutItemsInput
-}
-
-export interface ClientUpdateInput {
-  address?: String
-  email?: String
-  name?: String
-  phone?: String
-  tva?: String
-  language?: LanguageEnum
-  type?: ClientType
-  events?: EventUpdateManyWithoutClientInput
-  offers?: OfferUpdateManyWithoutClientInput
-  clientContacts?: ClientContactUpdateManyWithoutClientInput
-  communications?: CommunicationUpdateManyInput
-}
-
-export interface ItemTranslationUpdateInput {
-  description?: String
-  internalDescription?: String
-  language?: LanguageEnum
-  name?: String
-  items?: ItemUpdateOneWithoutPlatTranslationsInput
-}
-
-export interface EventUpdateManyWithoutClientInput {
-  create?: EventCreateWithoutClientInput[] | EventCreateWithoutClientInput
-  connect?: EventWhereUniqueInput[] | EventWhereUniqueInput
-  disconnect?: EventWhereUniqueInput[] | EventWhereUniqueInput
-  delete?: EventWhereUniqueInput[] | EventWhereUniqueInput
-  update?: EventUpdateWithWhereUniqueWithoutClientInput[] | EventUpdateWithWhereUniqueWithoutClientInput
-  upsert?: EventUpsertWithWhereUniqueWithoutClientInput[] | EventUpsertWithWhereUniqueWithoutClientInput
-}
-
-export interface OfferUpsertWithoutEventInput {
-  update: OfferUpdateWithoutEventDataInput
-  create: OfferCreateWithoutEventInput
-}
-
-export interface EventUpdateWithWhereUniqueWithoutClientInput {
-  where: EventWhereUniqueInput
-  data: EventUpdateWithoutClientDataInput
-}
-
-export interface ClientContactUpsertWithWhereUniqueWithoutClientInput {
-  where: ClientContactWhereUniqueInput
-  update: ClientContactUpdateWithoutClientDataInput
-  create: ClientContactCreateWithoutClientInput
-}
-
-export interface EventUpdateWithoutClientDataInput {
-  offer?: OfferUpdateOneWithoutEventInput
-  employees?: EmployeeUpdateManyWithoutEventInput
-  stuffs?: StuffUpdateManyInput
-  vehicles?: VehicleUpdateManyWithoutEventsInput
-}
-
-export interface EventUpsertWithoutOfferInput {
-  update: EventUpdateWithoutOfferDataInput
-  create: EventCreateWithoutOfferInput
-}
-
-export interface OfferUpdateOneWithoutEventInput {
-  create?: OfferCreateWithoutEventInput
-  connect?: OfferWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: OfferUpdateWithoutEventDataInput
-  upsert?: OfferUpsertWithoutEventInput
-}
-
-export interface OfferUpsertWithWhereUniqueWithoutClientInput {
-  where: OfferWhereUniqueInput
-  update: OfferUpdateWithoutClientDataInput
-  create: OfferCreateWithoutClientInput
-}
-
-export interface OfferUpdateWithoutEventDataInput {
-  customMessage?: String
-  status?: StatusOffer
-  language?: LanguageEnum
-  address?: String
-  city?: String
-  endTime?: DateTime
-  gmtOffset?: String
-  maxPersons?: Int
-  minPersons?: Int
-  name?: String
-  postalCode?: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  client?: ClientUpdateOneWithoutOffersInput
-  budgetLines?: BudgetLineUpdateManyWithoutOfferInput
-  clientContact?: ClientContactUpdateOneWithoutOffersInput
-  employeeEstimations?: EmployeeEstimationUpdateManyWithoutOfferInput
-  eventType?: EventTypeUpdateOneWithoutOffersInput
-  place?: PlaceUpdateOneWithoutOfferInput
-  sectionItems?: SectionItemUpdateManyWithoutOfferInput
-}
-
-export interface ClientCreateInput {
-  address?: String
-  email: String
-  name: String
-  phone: String
-  tva?: String
-  language?: LanguageEnum
-  type?: ClientType
-  events?: EventCreateManyWithoutClientInput
-  offers?: OfferCreateManyWithoutClientInput
-  clientContacts?: ClientContactCreateManyWithoutClientInput
-  communications?: CommunicationCreateManyInput
-}
-
-export interface CommunicationWhereInput {
-  AND?: CommunicationWhereInput[] | CommunicationWhereInput
-  OR?: CommunicationWhereInput[] | CommunicationWhereInput
-  NOT?: CommunicationWhereInput[] | CommunicationWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  message?: String
-  message_not?: String
-  message_in?: String[] | String
-  message_not_in?: String[] | String
-  message_lt?: String
-  message_lte?: String
-  message_gt?: String
-  message_gte?: String
-  message_contains?: String
-  message_not_contains?: String
-  message_starts_with?: String
-  message_not_starts_with?: String
-  message_ends_with?: String
-  message_not_ends_with?: String
-  subject?: String
-  subject_not?: String
-  subject_in?: String[] | String
-  subject_not_in?: String[] | String
-  subject_lt?: String
-  subject_lte?: String
-  subject_gt?: String
-  subject_gte?: String
-  subject_contains?: String
-  subject_not_contains?: String
-  subject_starts_with?: String
-  subject_not_starts_with?: String
-  subject_ends_with?: String
-  subject_not_ends_with?: String
-  channel?: Channel
-  channel_not?: Channel
-  channel_in?: Channel[] | Channel
-  channel_not_in?: Channel[] | Channel
-  date?: DateTime
-  date_not?: DateTime
-  date_in?: DateTime[] | DateTime
-  date_not_in?: DateTime[] | DateTime
-  date_lt?: DateTime
-  date_lte?: DateTime
-  date_gt?: DateTime
-  date_gte?: DateTime
-  gmtOffset?: String
-  gmtOffset_not?: String
-  gmtOffset_in?: String[] | String
-  gmtOffset_not_in?: String[] | String
-  gmtOffset_lt?: String
-  gmtOffset_lte?: String
-  gmtOffset_gt?: String
-  gmtOffset_gte?: String
-  gmtOffset_contains?: String
-  gmtOffset_not_contains?: String
-  gmtOffset_starts_with?: String
-  gmtOffset_not_starts_with?: String
-  gmtOffset_ends_with?: String
-  gmtOffset_not_ends_with?: String
-  offer?: OfferWhereInput
-}
-
-export interface EventCreateWithoutClientInput {
-  offer?: OfferCreateOneWithoutEventInput
-  employees?: EmployeeCreateManyWithoutEventInput
-  stuffs?: StuffCreateManyInput
-  vehicles?: VehicleCreateManyWithoutEventsInput
-}
-
-export interface StuffWhereInput {
-  AND?: StuffWhereInput[] | StuffWhereInput
-  OR?: StuffWhereInput[] | StuffWhereInput
-  NOT?: StuffWhereInput[] | StuffWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  name?: String
-  name_not?: String
-  name_in?: String[] | String
-  name_not_in?: String[] | String
-  name_lt?: String
-  name_lte?: String
-  name_gt?: String
-  name_gte?: String
-  name_contains?: String
-  name_not_contains?: String
-  name_starts_with?: String
-  name_not_starts_with?: String
-  name_ends_with?: String
-  name_not_ends_with?: String
-  eventStuffs_every?: EventStuffWhereInput
-  eventStuffs_some?: EventStuffWhereInput
-  eventStuffs_none?: EventStuffWhereInput
-}
-
-export interface OfferCreateWithoutEventInput {
-  customMessage?: String
-  status?: StatusOffer
-  language?: LanguageEnum
-  address: String
-  city: String
-  endTime?: DateTime
-  gmtOffset: String
-  maxPersons?: Int
-  minPersons?: Int
-  name: String
-  postalCode: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  client?: ClientCreateOneWithoutOffersInput
-  budgetLines?: BudgetLineCreateManyWithoutOfferInput
-  clientContact?: ClientContactCreateOneWithoutOffersInput
-  employeeEstimations?: EmployeeEstimationCreateManyWithoutOfferInput
-  eventType?: EventTypeCreateOneWithoutOffersInput
-  place?: PlaceCreateOneWithoutOfferInput
-  sectionItems?: SectionItemCreateManyWithoutOfferInput
-}
-
-export interface ClientCreateWithoutOffersInput {
-  address?: String
-  email: String
-  name: String
-  phone: String
-  tva?: String
-  language?: LanguageEnum
-  type?: ClientType
-  events?: EventCreateManyWithoutClientInput
-  clientContacts?: ClientContactCreateManyWithoutClientInput
-  communications?: CommunicationCreateManyInput
-}
-
-export interface ClientContactCreateWithoutClientInput {
-  email: String
-  mobilePhone?: String
-  name: String
-  phoneNumber?: String
-  offers?: OfferCreateManyWithoutClientContactInput
-}
-
-export interface ClientContactUpdateWithWhereUniqueWithoutClientInput {
-  where: ClientContactWhereUniqueInput
-  data: ClientContactUpdateWithoutClientDataInput
-}
-
-export interface OfferCreateWithoutClientContactInput {
-  customMessage?: String
-  status?: StatusOffer
-  language?: LanguageEnum
-  address: String
-  city: String
-  endTime?: DateTime
-  gmtOffset: String
-  maxPersons?: Int
-  minPersons?: Int
-  name: String
-  postalCode: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  client?: ClientCreateOneWithoutOffersInput
-  event?: EventCreateOneWithoutOfferInput
-  budgetLines?: BudgetLineCreateManyWithoutOfferInput
-  employeeEstimations?: EmployeeEstimationCreateManyWithoutOfferInput
-  eventType?: EventTypeCreateOneWithoutOffersInput
-  place?: PlaceCreateOneWithoutOfferInput
-  sectionItems?: SectionItemCreateManyWithoutOfferInput
-}
-
-export interface ClientContactUpdateWithoutClientDataInput {
-  email?: String
-  mobilePhone?: String
-  name?: String
-  phoneNumber?: String
-  offers?: OfferUpdateManyWithoutClientContactInput
-}
-
-export interface EventCreateWithoutOfferInput {
-  client?: ClientCreateOneWithoutEventsInput
-  employees?: EmployeeCreateManyWithoutEventInput
-  stuffs?: StuffCreateManyInput
-  vehicles?: VehicleCreateManyWithoutEventsInput
-}
-
-export interface OfferUpdateManyWithoutClientContactInput {
-  create?: OfferCreateWithoutClientContactInput[] | OfferCreateWithoutClientContactInput
-  connect?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
-  disconnect?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
-  delete?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
-  update?: OfferUpdateWithWhereUniqueWithoutClientContactInput[] | OfferUpdateWithWhereUniqueWithoutClientContactInput
-  upsert?: OfferUpsertWithWhereUniqueWithoutClientContactInput[] | OfferUpsertWithWhereUniqueWithoutClientContactInput
-}
-
-export interface ClientCreateWithoutEventsInput {
-  address?: String
-  email: String
-  name: String
-  phone: String
-  tva?: String
-  language?: LanguageEnum
-  type?: ClientType
-  offers?: OfferCreateManyWithoutClientInput
-  clientContacts?: ClientContactCreateManyWithoutClientInput
-  communications?: CommunicationCreateManyInput
-}
-
-export interface OfferUpdateWithWhereUniqueWithoutClientContactInput {
-  where: OfferWhereUniqueInput
-  data: OfferUpdateWithoutClientContactDataInput
-}
-
-export interface OfferCreateWithoutClientInput {
-  customMessage?: String
-  status?: StatusOffer
-  language?: LanguageEnum
-  address: String
-  city: String
-  endTime?: DateTime
-  gmtOffset: String
-  maxPersons?: Int
-  minPersons?: Int
-  name: String
-  postalCode: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  event?: EventCreateOneWithoutOfferInput
-  budgetLines?: BudgetLineCreateManyWithoutOfferInput
-  clientContact?: ClientContactCreateOneWithoutOffersInput
-  employeeEstimations?: EmployeeEstimationCreateManyWithoutOfferInput
-  eventType?: EventTypeCreateOneWithoutOffersInput
-  place?: PlaceCreateOneWithoutOfferInput
-  sectionItems?: SectionItemCreateManyWithoutOfferInput
-}
-
-export interface OfferUpdateWithoutClientContactDataInput {
-  customMessage?: String
-  status?: StatusOffer
-  language?: LanguageEnum
-  address?: String
-  city?: String
-  endTime?: DateTime
-  gmtOffset?: String
-  maxPersons?: Int
-  minPersons?: Int
-  name?: String
-  postalCode?: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  client?: ClientUpdateOneWithoutOffersInput
-  event?: EventUpdateOneWithoutOfferInput
-  budgetLines?: BudgetLineUpdateManyWithoutOfferInput
-  employeeEstimations?: EmployeeEstimationUpdateManyWithoutOfferInput
-  eventType?: EventTypeUpdateOneWithoutOffersInput
-  place?: PlaceUpdateOneWithoutOfferInput
-  sectionItems?: SectionItemUpdateManyWithoutOfferInput
-}
-
-export interface BudgetLineCreateWithoutOfferInput {
-  description: String
-  quantity?: Int
-  total?: Float
-  unitPrice?: Float
-  value: Float
-  tax?: TaxCreateOneWithoutBudgetLinesInput
-}
-
-export interface EventUpdateOneWithoutOfferInput {
-  create?: EventCreateWithoutOfferInput
-  connect?: EventWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: EventUpdateWithoutOfferDataInput
-  upsert?: EventUpsertWithoutOfferInput
-}
-
-export interface TaxCreateWithoutBudgetLinesInput {
-  name: String
-  value: Float
-}
-
-export interface EventUpdateWithoutOfferDataInput {
-  client?: ClientUpdateOneWithoutEventsInput
-  employees?: EmployeeUpdateManyWithoutEventInput
-  stuffs?: StuffUpdateManyInput
-  vehicles?: VehicleUpdateManyWithoutEventsInput
-}
-
-export interface ClientContactCreateWithoutOffersInput {
-  email: String
-  mobilePhone?: String
-  name: String
-  phoneNumber?: String
-  client?: ClientCreateOneWithoutClientContactsInput
-}
-
-export interface ClientUpdateOneWithoutEventsInput {
-  create?: ClientCreateWithoutEventsInput
-  connect?: ClientWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: ClientUpdateWithoutEventsDataInput
-  upsert?: ClientUpsertWithoutEventsInput
-}
-
-export interface ClientCreateWithoutClientContactsInput {
-  address?: String
-  email: String
-  name: String
-  phone: String
-  tva?: String
-  language?: LanguageEnum
-  type?: ClientType
-  events?: EventCreateManyWithoutClientInput
-  offers?: OfferCreateManyWithoutClientInput
-  communications?: CommunicationCreateManyInput
-}
-
-export interface ClientUpdateWithoutEventsDataInput {
-  address?: String
-  email?: String
-  name?: String
-  phone?: String
-  tva?: String
-  language?: LanguageEnum
-  type?: ClientType
-  offers?: OfferUpdateManyWithoutClientInput
-  clientContacts?: ClientContactUpdateManyWithoutClientInput
-  communications?: CommunicationUpdateManyInput
-}
-
-export interface CommunicationCreateInput {
-  message: String
-  subject: String
-  channel: Channel
-  date: DateTime
-  gmtOffset: String
-  offer?: OfferCreateOneInput
-}
-
-export interface OfferUpdateManyWithoutClientInput {
-  create?: OfferCreateWithoutClientInput[] | OfferCreateWithoutClientInput
-  connect?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
-  disconnect?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
-  delete?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
-  update?: OfferUpdateWithWhereUniqueWithoutClientInput[] | OfferUpdateWithWhereUniqueWithoutClientInput
-  upsert?: OfferUpsertWithWhereUniqueWithoutClientInput[] | OfferUpsertWithWhereUniqueWithoutClientInput
-}
-
-export interface OfferCreateInput {
-  customMessage?: String
-  status?: StatusOffer
-  language?: LanguageEnum
-  address: String
-  city: String
-  endTime?: DateTime
-  gmtOffset: String
-  maxPersons?: Int
-  minPersons?: Int
-  name: String
-  postalCode: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  client?: ClientCreateOneWithoutOffersInput
-  event?: EventCreateOneWithoutOfferInput
-  budgetLines?: BudgetLineCreateManyWithoutOfferInput
-  clientContact?: ClientContactCreateOneWithoutOffersInput
-  employeeEstimations?: EmployeeEstimationCreateManyWithoutOfferInput
-  eventType?: EventTypeCreateOneWithoutOffersInput
-  place?: PlaceCreateOneWithoutOfferInput
-  sectionItems?: SectionItemCreateManyWithoutOfferInput
-}
-
-export interface OfferUpdateWithWhereUniqueWithoutClientInput {
-  where: OfferWhereUniqueInput
-  data: OfferUpdateWithoutClientDataInput
-}
-
-export interface EmployeeEstimationCreateWithoutOfferInput {
-  estimatedEndAt: DateTime
-  estimatedStartAt: DateTime
-  number: Int
-  pricePerHour?: Float
-  total?: Float
-  job?: JobCreateOneWithoutEmployeeEstimationsInput
-}
-
-export interface OfferUpdateWithoutClientDataInput {
-  customMessage?: String
-  status?: StatusOffer
-  language?: LanguageEnum
-  address?: String
-  city?: String
-  endTime?: DateTime
-  gmtOffset?: String
-  maxPersons?: Int
-  minPersons?: Int
-  name?: String
-  postalCode?: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  event?: EventUpdateOneWithoutOfferInput
-  budgetLines?: BudgetLineUpdateManyWithoutOfferInput
-  clientContact?: ClientContactUpdateOneWithoutOffersInput
-  employeeEstimations?: EmployeeEstimationUpdateManyWithoutOfferInput
-  eventType?: EventTypeUpdateOneWithoutOffersInput
-  place?: PlaceUpdateOneWithoutOfferInput
-  sectionItems?: SectionItemUpdateManyWithoutOfferInput
-}
-
-export interface JobCreateWithoutEmployeeEstimationsInput {
-  name: String
-  employees?: EmployeeCreateManyWithoutJobInput
-  users?: UserCreateManyWithoutJobsInput
-}
-
-export interface BudgetLineUpdateManyWithoutOfferInput {
-  create?: BudgetLineCreateWithoutOfferInput[] | BudgetLineCreateWithoutOfferInput
-  connect?: BudgetLineWhereUniqueInput[] | BudgetLineWhereUniqueInput
-  disconnect?: BudgetLineWhereUniqueInput[] | BudgetLineWhereUniqueInput
-  delete?: BudgetLineWhereUniqueInput[] | BudgetLineWhereUniqueInput
-  update?: BudgetLineUpdateWithWhereUniqueWithoutOfferInput[] | BudgetLineUpdateWithWhereUniqueWithoutOfferInput
-  upsert?: BudgetLineUpsertWithWhereUniqueWithoutOfferInput[] | BudgetLineUpsertWithWhereUniqueWithoutOfferInput
-}
-
-export interface EmployeeCreateWithoutJobInput {
-  endedAt?: DateTime
-  estimatedEndAt: DateTime
-  estimatedStartAt: DateTime
-  startedAt?: DateTime
-  event?: EventCreateOneWithoutEmployeesInput
-  user?: UserCreateOneWithoutEmployeeInput
-}
-
-export interface BudgetLineUpdateWithWhereUniqueWithoutOfferInput {
-  where: BudgetLineWhereUniqueInput
-  data: BudgetLineUpdateWithoutOfferDataInput
-}
-
-export interface EventCreateWithoutEmployeesInput {
-  client?: ClientCreateOneWithoutEventsInput
-  offer?: OfferCreateOneWithoutEventInput
-  stuffs?: StuffCreateManyInput
-  vehicles?: VehicleCreateManyWithoutEventsInput
-}
-
-export interface BudgetLineUpdateWithoutOfferDataInput {
-  description?: String
-  quantity?: Int
-  total?: Float
-  unitPrice?: Float
-  value?: Float
-  tax?: TaxUpdateOneWithoutBudgetLinesInput
-}
-
-export interface StuffCreateInput {
-  name: String
-  eventStuffs?: EventStuffCreateManyWithoutStuffInput
-}
-
-export interface TaxUpdateOneWithoutBudgetLinesInput {
-  create?: TaxCreateWithoutBudgetLinesInput
-  connect?: TaxWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: TaxUpdateWithoutBudgetLinesDataInput
-  upsert?: TaxUpsertWithoutBudgetLinesInput
-}
-
-export interface EventStuffCreateWithoutStuffInput {
-  quantity?: Int
-  event?: EventCreateOneInput
-}
-
-export interface TaxUpdateWithoutBudgetLinesDataInput {
-  name?: String
-  value?: Float
-}
-
-export interface EventCreateInput {
-  client?: ClientCreateOneWithoutEventsInput
-  offer?: OfferCreateOneWithoutEventInput
-  employees?: EmployeeCreateManyWithoutEventInput
-  stuffs?: StuffCreateManyInput
-  vehicles?: VehicleCreateManyWithoutEventsInput
-}
-
-export interface TaxUpsertWithoutBudgetLinesInput {
-  update: TaxUpdateWithoutBudgetLinesDataInput
-  create: TaxCreateWithoutBudgetLinesInput
-}
-
-export interface EmployeeCreateWithoutEventInput {
-  endedAt?: DateTime
-  estimatedEndAt: DateTime
-  estimatedStartAt: DateTime
-  startedAt?: DateTime
-  job?: JobCreateOneWithoutEmployeesInput
-  user?: UserCreateOneWithoutEmployeeInput
-}
-
-export interface BudgetLineUpsertWithWhereUniqueWithoutOfferInput {
-  where: BudgetLineWhereUniqueInput
-  update: BudgetLineUpdateWithoutOfferDataInput
-  create: BudgetLineCreateWithoutOfferInput
-}
-
-export interface JobCreateWithoutEmployeesInput {
-  name: String
-  employeeEstimations?: EmployeeEstimationCreateManyWithoutJobInput
-  users?: UserCreateManyWithoutJobsInput
-}
-
-export interface ClientContactUpdateOneWithoutOffersInput {
-  create?: ClientContactCreateWithoutOffersInput
-  connect?: ClientContactWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: ClientContactUpdateWithoutOffersDataInput
-  upsert?: ClientContactUpsertWithoutOffersInput
-}
-
-export interface EmployeeEstimationCreateWithoutJobInput {
-  estimatedEndAt: DateTime
-  estimatedStartAt: DateTime
-  number: Int
-  pricePerHour?: Float
-  total?: Float
-  offer?: OfferCreateOneWithoutEmployeeEstimationsInput
-}
-
-export interface ClientContactUpdateWithoutOffersDataInput {
-  email?: String
-  mobilePhone?: String
-  name?: String
-  phoneNumber?: String
-  client?: ClientUpdateOneWithoutClientContactsInput
-}
-
-export interface OfferCreateWithoutEmployeeEstimationsInput {
-  customMessage?: String
-  status?: StatusOffer
-  language?: LanguageEnum
-  address: String
-  city: String
-  endTime?: DateTime
-  gmtOffset: String
-  maxPersons?: Int
-  minPersons?: Int
-  name: String
-  postalCode: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  client?: ClientCreateOneWithoutOffersInput
-  event?: EventCreateOneWithoutOfferInput
-  budgetLines?: BudgetLineCreateManyWithoutOfferInput
-  clientContact?: ClientContactCreateOneWithoutOffersInput
-  eventType?: EventTypeCreateOneWithoutOffersInput
-  place?: PlaceCreateOneWithoutOfferInput
-  sectionItems?: SectionItemCreateManyWithoutOfferInput
-}
-
-export interface ClientUpdateOneWithoutClientContactsInput {
-  create?: ClientCreateWithoutClientContactsInput
-  connect?: ClientWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: ClientUpdateWithoutClientContactsDataInput
-  upsert?: ClientUpsertWithoutClientContactsInput
-}
-
 export interface EventTypeCreateWithoutOffersInput {
   name: String
-}
-
-export interface ClientUpdateWithoutClientContactsDataInput {
-  address?: String
-  email?: String
-  name?: String
-  phone?: String
-  tva?: String
-  language?: LanguageEnum
-  type?: ClientType
-  events?: EventUpdateManyWithoutClientInput
-  offers?: OfferUpdateManyWithoutClientInput
-  communications?: CommunicationUpdateManyInput
-}
-
-export interface CategoryWhereInput {
-  AND?: CategoryWhereInput[] | CategoryWhereInput
-  OR?: CategoryWhereInput[] | CategoryWhereInput
-  NOT?: CategoryWhereInput[] | CategoryWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  name?: String
-  name_not?: String
-  name_in?: String[] | String
-  name_not_in?: String[] | String
-  name_lt?: String
-  name_lte?: String
-  name_gt?: String
-  name_gte?: String
-  name_contains?: String
-  name_not_contains?: String
-  name_starts_with?: String
-  name_not_starts_with?: String
-  name_ends_with?: String
-  name_not_ends_with?: String
-  items_every?: ItemWhereInput
-  items_some?: ItemWhereInput
-  items_none?: ItemWhereInput
-}
-
-export interface CommunicationUpdateManyInput {
-  create?: CommunicationCreateInput[] | CommunicationCreateInput
-  connect?: CommunicationWhereUniqueInput[] | CommunicationWhereUniqueInput
-  disconnect?: CommunicationWhereUniqueInput[] | CommunicationWhereUniqueInput
-  delete?: CommunicationWhereUniqueInput[] | CommunicationWhereUniqueInput
-  update?: CommunicationUpdateWithWhereUniqueNestedInput[] | CommunicationUpdateWithWhereUniqueNestedInput
-  upsert?: CommunicationUpsertWithWhereUniqueNestedInput[] | CommunicationUpsertWithWhereUniqueNestedInput
-}
-
-export interface StuffSubscriptionWhereInput {
-  AND?: StuffSubscriptionWhereInput[] | StuffSubscriptionWhereInput
-  OR?: StuffSubscriptionWhereInput[] | StuffSubscriptionWhereInput
-  NOT?: StuffSubscriptionWhereInput[] | StuffSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: StuffWhereInput
-}
-
-export interface CommunicationUpdateWithWhereUniqueNestedInput {
-  where: CommunicationWhereUniqueInput
-  data: CommunicationUpdateDataInput
 }
 
 export interface SectionItemWhereInput {
@@ -12273,13 +10274,9 @@ export interface SectionItemWhereInput {
   items_none?: ItemWhereInput
 }
 
-export interface CommunicationUpdateDataInput {
-  message?: String
-  subject?: String
-  channel?: Channel
-  date?: DateTime
-  gmtOffset?: String
-  offer?: OfferUpdateOneInput
+export interface PlaceCreateOneWithoutOfferInput {
+  create?: PlaceCreateWithoutOfferInput
+  connect?: PlaceWhereUniqueInput
 }
 
 export interface PlaceContactSubscriptionWhereInput {
@@ -12293,49 +10290,90 @@ export interface PlaceContactSubscriptionWhereInput {
   node?: PlaceContactWhereInput
 }
 
-export interface OfferUpdateOneInput {
-  create?: OfferCreateInput
-  connect?: OfferWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: OfferUpdateDataInput
-  upsert?: OfferUpsertNestedInput
+export interface PlaceCreateWithoutOfferInput {
+  address: String
+  city: String
+  name: String
+  postalCode: String
+  country?: Country
+  note?: String
+  placeContacts?: PlaceContactCreateManyWithoutPlaceInput
 }
 
-export interface EventTypeSubscriptionWhereInput {
-  AND?: EventTypeSubscriptionWhereInput[] | EventTypeSubscriptionWhereInput
-  OR?: EventTypeSubscriptionWhereInput[] | EventTypeSubscriptionWhereInput
-  NOT?: EventTypeSubscriptionWhereInput[] | EventTypeSubscriptionWhereInput
+export interface JobSubscriptionWhereInput {
+  AND?: JobSubscriptionWhereInput[] | JobSubscriptionWhereInput
+  OR?: JobSubscriptionWhereInput[] | JobSubscriptionWhereInput
+  NOT?: JobSubscriptionWhereInput[] | JobSubscriptionWhereInput
   mutation_in?: MutationType[] | MutationType
   updatedFields_contains?: String
   updatedFields_contains_every?: String[] | String
   updatedFields_contains_some?: String[] | String
-  node?: EventTypeWhereInput
+  node?: JobWhereInput
 }
 
-export interface OfferUpdateDataInput {
-  customMessage?: String
-  status?: StatusOffer
-  language?: LanguageEnum
-  address?: String
-  city?: String
-  endTime?: DateTime
-  gmtOffset?: String
-  maxPersons?: Int
-  minPersons?: Int
+export interface PlaceContactCreateManyWithoutPlaceInput {
+  create?: PlaceContactCreateWithoutPlaceInput[] | PlaceContactCreateWithoutPlaceInput
+  connect?: PlaceContactWhereUniqueInput[] | PlaceContactWhereUniqueInput
+}
+
+export interface EventTypeWhereInput {
+  AND?: EventTypeWhereInput[] | EventTypeWhereInput
+  OR?: EventTypeWhereInput[] | EventTypeWhereInput
+  NOT?: EventTypeWhereInput[] | EventTypeWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
   name?: String
-  postalCode?: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  client?: ClientUpdateOneWithoutOffersInput
-  event?: EventUpdateOneWithoutOfferInput
-  budgetLines?: BudgetLineUpdateManyWithoutOfferInput
-  clientContact?: ClientContactUpdateOneWithoutOffersInput
-  employeeEstimations?: EmployeeEstimationUpdateManyWithoutOfferInput
-  eventType?: EventTypeUpdateOneWithoutOffersInput
-  place?: PlaceUpdateOneWithoutOfferInput
-  sectionItems?: SectionItemUpdateManyWithoutOfferInput
+  name_not?: String
+  name_in?: String[] | String
+  name_not_in?: String[] | String
+  name_lt?: String
+  name_lte?: String
+  name_gt?: String
+  name_gte?: String
+  name_contains?: String
+  name_not_contains?: String
+  name_starts_with?: String
+  name_not_starts_with?: String
+  name_ends_with?: String
+  name_not_ends_with?: String
+  offers_every?: OfferWhereInput
+  offers_some?: OfferWhereInput
+  offers_none?: OfferWhereInput
+}
+
+export interface PlaceContactCreateWithoutPlaceInput {
+  email?: String
+  mobilePhone?: String
+  name: String
+  phoneNumber?: String
+}
+
+export interface EmployeeEstimationSubscriptionWhereInput {
+  AND?: EmployeeEstimationSubscriptionWhereInput[] | EmployeeEstimationSubscriptionWhereInput
+  OR?: EmployeeEstimationSubscriptionWhereInput[] | EmployeeEstimationSubscriptionWhereInput
+  NOT?: EmployeeEstimationSubscriptionWhereInput[] | EmployeeEstimationSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: EmployeeEstimationWhereInput
+}
+
+export interface SectionItemCreateManyWithoutOfferInput {
+  create?: SectionItemCreateWithoutOfferInput[] | SectionItemCreateWithoutOfferInput
+  connect?: SectionItemWhereUniqueInput[] | SectionItemWhereUniqueInput
 }
 
 export interface EmployeeWhereInput {
@@ -12393,35 +10431,222 @@ export interface EmployeeWhereInput {
   user?: UserWhereInput
 }
 
-export interface EmployeeEstimationUpdateManyWithoutOfferInput {
-  create?: EmployeeEstimationCreateWithoutOfferInput[] | EmployeeEstimationCreateWithoutOfferInput
-  connect?: EmployeeEstimationWhereUniqueInput[] | EmployeeEstimationWhereUniqueInput
-  disconnect?: EmployeeEstimationWhereUniqueInput[] | EmployeeEstimationWhereUniqueInput
-  delete?: EmployeeEstimationWhereUniqueInput[] | EmployeeEstimationWhereUniqueInput
-  update?: EmployeeEstimationUpdateWithWhereUniqueWithoutOfferInput[] | EmployeeEstimationUpdateWithWhereUniqueWithoutOfferInput
-  upsert?: EmployeeEstimationUpsertWithWhereUniqueWithoutOfferInput[] | EmployeeEstimationUpsertWithWhereUniqueWithoutOfferInput
+export interface SectionItemCreateWithoutOfferInput {
+  content?: String
+  endTime?: DateTime
+  h: Int
+  i: String
+  isDraggable?: Boolean
+  isResizable?: Boolean
+  maxH?: Int
+  maxW?: Int
+  minH?: Int
+  minW?: Int
+  moved?: Boolean
+  persons?: Int
+  price?: Float
+  static?: Boolean
+  startTime?: DateTime
+  title?: String
+  type?: SectionTypes
+  w: Int
+  x: Int
+  y?: Int
+  items?: ItemCreateManyWithoutSectionItemsInput
 }
 
-export interface EmployeeEstimationWhereInput {
-  AND?: EmployeeEstimationWhereInput[] | EmployeeEstimationWhereInput
-  OR?: EmployeeEstimationWhereInput[] | EmployeeEstimationWhereInput
-  NOT?: EmployeeEstimationWhereInput[] | EmployeeEstimationWhereInput
-  estimatedEndAt?: DateTime
-  estimatedEndAt_not?: DateTime
-  estimatedEndAt_in?: DateTime[] | DateTime
-  estimatedEndAt_not_in?: DateTime[] | DateTime
-  estimatedEndAt_lt?: DateTime
-  estimatedEndAt_lte?: DateTime
-  estimatedEndAt_gt?: DateTime
-  estimatedEndAt_gte?: DateTime
-  estimatedStartAt?: DateTime
-  estimatedStartAt_not?: DateTime
-  estimatedStartAt_in?: DateTime[] | DateTime
-  estimatedStartAt_not_in?: DateTime[] | DateTime
-  estimatedStartAt_lt?: DateTime
-  estimatedStartAt_lte?: DateTime
-  estimatedStartAt_gt?: DateTime
-  estimatedStartAt_gte?: DateTime
+export interface CategorySubscriptionWhereInput {
+  AND?: CategorySubscriptionWhereInput[] | CategorySubscriptionWhereInput
+  OR?: CategorySubscriptionWhereInput[] | CategorySubscriptionWhereInput
+  NOT?: CategorySubscriptionWhereInput[] | CategorySubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: CategoryWhereInput
+}
+
+export interface ItemCreateManyWithoutSectionItemsInput {
+  create?: ItemCreateWithoutSectionItemsInput[] | ItemCreateWithoutSectionItemsInput
+  connect?: ItemWhereUniqueInput[] | ItemWhereUniqueInput
+}
+
+export interface BudgetLineSubscriptionWhereInput {
+  AND?: BudgetLineSubscriptionWhereInput[] | BudgetLineSubscriptionWhereInput
+  OR?: BudgetLineSubscriptionWhereInput[] | BudgetLineSubscriptionWhereInput
+  NOT?: BudgetLineSubscriptionWhereInput[] | BudgetLineSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: BudgetLineWhereInput
+}
+
+export interface ItemCreateWithoutSectionItemsInput {
+  itemTranslations?: ItemTranslationCreateManyWithoutItemsInput
+  categories?: CategoryCreateManyWithoutItemsInput
+}
+
+export interface PlaceSubscriptionWhereInput {
+  AND?: PlaceSubscriptionWhereInput[] | PlaceSubscriptionWhereInput
+  OR?: PlaceSubscriptionWhereInput[] | PlaceSubscriptionWhereInput
+  NOT?: PlaceSubscriptionWhereInput[] | PlaceSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: PlaceWhereInput
+}
+
+export interface ItemTranslationCreateManyWithoutItemsInput {
+  create?: ItemTranslationCreateWithoutItemsInput[] | ItemTranslationCreateWithoutItemsInput
+  connect?: ItemTranslationWhereUniqueInput[] | ItemTranslationWhereUniqueInput
+}
+
+export interface ClientContactSubscriptionWhereInput {
+  AND?: ClientContactSubscriptionWhereInput[] | ClientContactSubscriptionWhereInput
+  OR?: ClientContactSubscriptionWhereInput[] | ClientContactSubscriptionWhereInput
+  NOT?: ClientContactSubscriptionWhereInput[] | ClientContactSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: ClientContactWhereInput
+}
+
+export interface ItemTranslationCreateWithoutItemsInput {
+  description?: String
+  internalDescription?: String
+  language: LanguageEnum
+  name?: String
+}
+
+export interface UserSubscriptionWhereInput {
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: UserWhereInput
+}
+
+export interface CategoryCreateManyWithoutItemsInput {
+  create?: CategoryCreateWithoutItemsInput[] | CategoryCreateWithoutItemsInput
+  connect?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
+}
+
+export interface ItemSubscriptionWhereInput {
+  AND?: ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput
+  OR?: ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput
+  NOT?: ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: ItemWhereInput
+}
+
+export interface CategoryCreateWithoutItemsInput {
+  name: String
+}
+
+export interface OfferSubscriptionWhereInput {
+  AND?: OfferSubscriptionWhereInput[] | OfferSubscriptionWhereInput
+  OR?: OfferSubscriptionWhereInput[] | OfferSubscriptionWhereInput
+  NOT?: OfferSubscriptionWhereInput[] | OfferSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: OfferWhereInput
+}
+
+export interface CommunicationCreateInput {
+  message: String
+  subject: String
+  channel: Channel
+  date: DateTime
+  gmtOffset: String
+  offer?: OfferCreateOneWithoutCommunicationsInput
+}
+
+export interface CommunicationSubscriptionWhereInput {
+  AND?: CommunicationSubscriptionWhereInput[] | CommunicationSubscriptionWhereInput
+  OR?: CommunicationSubscriptionWhereInput[] | CommunicationSubscriptionWhereInput
+  NOT?: CommunicationSubscriptionWhereInput[] | CommunicationSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: CommunicationWhereInput
+}
+
+export interface OfferCreateOneWithoutCommunicationsInput {
+  create?: OfferCreateWithoutCommunicationsInput
+  connect?: OfferWhereUniqueInput
+}
+
+export interface EventUpdateInput {
+  offer?: OfferUpdateOneWithoutEventInput
+  employees?: EmployeeUpdateManyWithoutEventInput
+  stuffs?: StuffUpdateManyInput
+  vehicles?: VehicleUpdateManyWithoutEventsInput
+}
+
+export interface OfferCreateWithoutCommunicationsInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address: String
+  city: String
+  endTime?: DateTime
+  gmtOffset: String
+  maxPersons?: Int
+  minPersons?: Int
+  name: String
+  postalCode: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  client?: ClientCreateOneWithoutOffersInput
+  event?: EventCreateOneWithoutOfferInput
+  budgetLines?: BudgetLineCreateManyWithoutOfferInput
+  clientContact?: ClientContactCreateOneWithoutOffersInput
+  employeeEstimations?: EmployeeEstimationCreateManyWithoutOfferInput
+  eventType?: EventTypeCreateOneWithoutOffersInput
+  place?: PlaceCreateOneWithoutOfferInput
+  sectionItems?: SectionItemCreateManyWithoutOfferInput
+}
+
+export interface OfferWhereInput {
+  AND?: OfferWhereInput[] | OfferWhereInput
+  OR?: OfferWhereInput[] | OfferWhereInput
+  NOT?: OfferWhereInput[] | OfferWhereInput
+  createdAt?: DateTime
+  createdAt_not?: DateTime
+  createdAt_in?: DateTime[] | DateTime
+  createdAt_not_in?: DateTime[] | DateTime
+  createdAt_lt?: DateTime
+  createdAt_lte?: DateTime
+  createdAt_gt?: DateTime
+  createdAt_gte?: DateTime
+  customMessage?: String
+  customMessage_not?: String
+  customMessage_in?: String[] | String
+  customMessage_not_in?: String[] | String
+  customMessage_lt?: String
+  customMessage_lte?: String
+  customMessage_gt?: String
+  customMessage_gte?: String
+  customMessage_contains?: String
+  customMessage_not_contains?: String
+  customMessage_starts_with?: String
+  customMessage_not_starts_with?: String
+  customMessage_ends_with?: String
+  customMessage_not_ends_with?: String
   id?: ID_Input
   id_not?: ID_Input
   id_in?: ID_Input[] | ID_Input
@@ -12436,43 +10661,961 @@ export interface EmployeeEstimationWhereInput {
   id_not_starts_with?: ID_Input
   id_ends_with?: ID_Input
   id_not_ends_with?: ID_Input
-  number?: Int
-  number_not?: Int
-  number_in?: Int[] | Int
-  number_not_in?: Int[] | Int
-  number_lt?: Int
-  number_lte?: Int
-  number_gt?: Int
-  number_gte?: Int
-  pricePerHour?: Float
-  pricePerHour_not?: Float
-  pricePerHour_in?: Float[] | Float
-  pricePerHour_not_in?: Float[] | Float
-  pricePerHour_lt?: Float
-  pricePerHour_lte?: Float
-  pricePerHour_gt?: Float
-  pricePerHour_gte?: Float
+  status?: StatusOffer
+  status_not?: StatusOffer
+  status_in?: StatusOffer[] | StatusOffer
+  status_not_in?: StatusOffer[] | StatusOffer
+  language?: LanguageEnum
+  language_not?: LanguageEnum
+  language_in?: LanguageEnum[] | LanguageEnum
+  language_not_in?: LanguageEnum[] | LanguageEnum
+  address?: String
+  address_not?: String
+  address_in?: String[] | String
+  address_not_in?: String[] | String
+  address_lt?: String
+  address_lte?: String
+  address_gt?: String
+  address_gte?: String
+  address_contains?: String
+  address_not_contains?: String
+  address_starts_with?: String
+  address_not_starts_with?: String
+  address_ends_with?: String
+  address_not_ends_with?: String
+  city?: String
+  city_not?: String
+  city_in?: String[] | String
+  city_not_in?: String[] | String
+  city_lt?: String
+  city_lte?: String
+  city_gt?: String
+  city_gte?: String
+  city_contains?: String
+  city_not_contains?: String
+  city_starts_with?: String
+  city_not_starts_with?: String
+  city_ends_with?: String
+  city_not_ends_with?: String
+  endTime?: DateTime
+  endTime_not?: DateTime
+  endTime_in?: DateTime[] | DateTime
+  endTime_not_in?: DateTime[] | DateTime
+  endTime_lt?: DateTime
+  endTime_lte?: DateTime
+  endTime_gt?: DateTime
+  endTime_gte?: DateTime
+  gmtOffset?: String
+  gmtOffset_not?: String
+  gmtOffset_in?: String[] | String
+  gmtOffset_not_in?: String[] | String
+  gmtOffset_lt?: String
+  gmtOffset_lte?: String
+  gmtOffset_gt?: String
+  gmtOffset_gte?: String
+  gmtOffset_contains?: String
+  gmtOffset_not_contains?: String
+  gmtOffset_starts_with?: String
+  gmtOffset_not_starts_with?: String
+  gmtOffset_ends_with?: String
+  gmtOffset_not_ends_with?: String
+  maxPersons?: Int
+  maxPersons_not?: Int
+  maxPersons_in?: Int[] | Int
+  maxPersons_not_in?: Int[] | Int
+  maxPersons_lt?: Int
+  maxPersons_lte?: Int
+  maxPersons_gt?: Int
+  maxPersons_gte?: Int
+  minPersons?: Int
+  minPersons_not?: Int
+  minPersons_in?: Int[] | Int
+  minPersons_not_in?: Int[] | Int
+  minPersons_lt?: Int
+  minPersons_lte?: Int
+  minPersons_gt?: Int
+  minPersons_gte?: Int
+  name?: String
+  name_not?: String
+  name_in?: String[] | String
+  name_not_in?: String[] | String
+  name_lt?: String
+  name_lte?: String
+  name_gt?: String
+  name_gte?: String
+  name_contains?: String
+  name_not_contains?: String
+  name_starts_with?: String
+  name_not_starts_with?: String
+  name_ends_with?: String
+  name_not_ends_with?: String
+  postalCode?: String
+  postalCode_not?: String
+  postalCode_in?: String[] | String
+  postalCode_not_in?: String[] | String
+  postalCode_lt?: String
+  postalCode_lte?: String
+  postalCode_gt?: String
+  postalCode_gte?: String
+  postalCode_contains?: String
+  postalCode_not_contains?: String
+  postalCode_starts_with?: String
+  postalCode_not_starts_with?: String
+  postalCode_ends_with?: String
+  postalCode_not_ends_with?: String
+  rev?: String
+  rev_not?: String
+  rev_in?: String[] | String
+  rev_not_in?: String[] | String
+  rev_lt?: String
+  rev_lte?: String
+  rev_gt?: String
+  rev_gte?: String
+  rev_contains?: String
+  rev_not_contains?: String
+  rev_starts_with?: String
+  rev_not_starts_with?: String
+  rev_ends_with?: String
+  rev_not_ends_with?: String
+  showTotalBudgetsPdf?: Boolean
+  showTotalBudgetsPdf_not?: Boolean
+  startTime?: DateTime
+  startTime_not?: DateTime
+  startTime_in?: DateTime[] | DateTime
+  startTime_not_in?: DateTime[] | DateTime
+  startTime_lt?: DateTime
+  startTime_lte?: DateTime
+  startTime_gt?: DateTime
+  startTime_gte?: DateTime
+  version?: Int
+  version_not?: Int
+  version_in?: Int[] | Int
+  version_not_in?: Int[] | Int
+  version_lt?: Int
+  version_lte?: Int
+  version_gt?: Int
+  version_gte?: Int
+  client?: ClientWhereInput
+  event?: EventWhereInput
+  budgetLines_every?: BudgetLineWhereInput
+  budgetLines_some?: BudgetLineWhereInput
+  budgetLines_none?: BudgetLineWhereInput
+  clientContact?: ClientContactWhereInput
+  communications_every?: CommunicationWhereInput
+  communications_some?: CommunicationWhereInput
+  communications_none?: CommunicationWhereInput
+  employeeEstimations_every?: EmployeeEstimationWhereInput
+  employeeEstimations_some?: EmployeeEstimationWhereInput
+  employeeEstimations_none?: EmployeeEstimationWhereInput
+  eventType?: EventTypeWhereInput
+  place?: PlaceWhereInput
+  sectionItems_every?: SectionItemWhereInput
+  sectionItems_some?: SectionItemWhereInput
+  sectionItems_none?: SectionItemWhereInput
+}
+
+export interface OfferCreateInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address: String
+  city: String
+  endTime?: DateTime
+  gmtOffset: String
+  maxPersons?: Int
+  minPersons?: Int
+  name: String
+  postalCode: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  client?: ClientCreateOneWithoutOffersInput
+  event?: EventCreateOneWithoutOfferInput
+  budgetLines?: BudgetLineCreateManyWithoutOfferInput
+  clientContact?: ClientContactCreateOneWithoutOffersInput
+  communications?: CommunicationCreateManyWithoutOfferInput
+  employeeEstimations?: EmployeeEstimationCreateManyWithoutOfferInput
+  eventType?: EventTypeCreateOneWithoutOffersInput
+  place?: PlaceCreateOneWithoutOfferInput
+  sectionItems?: SectionItemCreateManyWithoutOfferInput
+}
+
+export interface EventUpsertWithWhereUniqueWithoutVehiclesInput {
+  where: EventWhereUniqueInput
+  update: EventUpdateWithoutVehiclesDataInput
+  create: EventCreateWithoutVehiclesInput
+}
+
+export interface ItemTranslationCreateInput {
+  description?: String
+  internalDescription?: String
+  language: LanguageEnum
+  name?: String
+  items?: ItemCreateOneWithoutItemTranslationsInput
+}
+
+export interface CommunicationWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface ItemCreateOneWithoutItemTranslationsInput {
+  create?: ItemCreateWithoutItemTranslationsInput
+  connect?: ItemWhereUniqueInput
+}
+
+export interface ItemTranslationWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface ItemCreateWithoutItemTranslationsInput {
+  categories?: CategoryCreateManyWithoutItemsInput
+  sectionItems?: SectionItemCreateManyWithoutItemsInput
+}
+
+export interface UserWhereUniqueInput {
+  id?: ID_Input
+  email?: String
+}
+
+export interface SectionItemCreateManyWithoutItemsInput {
+  create?: SectionItemCreateWithoutItemsInput[] | SectionItemCreateWithoutItemsInput
+  connect?: SectionItemWhereUniqueInput[] | SectionItemWhereUniqueInput
+}
+
+export interface PlaceWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface SectionItemCreateWithoutItemsInput {
+  content?: String
+  endTime?: DateTime
+  h: Int
+  i: String
+  isDraggable?: Boolean
+  isResizable?: Boolean
+  maxH?: Int
+  maxW?: Int
+  minH?: Int
+  minW?: Int
+  moved?: Boolean
+  persons?: Int
+  price?: Float
+  static?: Boolean
+  startTime?: DateTime
+  title?: String
+  type?: SectionTypes
+  w: Int
+  x: Int
+  y?: Int
+  offer?: OfferCreateOneWithoutSectionItemsInput
+}
+
+export interface CategoryWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface OfferCreateOneWithoutSectionItemsInput {
+  create?: OfferCreateWithoutSectionItemsInput
+  connect?: OfferWhereUniqueInput
+}
+
+export interface EmployeeEstimationWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface OfferCreateWithoutSectionItemsInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address: String
+  city: String
+  endTime?: DateTime
+  gmtOffset: String
+  maxPersons?: Int
+  minPersons?: Int
+  name: String
+  postalCode: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  client?: ClientCreateOneWithoutOffersInput
+  event?: EventCreateOneWithoutOfferInput
+  budgetLines?: BudgetLineCreateManyWithoutOfferInput
+  clientContact?: ClientContactCreateOneWithoutOffersInput
+  communications?: CommunicationCreateManyWithoutOfferInput
+  employeeEstimations?: EmployeeEstimationCreateManyWithoutOfferInput
+  eventType?: EventTypeCreateOneWithoutOffersInput
+  place?: PlaceCreateOneWithoutOfferInput
+}
+
+export interface EventTypeWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface ItemCreateInput {
+  itemTranslations?: ItemTranslationCreateManyWithoutItemsInput
+  categories?: CategoryCreateManyWithoutItemsInput
+  sectionItems?: SectionItemCreateManyWithoutItemsInput
+}
+
+export interface PlaceContactWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface UserCreateInput {
+  role: Role
+  email: String
+  image?: String
+  name: String
+  password: String
+  language?: LanguageEnum
+  employee?: EmployeeCreateOneWithoutUserInput
+  jobs?: JobCreateManyWithoutUsersInput
+}
+
+export interface TaxWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface ClientContactCreateInput {
+  email: String
+  mobilePhone?: String
+  name: String
+  phoneNumber?: String
+  client?: ClientCreateOneWithoutClientContactsInput
+  offers?: OfferCreateManyWithoutClientContactInput
+}
+
+export interface StuffWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface PlaceCreateInput {
+  address: String
+  city: String
+  name: String
+  postalCode: String
+  country?: Country
+  note?: String
+  offer?: OfferCreateOneWithoutPlaceInput
+  placeContacts?: PlaceContactCreateManyWithoutPlaceInput
+}
+
+export interface EventUpdateWithoutVehiclesDataInput {
+  offer?: OfferUpdateOneWithoutEventInput
+  employees?: EmployeeUpdateManyWithoutEventInput
+  stuffs?: StuffUpdateManyInput
+}
+
+export interface OfferCreateOneWithoutPlaceInput {
+  create?: OfferCreateWithoutPlaceInput
+  connect?: OfferWhereUniqueInput
+}
+
+export interface EventUpdateManyWithoutVehiclesInput {
+  create?: EventCreateWithoutVehiclesInput[] | EventCreateWithoutVehiclesInput
+  connect?: EventWhereUniqueInput[] | EventWhereUniqueInput
+  disconnect?: EventWhereUniqueInput[] | EventWhereUniqueInput
+  delete?: EventWhereUniqueInput[] | EventWhereUniqueInput
+  update?: EventUpdateWithWhereUniqueWithoutVehiclesInput[] | EventUpdateWithWhereUniqueWithoutVehiclesInput
+  upsert?: EventUpsertWithWhereUniqueWithoutVehiclesInput[] | EventUpsertWithWhereUniqueWithoutVehiclesInput
+}
+
+export interface OfferCreateWithoutPlaceInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address: String
+  city: String
+  endTime?: DateTime
+  gmtOffset: String
+  maxPersons?: Int
+  minPersons?: Int
+  name: String
+  postalCode: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  client?: ClientCreateOneWithoutOffersInput
+  event?: EventCreateOneWithoutOfferInput
+  budgetLines?: BudgetLineCreateManyWithoutOfferInput
+  clientContact?: ClientContactCreateOneWithoutOffersInput
+  communications?: CommunicationCreateManyWithoutOfferInput
+  employeeEstimations?: EmployeeEstimationCreateManyWithoutOfferInput
+  eventType?: EventTypeCreateOneWithoutOffersInput
+  sectionItems?: SectionItemCreateManyWithoutOfferInput
+}
+
+export interface BudgetLineUpsertWithWhereUniqueWithoutTaxInput {
+  where: BudgetLineWhereUniqueInput
+  update: BudgetLineUpdateWithoutTaxDataInput
+  create: BudgetLineCreateWithoutTaxInput
+}
+
+export interface BudgetLineCreateInput {
+  description: String
+  quantity?: Int
   total?: Float
-  total_not?: Float
-  total_in?: Float[] | Float
-  total_not_in?: Float[] | Float
-  total_lt?: Float
-  total_lte?: Float
-  total_gt?: Float
-  total_gte?: Float
-  job?: JobWhereInput
-  offer?: OfferWhereInput
+  unitPrice?: Float
+  value: Float
+  offer?: OfferCreateOneWithoutBudgetLinesInput
+  tax?: TaxCreateOneWithoutBudgetLinesInput
 }
 
-export interface EmployeeEstimationUpdateWithWhereUniqueWithoutOfferInput {
-  where: EmployeeEstimationWhereUniqueInput
-  data: EmployeeEstimationUpdateWithoutOfferDataInput
+export interface BudgetLineUpdateWithWhereUniqueWithoutTaxInput {
+  where: BudgetLineWhereUniqueInput
+  data: BudgetLineUpdateWithoutTaxDataInput
 }
 
-export interface TaxWhereInput {
-  AND?: TaxWhereInput[] | TaxWhereInput
-  OR?: TaxWhereInput[] | TaxWhereInput
-  NOT?: TaxWhereInput[] | TaxWhereInput
+export interface OfferCreateOneWithoutBudgetLinesInput {
+  create?: OfferCreateWithoutBudgetLinesInput
+  connect?: OfferWhereUniqueInput
+}
+
+export interface TaxUpdateInput {
+  name?: String
+  value?: Float
+  budgetLines?: BudgetLineUpdateManyWithoutTaxInput
+}
+
+export interface OfferCreateWithoutBudgetLinesInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address: String
+  city: String
+  endTime?: DateTime
+  gmtOffset: String
+  maxPersons?: Int
+  minPersons?: Int
+  name: String
+  postalCode: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  client?: ClientCreateOneWithoutOffersInput
+  event?: EventCreateOneWithoutOfferInput
+  clientContact?: ClientContactCreateOneWithoutOffersInput
+  communications?: CommunicationCreateManyWithoutOfferInput
+  employeeEstimations?: EmployeeEstimationCreateManyWithoutOfferInput
+  eventType?: EventTypeCreateOneWithoutOffersInput
+  place?: PlaceCreateOneWithoutOfferInput
+  sectionItems?: SectionItemCreateManyWithoutOfferInput
+}
+
+export interface PlaceUpsertWithoutPlaceContactsInput {
+  update: PlaceUpdateWithoutPlaceContactsDataInput
+  create: PlaceCreateWithoutPlaceContactsInput
+}
+
+export interface CategoryCreateInput {
+  name: String
+  items?: ItemCreateManyWithoutCategoriesInput
+}
+
+export interface PlaceUpdateOneWithoutPlaceContactsInput {
+  create?: PlaceCreateWithoutPlaceContactsInput
+  connect?: PlaceWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: PlaceUpdateWithoutPlaceContactsDataInput
+  upsert?: PlaceUpsertWithoutPlaceContactsInput
+}
+
+export interface ItemCreateManyWithoutCategoriesInput {
+  create?: ItemCreateWithoutCategoriesInput[] | ItemCreateWithoutCategoriesInput
+  connect?: ItemWhereUniqueInput[] | ItemWhereUniqueInput
+}
+
+export interface JobUpdateInput {
+  name?: String
+  employeeEstimations?: EmployeeEstimationUpdateManyWithoutJobInput
+  employees?: EmployeeUpdateManyWithoutJobInput
+  users?: UserUpdateManyWithoutJobsInput
+}
+
+export interface ItemCreateWithoutCategoriesInput {
+  itemTranslations?: ItemTranslationCreateManyWithoutItemsInput
+  sectionItems?: SectionItemCreateManyWithoutItemsInput
+}
+
+export interface OfferUpdateWithoutEventTypeDataInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address?: String
+  city?: String
+  endTime?: DateTime
+  gmtOffset?: String
+  maxPersons?: Int
+  minPersons?: Int
+  name?: String
+  postalCode?: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  client?: ClientUpdateOneWithoutOffersInput
+  event?: EventUpdateOneWithoutOfferInput
+  budgetLines?: BudgetLineUpdateManyWithoutOfferInput
+  clientContact?: ClientContactUpdateOneWithoutOffersInput
+  communications?: CommunicationUpdateManyWithoutOfferInput
+  employeeEstimations?: EmployeeEstimationUpdateManyWithoutOfferInput
+  place?: PlaceUpdateOneWithoutOfferInput
+  sectionItems?: SectionItemUpdateManyWithoutOfferInput
+}
+
+export interface EmployeeCreateInput {
+  endedAt?: DateTime
+  estimatedEndAt: DateTime
+  estimatedStartAt: DateTime
+  startedAt?: DateTime
+  event?: EventCreateOneWithoutEmployeesInput
+  job?: JobCreateOneWithoutEmployeesInput
+  user?: UserCreateOneWithoutEmployeeInput
+}
+
+export interface OfferUpdateManyWithoutEventTypeInput {
+  create?: OfferCreateWithoutEventTypeInput[] | OfferCreateWithoutEventTypeInput
+  connect?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
+  disconnect?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
+  delete?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
+  update?: OfferUpdateWithWhereUniqueWithoutEventTypeInput[] | OfferUpdateWithWhereUniqueWithoutEventTypeInput
+  upsert?: OfferUpsertWithWhereUniqueWithoutEventTypeInput[] | OfferUpsertWithWhereUniqueWithoutEventTypeInput
+}
+
+export interface EmployeeEstimationCreateInput {
+  estimatedEndAt: DateTime
+  estimatedStartAt: DateTime
+  number: Int
+  pricePerHour?: Float
+  total?: Float
+  job?: JobCreateOneWithoutEmployeeEstimationsInput
+  offer?: OfferCreateOneWithoutEmployeeEstimationsInput
+}
+
+export interface StuffUpsertWithoutEventStuffsInput {
+  update: StuffUpdateWithoutEventStuffsDataInput
+  create: StuffCreateWithoutEventStuffsInput
+}
+
+export interface EventStuffCreateInput {
+  quantity?: Int
+  event?: EventCreateOneInput
+  stuff?: StuffCreateOneWithoutEventStuffsInput
+}
+
+export interface StuffUpdateOneWithoutEventStuffsInput {
+  create?: StuffCreateWithoutEventStuffsInput
+  connect?: StuffWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: StuffUpdateWithoutEventStuffsDataInput
+  upsert?: StuffUpsertWithoutEventStuffsInput
+}
+
+export interface StuffCreateOneWithoutEventStuffsInput {
+  create?: StuffCreateWithoutEventStuffsInput
+  connect?: StuffWhereUniqueInput
+}
+
+export interface EmployeeEstimationUpdateInput {
+  estimatedEndAt?: DateTime
+  estimatedStartAt?: DateTime
+  number?: Int
+  pricePerHour?: Float
+  total?: Float
+  job?: JobUpdateOneWithoutEmployeeEstimationsInput
+  offer?: OfferUpdateOneWithoutEmployeeEstimationsInput
+}
+
+export interface StuffCreateWithoutEventStuffsInput {
+  name: String
+}
+
+export interface ItemUpsertWithWhereUniqueWithoutCategoriesInput {
+  where: ItemWhereUniqueInput
+  update: ItemUpdateWithoutCategoriesDataInput
+  create: ItemCreateWithoutCategoriesInput
+}
+
+export interface EventTypeCreateInput {
+  name: String
+  offers?: OfferCreateManyWithoutEventTypeInput
+}
+
+export interface ItemUpdateWithWhereUniqueWithoutCategoriesInput {
+  where: ItemWhereUniqueInput
+  data: ItemUpdateWithoutCategoriesDataInput
+}
+
+export interface OfferCreateManyWithoutEventTypeInput {
+  create?: OfferCreateWithoutEventTypeInput[] | OfferCreateWithoutEventTypeInput
+  connect?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
+}
+
+export interface CategoryUpdateInput {
+  name?: String
+  items?: ItemUpdateManyWithoutCategoriesInput
+}
+
+export interface OfferCreateWithoutEventTypeInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address: String
+  city: String
+  endTime?: DateTime
+  gmtOffset: String
+  maxPersons?: Int
+  minPersons?: Int
+  name: String
+  postalCode: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  client?: ClientCreateOneWithoutOffersInput
+  event?: EventCreateOneWithoutOfferInput
+  budgetLines?: BudgetLineCreateManyWithoutOfferInput
+  clientContact?: ClientContactCreateOneWithoutOffersInput
+  communications?: CommunicationCreateManyWithoutOfferInput
+  employeeEstimations?: EmployeeEstimationCreateManyWithoutOfferInput
+  place?: PlaceCreateOneWithoutOfferInput
+  sectionItems?: SectionItemCreateManyWithoutOfferInput
+}
+
+export interface OfferUpdateWithoutBudgetLinesDataInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address?: String
+  city?: String
+  endTime?: DateTime
+  gmtOffset?: String
+  maxPersons?: Int
+  minPersons?: Int
+  name?: String
+  postalCode?: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  client?: ClientUpdateOneWithoutOffersInput
+  event?: EventUpdateOneWithoutOfferInput
+  clientContact?: ClientContactUpdateOneWithoutOffersInput
+  communications?: CommunicationUpdateManyWithoutOfferInput
+  employeeEstimations?: EmployeeEstimationUpdateManyWithoutOfferInput
+  eventType?: EventTypeUpdateOneWithoutOffersInput
+  place?: PlaceUpdateOneWithoutOfferInput
+  sectionItems?: SectionItemUpdateManyWithoutOfferInput
+}
+
+export interface EmployeeUpsertWithWhereUniqueWithoutEventInput {
+  where: EmployeeWhereUniqueInput
+  update: EmployeeUpdateWithoutEventDataInput
+  create: EmployeeCreateWithoutEventInput
+}
+
+export interface BudgetLineUpdateInput {
+  description?: String
+  quantity?: Int
+  total?: Float
+  unitPrice?: Float
+  value?: Float
+  offer?: OfferUpdateOneWithoutBudgetLinesInput
+  tax?: TaxUpdateOneWithoutBudgetLinesInput
+}
+
+export interface PlaceContactCreateInput {
+  email?: String
+  mobilePhone?: String
+  name: String
+  phoneNumber?: String
+  place?: PlaceCreateOneWithoutPlaceContactsInput
+}
+
+export interface OfferUpdateWithoutPlaceDataInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address?: String
+  city?: String
+  endTime?: DateTime
+  gmtOffset?: String
+  maxPersons?: Int
+  minPersons?: Int
+  name?: String
+  postalCode?: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  client?: ClientUpdateOneWithoutOffersInput
+  event?: EventUpdateOneWithoutOfferInput
+  budgetLines?: BudgetLineUpdateManyWithoutOfferInput
+  clientContact?: ClientContactUpdateOneWithoutOffersInput
+  communications?: CommunicationUpdateManyWithoutOfferInput
+  employeeEstimations?: EmployeeEstimationUpdateManyWithoutOfferInput
+  eventType?: EventTypeUpdateOneWithoutOffersInput
+  sectionItems?: SectionItemUpdateManyWithoutOfferInput
+}
+
+export interface PlaceCreateOneWithoutPlaceContactsInput {
+  create?: PlaceCreateWithoutPlaceContactsInput
+  connect?: PlaceWhereUniqueInput
+}
+
+export interface PlaceUpdateInput {
+  address?: String
+  city?: String
+  name?: String
+  postalCode?: String
+  country?: Country
+  note?: String
+  offer?: OfferUpdateOneWithoutPlaceInput
+  placeContacts?: PlaceContactUpdateManyWithoutPlaceInput
+}
+
+export interface PlaceCreateWithoutPlaceContactsInput {
+  address: String
+  city: String
+  name: String
+  postalCode: String
+  country?: Country
+  note?: String
+  offer?: OfferCreateOneWithoutPlaceInput
+}
+
+export interface UserUpdateInput {
+  role?: Role
+  email?: String
+  image?: String
+  name?: String
+  password?: String
+  language?: LanguageEnum
+  employee?: EmployeeUpdateOneWithoutUserInput
+  jobs?: JobUpdateManyWithoutUsersInput
+}
+
+export interface SectionItemCreateInput {
+  content?: String
+  endTime?: DateTime
+  h: Int
+  i: String
+  isDraggable?: Boolean
+  isResizable?: Boolean
+  maxH?: Int
+  maxW?: Int
+  minH?: Int
+  minW?: Int
+  moved?: Boolean
+  persons?: Int
+  price?: Float
+  static?: Boolean
+  startTime?: DateTime
+  title?: String
+  type?: SectionTypes
+  w: Int
+  x: Int
+  y?: Int
+  offer?: OfferCreateOneWithoutSectionItemsInput
+  items?: ItemCreateManyWithoutSectionItemsInput
+}
+
+export interface ItemUpsertWithoutItemTranslationsInput {
+  update: ItemUpdateWithoutItemTranslationsDataInput
+  create: ItemCreateWithoutItemTranslationsInput
+}
+
+export interface TaxCreateInput {
+  name: String
+  value: Float
+  budgetLines?: BudgetLineCreateManyWithoutTaxInput
+}
+
+export interface OfferUpsertWithoutSectionItemsInput {
+  update: OfferUpdateWithoutSectionItemsDataInput
+  create: OfferCreateWithoutSectionItemsInput
+}
+
+export interface BudgetLineCreateManyWithoutTaxInput {
+  create?: BudgetLineCreateWithoutTaxInput[] | BudgetLineCreateWithoutTaxInput
+  connect?: BudgetLineWhereUniqueInput[] | BudgetLineWhereUniqueInput
+}
+
+export interface OfferUpdateOneWithoutSectionItemsInput {
+  create?: OfferCreateWithoutSectionItemsInput
+  connect?: OfferWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: OfferUpdateWithoutSectionItemsDataInput
+  upsert?: OfferUpsertWithoutSectionItemsInput
+}
+
+export interface BudgetLineCreateWithoutTaxInput {
+  description: String
+  quantity?: Int
+  total?: Float
+  unitPrice?: Float
+  value: Float
+  offer?: OfferCreateOneWithoutBudgetLinesInput
+}
+
+export interface SectionItemUpdateWithWhereUniqueWithoutItemsInput {
+  where: SectionItemWhereUniqueInput
+  data: SectionItemUpdateWithoutItemsDataInput
+}
+
+export interface VehicleCreateInput {
+  color?: String
+  description?: String
+  name: String
+  plate: String
+  year?: Int
+  events?: EventCreateManyWithoutVehiclesInput
+}
+
+export interface ItemUpdateWithoutItemTranslationsDataInput {
+  categories?: CategoryUpdateManyWithoutItemsInput
+  sectionItems?: SectionItemUpdateManyWithoutItemsInput
+}
+
+export interface EventCreateManyWithoutVehiclesInput {
+  create?: EventCreateWithoutVehiclesInput[] | EventCreateWithoutVehiclesInput
+  connect?: EventWhereUniqueInput[] | EventWhereUniqueInput
+}
+
+export interface ItemTranslationUpdateInput {
+  description?: String
+  internalDescription?: String
+  language?: LanguageEnum
+  name?: String
+  items?: ItemUpdateOneWithoutItemTranslationsInput
+}
+
+export interface EventCreateWithoutVehiclesInput {
+  offer?: OfferCreateOneWithoutEventInput
+  employees?: EmployeeCreateManyWithoutEventInput
+  stuffs?: StuffCreateManyInput
+}
+
+export interface OfferUpsertWithoutCommunicationsInput {
+  update: OfferUpdateWithoutCommunicationsDataInput
+  create: OfferCreateWithoutCommunicationsInput
+}
+
+export interface ClientUpdateInput {
+  address?: String
+  email?: String
+  name?: String
+  phone?: String
+  tva?: String
+  language?: LanguageEnum
+  type?: ClientType
+  events?: EventUpdateManyInput
+  offers?: OfferUpdateManyWithoutClientInput
+  clientContacts?: ClientContactUpdateManyWithoutClientInput
+}
+
+export interface OfferUpdateOneWithoutCommunicationsInput {
+  create?: OfferCreateWithoutCommunicationsInput
+  connect?: OfferWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: OfferUpdateWithoutCommunicationsDataInput
+  upsert?: OfferUpsertWithoutCommunicationsInput
+}
+
+export interface EventUpdateManyInput {
+  create?: EventCreateInput[] | EventCreateInput
+  connect?: EventWhereUniqueInput[] | EventWhereUniqueInput
+  disconnect?: EventWhereUniqueInput[] | EventWhereUniqueInput
+  delete?: EventWhereUniqueInput[] | EventWhereUniqueInput
+  update?: EventUpdateWithWhereUniqueNestedInput[] | EventUpdateWithWhereUniqueNestedInput
+  upsert?: EventUpsertWithWhereUniqueNestedInput[] | EventUpsertWithWhereUniqueNestedInput
+}
+
+export interface EventUpsertWithWhereUniqueNestedInput {
+  where: EventWhereUniqueInput
+  update: EventUpdateDataInput
+  create: EventCreateInput
+}
+
+export interface EventUpdateWithWhereUniqueNestedInput {
+  where: EventWhereUniqueInput
+  data: EventUpdateDataInput
+}
+
+export interface ClientUpsertWithoutOffersInput {
+  update: ClientUpdateWithoutOffersDataInput
+  create: ClientCreateWithoutOffersInput
+}
+
+export interface EventUpdateDataInput {
+  offer?: OfferUpdateOneWithoutEventInput
+  employees?: EmployeeUpdateManyWithoutEventInput
+  stuffs?: StuffUpdateManyInput
+  vehicles?: VehicleUpdateManyWithoutEventsInput
+}
+
+export interface OfferUpsertWithWhereUniqueWithoutClientContactInput {
+  where: OfferWhereUniqueInput
+  update: OfferUpdateWithoutClientContactDataInput
+  create: OfferCreateWithoutClientContactInput
+}
+
+export interface EventStuffWhereInput {
+  AND?: EventStuffWhereInput[] | EventStuffWhereInput
+  OR?: EventStuffWhereInput[] | EventStuffWhereInput
+  NOT?: EventStuffWhereInput[] | EventStuffWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  quantity?: Int
+  quantity_not?: Int
+  quantity_in?: Int[] | Int
+  quantity_not_in?: Int[] | Int
+  quantity_lt?: Int
+  quantity_lte?: Int
+  quantity_gt?: Int
+  quantity_gte?: Int
+  event?: EventWhereInput
+  stuff?: StuffWhereInput
+}
+
+export interface ClientCreateInput {
+  address?: String
+  email: String
+  name: String
+  phone: String
+  tva?: String
+  language?: LanguageEnum
+  type?: ClientType
+  events?: EventCreateManyInput
+  offers?: OfferCreateManyWithoutClientInput
+  clientContacts?: ClientContactCreateManyWithoutClientInput
+}
+
+export interface CategoryWhereInput {
+  AND?: CategoryWhereInput[] | CategoryWhereInput
+  OR?: CategoryWhereInput[] | CategoryWhereInput
+  NOT?: CategoryWhereInput[] | CategoryWhereInput
   id?: ID_Input
   id_not?: ID_Input
   id_in?: ID_Input[] | ID_Input
@@ -12501,32 +11644,490 @@ export interface TaxWhereInput {
   name_not_starts_with?: String
   name_ends_with?: String
   name_not_ends_with?: String
-  value?: Float
-  value_not?: Float
-  value_in?: Float[] | Float
-  value_not_in?: Float[] | Float
-  value_lt?: Float
-  value_lte?: Float
-  value_gt?: Float
-  value_gte?: Float
-  budgetLines_every?: BudgetLineWhereInput
-  budgetLines_some?: BudgetLineWhereInput
-  budgetLines_none?: BudgetLineWhereInput
+  items_every?: ItemWhereInput
+  items_some?: ItemWhereInput
+  items_none?: ItemWhereInput
 }
 
-export interface EmployeeEstimationUpdateWithoutOfferDataInput {
+export interface EventCreateInput {
+  offer?: OfferCreateOneWithoutEventInput
+  employees?: EmployeeCreateManyWithoutEventInput
+  stuffs?: StuffCreateManyInput
+  vehicles?: VehicleCreateManyWithoutEventsInput
+}
+
+export interface OfferCreateWithoutEventInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address: String
+  city: String
+  endTime?: DateTime
+  gmtOffset: String
+  maxPersons?: Int
+  minPersons?: Int
+  name: String
+  postalCode: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  client?: ClientCreateOneWithoutOffersInput
+  budgetLines?: BudgetLineCreateManyWithoutOfferInput
+  clientContact?: ClientContactCreateOneWithoutOffersInput
+  communications?: CommunicationCreateManyWithoutOfferInput
+  employeeEstimations?: EmployeeEstimationCreateManyWithoutOfferInput
+  eventType?: EventTypeCreateOneWithoutOffersInput
+  place?: PlaceCreateOneWithoutOfferInput
+  sectionItems?: SectionItemCreateManyWithoutOfferInput
+}
+
+export interface ClientCreateWithoutOffersInput {
+  address?: String
+  email: String
+  name: String
+  phone: String
+  tva?: String
+  language?: LanguageEnum
+  type?: ClientType
+  events?: EventCreateManyInput
+  clientContacts?: ClientContactCreateManyWithoutClientInput
+}
+
+export interface ClientUpdateWithoutOffersDataInput {
+  address?: String
+  email?: String
+  name?: String
+  phone?: String
+  tva?: String
+  language?: LanguageEnum
+  type?: ClientType
+  events?: EventUpdateManyInput
+  clientContacts?: ClientContactUpdateManyWithoutClientInput
+}
+
+export interface ClientContactCreateWithoutClientInput {
+  email: String
+  mobilePhone?: String
+  name: String
+  phoneNumber?: String
+  offers?: OfferCreateManyWithoutClientContactInput
+}
+
+export interface ClientContactUpdateManyWithoutClientInput {
+  create?: ClientContactCreateWithoutClientInput[] | ClientContactCreateWithoutClientInput
+  connect?: ClientContactWhereUniqueInput[] | ClientContactWhereUniqueInput
+  disconnect?: ClientContactWhereUniqueInput[] | ClientContactWhereUniqueInput
+  delete?: ClientContactWhereUniqueInput[] | ClientContactWhereUniqueInput
+  update?: ClientContactUpdateWithWhereUniqueWithoutClientInput[] | ClientContactUpdateWithWhereUniqueWithoutClientInput
+  upsert?: ClientContactUpsertWithWhereUniqueWithoutClientInput[] | ClientContactUpsertWithWhereUniqueWithoutClientInput
+}
+
+export interface OfferCreateWithoutClientContactInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address: String
+  city: String
+  endTime?: DateTime
+  gmtOffset: String
+  maxPersons?: Int
+  minPersons?: Int
+  name: String
+  postalCode: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  client?: ClientCreateOneWithoutOffersInput
+  event?: EventCreateOneWithoutOfferInput
+  budgetLines?: BudgetLineCreateManyWithoutOfferInput
+  communications?: CommunicationCreateManyWithoutOfferInput
+  employeeEstimations?: EmployeeEstimationCreateManyWithoutOfferInput
+  eventType?: EventTypeCreateOneWithoutOffersInput
+  place?: PlaceCreateOneWithoutOfferInput
+  sectionItems?: SectionItemCreateManyWithoutOfferInput
+}
+
+export interface ClientContactUpdateWithWhereUniqueWithoutClientInput {
+  where: ClientContactWhereUniqueInput
+  data: ClientContactUpdateWithoutClientDataInput
+}
+
+export interface EventCreateWithoutOfferInput {
+  employees?: EmployeeCreateManyWithoutEventInput
+  stuffs?: StuffCreateManyInput
+  vehicles?: VehicleCreateManyWithoutEventsInput
+}
+
+export interface ClientContactUpdateWithoutClientDataInput {
+  email?: String
+  mobilePhone?: String
+  name?: String
+  phoneNumber?: String
+  offers?: OfferUpdateManyWithoutClientContactInput
+}
+
+export interface EmployeeCreateWithoutEventInput {
+  endedAt?: DateTime
+  estimatedEndAt: DateTime
+  estimatedStartAt: DateTime
+  startedAt?: DateTime
+  job?: JobCreateOneWithoutEmployeesInput
+  user?: UserCreateOneWithoutEmployeeInput
+}
+
+export interface OfferUpdateManyWithoutClientContactInput {
+  create?: OfferCreateWithoutClientContactInput[] | OfferCreateWithoutClientContactInput
+  connect?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
+  disconnect?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
+  delete?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
+  update?: OfferUpdateWithWhereUniqueWithoutClientContactInput[] | OfferUpdateWithWhereUniqueWithoutClientContactInput
+  upsert?: OfferUpsertWithWhereUniqueWithoutClientContactInput[] | OfferUpsertWithWhereUniqueWithoutClientContactInput
+}
+
+export interface JobCreateWithoutEmployeesInput {
+  name: String
+  employeeEstimations?: EmployeeEstimationCreateManyWithoutJobInput
+  users?: UserCreateManyWithoutJobsInput
+}
+
+export interface OfferUpdateWithWhereUniqueWithoutClientContactInput {
+  where: OfferWhereUniqueInput
+  data: OfferUpdateWithoutClientContactDataInput
+}
+
+export interface EmployeeEstimationCreateWithoutJobInput {
+  estimatedEndAt: DateTime
+  estimatedStartAt: DateTime
+  number: Int
+  pricePerHour?: Float
+  total?: Float
+  offer?: OfferCreateOneWithoutEmployeeEstimationsInput
+}
+
+export interface OfferUpdateWithoutClientContactDataInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address?: String
+  city?: String
+  endTime?: DateTime
+  gmtOffset?: String
+  maxPersons?: Int
+  minPersons?: Int
+  name?: String
+  postalCode?: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  client?: ClientUpdateOneWithoutOffersInput
+  event?: EventUpdateOneWithoutOfferInput
+  budgetLines?: BudgetLineUpdateManyWithoutOfferInput
+  communications?: CommunicationUpdateManyWithoutOfferInput
+  employeeEstimations?: EmployeeEstimationUpdateManyWithoutOfferInput
+  eventType?: EventTypeUpdateOneWithoutOffersInput
+  place?: PlaceUpdateOneWithoutOfferInput
+  sectionItems?: SectionItemUpdateManyWithoutOfferInput
+}
+
+export interface OfferCreateWithoutEmployeeEstimationsInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address: String
+  city: String
+  endTime?: DateTime
+  gmtOffset: String
+  maxPersons?: Int
+  minPersons?: Int
+  name: String
+  postalCode: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  client?: ClientCreateOneWithoutOffersInput
+  event?: EventCreateOneWithoutOfferInput
+  budgetLines?: BudgetLineCreateManyWithoutOfferInput
+  clientContact?: ClientContactCreateOneWithoutOffersInput
+  communications?: CommunicationCreateManyWithoutOfferInput
+  eventType?: EventTypeCreateOneWithoutOffersInput
+  place?: PlaceCreateOneWithoutOfferInput
+  sectionItems?: SectionItemCreateManyWithoutOfferInput
+}
+
+export interface EventUpdateOneWithoutOfferInput {
+  create?: EventCreateWithoutOfferInput
+  connect?: EventWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: EventUpdateWithoutOfferDataInput
+  upsert?: EventUpsertWithoutOfferInput
+}
+
+export interface BudgetLineCreateWithoutOfferInput {
+  description: String
+  quantity?: Int
+  total?: Float
+  unitPrice?: Float
+  value: Float
+  tax?: TaxCreateOneWithoutBudgetLinesInput
+}
+
+export interface EventUpdateWithoutOfferDataInput {
+  employees?: EmployeeUpdateManyWithoutEventInput
+  stuffs?: StuffUpdateManyInput
+  vehicles?: VehicleUpdateManyWithoutEventsInput
+}
+
+export interface TaxCreateWithoutBudgetLinesInput {
+  name: String
+  value: Float
+}
+
+export interface EmployeeUpdateManyWithoutEventInput {
+  create?: EmployeeCreateWithoutEventInput[] | EmployeeCreateWithoutEventInput
+  connect?: EmployeeWhereUniqueInput[] | EmployeeWhereUniqueInput
+  disconnect?: EmployeeWhereUniqueInput[] | EmployeeWhereUniqueInput
+  delete?: EmployeeWhereUniqueInput[] | EmployeeWhereUniqueInput
+  update?: EmployeeUpdateWithWhereUniqueWithoutEventInput[] | EmployeeUpdateWithWhereUniqueWithoutEventInput
+  upsert?: EmployeeUpsertWithWhereUniqueWithoutEventInput[] | EmployeeUpsertWithWhereUniqueWithoutEventInput
+}
+
+export interface ClientContactCreateWithoutOffersInput {
+  email: String
+  mobilePhone?: String
+  name: String
+  phoneNumber?: String
+  client?: ClientCreateOneWithoutClientContactsInput
+}
+
+export interface EmployeeUpdateWithWhereUniqueWithoutEventInput {
+  where: EmployeeWhereUniqueInput
+  data: EmployeeUpdateWithoutEventDataInput
+}
+
+export interface ClientCreateWithoutClientContactsInput {
+  address?: String
+  email: String
+  name: String
+  phone: String
+  tva?: String
+  language?: LanguageEnum
+  type?: ClientType
+  events?: EventCreateManyInput
+  offers?: OfferCreateManyWithoutClientInput
+}
+
+export interface EmployeeUpdateWithoutEventDataInput {
+  endedAt?: DateTime
+  estimatedEndAt?: DateTime
+  estimatedStartAt?: DateTime
+  startedAt?: DateTime
+  job?: JobUpdateOneWithoutEmployeesInput
+  user?: UserUpdateOneWithoutEmployeeInput
+}
+
+export interface OfferCreateWithoutClientInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address: String
+  city: String
+  endTime?: DateTime
+  gmtOffset: String
+  maxPersons?: Int
+  minPersons?: Int
+  name: String
+  postalCode: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  event?: EventCreateOneWithoutOfferInput
+  budgetLines?: BudgetLineCreateManyWithoutOfferInput
+  clientContact?: ClientContactCreateOneWithoutOffersInput
+  communications?: CommunicationCreateManyWithoutOfferInput
+  employeeEstimations?: EmployeeEstimationCreateManyWithoutOfferInput
+  eventType?: EventTypeCreateOneWithoutOffersInput
+  place?: PlaceCreateOneWithoutOfferInput
+  sectionItems?: SectionItemCreateManyWithoutOfferInput
+}
+
+export interface JobUpdateOneWithoutEmployeesInput {
+  create?: JobCreateWithoutEmployeesInput
+  connect?: JobWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: JobUpdateWithoutEmployeesDataInput
+  upsert?: JobUpsertWithoutEmployeesInput
+}
+
+export interface CommunicationCreateWithoutOfferInput {
+  message: String
+  subject: String
+  channel: Channel
+  date: DateTime
+  gmtOffset: String
+}
+
+export interface JobUpdateWithoutEmployeesDataInput {
+  name?: String
+  employeeEstimations?: EmployeeEstimationUpdateManyWithoutJobInput
+  users?: UserUpdateManyWithoutJobsInput
+}
+
+export interface EmployeeEstimationCreateWithoutOfferInput {
+  estimatedEndAt: DateTime
+  estimatedStartAt: DateTime
+  number: Int
+  pricePerHour?: Float
+  total?: Float
+  job?: JobCreateOneWithoutEmployeeEstimationsInput
+}
+
+export interface EmployeeEstimationUpdateManyWithoutJobInput {
+  create?: EmployeeEstimationCreateWithoutJobInput[] | EmployeeEstimationCreateWithoutJobInput
+  connect?: EmployeeEstimationWhereUniqueInput[] | EmployeeEstimationWhereUniqueInput
+  disconnect?: EmployeeEstimationWhereUniqueInput[] | EmployeeEstimationWhereUniqueInput
+  delete?: EmployeeEstimationWhereUniqueInput[] | EmployeeEstimationWhereUniqueInput
+  update?: EmployeeEstimationUpdateWithWhereUniqueWithoutJobInput[] | EmployeeEstimationUpdateWithWhereUniqueWithoutJobInput
+  upsert?: EmployeeEstimationUpsertWithWhereUniqueWithoutJobInput[] | EmployeeEstimationUpsertWithWhereUniqueWithoutJobInput
+}
+
+export interface JobCreateWithoutEmployeeEstimationsInput {
+  name: String
+  employees?: EmployeeCreateManyWithoutJobInput
+  users?: UserCreateManyWithoutJobsInput
+}
+
+export interface EmployeeEstimationUpdateWithWhereUniqueWithoutJobInput {
+  where: EmployeeEstimationWhereUniqueInput
+  data: EmployeeEstimationUpdateWithoutJobDataInput
+}
+
+export interface EmployeeCreateWithoutJobInput {
+  endedAt?: DateTime
+  estimatedEndAt: DateTime
+  estimatedStartAt: DateTime
+  startedAt?: DateTime
+  event?: EventCreateOneWithoutEmployeesInput
+  user?: UserCreateOneWithoutEmployeeInput
+}
+
+export interface EmployeeEstimationUpdateWithoutJobDataInput {
   estimatedEndAt?: DateTime
   estimatedStartAt?: DateTime
   number?: Int
   pricePerHour?: Float
   total?: Float
-  job?: JobUpdateOneWithoutEmployeeEstimationsInput
+  offer?: OfferUpdateOneWithoutEmployeeEstimationsInput
 }
 
-export interface BudgetLineWhereInput {
-  AND?: BudgetLineWhereInput[] | BudgetLineWhereInput
-  OR?: BudgetLineWhereInput[] | BudgetLineWhereInput
-  NOT?: BudgetLineWhereInput[] | BudgetLineWhereInput
+export interface EventCreateWithoutEmployeesInput {
+  offer?: OfferCreateOneWithoutEventInput
+  stuffs?: StuffCreateManyInput
+  vehicles?: VehicleCreateManyWithoutEventsInput
+}
+
+export interface OfferUpdateOneWithoutEmployeeEstimationsInput {
+  create?: OfferCreateWithoutEmployeeEstimationsInput
+  connect?: OfferWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: OfferUpdateWithoutEmployeeEstimationsDataInput
+  upsert?: OfferUpsertWithoutEmployeeEstimationsInput
+}
+
+export interface StuffCreateInput {
+  name: String
+  eventStuffs?: EventStuffCreateManyWithoutStuffInput
+}
+
+export interface OfferUpdateWithoutEmployeeEstimationsDataInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address?: String
+  city?: String
+  endTime?: DateTime
+  gmtOffset?: String
+  maxPersons?: Int
+  minPersons?: Int
+  name?: String
+  postalCode?: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  client?: ClientUpdateOneWithoutOffersInput
+  event?: EventUpdateOneWithoutOfferInput
+  budgetLines?: BudgetLineUpdateManyWithoutOfferInput
+  clientContact?: ClientContactUpdateOneWithoutOffersInput
+  communications?: CommunicationUpdateManyWithoutOfferInput
+  eventType?: EventTypeUpdateOneWithoutOffersInput
+  place?: PlaceUpdateOneWithoutOfferInput
+  sectionItems?: SectionItemUpdateManyWithoutOfferInput
+}
+
+export interface EventStuffCreateWithoutStuffInput {
+  quantity?: Int
+  event?: EventCreateOneInput
+}
+
+export interface BudgetLineUpdateManyWithoutOfferInput {
+  create?: BudgetLineCreateWithoutOfferInput[] | BudgetLineCreateWithoutOfferInput
+  connect?: BudgetLineWhereUniqueInput[] | BudgetLineWhereUniqueInput
+  disconnect?: BudgetLineWhereUniqueInput[] | BudgetLineWhereUniqueInput
+  delete?: BudgetLineWhereUniqueInput[] | BudgetLineWhereUniqueInput
+  update?: BudgetLineUpdateWithWhereUniqueWithoutOfferInput[] | BudgetLineUpdateWithWhereUniqueWithoutOfferInput
+  upsert?: BudgetLineUpsertWithWhereUniqueWithoutOfferInput[] | BudgetLineUpsertWithWhereUniqueWithoutOfferInput
+}
+
+export interface VehicleCreateManyWithoutEventsInput {
+  create?: VehicleCreateWithoutEventsInput[] | VehicleCreateWithoutEventsInput
+  connect?: VehicleWhereUniqueInput[] | VehicleWhereUniqueInput
+}
+
+export interface BudgetLineUpdateWithWhereUniqueWithoutOfferInput {
+  where: BudgetLineWhereUniqueInput
+  data: BudgetLineUpdateWithoutOfferDataInput
+}
+
+export interface UserCreateOneWithoutEmployeeInput {
+  create?: UserCreateWithoutEmployeeInput
+  connect?: UserWhereUniqueInput
+}
+
+export interface BudgetLineUpdateWithoutOfferDataInput {
+  description?: String
+  quantity?: Int
+  total?: Float
+  unitPrice?: Float
+  value?: Float
+  tax?: TaxUpdateOneWithoutBudgetLinesInput
+}
+
+export interface JobCreateManyWithoutUsersInput {
+  create?: JobCreateWithoutUsersInput[] | JobCreateWithoutUsersInput
+  connect?: JobWhereUniqueInput[] | JobWhereUniqueInput
+}
+
+export interface TaxUpdateOneWithoutBudgetLinesInput {
+  create?: TaxCreateWithoutBudgetLinesInput
+  connect?: TaxWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: TaxUpdateWithoutBudgetLinesDataInput
+  upsert?: TaxUpsertWithoutBudgetLinesInput
+}
+
+export interface ItemTranslationWhereInput {
+  AND?: ItemTranslationWhereInput[] | ItemTranslationWhereInput
+  OR?: ItemTranslationWhereInput[] | ItemTranslationWhereInput
+  NOT?: ItemTranslationWhereInput[] | ItemTranslationWhereInput
   description?: String
   description_not?: String
   description_in?: String[] | String
@@ -12555,627 +12156,163 @@ export interface BudgetLineWhereInput {
   id_not_starts_with?: ID_Input
   id_ends_with?: ID_Input
   id_not_ends_with?: ID_Input
-  quantity?: Int
-  quantity_not?: Int
-  quantity_in?: Int[] | Int
-  quantity_not_in?: Int[] | Int
-  quantity_lt?: Int
-  quantity_lte?: Int
-  quantity_gt?: Int
-  quantity_gte?: Int
-  total?: Float
-  total_not?: Float
-  total_in?: Float[] | Float
-  total_not_in?: Float[] | Float
-  total_lt?: Float
-  total_lte?: Float
-  total_gt?: Float
-  total_gte?: Float
-  unitPrice?: Float
-  unitPrice_not?: Float
-  unitPrice_in?: Float[] | Float
-  unitPrice_not_in?: Float[] | Float
-  unitPrice_lt?: Float
-  unitPrice_lte?: Float
-  unitPrice_gt?: Float
-  unitPrice_gte?: Float
-  value?: Float
-  value_not?: Float
-  value_in?: Float[] | Float
-  value_not_in?: Float[] | Float
-  value_lt?: Float
-  value_lte?: Float
-  value_gt?: Float
-  value_gte?: Float
-  offer?: OfferWhereInput
-  tax?: TaxWhereInput
-}
-
-export interface JobUpdateOneWithoutEmployeeEstimationsInput {
-  create?: JobCreateWithoutEmployeeEstimationsInput
-  connect?: JobWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: JobUpdateWithoutEmployeeEstimationsDataInput
-  upsert?: JobUpsertWithoutEmployeeEstimationsInput
-}
-
-export interface EventUpdateInput {
-  client?: ClientUpdateOneWithoutEventsInput
-  offer?: OfferUpdateOneWithoutEventInput
-  employees?: EmployeeUpdateManyWithoutEventInput
-  stuffs?: StuffUpdateManyInput
-  vehicles?: VehicleUpdateManyWithoutEventsInput
-}
-
-export interface JobUpdateWithoutEmployeeEstimationsDataInput {
-  name?: String
-  employees?: EmployeeUpdateManyWithoutJobInput
-  users?: UserUpdateManyWithoutJobsInput
-}
-
-export interface ClientWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface EmployeeUpdateManyWithoutJobInput {
-  create?: EmployeeCreateWithoutJobInput[] | EmployeeCreateWithoutJobInput
-  connect?: EmployeeWhereUniqueInput[] | EmployeeWhereUniqueInput
-  disconnect?: EmployeeWhereUniqueInput[] | EmployeeWhereUniqueInput
-  delete?: EmployeeWhereUniqueInput[] | EmployeeWhereUniqueInput
-  update?: EmployeeUpdateWithWhereUniqueWithoutJobInput[] | EmployeeUpdateWithWhereUniqueWithoutJobInput
-  upsert?: EmployeeUpsertWithWhereUniqueWithoutJobInput[] | EmployeeUpsertWithWhereUniqueWithoutJobInput
-}
-
-export interface ClientContactWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface EmployeeUpdateWithWhereUniqueWithoutJobInput {
-  where: EmployeeWhereUniqueInput
-  data: EmployeeUpdateWithoutJobDataInput
-}
-
-export interface EmployeeWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface EmployeeUpdateWithoutJobDataInput {
-  endedAt?: DateTime
-  estimatedEndAt?: DateTime
-  estimatedStartAt?: DateTime
-  startedAt?: DateTime
-  event?: EventUpdateOneWithoutEmployeesInput
-  user?: UserUpdateOneWithoutEmployeeInput
-}
-
-export interface JobWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface EventUpdateOneWithoutEmployeesInput {
-  create?: EventCreateWithoutEmployeesInput
-  connect?: EventWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: EventUpdateWithoutEmployeesDataInput
-  upsert?: EventUpsertWithoutEmployeesInput
-}
-
-export interface VehicleWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface EventUpdateWithoutEmployeesDataInput {
-  client?: ClientUpdateOneWithoutEventsInput
-  offer?: OfferUpdateOneWithoutEventInput
-  stuffs?: StuffUpdateManyInput
-  vehicles?: VehicleUpdateManyWithoutEventsInput
-}
-
-export interface OfferWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface StuffUpdateManyInput {
-  create?: StuffCreateInput[] | StuffCreateInput
-  connect?: StuffWhereUniqueInput[] | StuffWhereUniqueInput
-  disconnect?: StuffWhereUniqueInput[] | StuffWhereUniqueInput
-  delete?: StuffWhereUniqueInput[] | StuffWhereUniqueInput
-  update?: StuffUpdateWithWhereUniqueNestedInput[] | StuffUpdateWithWhereUniqueNestedInput
-  upsert?: StuffUpsertWithWhereUniqueNestedInput[] | StuffUpsertWithWhereUniqueNestedInput
-}
-
-export interface EventUpdateWithWhereUniqueWithoutVehiclesInput {
-  where: EventWhereUniqueInput
-  data: EventUpdateWithoutVehiclesDataInput
-}
-
-export interface StuffUpdateWithWhereUniqueNestedInput {
-  where: StuffWhereUniqueInput
-  data: StuffUpdateDataInput
-}
-
-export interface BudgetLineUpdateWithoutTaxDataInput {
-  description?: String
-  quantity?: Int
-  total?: Float
-  unitPrice?: Float
-  value?: Float
-  offer?: OfferUpdateOneWithoutBudgetLinesInput
-}
-
-export interface StuffUpdateDataInput {
-  name?: String
-  eventStuffs?: EventStuffUpdateManyWithoutStuffInput
-}
-
-export interface SectionItemUpdateInput {
-  content?: String
-  endTime?: DateTime
-  h?: Int
-  i?: String
-  isDraggable?: Boolean
-  isResizable?: Boolean
-  maxH?: Int
-  maxW?: Int
-  minH?: Int
-  minW?: Int
-  moved?: Boolean
-  persons?: Int
-  price?: Float
-  static?: Boolean
-  startTime?: DateTime
-  title?: String
-  type?: SectionTypes
-  w?: Int
-  x?: Int
-  y?: Int
-  offer?: OfferUpdateOneWithoutSectionItemsInput
-  items?: ItemUpdateManyWithoutSectionItemsInput
-}
-
-export interface EventStuffUpdateManyWithoutStuffInput {
-  create?: EventStuffCreateWithoutStuffInput[] | EventStuffCreateWithoutStuffInput
-  connect?: EventStuffWhereUniqueInput[] | EventStuffWhereUniqueInput
-  disconnect?: EventStuffWhereUniqueInput[] | EventStuffWhereUniqueInput
-  delete?: EventStuffWhereUniqueInput[] | EventStuffWhereUniqueInput
-  update?: EventStuffUpdateWithWhereUniqueWithoutStuffInput[] | EventStuffUpdateWithWhereUniqueWithoutStuffInput
-  upsert?: EventStuffUpsertWithWhereUniqueWithoutStuffInput[] | EventStuffUpsertWithWhereUniqueWithoutStuffInput
-}
-
-export interface PlaceContactUpdateInput {
-  email?: String
-  mobilePhone?: String
-  name?: String
-  phoneNumber?: String
-  place?: PlaceUpdateOneWithoutPlaceContactsInput
-}
-
-export interface EventStuffUpdateWithWhereUniqueWithoutStuffInput {
-  where: EventStuffWhereUniqueInput
-  data: EventStuffUpdateWithoutStuffDataInput
-}
-
-export interface OfferUpdateWithWhereUniqueWithoutEventTypeInput {
-  where: OfferWhereUniqueInput
-  data: OfferUpdateWithoutEventTypeDataInput
-}
-
-export interface EventStuffUpdateWithoutStuffDataInput {
-  quantity?: Int
-  event?: EventUpdateOneInput
-}
-
-export interface StuffUpdateWithoutEventStuffsDataInput {
-  name?: String
-}
-
-export interface EventUpdateOneInput {
-  create?: EventCreateInput
-  connect?: EventWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: EventUpdateDataInput
-  upsert?: EventUpsertNestedInput
-}
-
-export interface EmployeeUpdateInput {
-  endedAt?: DateTime
-  estimatedEndAt?: DateTime
-  estimatedStartAt?: DateTime
-  startedAt?: DateTime
-  event?: EventUpdateOneWithoutEmployeesInput
-  job?: JobUpdateOneWithoutEmployeesInput
-  user?: UserUpdateOneWithoutEmployeeInput
-}
-
-export interface EventUpdateDataInput {
-  client?: ClientUpdateOneWithoutEventsInput
-  offer?: OfferUpdateOneWithoutEventInput
-  employees?: EmployeeUpdateManyWithoutEventInput
-  stuffs?: StuffUpdateManyInput
-  vehicles?: VehicleUpdateManyWithoutEventsInput
-}
-
-export interface ItemUpdateManyWithoutCategoriesInput {
-  create?: ItemCreateWithoutCategoriesInput[] | ItemCreateWithoutCategoriesInput
-  connect?: ItemWhereUniqueInput[] | ItemWhereUniqueInput
-  disconnect?: ItemWhereUniqueInput[] | ItemWhereUniqueInput
-  delete?: ItemWhereUniqueInput[] | ItemWhereUniqueInput
-  update?: ItemUpdateWithWhereUniqueWithoutCategoriesInput[] | ItemUpdateWithWhereUniqueWithoutCategoriesInput
-  upsert?: ItemUpsertWithWhereUniqueWithoutCategoriesInput[] | ItemUpsertWithWhereUniqueWithoutCategoriesInput
-}
-
-export interface EmployeeUpdateManyWithoutEventInput {
-  create?: EmployeeCreateWithoutEventInput[] | EmployeeCreateWithoutEventInput
-  connect?: EmployeeWhereUniqueInput[] | EmployeeWhereUniqueInput
-  disconnect?: EmployeeWhereUniqueInput[] | EmployeeWhereUniqueInput
-  delete?: EmployeeWhereUniqueInput[] | EmployeeWhereUniqueInput
-  update?: EmployeeUpdateWithWhereUniqueWithoutEventInput[] | EmployeeUpdateWithWhereUniqueWithoutEventInput
-  upsert?: EmployeeUpsertWithWhereUniqueWithoutEventInput[] | EmployeeUpsertWithWhereUniqueWithoutEventInput
-}
-
-export interface OfferUpdateOneWithoutBudgetLinesInput {
-  create?: OfferCreateWithoutBudgetLinesInput
-  connect?: OfferWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: OfferUpdateWithoutBudgetLinesDataInput
-  upsert?: OfferUpsertWithoutBudgetLinesInput
-}
-
-export interface EmployeeUpdateWithWhereUniqueWithoutEventInput {
-  where: EmployeeWhereUniqueInput
-  data: EmployeeUpdateWithoutEventDataInput
-}
-
-export interface OfferUpdateOneWithoutPlaceInput {
-  create?: OfferCreateWithoutPlaceInput
-  connect?: OfferWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: OfferUpdateWithoutPlaceDataInput
-  upsert?: OfferUpsertWithoutPlaceInput
-}
-
-export interface EmployeeUpdateWithoutEventDataInput {
-  endedAt?: DateTime
-  estimatedEndAt?: DateTime
-  estimatedStartAt?: DateTime
-  startedAt?: DateTime
-  job?: JobUpdateOneWithoutEmployeesInput
-  user?: UserUpdateOneWithoutEmployeeInput
-}
-
-export interface ItemUpdateInput {
-  platTranslations?: ItemTranslationUpdateManyWithoutItemsInput
-  categories?: CategoryUpdateManyWithoutItemsInput
-  sectionItems?: SectionItemUpdateManyWithoutItemsInput
-}
-
-export interface JobUpdateOneWithoutEmployeesInput {
-  create?: JobCreateWithoutEmployeesInput
-  connect?: JobWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: JobUpdateWithoutEmployeesDataInput
-  upsert?: JobUpsertWithoutEmployeesInput
-}
-
-export interface OfferUpdateWithoutSectionItemsDataInput {
-  customMessage?: String
-  status?: StatusOffer
+  internalDescription?: String
+  internalDescription_not?: String
+  internalDescription_in?: String[] | String
+  internalDescription_not_in?: String[] | String
+  internalDescription_lt?: String
+  internalDescription_lte?: String
+  internalDescription_gt?: String
+  internalDescription_gte?: String
+  internalDescription_contains?: String
+  internalDescription_not_contains?: String
+  internalDescription_starts_with?: String
+  internalDescription_not_starts_with?: String
+  internalDescription_ends_with?: String
+  internalDescription_not_ends_with?: String
   language?: LanguageEnum
-  address?: String
-  city?: String
-  endTime?: DateTime
-  gmtOffset?: String
-  maxPersons?: Int
-  minPersons?: Int
+  language_not?: LanguageEnum
+  language_in?: LanguageEnum[] | LanguageEnum
+  language_not_in?: LanguageEnum[] | LanguageEnum
   name?: String
-  postalCode?: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  client?: ClientUpdateOneWithoutOffersInput
-  event?: EventUpdateOneWithoutOfferInput
-  budgetLines?: BudgetLineUpdateManyWithoutOfferInput
-  clientContact?: ClientContactUpdateOneWithoutOffersInput
-  employeeEstimations?: EmployeeEstimationUpdateManyWithoutOfferInput
-  eventType?: EventTypeUpdateOneWithoutOffersInput
-  place?: PlaceUpdateOneWithoutOfferInput
+  name_not?: String
+  name_in?: String[] | String
+  name_not_in?: String[] | String
+  name_lt?: String
+  name_lte?: String
+  name_gt?: String
+  name_gte?: String
+  name_contains?: String
+  name_not_contains?: String
+  name_starts_with?: String
+  name_not_starts_with?: String
+  name_ends_with?: String
+  name_not_ends_with?: String
+  items?: ItemWhereInput
 }
 
-export interface JobUpdateWithoutEmployeesDataInput {
+export interface TaxUpdateWithoutBudgetLinesDataInput {
   name?: String
-  employeeEstimations?: EmployeeEstimationUpdateManyWithoutJobInput
-  users?: UserUpdateManyWithoutJobsInput
+  value?: Float
 }
 
-export interface SectionItemUpdateManyWithoutItemsInput {
-  create?: SectionItemCreateWithoutItemsInput[] | SectionItemCreateWithoutItemsInput
-  connect?: SectionItemWhereUniqueInput[] | SectionItemWhereUniqueInput
-  disconnect?: SectionItemWhereUniqueInput[] | SectionItemWhereUniqueInput
-  delete?: SectionItemWhereUniqueInput[] | SectionItemWhereUniqueInput
-  update?: SectionItemUpdateWithWhereUniqueWithoutItemsInput[] | SectionItemUpdateWithWhereUniqueWithoutItemsInput
-  upsert?: SectionItemUpsertWithWhereUniqueWithoutItemsInput[] | SectionItemUpsertWithWhereUniqueWithoutItemsInput
-}
-
-export interface EmployeeEstimationUpdateManyWithoutJobInput {
-  create?: EmployeeEstimationCreateWithoutJobInput[] | EmployeeEstimationCreateWithoutJobInput
-  connect?: EmployeeEstimationWhereUniqueInput[] | EmployeeEstimationWhereUniqueInput
-  disconnect?: EmployeeEstimationWhereUniqueInput[] | EmployeeEstimationWhereUniqueInput
-  delete?: EmployeeEstimationWhereUniqueInput[] | EmployeeEstimationWhereUniqueInput
-  update?: EmployeeEstimationUpdateWithWhereUniqueWithoutJobInput[] | EmployeeEstimationUpdateWithWhereUniqueWithoutJobInput
-  upsert?: EmployeeEstimationUpsertWithWhereUniqueWithoutJobInput[] | EmployeeEstimationUpsertWithWhereUniqueWithoutJobInput
-}
-
-export interface EventUpsertWithWhereUniqueWithoutClientInput {
-  where: EventWhereUniqueInput
-  update: EventUpdateWithoutClientDataInput
-  create: EventCreateWithoutClientInput
-}
-
-export interface EmployeeEstimationUpdateWithWhereUniqueWithoutJobInput {
-  where: EmployeeEstimationWhereUniqueInput
-  data: EmployeeEstimationUpdateWithoutJobDataInput
-}
-
-export interface OfferUpsertWithWhereUniqueWithoutClientContactInput {
-  where: OfferWhereUniqueInput
-  update: OfferUpdateWithoutClientContactDataInput
-  create: OfferCreateWithoutClientContactInput
-}
-
-export interface EmployeeEstimationUpdateWithoutJobDataInput {
-  estimatedEndAt?: DateTime
-  estimatedStartAt?: DateTime
-  number?: Int
-  pricePerHour?: Float
-  total?: Float
-  offer?: OfferUpdateOneWithoutEmployeeEstimationsInput
-}
-
-export interface ClientContactUpsertWithoutOffersInput {
-  update: ClientContactUpdateWithoutOffersDataInput
-  create: ClientContactCreateWithoutOffersInput
-}
-
-export interface OfferUpdateOneWithoutEmployeeEstimationsInput {
-  create?: OfferCreateWithoutEmployeeEstimationsInput
-  connect?: OfferWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: OfferUpdateWithoutEmployeeEstimationsDataInput
-  upsert?: OfferUpsertWithoutEmployeeEstimationsInput
-}
-
-export interface OfferCreateOneWithoutEventInput {
-  create?: OfferCreateWithoutEventInput
-  connect?: OfferWhereUniqueInput
-}
-
-export interface OfferUpdateWithoutEmployeeEstimationsDataInput {
-  customMessage?: String
-  status?: StatusOffer
-  language?: LanguageEnum
-  address?: String
-  city?: String
-  endTime?: DateTime
-  gmtOffset?: String
-  maxPersons?: Int
-  minPersons?: Int
-  name?: String
-  postalCode?: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
-  client?: ClientUpdateOneWithoutOffersInput
-  event?: EventUpdateOneWithoutOfferInput
-  budgetLines?: BudgetLineUpdateManyWithoutOfferInput
-  clientContact?: ClientContactUpdateOneWithoutOffersInput
-  eventType?: EventTypeUpdateOneWithoutOffersInput
-  place?: PlaceUpdateOneWithoutOfferInput
-  sectionItems?: SectionItemUpdateManyWithoutOfferInput
-}
-
-export interface ClientContactCreateManyWithoutClientInput {
-  create?: ClientContactCreateWithoutClientInput[] | ClientContactCreateWithoutClientInput
-  connect?: ClientContactWhereUniqueInput[] | ClientContactWhereUniqueInput
-}
-
-export interface EventTypeUpdateOneWithoutOffersInput {
-  create?: EventTypeCreateWithoutOffersInput
-  connect?: EventTypeWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: EventTypeUpdateWithoutOffersDataInput
-  upsert?: EventTypeUpsertWithoutOffersInput
-}
-
-export interface EventCreateOneWithoutOfferInput {
-  create?: EventCreateWithoutOfferInput
-  connect?: EventWhereUniqueInput
-}
-
-export interface EventTypeUpdateWithoutOffersDataInput {
-  name?: String
-}
-
-export interface OfferCreateManyWithoutClientInput {
-  create?: OfferCreateWithoutClientInput[] | OfferCreateWithoutClientInput
-  connect?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
-}
-
-export interface EventTypeUpsertWithoutOffersInput {
-  update: EventTypeUpdateWithoutOffersDataInput
-  create: EventTypeCreateWithoutOffersInput
-}
-
-export interface TaxCreateOneWithoutBudgetLinesInput {
-  create?: TaxCreateWithoutBudgetLinesInput
-  connect?: TaxWhereUniqueInput
-}
-
-export interface PlaceUpdateOneWithoutOfferInput {
-  create?: PlaceCreateWithoutOfferInput
-  connect?: PlaceWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: PlaceUpdateWithoutOfferDataInput
-  upsert?: PlaceUpsertWithoutOfferInput
-}
-
-export interface ClientCreateOneWithoutClientContactsInput {
-  create?: ClientCreateWithoutClientContactsInput
-  connect?: ClientWhereUniqueInput
-}
-
-export interface PlaceUpdateWithoutOfferDataInput {
-  address?: String
-  city?: String
-  name?: String
-  postalCode?: String
-  country?: Country
-  note?: String
-  placeContacts?: PlaceContactUpdateManyWithoutPlaceInput
-}
-
-export interface OfferCreateOneInput {
-  create?: OfferCreateInput
-  connect?: OfferWhereUniqueInput
-}
-
-export interface PlaceContactUpdateManyWithoutPlaceInput {
-  create?: PlaceContactCreateWithoutPlaceInput[] | PlaceContactCreateWithoutPlaceInput
-  connect?: PlaceContactWhereUniqueInput[] | PlaceContactWhereUniqueInput
-  disconnect?: PlaceContactWhereUniqueInput[] | PlaceContactWhereUniqueInput
-  delete?: PlaceContactWhereUniqueInput[] | PlaceContactWhereUniqueInput
-  update?: PlaceContactUpdateWithWhereUniqueWithoutPlaceInput[] | PlaceContactUpdateWithWhereUniqueWithoutPlaceInput
-  upsert?: PlaceContactUpsertWithWhereUniqueWithoutPlaceInput[] | PlaceContactUpsertWithWhereUniqueWithoutPlaceInput
-}
-
-export interface JobCreateOneWithoutEmployeeEstimationsInput {
-  create?: JobCreateWithoutEmployeeEstimationsInput
-  connect?: JobWhereUniqueInput
-}
-
-export interface PlaceContactUpdateWithWhereUniqueWithoutPlaceInput {
-  where: PlaceContactWhereUniqueInput
-  data: PlaceContactUpdateWithoutPlaceDataInput
-}
-
-export interface EventCreateOneWithoutEmployeesInput {
-  create?: EventCreateWithoutEmployeesInput
-  connect?: EventWhereUniqueInput
-}
-
-export interface PlaceContactUpdateWithoutPlaceDataInput {
-  email?: String
-  mobilePhone?: String
-  name?: String
-  phoneNumber?: String
-}
-
-export interface EventStuffCreateManyWithoutStuffInput {
-  create?: EventStuffCreateWithoutStuffInput[] | EventStuffCreateWithoutStuffInput
-  connect?: EventStuffWhereUniqueInput[] | EventStuffWhereUniqueInput
-}
-
-export interface PlaceContactUpsertWithWhereUniqueWithoutPlaceInput {
-  where: PlaceContactWhereUniqueInput
-  update: PlaceContactUpdateWithoutPlaceDataInput
-  create: PlaceContactCreateWithoutPlaceInput
-}
-
-export interface EmployeeCreateManyWithoutEventInput {
-  create?: EmployeeCreateWithoutEventInput[] | EmployeeCreateWithoutEventInput
-  connect?: EmployeeWhereUniqueInput[] | EmployeeWhereUniqueInput
-}
-
-export interface PlaceUpsertWithoutOfferInput {
-  update: PlaceUpdateWithoutOfferDataInput
-  create: PlaceCreateWithoutOfferInput
-}
-
-export interface EmployeeEstimationCreateManyWithoutJobInput {
-  create?: EmployeeEstimationCreateWithoutJobInput[] | EmployeeEstimationCreateWithoutJobInput
-  connect?: EmployeeEstimationWhereUniqueInput[] | EmployeeEstimationWhereUniqueInput
-}
-
-export interface SectionItemUpdateManyWithoutOfferInput {
-  create?: SectionItemCreateWithoutOfferInput[] | SectionItemCreateWithoutOfferInput
-  connect?: SectionItemWhereUniqueInput[] | SectionItemWhereUniqueInput
-  disconnect?: SectionItemWhereUniqueInput[] | SectionItemWhereUniqueInput
-  delete?: SectionItemWhereUniqueInput[] | SectionItemWhereUniqueInput
-  update?: SectionItemUpdateWithWhereUniqueWithoutOfferInput[] | SectionItemUpdateWithWhereUniqueWithoutOfferInput
-  upsert?: SectionItemUpsertWithWhereUniqueWithoutOfferInput[] | SectionItemUpsertWithWhereUniqueWithoutOfferInput
-}
-
-export interface EventTypeCreateOneWithoutOffersInput {
-  create?: EventTypeCreateWithoutOffersInput
-  connect?: EventTypeWhereUniqueInput
-}
-
-export interface SectionItemUpdateWithWhereUniqueWithoutOfferInput {
-  where: SectionItemWhereUniqueInput
-  data: SectionItemUpdateWithoutOfferDataInput
-}
-
-export interface EventSubscriptionWhereInput {
-  AND?: EventSubscriptionWhereInput[] | EventSubscriptionWhereInput
-  OR?: EventSubscriptionWhereInput[] | EventSubscriptionWhereInput
-  NOT?: EventSubscriptionWhereInput[] | EventSubscriptionWhereInput
+export interface VehicleSubscriptionWhereInput {
+  AND?: VehicleSubscriptionWhereInput[] | VehicleSubscriptionWhereInput
+  OR?: VehicleSubscriptionWhereInput[] | VehicleSubscriptionWhereInput
+  NOT?: VehicleSubscriptionWhereInput[] | VehicleSubscriptionWhereInput
   mutation_in?: MutationType[] | MutationType
   updatedFields_contains?: String
   updatedFields_contains_every?: String[] | String
   updatedFields_contains_some?: String[] | String
-  node?: EventWhereInput
+  node?: VehicleWhereInput
 }
 
-export interface SectionItemUpdateWithoutOfferDataInput {
-  content?: String
-  endTime?: DateTime
-  h?: Int
-  i?: String
-  isDraggable?: Boolean
-  isResizable?: Boolean
-  maxH?: Int
-  maxW?: Int
-  minH?: Int
-  minW?: Int
-  moved?: Boolean
-  persons?: Int
-  price?: Float
-  static?: Boolean
-  startTime?: DateTime
-  title?: String
-  type?: SectionTypes
-  w?: Int
-  x?: Int
-  y?: Int
-  items?: ItemUpdateManyWithoutSectionItemsInput
+export interface TaxUpsertWithoutBudgetLinesInput {
+  update: TaxUpdateWithoutBudgetLinesDataInput
+  create: TaxCreateWithoutBudgetLinesInput
 }
 
-export interface SectionItemSubscriptionWhereInput {
-  AND?: SectionItemSubscriptionWhereInput[] | SectionItemSubscriptionWhereInput
-  OR?: SectionItemSubscriptionWhereInput[] | SectionItemSubscriptionWhereInput
-  NOT?: SectionItemSubscriptionWhereInput[] | SectionItemSubscriptionWhereInput
+export interface PlaceContactWhereInput {
+  AND?: PlaceContactWhereInput[] | PlaceContactWhereInput
+  OR?: PlaceContactWhereInput[] | PlaceContactWhereInput
+  NOT?: PlaceContactWhereInput[] | PlaceContactWhereInput
+  email?: String
+  email_not?: String
+  email_in?: String[] | String
+  email_not_in?: String[] | String
+  email_lt?: String
+  email_lte?: String
+  email_gt?: String
+  email_gte?: String
+  email_contains?: String
+  email_not_contains?: String
+  email_starts_with?: String
+  email_not_starts_with?: String
+  email_ends_with?: String
+  email_not_ends_with?: String
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  mobilePhone?: String
+  mobilePhone_not?: String
+  mobilePhone_in?: String[] | String
+  mobilePhone_not_in?: String[] | String
+  mobilePhone_lt?: String
+  mobilePhone_lte?: String
+  mobilePhone_gt?: String
+  mobilePhone_gte?: String
+  mobilePhone_contains?: String
+  mobilePhone_not_contains?: String
+  mobilePhone_starts_with?: String
+  mobilePhone_not_starts_with?: String
+  mobilePhone_ends_with?: String
+  mobilePhone_not_ends_with?: String
+  name?: String
+  name_not?: String
+  name_in?: String[] | String
+  name_not_in?: String[] | String
+  name_lt?: String
+  name_lte?: String
+  name_gt?: String
+  name_gte?: String
+  name_contains?: String
+  name_not_contains?: String
+  name_starts_with?: String
+  name_not_starts_with?: String
+  name_ends_with?: String
+  name_not_ends_with?: String
+  phoneNumber?: String
+  phoneNumber_not?: String
+  phoneNumber_in?: String[] | String
+  phoneNumber_not_in?: String[] | String
+  phoneNumber_lt?: String
+  phoneNumber_lte?: String
+  phoneNumber_gt?: String
+  phoneNumber_gte?: String
+  phoneNumber_contains?: String
+  phoneNumber_not_contains?: String
+  phoneNumber_starts_with?: String
+  phoneNumber_not_starts_with?: String
+  phoneNumber_ends_with?: String
+  phoneNumber_not_ends_with?: String
+  place?: PlaceWhereInput
+}
+
+export interface BudgetLineUpsertWithWhereUniqueWithoutOfferInput {
+  where: BudgetLineWhereUniqueInput
+  update: BudgetLineUpdateWithoutOfferDataInput
+  create: BudgetLineCreateWithoutOfferInput
+}
+
+export interface EventTypeSubscriptionWhereInput {
+  AND?: EventTypeSubscriptionWhereInput[] | EventTypeSubscriptionWhereInput
+  OR?: EventTypeSubscriptionWhereInput[] | EventTypeSubscriptionWhereInput
+  NOT?: EventTypeSubscriptionWhereInput[] | EventTypeSubscriptionWhereInput
   mutation_in?: MutationType[] | MutationType
   updatedFields_contains?: String
   updatedFields_contains_every?: String[] | String
   updatedFields_contains_some?: String[] | String
-  node?: SectionItemWhereInput
+  node?: EventTypeWhereInput
 }
 
-export interface ItemUpdateManyWithoutSectionItemsInput {
-  create?: ItemCreateWithoutSectionItemsInput[] | ItemCreateWithoutSectionItemsInput
-  connect?: ItemWhereUniqueInput[] | ItemWhereUniqueInput
-  disconnect?: ItemWhereUniqueInput[] | ItemWhereUniqueInput
-  delete?: ItemWhereUniqueInput[] | ItemWhereUniqueInput
-  update?: ItemUpdateWithWhereUniqueWithoutSectionItemsInput[] | ItemUpdateWithWhereUniqueWithoutSectionItemsInput
-  upsert?: ItemUpsertWithWhereUniqueWithoutSectionItemsInput[] | ItemUpsertWithWhereUniqueWithoutSectionItemsInput
+export interface ClientContactUpdateOneWithoutOffersInput {
+  create?: ClientContactCreateWithoutOffersInput
+  connect?: ClientContactWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: ClientContactUpdateWithoutOffersDataInput
+  upsert?: ClientContactUpsertWithoutOffersInput
 }
 
 export interface UserWhereInput {
@@ -13282,29 +12419,18 @@ export interface UserWhereInput {
   jobs_none?: JobWhereInput
 }
 
-export interface ItemUpdateWithWhereUniqueWithoutSectionItemsInput {
-  where: ItemWhereUniqueInput
-  data: ItemUpdateWithoutSectionItemsDataInput
+export interface ClientContactUpdateWithoutOffersDataInput {
+  email?: String
+  mobilePhone?: String
+  name?: String
+  phoneNumber?: String
+  client?: ClientUpdateOneWithoutClientContactsInput
 }
 
-export interface ClientContactWhereInput {
-  AND?: ClientContactWhereInput[] | ClientContactWhereInput
-  OR?: ClientContactWhereInput[] | ClientContactWhereInput
-  NOT?: ClientContactWhereInput[] | ClientContactWhereInput
-  email?: String
-  email_not?: String
-  email_in?: String[] | String
-  email_not_in?: String[] | String
-  email_lt?: String
-  email_lte?: String
-  email_gt?: String
-  email_gte?: String
-  email_contains?: String
-  email_not_contains?: String
-  email_starts_with?: String
-  email_not_starts_with?: String
-  email_ends_with?: String
-  email_not_ends_with?: String
+export interface JobWhereInput {
+  AND?: JobWhereInput[] | JobWhereInput
+  OR?: JobWhereInput[] | JobWhereInput
+  NOT?: JobWhereInput[] | JobWhereInput
   id?: ID_Input
   id_not?: ID_Input
   id_in?: ID_Input[] | ID_Input
@@ -13319,20 +12445,6 @@ export interface ClientContactWhereInput {
   id_not_starts_with?: ID_Input
   id_ends_with?: ID_Input
   id_not_ends_with?: ID_Input
-  mobilePhone?: String
-  mobilePhone_not?: String
-  mobilePhone_in?: String[] | String
-  mobilePhone_not_in?: String[] | String
-  mobilePhone_lt?: String
-  mobilePhone_lte?: String
-  mobilePhone_gt?: String
-  mobilePhone_gte?: String
-  mobilePhone_contains?: String
-  mobilePhone_not_contains?: String
-  mobilePhone_starts_with?: String
-  mobilePhone_not_starts_with?: String
-  mobilePhone_ends_with?: String
-  mobilePhone_not_ends_with?: String
   name?: String
   name_not?: String
   name_in?: String[] | String
@@ -13347,79 +12459,335 @@ export interface ClientContactWhereInput {
   name_not_starts_with?: String
   name_ends_with?: String
   name_not_ends_with?: String
-  phoneNumber?: String
-  phoneNumber_not?: String
-  phoneNumber_in?: String[] | String
-  phoneNumber_not_in?: String[] | String
-  phoneNumber_lt?: String
-  phoneNumber_lte?: String
-  phoneNumber_gt?: String
-  phoneNumber_gte?: String
-  phoneNumber_contains?: String
-  phoneNumber_not_contains?: String
-  phoneNumber_starts_with?: String
-  phoneNumber_not_starts_with?: String
-  phoneNumber_ends_with?: String
-  phoneNumber_not_ends_with?: String
-  client?: ClientWhereInput
-  offers_every?: OfferWhereInput
-  offers_some?: OfferWhereInput
-  offers_none?: OfferWhereInput
+  employeeEstimations_every?: EmployeeEstimationWhereInput
+  employeeEstimations_some?: EmployeeEstimationWhereInput
+  employeeEstimations_none?: EmployeeEstimationWhereInput
+  employees_every?: EmployeeWhereInput
+  employees_some?: EmployeeWhereInput
+  employees_none?: EmployeeWhereInput
+  users_every?: UserWhereInput
+  users_some?: UserWhereInput
+  users_none?: UserWhereInput
 }
 
-export interface ItemUpdateWithoutSectionItemsDataInput {
-  platTranslations?: ItemTranslationUpdateManyWithoutItemsInput
-  categories?: CategoryUpdateManyWithoutItemsInput
+export interface ClientUpdateOneWithoutClientContactsInput {
+  create?: ClientCreateWithoutClientContactsInput
+  connect?: ClientWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: ClientUpdateWithoutClientContactsDataInput
+  upsert?: ClientUpsertWithoutClientContactsInput
 }
 
-export interface ClientSubscriptionWhereInput {
-  AND?: ClientSubscriptionWhereInput[] | ClientSubscriptionWhereInput
-  OR?: ClientSubscriptionWhereInput[] | ClientSubscriptionWhereInput
-  NOT?: ClientSubscriptionWhereInput[] | ClientSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: ClientWhereInput
+export interface CommunicationWhereInput {
+  AND?: CommunicationWhereInput[] | CommunicationWhereInput
+  OR?: CommunicationWhereInput[] | CommunicationWhereInput
+  NOT?: CommunicationWhereInput[] | CommunicationWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  message?: String
+  message_not?: String
+  message_in?: String[] | String
+  message_not_in?: String[] | String
+  message_lt?: String
+  message_lte?: String
+  message_gt?: String
+  message_gte?: String
+  message_contains?: String
+  message_not_contains?: String
+  message_starts_with?: String
+  message_not_starts_with?: String
+  message_ends_with?: String
+  message_not_ends_with?: String
+  subject?: String
+  subject_not?: String
+  subject_in?: String[] | String
+  subject_not_in?: String[] | String
+  subject_lt?: String
+  subject_lte?: String
+  subject_gt?: String
+  subject_gte?: String
+  subject_contains?: String
+  subject_not_contains?: String
+  subject_starts_with?: String
+  subject_not_starts_with?: String
+  subject_ends_with?: String
+  subject_not_ends_with?: String
+  channel?: Channel
+  channel_not?: Channel
+  channel_in?: Channel[] | Channel
+  channel_not_in?: Channel[] | Channel
+  date?: DateTime
+  date_not?: DateTime
+  date_in?: DateTime[] | DateTime
+  date_not_in?: DateTime[] | DateTime
+  date_lt?: DateTime
+  date_lte?: DateTime
+  date_gt?: DateTime
+  date_gte?: DateTime
+  gmtOffset?: String
+  gmtOffset_not?: String
+  gmtOffset_in?: String[] | String
+  gmtOffset_not_in?: String[] | String
+  gmtOffset_lt?: String
+  gmtOffset_lte?: String
+  gmtOffset_gt?: String
+  gmtOffset_gte?: String
+  gmtOffset_contains?: String
+  gmtOffset_not_contains?: String
+  gmtOffset_starts_with?: String
+  gmtOffset_not_starts_with?: String
+  gmtOffset_ends_with?: String
+  gmtOffset_not_ends_with?: String
+  offer?: OfferWhereInput
 }
 
-export interface ItemTranslationUpdateManyWithoutItemsInput {
-  create?: ItemTranslationCreateWithoutItemsInput[] | ItemTranslationCreateWithoutItemsInput
-  connect?: ItemTranslationWhereUniqueInput[] | ItemTranslationWhereUniqueInput
-  disconnect?: ItemTranslationWhereUniqueInput[] | ItemTranslationWhereUniqueInput
-  delete?: ItemTranslationWhereUniqueInput[] | ItemTranslationWhereUniqueInput
-  update?: ItemTranslationUpdateWithWhereUniqueWithoutItemsInput[] | ItemTranslationUpdateWithWhereUniqueWithoutItemsInput
-  upsert?: ItemTranslationUpsertWithWhereUniqueWithoutItemsInput[] | ItemTranslationUpsertWithWhereUniqueWithoutItemsInput
+export interface ClientUpdateWithoutClientContactsDataInput {
+  address?: String
+  email?: String
+  name?: String
+  phone?: String
+  tva?: String
+  language?: LanguageEnum
+  type?: ClientType
+  events?: EventUpdateManyInput
+  offers?: OfferUpdateManyWithoutClientInput
+}
+
+export interface TaxWhereInput {
+  AND?: TaxWhereInput[] | TaxWhereInput
+  OR?: TaxWhereInput[] | TaxWhereInput
+  NOT?: TaxWhereInput[] | TaxWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  name?: String
+  name_not?: String
+  name_in?: String[] | String
+  name_not_in?: String[] | String
+  name_lt?: String
+  name_lte?: String
+  name_gt?: String
+  name_gte?: String
+  name_contains?: String
+  name_not_contains?: String
+  name_starts_with?: String
+  name_not_starts_with?: String
+  name_ends_with?: String
+  name_not_ends_with?: String
+  value?: Float
+  value_not?: Float
+  value_in?: Float[] | Float
+  value_not_in?: Float[] | Float
+  value_lt?: Float
+  value_lte?: Float
+  value_gt?: Float
+  value_gte?: Float
+  budgetLines_every?: BudgetLineWhereInput
+  budgetLines_some?: BudgetLineWhereInput
+  budgetLines_none?: BudgetLineWhereInput
+}
+
+export interface OfferUpdateManyWithoutClientInput {
+  create?: OfferCreateWithoutClientInput[] | OfferCreateWithoutClientInput
+  connect?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
+  disconnect?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
+  delete?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
+  update?: OfferUpdateWithWhereUniqueWithoutClientInput[] | OfferUpdateWithWhereUniqueWithoutClientInput
+  upsert?: OfferUpsertWithWhereUniqueWithoutClientInput[] | OfferUpsertWithWhereUniqueWithoutClientInput
+}
+
+export interface BudgetLineWhereInput {
+  AND?: BudgetLineWhereInput[] | BudgetLineWhereInput
+  OR?: BudgetLineWhereInput[] | BudgetLineWhereInput
+  NOT?: BudgetLineWhereInput[] | BudgetLineWhereInput
+  description?: String
+  description_not?: String
+  description_in?: String[] | String
+  description_not_in?: String[] | String
+  description_lt?: String
+  description_lte?: String
+  description_gt?: String
+  description_gte?: String
+  description_contains?: String
+  description_not_contains?: String
+  description_starts_with?: String
+  description_not_starts_with?: String
+  description_ends_with?: String
+  description_not_ends_with?: String
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  quantity?: Int
+  quantity_not?: Int
+  quantity_in?: Int[] | Int
+  quantity_not_in?: Int[] | Int
+  quantity_lt?: Int
+  quantity_lte?: Int
+  quantity_gt?: Int
+  quantity_gte?: Int
+  total?: Float
+  total_not?: Float
+  total_in?: Float[] | Float
+  total_not_in?: Float[] | Float
+  total_lt?: Float
+  total_lte?: Float
+  total_gt?: Float
+  total_gte?: Float
+  unitPrice?: Float
+  unitPrice_not?: Float
+  unitPrice_in?: Float[] | Float
+  unitPrice_not_in?: Float[] | Float
+  unitPrice_lt?: Float
+  unitPrice_lte?: Float
+  unitPrice_gt?: Float
+  unitPrice_gte?: Float
+  value?: Float
+  value_not?: Float
+  value_in?: Float[] | Float
+  value_not_in?: Float[] | Float
+  value_lt?: Float
+  value_lte?: Float
+  value_gt?: Float
+  value_gte?: Float
+  offer?: OfferWhereInput
+  tax?: TaxWhereInput
+}
+
+export interface OfferUpdateWithWhereUniqueWithoutClientInput {
+  where: OfferWhereUniqueInput
+  data: OfferUpdateWithoutClientDataInput
+}
+
+export interface StuffUpdateInput {
+  name?: String
+  eventStuffs?: EventStuffUpdateManyWithoutStuffInput
+}
+
+export interface OfferUpdateWithoutClientDataInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address?: String
+  city?: String
+  endTime?: DateTime
+  gmtOffset?: String
+  maxPersons?: Int
+  minPersons?: Int
+  name?: String
+  postalCode?: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  event?: EventUpdateOneWithoutOfferInput
+  budgetLines?: BudgetLineUpdateManyWithoutOfferInput
+  clientContact?: ClientContactUpdateOneWithoutOffersInput
+  communications?: CommunicationUpdateManyWithoutOfferInput
+  employeeEstimations?: EmployeeEstimationUpdateManyWithoutOfferInput
+  eventType?: EventTypeUpdateOneWithoutOffersInput
+  place?: PlaceUpdateOneWithoutOfferInput
+  sectionItems?: SectionItemUpdateManyWithoutOfferInput
+}
+
+export interface ClientWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface CommunicationUpdateManyWithoutOfferInput {
+  create?: CommunicationCreateWithoutOfferInput[] | CommunicationCreateWithoutOfferInput
+  connect?: CommunicationWhereUniqueInput[] | CommunicationWhereUniqueInput
+  disconnect?: CommunicationWhereUniqueInput[] | CommunicationWhereUniqueInput
+  delete?: CommunicationWhereUniqueInput[] | CommunicationWhereUniqueInput
+  update?: CommunicationUpdateWithWhereUniqueWithoutOfferInput[] | CommunicationUpdateWithWhereUniqueWithoutOfferInput
+  upsert?: CommunicationUpsertWithWhereUniqueWithoutOfferInput[] | CommunicationUpsertWithWhereUniqueWithoutOfferInput
 }
 
 export interface ItemWhereUniqueInput {
   id?: ID_Input
 }
 
-export interface ItemTranslationUpdateWithWhereUniqueWithoutItemsInput {
-  where: ItemTranslationWhereUniqueInput
-  data: ItemTranslationUpdateWithoutItemsDataInput
+export interface CommunicationUpdateWithWhereUniqueWithoutOfferInput {
+  where: CommunicationWhereUniqueInput
+  data: CommunicationUpdateWithoutOfferDataInput
+}
+
+export interface BudgetLineWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface CommunicationUpdateWithoutOfferDataInput {
+  message?: String
+  subject?: String
+  channel?: Channel
+  date?: DateTime
+  gmtOffset?: String
 }
 
 export interface EventStuffWhereUniqueInput {
   id?: ID_Input
 }
 
-export interface ItemTranslationUpdateWithoutItemsDataInput {
-  description?: String
-  internalDescription?: String
-  language?: LanguageEnum
-  name?: String
+export interface CommunicationUpsertWithWhereUniqueWithoutOfferInput {
+  where: CommunicationWhereUniqueInput
+  update: CommunicationUpdateWithoutOfferDataInput
+  create: CommunicationCreateWithoutOfferInput
 }
 
-export interface StuffWhereUniqueInput {
+export interface SectionItemWhereUniqueInput {
   id?: ID_Input
 }
 
-export interface ItemTranslationUpsertWithWhereUniqueWithoutItemsInput {
-  where: ItemTranslationWhereUniqueInput
-  update: ItemTranslationUpdateWithoutItemsDataInput
-  create: ItemTranslationCreateWithoutItemsInput
+export interface EmployeeEstimationUpdateManyWithoutOfferInput {
+  create?: EmployeeEstimationCreateWithoutOfferInput[] | EmployeeEstimationCreateWithoutOfferInput
+  connect?: EmployeeEstimationWhereUniqueInput[] | EmployeeEstimationWhereUniqueInput
+  disconnect?: EmployeeEstimationWhereUniqueInput[] | EmployeeEstimationWhereUniqueInput
+  delete?: EmployeeEstimationWhereUniqueInput[] | EmployeeEstimationWhereUniqueInput
+  update?: EmployeeEstimationUpdateWithWhereUniqueWithoutOfferInput[] | EmployeeEstimationUpdateWithWhereUniqueWithoutOfferInput
+  upsert?: EmployeeEstimationUpsertWithWhereUniqueWithoutOfferInput[] | EmployeeEstimationUpsertWithWhereUniqueWithoutOfferInput
+}
+
+export interface EventWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface EmployeeEstimationUpdateWithWhereUniqueWithoutOfferInput {
+  where: EmployeeEstimationWhereUniqueInput
+  data: EmployeeEstimationUpdateWithoutOfferDataInput
 }
 
 export interface VehicleUpdateInput {
@@ -13431,13 +12799,31 @@ export interface VehicleUpdateInput {
   events?: EventUpdateManyWithoutVehiclesInput
 }
 
-export interface CategoryUpdateManyWithoutItemsInput {
-  create?: CategoryCreateWithoutItemsInput[] | CategoryCreateWithoutItemsInput
-  connect?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
-  disconnect?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
-  delete?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
-  update?: CategoryUpdateWithWhereUniqueWithoutItemsInput[] | CategoryUpdateWithWhereUniqueWithoutItemsInput
-  upsert?: CategoryUpsertWithWhereUniqueWithoutItemsInput[] | CategoryUpsertWithWhereUniqueWithoutItemsInput
+export interface EmployeeEstimationUpdateWithoutOfferDataInput {
+  estimatedEndAt?: DateTime
+  estimatedStartAt?: DateTime
+  number?: Int
+  pricePerHour?: Float
+  total?: Float
+  job?: JobUpdateOneWithoutEmployeeEstimationsInput
+}
+
+export interface BudgetLineUpdateManyWithoutTaxInput {
+  create?: BudgetLineCreateWithoutTaxInput[] | BudgetLineCreateWithoutTaxInput
+  connect?: BudgetLineWhereUniqueInput[] | BudgetLineWhereUniqueInput
+  disconnect?: BudgetLineWhereUniqueInput[] | BudgetLineWhereUniqueInput
+  delete?: BudgetLineWhereUniqueInput[] | BudgetLineWhereUniqueInput
+  update?: BudgetLineUpdateWithWhereUniqueWithoutTaxInput[] | BudgetLineUpdateWithWhereUniqueWithoutTaxInput
+  upsert?: BudgetLineUpsertWithWhereUniqueWithoutTaxInput[] | BudgetLineUpsertWithWhereUniqueWithoutTaxInput
+}
+
+export interface JobUpdateOneWithoutEmployeeEstimationsInput {
+  create?: JobCreateWithoutEmployeeEstimationsInput
+  connect?: JobWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: JobUpdateWithoutEmployeeEstimationsDataInput
+  upsert?: JobUpsertWithoutEmployeeEstimationsInput
 }
 
 export interface PlaceUpdateWithoutPlaceContactsDataInput {
@@ -13450,9 +12836,25 @@ export interface PlaceUpdateWithoutPlaceContactsDataInput {
   offer?: OfferUpdateOneWithoutPlaceInput
 }
 
-export interface CategoryUpdateWithWhereUniqueWithoutItemsInput {
-  where: CategoryWhereUniqueInput
-  data: CategoryUpdateWithoutItemsDataInput
+export interface JobUpdateWithoutEmployeeEstimationsDataInput {
+  name?: String
+  employees?: EmployeeUpdateManyWithoutJobInput
+  users?: UserUpdateManyWithoutJobsInput
+}
+
+export interface OfferUpsertWithWhereUniqueWithoutEventTypeInput {
+  where: OfferWhereUniqueInput
+  update: OfferUpdateWithoutEventTypeDataInput
+  create: OfferCreateWithoutEventTypeInput
+}
+
+export interface EmployeeUpdateManyWithoutJobInput {
+  create?: EmployeeCreateWithoutJobInput[] | EmployeeCreateWithoutJobInput
+  connect?: EmployeeWhereUniqueInput[] | EmployeeWhereUniqueInput
+  disconnect?: EmployeeWhereUniqueInput[] | EmployeeWhereUniqueInput
+  delete?: EmployeeWhereUniqueInput[] | EmployeeWhereUniqueInput
+  update?: EmployeeUpdateWithWhereUniqueWithoutJobInput[] | EmployeeUpdateWithWhereUniqueWithoutJobInput
+  upsert?: EmployeeUpsertWithWhereUniqueWithoutJobInput[] | EmployeeUpsertWithWhereUniqueWithoutJobInput
 }
 
 export interface EventTypeUpdateInput {
@@ -13460,19 +12862,49 @@ export interface EventTypeUpdateInput {
   offers?: OfferUpdateManyWithoutEventTypeInput
 }
 
-export interface CategoryUpdateWithoutItemsDataInput {
-  name?: String
+export interface EmployeeUpdateWithWhereUniqueWithoutJobInput {
+  where: EmployeeWhereUniqueInput
+  data: EmployeeUpdateWithoutJobDataInput
+}
+
+export interface EventStuffUpdateInput {
+  quantity?: Int
+  event?: EventUpdateOneInput
+  stuff?: StuffUpdateOneWithoutEventStuffsInput
+}
+
+export interface EmployeeUpdateWithoutJobDataInput {
+  endedAt?: DateTime
+  estimatedEndAt?: DateTime
+  estimatedStartAt?: DateTime
+  startedAt?: DateTime
+  event?: EventUpdateOneWithoutEmployeesInput
+  user?: UserUpdateOneWithoutEmployeeInput
 }
 
 export interface ItemUpdateWithoutCategoriesDataInput {
-  platTranslations?: ItemTranslationUpdateManyWithoutItemsInput
+  itemTranslations?: ItemTranslationUpdateManyWithoutItemsInput
   sectionItems?: SectionItemUpdateManyWithoutItemsInput
 }
 
-export interface CategoryUpsertWithWhereUniqueWithoutItemsInput {
-  where: CategoryWhereUniqueInput
-  update: CategoryUpdateWithoutItemsDataInput
-  create: CategoryCreateWithoutItemsInput
+export interface EventUpdateOneWithoutEmployeesInput {
+  create?: EventCreateWithoutEmployeesInput
+  connect?: EventWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: EventUpdateWithoutEmployeesDataInput
+  upsert?: EventUpsertWithoutEmployeesInput
+}
+
+export interface OfferUpsertWithoutBudgetLinesInput {
+  update: OfferUpdateWithoutBudgetLinesDataInput
+  create: OfferCreateWithoutBudgetLinesInput
+}
+
+export interface EventUpdateWithoutEmployeesDataInput {
+  offer?: OfferUpdateOneWithoutEventInput
+  stuffs?: StuffUpdateManyInput
+  vehicles?: VehicleUpdateManyWithoutEventsInput
 }
 
 export interface OfferUpsertWithoutPlaceInput {
@@ -13480,10 +12912,27 @@ export interface OfferUpsertWithoutPlaceInput {
   create: OfferCreateWithoutPlaceInput
 }
 
-export interface ItemUpsertWithWhereUniqueWithoutSectionItemsInput {
-  where: ItemWhereUniqueInput
-  update: ItemUpdateWithoutSectionItemsDataInput
-  create: ItemCreateWithoutSectionItemsInput
+export interface StuffUpdateManyInput {
+  create?: StuffCreateInput[] | StuffCreateInput
+  connect?: StuffWhereUniqueInput[] | StuffWhereUniqueInput
+  disconnect?: StuffWhereUniqueInput[] | StuffWhereUniqueInput
+  delete?: StuffWhereUniqueInput[] | StuffWhereUniqueInput
+  update?: StuffUpdateWithWhereUniqueNestedInput[] | StuffUpdateWithWhereUniqueNestedInput
+  upsert?: StuffUpsertWithWhereUniqueNestedInput[] | StuffUpsertWithWhereUniqueNestedInput
+}
+
+export interface ClientContactUpdateInput {
+  email?: String
+  mobilePhone?: String
+  name?: String
+  phoneNumber?: String
+  client?: ClientUpdateOneWithoutClientContactsInput
+  offers?: OfferUpdateManyWithoutClientContactInput
+}
+
+export interface StuffUpdateWithWhereUniqueNestedInput {
+  where: StuffWhereUniqueInput
+  data: StuffUpdateDataInput
 }
 
 export interface SectionItemUpsertWithWhereUniqueWithoutItemsInput {
@@ -13492,40 +12941,365 @@ export interface SectionItemUpsertWithWhereUniqueWithoutItemsInput {
   create: SectionItemCreateWithoutItemsInput
 }
 
-export interface SectionItemUpsertWithWhereUniqueWithoutOfferInput {
-  where: SectionItemWhereUniqueInput
-  update: SectionItemUpdateWithoutOfferDataInput
-  create: SectionItemCreateWithoutOfferInput
+export interface StuffUpdateDataInput {
+  name?: String
+  eventStuffs?: EventStuffUpdateManyWithoutStuffInput
 }
 
-export interface ItemUpdateOneWithoutPlatTranslationsInput {
-  create?: ItemCreateWithoutPlatTranslationsInput
+export interface SectionItemUpdateWithoutItemsDataInput {
+  content?: String
+  endTime?: DateTime
+  h?: Int
+  i?: String
+  isDraggable?: Boolean
+  isResizable?: Boolean
+  maxH?: Int
+  maxW?: Int
+  minH?: Int
+  minW?: Int
+  moved?: Boolean
+  persons?: Int
+  price?: Float
+  static?: Boolean
+  startTime?: DateTime
+  title?: String
+  type?: SectionTypes
+  w?: Int
+  x?: Int
+  y?: Int
+  offer?: OfferUpdateOneWithoutSectionItemsInput
+}
+
+export interface EventStuffUpdateManyWithoutStuffInput {
+  create?: EventStuffCreateWithoutStuffInput[] | EventStuffCreateWithoutStuffInput
+  connect?: EventStuffWhereUniqueInput[] | EventStuffWhereUniqueInput
+  disconnect?: EventStuffWhereUniqueInput[] | EventStuffWhereUniqueInput
+  delete?: EventStuffWhereUniqueInput[] | EventStuffWhereUniqueInput
+  update?: EventStuffUpdateWithWhereUniqueWithoutStuffInput[] | EventStuffUpdateWithWhereUniqueWithoutStuffInput
+  upsert?: EventStuffUpsertWithWhereUniqueWithoutStuffInput[] | EventStuffUpsertWithWhereUniqueWithoutStuffInput
+}
+
+export interface ItemUpdateOneWithoutItemTranslationsInput {
+  create?: ItemCreateWithoutItemTranslationsInput
   connect?: ItemWhereUniqueInput
   disconnect?: Boolean
   delete?: Boolean
-  update?: ItemUpdateWithoutPlatTranslationsDataInput
-  upsert?: ItemUpsertWithoutPlatTranslationsInput
+  update?: ItemUpdateWithoutItemTranslationsDataInput
+  upsert?: ItemUpsertWithoutItemTranslationsInput
 }
 
-export interface OfferUpsertWithoutEmployeeEstimationsInput {
-  update: OfferUpdateWithoutEmployeeEstimationsDataInput
-  create: OfferCreateWithoutEmployeeEstimationsInput
+export interface EventStuffUpdateWithWhereUniqueWithoutStuffInput {
+  where: EventStuffWhereUniqueInput
+  data: EventStuffUpdateWithoutStuffDataInput
 }
 
-export interface ClientUpsertWithoutEventsInput {
-  update: ClientUpdateWithoutEventsDataInput
-  create: ClientCreateWithoutEventsInput
+export interface OfferUpdateWithoutCommunicationsDataInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address?: String
+  city?: String
+  endTime?: DateTime
+  gmtOffset?: String
+  maxPersons?: Int
+  minPersons?: Int
+  name?: String
+  postalCode?: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  client?: ClientUpdateOneWithoutOffersInput
+  event?: EventUpdateOneWithoutOfferInput
+  budgetLines?: BudgetLineUpdateManyWithoutOfferInput
+  clientContact?: ClientContactUpdateOneWithoutOffersInput
+  employeeEstimations?: EmployeeEstimationUpdateManyWithoutOfferInput
+  eventType?: EventTypeUpdateOneWithoutOffersInput
+  place?: PlaceUpdateOneWithoutOfferInput
+  sectionItems?: SectionItemUpdateManyWithoutOfferInput
 }
 
-export interface EmployeeEstimationUpsertWithWhereUniqueWithoutJobInput {
-  where: EmployeeEstimationWhereUniqueInput
-  update: EmployeeEstimationUpdateWithoutJobDataInput
-  create: EmployeeEstimationCreateWithoutJobInput
+export interface EventStuffUpdateWithoutStuffDataInput {
+  quantity?: Int
+  event?: EventUpdateOneInput
 }
 
-export interface ClientCreateOneWithoutOffersInput {
-  create?: ClientCreateWithoutOffersInput
+export interface OfferUpsertWithoutEventInput {
+  update: OfferUpdateWithoutEventDataInput
+  create: OfferCreateWithoutEventInput
+}
+
+export interface EventUpdateOneInput {
+  create?: EventCreateInput
+  connect?: EventWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: EventUpdateDataInput
+  upsert?: EventUpsertNestedInput
+}
+
+export interface EventUpsertWithoutOfferInput {
+  update: EventUpdateWithoutOfferDataInput
+  create: EventCreateWithoutOfferInput
+}
+
+export interface EventUpsertNestedInput {
+  update: EventUpdateDataInput
+  create: EventCreateInput
+}
+
+export interface OfferCreateOneWithoutEventInput {
+  create?: OfferCreateWithoutEventInput
+  connect?: OfferWhereUniqueInput
+}
+
+export interface EventStuffUpsertWithWhereUniqueWithoutStuffInput {
+  where: EventStuffWhereUniqueInput
+  update: EventStuffUpdateWithoutStuffDataInput
+  create: EventStuffCreateWithoutStuffInput
+}
+
+export interface ClientContactCreateManyWithoutClientInput {
+  create?: ClientContactCreateWithoutClientInput[] | ClientContactCreateWithoutClientInput
+  connect?: ClientContactWhereUniqueInput[] | ClientContactWhereUniqueInput
+}
+
+export interface StuffUpsertWithWhereUniqueNestedInput {
+  where: StuffWhereUniqueInput
+  update: StuffUpdateDataInput
+  create: StuffCreateInput
+}
+
+export interface EventCreateOneWithoutOfferInput {
+  create?: EventCreateWithoutOfferInput
+  connect?: EventWhereUniqueInput
+}
+
+export interface VehicleUpdateManyWithoutEventsInput {
+  create?: VehicleCreateWithoutEventsInput[] | VehicleCreateWithoutEventsInput
+  connect?: VehicleWhereUniqueInput[] | VehicleWhereUniqueInput
+  disconnect?: VehicleWhereUniqueInput[] | VehicleWhereUniqueInput
+  delete?: VehicleWhereUniqueInput[] | VehicleWhereUniqueInput
+  update?: VehicleUpdateWithWhereUniqueWithoutEventsInput[] | VehicleUpdateWithWhereUniqueWithoutEventsInput
+  upsert?: VehicleUpsertWithWhereUniqueWithoutEventsInput[] | VehicleUpsertWithWhereUniqueWithoutEventsInput
+}
+
+export interface JobCreateOneWithoutEmployeesInput {
+  create?: JobCreateWithoutEmployeesInput
+  connect?: JobWhereUniqueInput
+}
+
+export interface VehicleUpdateWithWhereUniqueWithoutEventsInput {
+  where: VehicleWhereUniqueInput
+  data: VehicleUpdateWithoutEventsDataInput
+}
+
+export interface OfferCreateOneWithoutEmployeeEstimationsInput {
+  create?: OfferCreateWithoutEmployeeEstimationsInput
+  connect?: OfferWhereUniqueInput
+}
+
+export interface VehicleUpdateWithoutEventsDataInput {
+  color?: String
+  description?: String
+  name?: String
+  plate?: String
+  year?: Int
+}
+
+export interface TaxCreateOneWithoutBudgetLinesInput {
+  create?: TaxCreateWithoutBudgetLinesInput
+  connect?: TaxWhereUniqueInput
+}
+
+export interface VehicleUpsertWithWhereUniqueWithoutEventsInput {
+  where: VehicleWhereUniqueInput
+  update: VehicleUpdateWithoutEventsDataInput
+  create: VehicleCreateWithoutEventsInput
+}
+
+export interface ClientCreateOneWithoutClientContactsInput {
+  create?: ClientCreateWithoutClientContactsInput
   connect?: ClientWhereUniqueInput
+}
+
+export interface EventUpsertWithoutEmployeesInput {
+  update: EventUpdateWithoutEmployeesDataInput
+  create: EventCreateWithoutEmployeesInput
+}
+
+export interface CommunicationCreateManyWithoutOfferInput {
+  create?: CommunicationCreateWithoutOfferInput[] | CommunicationCreateWithoutOfferInput
+  connect?: CommunicationWhereUniqueInput[] | CommunicationWhereUniqueInput
+}
+
+export interface UserUpdateOneWithoutEmployeeInput {
+  create?: UserCreateWithoutEmployeeInput
+  connect?: UserWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: UserUpdateWithoutEmployeeDataInput
+  upsert?: UserUpsertWithoutEmployeeInput
+}
+
+export interface JobCreateOneWithoutEmployeeEstimationsInput {
+  create?: JobCreateWithoutEmployeeEstimationsInput
+  connect?: JobWhereUniqueInput
+}
+
+export interface UserUpdateWithoutEmployeeDataInput {
+  role?: Role
+  email?: String
+  image?: String
+  name?: String
+  password?: String
+  language?: LanguageEnum
+  jobs?: JobUpdateManyWithoutUsersInput
+}
+
+export interface EventCreateOneWithoutEmployeesInput {
+  create?: EventCreateWithoutEmployeesInput
+  connect?: EventWhereUniqueInput
+}
+
+export interface JobUpdateManyWithoutUsersInput {
+  create?: JobCreateWithoutUsersInput[] | JobCreateWithoutUsersInput
+  connect?: JobWhereUniqueInput[] | JobWhereUniqueInput
+  disconnect?: JobWhereUniqueInput[] | JobWhereUniqueInput
+  delete?: JobWhereUniqueInput[] | JobWhereUniqueInput
+  update?: JobUpdateWithWhereUniqueWithoutUsersInput[] | JobUpdateWithWhereUniqueWithoutUsersInput
+  upsert?: JobUpsertWithWhereUniqueWithoutUsersInput[] | JobUpsertWithWhereUniqueWithoutUsersInput
+}
+
+export interface EventStuffCreateManyWithoutStuffInput {
+  create?: EventStuffCreateWithoutStuffInput[] | EventStuffCreateWithoutStuffInput
+  connect?: EventStuffWhereUniqueInput[] | EventStuffWhereUniqueInput
+}
+
+export interface JobUpdateWithWhereUniqueWithoutUsersInput {
+  where: JobWhereUniqueInput
+  data: JobUpdateWithoutUsersDataInput
+}
+
+export interface VehicleCreateWithoutEventsInput {
+  color?: String
+  description?: String
+  name: String
+  plate: String
+  year?: Int
+}
+
+export interface JobUpdateWithoutUsersDataInput {
+  name?: String
+  employeeEstimations?: EmployeeEstimationUpdateManyWithoutJobInput
+  employees?: EmployeeUpdateManyWithoutJobInput
+}
+
+export interface JobCreateWithoutUsersInput {
+  name: String
+  employeeEstimations?: EmployeeEstimationCreateManyWithoutJobInput
+  employees?: EmployeeCreateManyWithoutJobInput
+}
+
+export interface JobUpsertWithWhereUniqueWithoutUsersInput {
+  where: JobWhereUniqueInput
+  update: JobUpdateWithoutUsersDataInput
+  create: JobCreateWithoutUsersInput
+}
+
+export interface SectionItemSubscriptionWhereInput {
+  AND?: SectionItemSubscriptionWhereInput[] | SectionItemSubscriptionWhereInput
+  OR?: SectionItemSubscriptionWhereInput[] | SectionItemSubscriptionWhereInput
+  NOT?: SectionItemSubscriptionWhereInput[] | SectionItemSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: SectionItemWhereInput
+}
+
+export interface UserUpsertWithoutEmployeeInput {
+  update: UserUpdateWithoutEmployeeDataInput
+  create: UserCreateWithoutEmployeeInput
+}
+
+export interface EventStuffSubscriptionWhereInput {
+  AND?: EventStuffSubscriptionWhereInput[] | EventStuffSubscriptionWhereInput
+  OR?: EventStuffSubscriptionWhereInput[] | EventStuffSubscriptionWhereInput
+  NOT?: EventStuffSubscriptionWhereInput[] | EventStuffSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: EventStuffWhereInput
+}
+
+export interface EmployeeUpsertWithWhereUniqueWithoutJobInput {
+  where: EmployeeWhereUniqueInput
+  update: EmployeeUpdateWithoutJobDataInput
+  create: EmployeeCreateWithoutJobInput
+}
+
+export interface EmployeeEstimationWhereInput {
+  AND?: EmployeeEstimationWhereInput[] | EmployeeEstimationWhereInput
+  OR?: EmployeeEstimationWhereInput[] | EmployeeEstimationWhereInput
+  NOT?: EmployeeEstimationWhereInput[] | EmployeeEstimationWhereInput
+  estimatedEndAt?: DateTime
+  estimatedEndAt_not?: DateTime
+  estimatedEndAt_in?: DateTime[] | DateTime
+  estimatedEndAt_not_in?: DateTime[] | DateTime
+  estimatedEndAt_lt?: DateTime
+  estimatedEndAt_lte?: DateTime
+  estimatedEndAt_gt?: DateTime
+  estimatedEndAt_gte?: DateTime
+  estimatedStartAt?: DateTime
+  estimatedStartAt_not?: DateTime
+  estimatedStartAt_in?: DateTime[] | DateTime
+  estimatedStartAt_not_in?: DateTime[] | DateTime
+  estimatedStartAt_lt?: DateTime
+  estimatedStartAt_lte?: DateTime
+  estimatedStartAt_gt?: DateTime
+  estimatedStartAt_gte?: DateTime
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  number?: Int
+  number_not?: Int
+  number_in?: Int[] | Int
+  number_not_in?: Int[] | Int
+  number_lt?: Int
+  number_lte?: Int
+  number_gt?: Int
+  number_gte?: Int
+  pricePerHour?: Float
+  pricePerHour_not?: Float
+  pricePerHour_in?: Float[] | Float
+  pricePerHour_not_in?: Float[] | Float
+  pricePerHour_lt?: Float
+  pricePerHour_lte?: Float
+  pricePerHour_gt?: Float
+  pricePerHour_gte?: Float
+  total?: Float
+  total_not?: Float
+  total_in?: Float[] | Float
+  total_not_in?: Float[] | Float
+  total_lt?: Float
+  total_lte?: Float
+  total_gt?: Float
+  total_gte?: Float
+  job?: JobWhereInput
+  offer?: OfferWhereInput
 }
 
 export interface UserUpdateManyWithoutJobsInput {
@@ -13537,9 +13311,15 @@ export interface UserUpdateManyWithoutJobsInput {
   upsert?: UserUpsertWithWhereUniqueWithoutJobsInput[] | UserUpsertWithWhereUniqueWithoutJobsInput
 }
 
-export interface ClientCreateOneWithoutEventsInput {
-  create?: ClientCreateWithoutEventsInput
-  connect?: ClientWhereUniqueInput
+export interface ItemTranslationSubscriptionWhereInput {
+  AND?: ItemTranslationSubscriptionWhereInput[] | ItemTranslationSubscriptionWhereInput
+  OR?: ItemTranslationSubscriptionWhereInput[] | ItemTranslationSubscriptionWhereInput
+  NOT?: ItemTranslationSubscriptionWhereInput[] | ItemTranslationSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: ItemTranslationWhereInput
 }
 
 export interface UserUpdateWithWhereUniqueWithoutJobsInput {
@@ -13547,9 +13327,34 @@ export interface UserUpdateWithWhereUniqueWithoutJobsInput {
   data: UserUpdateWithoutJobsDataInput
 }
 
-export interface ClientContactCreateOneWithoutOffersInput {
-  create?: ClientContactCreateWithoutOffersInput
-  connect?: ClientContactWhereUniqueInput
+export interface EventWhereInput {
+  AND?: EventWhereInput[] | EventWhereInput
+  OR?: EventWhereInput[] | EventWhereInput
+  NOT?: EventWhereInput[] | EventWhereInput
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  offer?: OfferWhereInput
+  employees_every?: EmployeeWhereInput
+  employees_some?: EmployeeWhereInput
+  employees_none?: EmployeeWhereInput
+  stuffs_every?: StuffWhereInput
+  stuffs_some?: StuffWhereInput
+  stuffs_none?: StuffWhereInput
+  vehicles_every?: VehicleWhereInput
+  vehicles_some?: VehicleWhereInput
+  vehicles_none?: VehicleWhereInput
 }
 
 export interface UserUpdateWithoutJobsDataInput {
@@ -13562,9 +13367,8 @@ export interface UserUpdateWithoutJobsDataInput {
   employee?: EmployeeUpdateOneWithoutUserInput
 }
 
-export interface EmployeeEstimationCreateManyWithoutOfferInput {
-  create?: EmployeeEstimationCreateWithoutOfferInput[] | EmployeeEstimationCreateWithoutOfferInput
-  connect?: EmployeeEstimationWhereUniqueInput[] | EmployeeEstimationWhereUniqueInput
+export interface ClientContactWhereUniqueInput {
+  id?: ID_Input
 }
 
 export interface EmployeeUpdateOneWithoutUserInput {
@@ -13576,9 +13380,8 @@ export interface EmployeeUpdateOneWithoutUserInput {
   upsert?: EmployeeUpsertWithoutUserInput
 }
 
-export interface StuffCreateManyInput {
-  create?: StuffCreateInput[] | StuffCreateInput
-  connect?: StuffWhereUniqueInput[] | StuffWhereUniqueInput
+export interface JobWhereUniqueInput {
+  id?: ID_Input
 }
 
 export interface EmployeeUpdateWithoutUserDataInput {
@@ -13590,9 +13393,9 @@ export interface EmployeeUpdateWithoutUserDataInput {
   job?: JobUpdateOneWithoutEmployeesInput
 }
 
-export interface JobCreateOneWithoutEmployeesInput {
-  create?: JobCreateWithoutEmployeesInput
-  connect?: JobWhereUniqueInput
+export interface EventUpdateWithWhereUniqueWithoutVehiclesInput {
+  where: EventWhereUniqueInput
+  data: EventUpdateWithoutVehiclesDataInput
 }
 
 export interface EmployeeUpsertWithoutUserInput {
@@ -13600,15 +13403,212 @@ export interface EmployeeUpsertWithoutUserInput {
   create: EmployeeCreateWithoutUserInput
 }
 
-export interface PlaceCreateOneWithoutOfferInput {
-  create?: PlaceCreateWithoutOfferInput
-  connect?: PlaceWhereUniqueInput
+export interface SectionItemUpdateInput {
+  content?: String
+  endTime?: DateTime
+  h?: Int
+  i?: String
+  isDraggable?: Boolean
+  isResizable?: Boolean
+  maxH?: Int
+  maxW?: Int
+  minH?: Int
+  minW?: Int
+  moved?: Boolean
+  persons?: Int
+  price?: Float
+  static?: Boolean
+  startTime?: DateTime
+  title?: String
+  type?: SectionTypes
+  w?: Int
+  x?: Int
+  y?: Int
+  offer?: OfferUpdateOneWithoutSectionItemsInput
+  items?: ItemUpdateManyWithoutSectionItemsInput
 }
 
 export interface UserUpsertWithWhereUniqueWithoutJobsInput {
   where: UserWhereUniqueInput
   update: UserUpdateWithoutJobsDataInput
   create: UserCreateWithoutJobsInput
+}
+
+export interface OfferUpdateWithWhereUniqueWithoutEventTypeInput {
+  where: OfferWhereUniqueInput
+  data: OfferUpdateWithoutEventTypeDataInput
+}
+
+export interface JobUpsertWithoutEmployeeEstimationsInput {
+  update: JobUpdateWithoutEmployeeEstimationsDataInput
+  create: JobCreateWithoutEmployeeEstimationsInput
+}
+
+export interface EmployeeUpdateInput {
+  endedAt?: DateTime
+  estimatedEndAt?: DateTime
+  estimatedStartAt?: DateTime
+  startedAt?: DateTime
+  event?: EventUpdateOneWithoutEmployeesInput
+  job?: JobUpdateOneWithoutEmployeesInput
+  user?: UserUpdateOneWithoutEmployeeInput
+}
+
+export interface EmployeeEstimationUpsertWithWhereUniqueWithoutOfferInput {
+  where: EmployeeEstimationWhereUniqueInput
+  update: EmployeeEstimationUpdateWithoutOfferDataInput
+  create: EmployeeEstimationCreateWithoutOfferInput
+}
+
+export interface OfferUpdateOneWithoutBudgetLinesInput {
+  create?: OfferCreateWithoutBudgetLinesInput
+  connect?: OfferWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: OfferUpdateWithoutBudgetLinesDataInput
+  upsert?: OfferUpsertWithoutBudgetLinesInput
+}
+
+export interface EventTypeUpdateOneWithoutOffersInput {
+  create?: EventTypeCreateWithoutOffersInput
+  connect?: EventTypeWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: EventTypeUpdateWithoutOffersDataInput
+  upsert?: EventTypeUpsertWithoutOffersInput
+}
+
+export interface ItemUpdateInput {
+  itemTranslations?: ItemTranslationUpdateManyWithoutItemsInput
+  categories?: CategoryUpdateManyWithoutItemsInput
+  sectionItems?: SectionItemUpdateManyWithoutItemsInput
+}
+
+export interface EventTypeUpdateWithoutOffersDataInput {
+  name?: String
+}
+
+export interface SectionItemUpdateManyWithoutItemsInput {
+  create?: SectionItemCreateWithoutItemsInput[] | SectionItemCreateWithoutItemsInput
+  connect?: SectionItemWhereUniqueInput[] | SectionItemWhereUniqueInput
+  disconnect?: SectionItemWhereUniqueInput[] | SectionItemWhereUniqueInput
+  delete?: SectionItemWhereUniqueInput[] | SectionItemWhereUniqueInput
+  update?: SectionItemUpdateWithWhereUniqueWithoutItemsInput[] | SectionItemUpdateWithWhereUniqueWithoutItemsInput
+  upsert?: SectionItemUpsertWithWhereUniqueWithoutItemsInput[] | SectionItemUpsertWithWhereUniqueWithoutItemsInput
+}
+
+export interface EventTypeUpsertWithoutOffersInput {
+  update: EventTypeUpdateWithoutOffersDataInput
+  create: EventTypeCreateWithoutOffersInput
+}
+
+export interface CommunicationUpdateInput {
+  message?: String
+  subject?: String
+  channel?: Channel
+  date?: DateTime
+  gmtOffset?: String
+  offer?: OfferUpdateOneWithoutCommunicationsInput
+}
+
+export interface PlaceUpdateOneWithoutOfferInput {
+  create?: PlaceCreateWithoutOfferInput
+  connect?: PlaceWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: PlaceUpdateWithoutOfferDataInput
+  upsert?: PlaceUpsertWithoutOfferInput
+}
+
+export interface EventCreateManyInput {
+  create?: EventCreateInput[] | EventCreateInput
+  connect?: EventWhereUniqueInput[] | EventWhereUniqueInput
+}
+
+export interface PlaceUpdateWithoutOfferDataInput {
+  address?: String
+  city?: String
+  name?: String
+  postalCode?: String
+  country?: Country
+  note?: String
+  placeContacts?: PlaceContactUpdateManyWithoutPlaceInput
+}
+
+export interface OfferCreateManyWithoutClientContactInput {
+  create?: OfferCreateWithoutClientContactInput[] | OfferCreateWithoutClientContactInput
+  connect?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
+}
+
+export interface PlaceContactUpdateManyWithoutPlaceInput {
+  create?: PlaceContactCreateWithoutPlaceInput[] | PlaceContactCreateWithoutPlaceInput
+  connect?: PlaceContactWhereUniqueInput[] | PlaceContactWhereUniqueInput
+  disconnect?: PlaceContactWhereUniqueInput[] | PlaceContactWhereUniqueInput
+  delete?: PlaceContactWhereUniqueInput[] | PlaceContactWhereUniqueInput
+  update?: PlaceContactUpdateWithWhereUniqueWithoutPlaceInput[] | PlaceContactUpdateWithWhereUniqueWithoutPlaceInput
+  upsert?: PlaceContactUpsertWithWhereUniqueWithoutPlaceInput[] | PlaceContactUpsertWithWhereUniqueWithoutPlaceInput
+}
+
+export interface EmployeeEstimationCreateManyWithoutJobInput {
+  create?: EmployeeEstimationCreateWithoutJobInput[] | EmployeeEstimationCreateWithoutJobInput
+  connect?: EmployeeEstimationWhereUniqueInput[] | EmployeeEstimationWhereUniqueInput
+}
+
+export interface PlaceContactUpdateWithWhereUniqueWithoutPlaceInput {
+  where: PlaceContactWhereUniqueInput
+  data: PlaceContactUpdateWithoutPlaceDataInput
+}
+
+export interface ClientContactCreateOneWithoutOffersInput {
+  create?: ClientContactCreateWithoutOffersInput
+  connect?: ClientContactWhereUniqueInput
+}
+
+export interface PlaceContactUpdateWithoutPlaceDataInput {
+  email?: String
+  mobilePhone?: String
+  name?: String
+  phoneNumber?: String
+}
+
+export interface EmployeeEstimationCreateManyWithoutOfferInput {
+  create?: EmployeeEstimationCreateWithoutOfferInput[] | EmployeeEstimationCreateWithoutOfferInput
+  connect?: EmployeeEstimationWhereUniqueInput[] | EmployeeEstimationWhereUniqueInput
+}
+
+export interface PlaceContactUpsertWithWhereUniqueWithoutPlaceInput {
+  where: PlaceContactWhereUniqueInput
+  update: PlaceContactUpdateWithoutPlaceDataInput
+  create: PlaceContactCreateWithoutPlaceInput
+}
+
+export interface StuffCreateManyInput {
+  create?: StuffCreateInput[] | StuffCreateInput
+  connect?: StuffWhereUniqueInput[] | StuffWhereUniqueInput
+}
+
+export interface PlaceUpsertWithoutOfferInput {
+  update: PlaceUpdateWithoutOfferDataInput
+  create: PlaceCreateWithoutOfferInput
+}
+
+export interface UserCreateWithoutEmployeeInput {
+  role: Role
+  email: String
+  image?: String
+  name: String
+  password: String
+  language?: LanguageEnum
+  jobs?: JobCreateManyWithoutUsersInput
+}
+
+export interface SectionItemUpdateManyWithoutOfferInput {
+  create?: SectionItemCreateWithoutOfferInput[] | SectionItemCreateWithoutOfferInput
+  connect?: SectionItemWhereUniqueInput[] | SectionItemWhereUniqueInput
+  disconnect?: SectionItemWhereUniqueInput[] | SectionItemWhereUniqueInput
+  delete?: SectionItemWhereUniqueInput[] | SectionItemWhereUniqueInput
+  update?: SectionItemUpdateWithWhereUniqueWithoutOfferInput[] | SectionItemUpdateWithWhereUniqueWithoutOfferInput
+  upsert?: SectionItemUpsertWithWhereUniqueWithoutOfferInput[] | SectionItemUpsertWithWhereUniqueWithoutOfferInput
 }
 
 export interface PlaceWhereInput {
@@ -13709,83 +13709,92 @@ export interface PlaceWhereInput {
   placeContacts_none?: PlaceContactWhereInput
 }
 
-export interface JobUpsertWithoutEmployeesInput {
-  update: JobUpdateWithoutEmployeesDataInput
-  create: JobCreateWithoutEmployeesInput
+export interface SectionItemUpdateWithWhereUniqueWithoutOfferInput {
+  where: SectionItemWhereUniqueInput
+  data: SectionItemUpdateWithoutOfferDataInput
 }
 
-export interface UserSubscriptionWhereInput {
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: UserWhereInput
-}
-
-export interface UserUpdateOneWithoutEmployeeInput {
-  create?: UserCreateWithoutEmployeeInput
-  connect?: UserWhereUniqueInput
-  disconnect?: Boolean
-  delete?: Boolean
-  update?: UserUpdateWithoutEmployeeDataInput
-  upsert?: UserUpsertWithoutEmployeeInput
-}
-
-export interface BudgetLineWhereUniqueInput {
-  id?: ID_Input
-}
-
-export interface UserUpdateWithoutEmployeeDataInput {
-  role?: Role
+export interface ClientContactWhereInput {
+  AND?: ClientContactWhereInput[] | ClientContactWhereInput
+  OR?: ClientContactWhereInput[] | ClientContactWhereInput
+  NOT?: ClientContactWhereInput[] | ClientContactWhereInput
   email?: String
-  image?: String
+  email_not?: String
+  email_in?: String[] | String
+  email_not_in?: String[] | String
+  email_lt?: String
+  email_lte?: String
+  email_gt?: String
+  email_gte?: String
+  email_contains?: String
+  email_not_contains?: String
+  email_starts_with?: String
+  email_not_starts_with?: String
+  email_ends_with?: String
+  email_not_ends_with?: String
+  id?: ID_Input
+  id_not?: ID_Input
+  id_in?: ID_Input[] | ID_Input
+  id_not_in?: ID_Input[] | ID_Input
+  id_lt?: ID_Input
+  id_lte?: ID_Input
+  id_gt?: ID_Input
+  id_gte?: ID_Input
+  id_contains?: ID_Input
+  id_not_contains?: ID_Input
+  id_starts_with?: ID_Input
+  id_not_starts_with?: ID_Input
+  id_ends_with?: ID_Input
+  id_not_ends_with?: ID_Input
+  mobilePhone?: String
+  mobilePhone_not?: String
+  mobilePhone_in?: String[] | String
+  mobilePhone_not_in?: String[] | String
+  mobilePhone_lt?: String
+  mobilePhone_lte?: String
+  mobilePhone_gt?: String
+  mobilePhone_gte?: String
+  mobilePhone_contains?: String
+  mobilePhone_not_contains?: String
+  mobilePhone_starts_with?: String
+  mobilePhone_not_starts_with?: String
+  mobilePhone_ends_with?: String
+  mobilePhone_not_ends_with?: String
   name?: String
-  password?: String
-  language?: LanguageEnum
-  jobs?: JobUpdateManyWithoutUsersInput
+  name_not?: String
+  name_in?: String[] | String
+  name_not_in?: String[] | String
+  name_lt?: String
+  name_lte?: String
+  name_gt?: String
+  name_gte?: String
+  name_contains?: String
+  name_not_contains?: String
+  name_starts_with?: String
+  name_not_starts_with?: String
+  name_ends_with?: String
+  name_not_ends_with?: String
+  phoneNumber?: String
+  phoneNumber_not?: String
+  phoneNumber_in?: String[] | String
+  phoneNumber_not_in?: String[] | String
+  phoneNumber_lt?: String
+  phoneNumber_lte?: String
+  phoneNumber_gt?: String
+  phoneNumber_gte?: String
+  phoneNumber_contains?: String
+  phoneNumber_not_contains?: String
+  phoneNumber_starts_with?: String
+  phoneNumber_not_starts_with?: String
+  phoneNumber_ends_with?: String
+  phoneNumber_not_ends_with?: String
+  client?: ClientWhereInput
+  offers_every?: OfferWhereInput
+  offers_some?: OfferWhereInput
+  offers_none?: OfferWhereInput
 }
 
-export interface EventUpsertWithWhereUniqueWithoutVehiclesInput {
-  where: EventWhereUniqueInput
-  update: EventUpdateWithoutVehiclesDataInput
-  create: EventCreateWithoutVehiclesInput
-}
-
-export interface JobUpdateManyWithoutUsersInput {
-  create?: JobCreateWithoutUsersInput[] | JobCreateWithoutUsersInput
-  connect?: JobWhereUniqueInput[] | JobWhereUniqueInput
-  disconnect?: JobWhereUniqueInput[] | JobWhereUniqueInput
-  delete?: JobWhereUniqueInput[] | JobWhereUniqueInput
-  update?: JobUpdateWithWhereUniqueWithoutUsersInput[] | JobUpdateWithWhereUniqueWithoutUsersInput
-  upsert?: JobUpsertWithWhereUniqueWithoutUsersInput[] | JobUpsertWithWhereUniqueWithoutUsersInput
-}
-
-export interface OfferUpsertWithWhereUniqueWithoutEventTypeInput {
-  where: OfferWhereUniqueInput
-  update: OfferUpdateWithoutEventTypeDataInput
-  create: OfferCreateWithoutEventTypeInput
-}
-
-export interface JobUpdateWithWhereUniqueWithoutUsersInput {
-  where: JobWhereUniqueInput
-  data: JobUpdateWithoutUsersDataInput
-}
-
-export interface OfferUpsertWithoutBudgetLinesInput {
-  update: OfferUpdateWithoutBudgetLinesDataInput
-  create: OfferCreateWithoutBudgetLinesInput
-}
-
-export interface JobUpdateWithoutUsersDataInput {
-  name?: String
-  employeeEstimations?: EmployeeEstimationUpdateManyWithoutJobInput
-  employees?: EmployeeUpdateManyWithoutJobInput
-}
-
-export interface SectionItemUpdateWithoutItemsDataInput {
+export interface SectionItemUpdateWithoutOfferDataInput {
   content?: String
   endTime?: DateTime
   h?: Int
@@ -13806,239 +13815,129 @@ export interface SectionItemUpdateWithoutItemsDataInput {
   w?: Int
   x?: Int
   y?: Int
-  offer?: OfferUpdateOneWithoutSectionItemsInput
+  items?: ItemUpdateManyWithoutSectionItemsInput
 }
 
-export interface JobUpsertWithWhereUniqueWithoutUsersInput {
-  where: JobWhereUniqueInput
-  update: JobUpdateWithoutUsersDataInput
-  create: JobCreateWithoutUsersInput
-}
-
-export interface EventCreateManyWithoutClientInput {
-  create?: EventCreateWithoutClientInput[] | EventCreateWithoutClientInput
-  connect?: EventWhereUniqueInput[] | EventWhereUniqueInput
-}
-
-export interface UserUpsertWithoutEmployeeInput {
-  update: UserUpdateWithoutEmployeeDataInput
-  create: UserCreateWithoutEmployeeInput
-}
-
-export interface BudgetLineCreateManyWithoutOfferInput {
-  create?: BudgetLineCreateWithoutOfferInput[] | BudgetLineCreateWithoutOfferInput
-  connect?: BudgetLineWhereUniqueInput[] | BudgetLineWhereUniqueInput
-}
-
-export interface EmployeeUpsertWithWhereUniqueWithoutEventInput {
-  where: EmployeeWhereUniqueInput
-  update: EmployeeUpdateWithoutEventDataInput
-  create: EmployeeCreateWithoutEventInput
-}
-
-export interface EmployeeCreateManyWithoutJobInput {
-  create?: EmployeeCreateWithoutJobInput[] | EmployeeCreateWithoutJobInput
-  connect?: EmployeeWhereUniqueInput[] | EmployeeWhereUniqueInput
-}
-
-export interface VehicleUpdateManyWithoutEventsInput {
-  create?: VehicleCreateWithoutEventsInput[] | VehicleCreateWithoutEventsInput
-  connect?: VehicleWhereUniqueInput[] | VehicleWhereUniqueInput
-  disconnect?: VehicleWhereUniqueInput[] | VehicleWhereUniqueInput
-  delete?: VehicleWhereUniqueInput[] | VehicleWhereUniqueInput
-  update?: VehicleUpdateWithWhereUniqueWithoutEventsInput[] | VehicleUpdateWithWhereUniqueWithoutEventsInput
-  upsert?: VehicleUpsertWithWhereUniqueWithoutEventsInput[] | VehicleUpsertWithWhereUniqueWithoutEventsInput
-}
-
-export interface OfferCreateOneWithoutEmployeeEstimationsInput {
-  create?: OfferCreateWithoutEmployeeEstimationsInput
-  connect?: OfferWhereUniqueInput
-}
-
-export interface VehicleUpdateWithWhereUniqueWithoutEventsInput {
-  where: VehicleWhereUniqueInput
-  data: VehicleUpdateWithoutEventsDataInput
-}
-
-export interface JobWhereInput {
-  AND?: JobWhereInput[] | JobWhereInput
-  OR?: JobWhereInput[] | JobWhereInput
-  NOT?: JobWhereInput[] | JobWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  name?: String
-  name_not?: String
-  name_in?: String[] | String
-  name_not_in?: String[] | String
-  name_lt?: String
-  name_lte?: String
-  name_gt?: String
-  name_gte?: String
-  name_contains?: String
-  name_not_contains?: String
-  name_starts_with?: String
-  name_not_starts_with?: String
-  name_ends_with?: String
-  name_not_ends_with?: String
-  employeeEstimations_every?: EmployeeEstimationWhereInput
-  employeeEstimations_some?: EmployeeEstimationWhereInput
-  employeeEstimations_none?: EmployeeEstimationWhereInput
-  employees_every?: EmployeeWhereInput
-  employees_some?: EmployeeWhereInput
-  employees_none?: EmployeeWhereInput
-  users_every?: UserWhereInput
-  users_some?: UserWhereInput
-  users_none?: UserWhereInput
-}
-
-export interface VehicleUpdateWithoutEventsDataInput {
-  color?: String
-  description?: String
-  name?: String
-  plate?: String
-  year?: Int
-}
-
-export interface SectionItemWhereUniqueInput {
+export interface OfferWhereUniqueInput {
   id?: ID_Input
 }
 
-export interface VehicleUpsertWithWhereUniqueWithoutEventsInput {
-  where: VehicleWhereUniqueInput
-  update: VehicleUpdateWithoutEventsDataInput
-  create: VehicleCreateWithoutEventsInput
+export interface ItemUpdateManyWithoutSectionItemsInput {
+  create?: ItemCreateWithoutSectionItemsInput[] | ItemCreateWithoutSectionItemsInput
+  connect?: ItemWhereUniqueInput[] | ItemWhereUniqueInput
+  disconnect?: ItemWhereUniqueInput[] | ItemWhereUniqueInput
+  delete?: ItemWhereUniqueInput[] | ItemWhereUniqueInput
+  update?: ItemUpdateWithWhereUniqueWithoutSectionItemsInput[] | ItemUpdateWithWhereUniqueWithoutSectionItemsInput
+  upsert?: ItemUpsertWithWhereUniqueWithoutSectionItemsInput[] | ItemUpsertWithWhereUniqueWithoutSectionItemsInput
 }
 
-export interface EventStuffUpdateInput {
-  quantity?: Int
-  event?: EventUpdateOneInput
-  stuff?: StuffUpdateOneWithoutEventStuffsInput
+export interface VehicleWhereUniqueInput {
+  id?: ID_Input
 }
 
-export interface EventUpsertNestedInput {
-  update: EventUpdateDataInput
-  create: EventCreateInput
+export interface ItemUpdateWithWhereUniqueWithoutSectionItemsInput {
+  where: ItemWhereUniqueInput
+  data: ItemUpdateWithoutSectionItemsDataInput
 }
 
-export interface ClientUpsertWithoutOffersInput {
-  update: ClientUpdateWithoutOffersDataInput
-  create: ClientCreateWithoutOffersInput
-}
-
-export interface EventStuffUpsertWithWhereUniqueWithoutStuffInput {
-  where: EventStuffWhereUniqueInput
-  update: EventStuffUpdateWithoutStuffDataInput
-  create: EventStuffCreateWithoutStuffInput
-}
-
-export interface CommunicationCreateManyInput {
-  create?: CommunicationCreateInput[] | CommunicationCreateInput
-  connect?: CommunicationWhereUniqueInput[] | CommunicationWhereUniqueInput
-}
-
-export interface StuffUpsertWithWhereUniqueNestedInput {
-  where: StuffWhereUniqueInput
-  update: StuffUpdateDataInput
-  create: StuffCreateInput
-}
-
-export interface VehicleSubscriptionWhereInput {
-  AND?: VehicleSubscriptionWhereInput[] | VehicleSubscriptionWhereInput
-  OR?: VehicleSubscriptionWhereInput[] | VehicleSubscriptionWhereInput
-  NOT?: VehicleSubscriptionWhereInput[] | VehicleSubscriptionWhereInput
-  mutation_in?: MutationType[] | MutationType
-  updatedFields_contains?: String
-  updatedFields_contains_every?: String[] | String
-  updatedFields_contains_some?: String[] | String
-  node?: VehicleWhereInput
-}
-
-export interface EventUpsertWithoutEmployeesInput {
-  update: EventUpdateWithoutEmployeesDataInput
-  create: EventCreateWithoutEmployeesInput
-}
-
-export interface BudgetLineUpdateManyWithoutTaxInput {
-  create?: BudgetLineCreateWithoutTaxInput[] | BudgetLineCreateWithoutTaxInput
-  connect?: BudgetLineWhereUniqueInput[] | BudgetLineWhereUniqueInput
-  disconnect?: BudgetLineWhereUniqueInput[] | BudgetLineWhereUniqueInput
-  delete?: BudgetLineWhereUniqueInput[] | BudgetLineWhereUniqueInput
-  update?: BudgetLineUpdateWithWhereUniqueWithoutTaxInput[] | BudgetLineUpdateWithWhereUniqueWithoutTaxInput
-  upsert?: BudgetLineUpsertWithWhereUniqueWithoutTaxInput[] | BudgetLineUpsertWithWhereUniqueWithoutTaxInput
-}
-
-export interface OfferUpsertNestedInput {
-  update: OfferUpdateDataInput
-  create: OfferCreateInput
-}
-
-export interface EmployeeEstimationUpsertWithWhereUniqueWithoutOfferInput {
-  where: EmployeeEstimationWhereUniqueInput
-  update: EmployeeEstimationUpdateWithoutOfferDataInput
-  create: EmployeeEstimationCreateWithoutOfferInput
-}
-
-export interface JobUpsertWithoutEmployeeEstimationsInput {
-  update: JobUpdateWithoutEmployeeEstimationsDataInput
-  create: JobCreateWithoutEmployeeEstimationsInput
-}
-
-export interface EmployeeUpsertWithWhereUniqueWithoutJobInput {
-  where: EmployeeWhereUniqueInput
-  update: EmployeeUpdateWithoutJobDataInput
-  create: EmployeeCreateWithoutJobInput
-}
-
-export interface ClientContactUpdateInput {
+export interface PlaceContactUpdateInput {
   email?: String
   mobilePhone?: String
   name?: String
   phoneNumber?: String
-  client?: ClientUpdateOneWithoutClientContactsInput
-  offers?: OfferUpdateManyWithoutClientContactInput
+  place?: PlaceUpdateOneWithoutPlaceContactsInput
 }
 
-export interface EventWhereInput {
-  AND?: EventWhereInput[] | EventWhereInput
-  OR?: EventWhereInput[] | EventWhereInput
-  NOT?: EventWhereInput[] | EventWhereInput
-  id?: ID_Input
-  id_not?: ID_Input
-  id_in?: ID_Input[] | ID_Input
-  id_not_in?: ID_Input[] | ID_Input
-  id_lt?: ID_Input
-  id_lte?: ID_Input
-  id_gt?: ID_Input
-  id_gte?: ID_Input
-  id_contains?: ID_Input
-  id_not_contains?: ID_Input
-  id_starts_with?: ID_Input
-  id_not_starts_with?: ID_Input
-  id_ends_with?: ID_Input
-  id_not_ends_with?: ID_Input
-  client?: ClientWhereInput
-  offer?: OfferWhereInput
-  employees_every?: EmployeeWhereInput
-  employees_some?: EmployeeWhereInput
-  employees_none?: EmployeeWhereInput
-  stuffs_every?: StuffWhereInput
-  stuffs_some?: StuffWhereInput
-  stuffs_none?: StuffWhereInput
-  vehicles_every?: VehicleWhereInput
-  vehicles_some?: VehicleWhereInput
-  vehicles_none?: VehicleWhereInput
+export interface ItemUpdateWithoutSectionItemsDataInput {
+  itemTranslations?: ItemTranslationUpdateManyWithoutItemsInput
+  categories?: CategoryUpdateManyWithoutItemsInput
+}
+
+export interface ItemUpdateManyWithoutCategoriesInput {
+  create?: ItemCreateWithoutCategoriesInput[] | ItemCreateWithoutCategoriesInput
+  connect?: ItemWhereUniqueInput[] | ItemWhereUniqueInput
+  disconnect?: ItemWhereUniqueInput[] | ItemWhereUniqueInput
+  delete?: ItemWhereUniqueInput[] | ItemWhereUniqueInput
+  update?: ItemUpdateWithWhereUniqueWithoutCategoriesInput[] | ItemUpdateWithWhereUniqueWithoutCategoriesInput
+  upsert?: ItemUpsertWithWhereUniqueWithoutCategoriesInput[] | ItemUpsertWithWhereUniqueWithoutCategoriesInput
+}
+
+export interface ItemTranslationUpdateManyWithoutItemsInput {
+  create?: ItemTranslationCreateWithoutItemsInput[] | ItemTranslationCreateWithoutItemsInput
+  connect?: ItemTranslationWhereUniqueInput[] | ItemTranslationWhereUniqueInput
+  disconnect?: ItemTranslationWhereUniqueInput[] | ItemTranslationWhereUniqueInput
+  delete?: ItemTranslationWhereUniqueInput[] | ItemTranslationWhereUniqueInput
+  update?: ItemTranslationUpdateWithWhereUniqueWithoutItemsInput[] | ItemTranslationUpdateWithWhereUniqueWithoutItemsInput
+  upsert?: ItemTranslationUpsertWithWhereUniqueWithoutItemsInput[] | ItemTranslationUpsertWithWhereUniqueWithoutItemsInput
+}
+
+export interface OfferUpdateWithoutSectionItemsDataInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address?: String
+  city?: String
+  endTime?: DateTime
+  gmtOffset?: String
+  maxPersons?: Int
+  minPersons?: Int
+  name?: String
+  postalCode?: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  client?: ClientUpdateOneWithoutOffersInput
+  event?: EventUpdateOneWithoutOfferInput
+  budgetLines?: BudgetLineUpdateManyWithoutOfferInput
+  clientContact?: ClientContactUpdateOneWithoutOffersInput
+  communications?: CommunicationUpdateManyWithoutOfferInput
+  employeeEstimations?: EmployeeEstimationUpdateManyWithoutOfferInput
+  eventType?: EventTypeUpdateOneWithoutOffersInput
+  place?: PlaceUpdateOneWithoutOfferInput
+}
+
+export interface ItemTranslationUpdateWithWhereUniqueWithoutItemsInput {
+  where: ItemTranslationWhereUniqueInput
+  data: ItemTranslationUpdateWithoutItemsDataInput
+}
+
+export interface ClientContactUpsertWithWhereUniqueWithoutClientInput {
+  where: ClientContactWhereUniqueInput
+  update: ClientContactUpdateWithoutClientDataInput
+  create: ClientContactCreateWithoutClientInput
+}
+
+export interface ItemTranslationUpdateWithoutItemsDataInput {
+  description?: String
+  internalDescription?: String
+  language?: LanguageEnum
+  name?: String
+}
+
+export interface EmployeeCreateManyWithoutEventInput {
+  create?: EmployeeCreateWithoutEventInput[] | EmployeeCreateWithoutEventInput
+  connect?: EmployeeWhereUniqueInput[] | EmployeeWhereUniqueInput
+}
+
+export interface ItemTranslationUpsertWithWhereUniqueWithoutItemsInput {
+  where: ItemTranslationWhereUniqueInput
+  update: ItemTranslationUpdateWithoutItemsDataInput
+  create: ItemTranslationCreateWithoutItemsInput
+}
+
+export interface OfferCreateManyWithoutClientInput {
+  create?: OfferCreateWithoutClientInput[] | OfferCreateWithoutClientInput
+  connect?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
+}
+
+export interface CategoryUpdateManyWithoutItemsInput {
+  create?: CategoryCreateWithoutItemsInput[] | CategoryCreateWithoutItemsInput
+  connect?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
+  disconnect?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
+  delete?: CategoryWhereUniqueInput[] | CategoryWhereUniqueInput
+  update?: CategoryUpdateWithWhereUniqueWithoutItemsInput[] | CategoryUpdateWithWhereUniqueWithoutItemsInput
+  upsert?: CategoryUpsertWithWhereUniqueWithoutItemsInput[] | CategoryUpsertWithWhereUniqueWithoutItemsInput
 }
 
 export interface EventCreateOneInput {
@@ -14046,9 +13945,159 @@ export interface EventCreateOneInput {
   connect?: EventWhereUniqueInput
 }
 
-export interface OfferCreateManyWithoutClientContactInput {
-  create?: OfferCreateWithoutClientContactInput[] | OfferCreateWithoutClientContactInput
-  connect?: OfferWhereUniqueInput[] | OfferWhereUniqueInput
+export interface CategoryUpdateWithWhereUniqueWithoutItemsInput {
+  where: CategoryWhereUniqueInput
+  data: CategoryUpdateWithoutItemsDataInput
+}
+
+export interface EmployeeSubscriptionWhereInput {
+  AND?: EmployeeSubscriptionWhereInput[] | EmployeeSubscriptionWhereInput
+  OR?: EmployeeSubscriptionWhereInput[] | EmployeeSubscriptionWhereInput
+  NOT?: EmployeeSubscriptionWhereInput[] | EmployeeSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: EmployeeWhereInput
+}
+
+export interface CategoryUpdateWithoutItemsDataInput {
+  name?: String
+}
+
+export interface EmployeeWhereUniqueInput {
+  id?: ID_Input
+}
+
+export interface CategoryUpsertWithWhereUniqueWithoutItemsInput {
+  where: CategoryWhereUniqueInput
+  update: CategoryUpdateWithoutItemsDataInput
+  create: CategoryCreateWithoutItemsInput
+}
+
+export interface StuffUpdateWithoutEventStuffsDataInput {
+  name?: String
+}
+
+export interface ItemUpsertWithWhereUniqueWithoutSectionItemsInput {
+  where: ItemWhereUniqueInput
+  update: ItemUpdateWithoutSectionItemsDataInput
+  create: ItemCreateWithoutSectionItemsInput
+}
+
+export interface OfferUpdateInput {
+  customMessage?: String
+  status?: StatusOffer
+  language?: LanguageEnum
+  address?: String
+  city?: String
+  endTime?: DateTime
+  gmtOffset?: String
+  maxPersons?: Int
+  minPersons?: Int
+  name?: String
+  postalCode?: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+  client?: ClientUpdateOneWithoutOffersInput
+  event?: EventUpdateOneWithoutOfferInput
+  budgetLines?: BudgetLineUpdateManyWithoutOfferInput
+  clientContact?: ClientContactUpdateOneWithoutOffersInput
+  communications?: CommunicationUpdateManyWithoutOfferInput
+  employeeEstimations?: EmployeeEstimationUpdateManyWithoutOfferInput
+  eventType?: EventTypeUpdateOneWithoutOffersInput
+  place?: PlaceUpdateOneWithoutOfferInput
+  sectionItems?: SectionItemUpdateManyWithoutOfferInput
+}
+
+export interface SectionItemUpsertWithWhereUniqueWithoutOfferInput {
+  where: SectionItemWhereUniqueInput
+  update: SectionItemUpdateWithoutOfferDataInput
+  create: SectionItemCreateWithoutOfferInput
+}
+
+export interface BudgetLineCreateManyWithoutOfferInput {
+  create?: BudgetLineCreateWithoutOfferInput[] | BudgetLineCreateWithoutOfferInput
+  connect?: BudgetLineWhereUniqueInput[] | BudgetLineWhereUniqueInput
+}
+
+export interface OfferUpsertWithWhereUniqueWithoutClientInput {
+  where: OfferWhereUniqueInput
+  update: OfferUpdateWithoutClientDataInput
+  create: OfferCreateWithoutClientInput
+}
+
+export interface StuffSubscriptionWhereInput {
+  AND?: StuffSubscriptionWhereInput[] | StuffSubscriptionWhereInput
+  OR?: StuffSubscriptionWhereInput[] | StuffSubscriptionWhereInput
+  NOT?: StuffSubscriptionWhereInput[] | StuffSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: StuffWhereInput
+}
+
+export interface EmployeeEstimationUpsertWithWhereUniqueWithoutJobInput {
+  where: EmployeeEstimationWhereUniqueInput
+  update: EmployeeEstimationUpdateWithoutJobDataInput
+  create: EmployeeEstimationCreateWithoutJobInput
+}
+
+export interface OfferUpsertWithoutEmployeeEstimationsInput {
+  update: OfferUpdateWithoutEmployeeEstimationsDataInput
+  create: OfferCreateWithoutEmployeeEstimationsInput
+}
+
+export interface ClientContactUpsertWithoutOffersInput {
+  update: ClientContactUpdateWithoutOffersDataInput
+  create: ClientContactCreateWithoutOffersInput
+}
+
+export interface ClientUpsertWithoutClientContactsInput {
+  update: ClientUpdateWithoutClientContactsDataInput
+  create: ClientCreateWithoutClientContactsInput
+}
+
+export interface ClientSubscriptionWhereInput {
+  AND?: ClientSubscriptionWhereInput[] | ClientSubscriptionWhereInput
+  OR?: ClientSubscriptionWhereInput[] | ClientSubscriptionWhereInput
+  NOT?: ClientSubscriptionWhereInput[] | ClientSubscriptionWhereInput
+  mutation_in?: MutationType[] | MutationType
+  updatedFields_contains?: String
+  updatedFields_contains_every?: String[] | String
+  updatedFields_contains_some?: String[] | String
+  node?: ClientWhereInput
+}
+
+export interface EmployeeCreateManyWithoutJobInput {
+  create?: EmployeeCreateWithoutJobInput[] | EmployeeCreateWithoutJobInput
+  connect?: EmployeeWhereUniqueInput[] | EmployeeWhereUniqueInput
+}
+
+export interface ClientCreateOneWithoutOffersInput {
+  create?: ClientCreateWithoutOffersInput
+  connect?: ClientWhereUniqueInput
+}
+
+export interface OfferUpdateOneWithoutPlaceInput {
+  create?: OfferCreateWithoutPlaceInput
+  connect?: OfferWhereUniqueInput
+  disconnect?: Boolean
+  delete?: Boolean
+  update?: OfferUpdateWithoutPlaceDataInput
+  upsert?: OfferUpsertWithoutPlaceInput
+}
+
+export interface BudgetLineUpdateWithoutTaxDataInput {
+  description?: String
+  quantity?: Int
+  total?: Float
+  unitPrice?: Float
+  value?: Float
+  offer?: OfferUpdateOneWithoutBudgetLinesInput
 }
 
 /*
@@ -14059,45 +14108,18 @@ export interface Node {
   id: ID_Output
 }
 
-export interface OfferPreviousValues {
-  createdAt: DateTime
-  customMessage?: String
+export interface EventPreviousValues {
   id: ID_Output
-  status: StatusOffer
-  language?: LanguageEnum
-  address: String
-  city: String
-  endTime?: DateTime
-  gmtOffset: String
-  maxPersons?: Int
-  minPersons?: Int
-  name: String
-  postalCode: String
-  showTotalBudgetsPdf?: Boolean
-  startTime?: DateTime
-  version?: Int
 }
 
-/*
- * A connection to a list of items.
-
- */
-export interface ClientConnection {
-  pageInfo: PageInfo
-  edges: ClientEdge[]
-  aggregate: AggregateClient
-}
-
-export interface StuffPreviousValues {
+export interface Vehicle extends Node {
+  color?: String
+  description?: String
+  events?: Event[]
   id: ID_Output
   name: String
-}
-
-export interface OfferSubscriptionPayload {
-  mutation: MutationType
-  node?: Offer
-  updatedFields?: String[]
-  previousValues?: OfferPreviousValues
+  plate: String
+  year?: Int
 }
 
 export interface Client extends Node {
@@ -14112,32 +14134,11 @@ export interface Client extends Node {
   tva?: String
   clientContacts?: ClientContact[]
   language?: LanguageEnum
-  communications?: Communication[]
   type?: ClientType
 }
 
-export interface Communication extends Node {
-  id: ID_Output
-  message: String
-  subject: String
-  channel: Channel
-  date: DateTime
-  gmtOffset: String
-  offer?: Offer
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface OfferConnection {
-  pageInfo: PageInfo
-  edges: OfferEdge[]
-  aggregate: AggregateOffer
-}
-
-export interface AggregateOffer {
-  count: Int
+export interface BatchPayload {
+  count: Long
 }
 
 /*
@@ -14149,16 +14150,7 @@ export interface EventEdge {
   cursor: String
 }
 
-export interface BatchPayload {
-  count: Long
-}
-
-export interface AggregateStuff {
-  count: Int
-}
-
 export interface Event extends Node {
-  client?: Client
   id: ID_Output
   offer?: Offer
   employees?: Employee[]
@@ -14166,37 +14158,78 @@ export interface Event extends Node {
   vehicles?: Vehicle[]
 }
 
+export interface VehiclePreviousValues {
+  color?: String
+  description?: String
+  id: ID_Output
+  name: String
+  plate: String
+  year?: Int
+}
+
+export interface AggregateEvent {
+  count: Int
+}
+
+export interface AggregateStuff {
+  count: Int
+}
+
 /*
  * A connection to a list of items.
 
  */
-export interface StuffConnection {
+export interface EventConnection {
   pageInfo: PageInfo
-  edges: StuffEdge[]
-  aggregate: AggregateStuff
+  edges: EventEdge[]
+  aggregate: AggregateEvent
 }
 
-export interface EventPreviousValues {
-  id: ID_Output
+export interface AggregateVehicle {
+  count: Int
 }
 
 /*
  * An edge in a connection.
 
  */
-export interface CommunicationEdge {
-  node: Communication
+export interface StuffEdge {
+  node: Stuff
   cursor: String
 }
 
-export interface EventSubscriptionPayload {
-  mutation: MutationType
-  node?: Event
-  updatedFields?: String[]
-  previousValues?: EventPreviousValues
+/*
+ * A connection to a list of items.
+
+ */
+export interface VehicleConnection {
+  pageInfo: PageInfo
+  edges: VehicleEdge[]
+  aggregate: AggregateVehicle
 }
 
-export interface AggregateVehicle {
+export interface StuffPreviousValues {
+  id: ID_Output
+  name: String
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface TaxEdge {
+  node: Tax
+  cursor: String
+}
+
+export interface StuffSubscriptionPayload {
+  mutation: MutationType
+  node?: Stuff
+  updatedFields?: String[]
+  previousValues?: StuffPreviousValues
+}
+
+export interface AggregateSectionItem {
   count: Int
 }
 
@@ -14211,10 +14244,10 @@ export interface ClientSubscriptionPayload {
  * A connection to a list of items.
 
  */
-export interface VehicleConnection {
+export interface SectionItemConnection {
   pageInfo: PageInfo
-  edges: VehicleEdge[]
-  aggregate: AggregateVehicle
+  edges: SectionItemEdge[]
+  aggregate: AggregateSectionItem
 }
 
 export interface ClientPreviousValues {
@@ -14227,54 +14260,6 @@ export interface ClientPreviousValues {
   tva?: String
   language?: LanguageEnum
   type?: ClientType
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface TaxEdge {
-  node: Tax
-  cursor: String
-}
-
-export interface Vehicle extends Node {
-  color?: String
-  description?: String
-  events?: Event[]
-  id: ID_Output
-  name: String
-  plate: String
-  year?: Int
-}
-
-export interface AggregateSectionItem {
-  count: Int
-}
-
-export interface ItemTranslationSubscriptionPayload {
-  mutation: MutationType
-  node?: ItemTranslation
-  updatedFields?: String[]
-  previousValues?: ItemTranslationPreviousValues
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface SectionItemConnection {
-  pageInfo: PageInfo
-  edges: SectionItemEdge[]
-  aggregate: AggregateSectionItem
-}
-
-export interface ItemTranslationPreviousValues {
-  description?: String
-  id: ID_Output
-  internalDescription?: String
-  language: LanguageEnum
-  name?: String
 }
 
 /*
@@ -14297,11 +14282,11 @@ export interface AggregateJob {
   count: Int
 }
 
-export interface ItemSubscriptionPayload {
+export interface CommunicationSubscriptionPayload {
   mutation: MutationType
-  node?: Item
+  node?: Communication
   updatedFields?: String[]
-  previousValues?: ItemPreviousValues
+  previousValues?: CommunicationPreviousValues
 }
 
 /*
@@ -14314,8 +14299,13 @@ export interface JobConnection {
   aggregate: AggregateJob
 }
 
-export interface ItemPreviousValues {
+export interface CommunicationPreviousValues {
   id: ID_Output
+  message: String
+  subject: String
+  channel: Channel
+  date: DateTime
+  gmtOffset: String
 }
 
 /*
@@ -14324,6 +14314,62 @@ export interface ItemPreviousValues {
  */
 export interface EventTypeEdge {
   node: EventType
+  cursor: String
+}
+
+export interface Stuff extends Node {
+  eventStuffs?: EventStuff[]
+  id: ID_Output
+  name: String
+}
+
+export interface AggregateEventStuff {
+  count: Int
+}
+
+export interface OfferSubscriptionPayload {
+  mutation: MutationType
+  node?: Offer
+  updatedFields?: String[]
+  previousValues?: OfferPreviousValues
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface EventStuffConnection {
+  pageInfo: PageInfo
+  edges: EventStuffEdge[]
+  aggregate: AggregateEventStuff
+}
+
+export interface OfferPreviousValues {
+  createdAt: DateTime
+  customMessage?: String
+  id: ID_Output
+  status: StatusOffer
+  language?: LanguageEnum
+  address: String
+  city: String
+  endTime?: DateTime
+  gmtOffset: String
+  maxPersons?: Int
+  minPersons?: Int
+  name: String
+  postalCode: String
+  rev?: String
+  showTotalBudgetsPdf?: Boolean
+  startTime?: DateTime
+  version?: Int
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface EmployeeEstimationEdge {
+  node: EmployeeEstimation
   cursor: String
 }
 
@@ -14339,6 +14385,7 @@ export interface Offer extends Node {
   budgetLines?: BudgetLine[]
   city: String
   clientContact?: ClientContact
+  communications?: Communication[]
   employeeEstimations?: EmployeeEstimation[]
   endTime?: DateTime
   eventType?: EventType
@@ -14348,69 +14395,22 @@ export interface Offer extends Node {
   name: String
   place?: Place
   postalCode: String
+  rev?: String
   sectionItems?: SectionItem[]
   showTotalBudgetsPdf?: Boolean
   startTime?: DateTime
   version?: Int
 }
 
-export interface AggregateEventStuff {
-  count: Int
-}
-
-export interface UserSubscriptionPayload {
-  mutation: MutationType
-  node?: User
-  updatedFields?: String[]
-  previousValues?: UserPreviousValues
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface EventStuffConnection {
-  pageInfo: PageInfo
-  edges: EventStuffEdge[]
-  aggregate: AggregateEventStuff
-}
-
-export interface UserPreviousValues {
-  createdAt: DateTime
-  id: ID_Output
-  role: Role
-  updatedAt: DateTime
-  email: String
-  image?: String
-  name: String
-  password: String
-  language?: LanguageEnum
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface EmployeeEstimationEdge {
-  node: EmployeeEstimation
-  cursor: String
-}
-
-export interface Stuff extends Node {
-  eventStuffs?: EventStuff[]
-  id: ID_Output
-  name: String
-}
-
 export interface AggregateEmployee {
   count: Int
 }
 
-export interface ClientContactSubscriptionPayload {
+export interface ItemTranslationSubscriptionPayload {
   mutation: MutationType
-  node?: ClientContact
+  node?: ItemTranslation
   updatedFields?: String[]
-  previousValues?: ClientContactPreviousValues
+  previousValues?: ItemTranslationPreviousValues
 }
 
 /*
@@ -14423,12 +14423,12 @@ export interface EmployeeConnection {
   aggregate: AggregateEmployee
 }
 
-export interface ClientContactPreviousValues {
-  email: String
+export interface ItemTranslationPreviousValues {
+  description?: String
   id: ID_Output
-  mobilePhone?: String
-  name: String
-  phoneNumber?: String
+  internalDescription?: String
+  language: LanguageEnum
+  name?: String
 }
 
 /*
@@ -14450,11 +14450,11 @@ export interface AggregateBudgetLine {
   count: Int
 }
 
-export interface PlaceSubscriptionPayload {
+export interface ItemSubscriptionPayload {
   mutation: MutationType
-  node?: Place
+  node?: Item
   updatedFields?: String[]
-  previousValues?: PlacePreviousValues
+  previousValues?: ItemPreviousValues
 }
 
 /*
@@ -14467,14 +14467,8 @@ export interface BudgetLineConnection {
   aggregate: AggregateBudgetLine
 }
 
-export interface PlacePreviousValues {
-  address: String
-  city: String
+export interface ItemPreviousValues {
   id: ID_Output
-  name: String
-  postalCode: String
-  country?: Country
-  note?: String
 }
 
 /*
@@ -14499,11 +14493,11 @@ export interface AggregateClientContact {
   count: Int
 }
 
-export interface BudgetLineSubscriptionPayload {
+export interface UserSubscriptionPayload {
   mutation: MutationType
-  node?: BudgetLine
+  node?: User
   updatedFields?: String[]
-  previousValues?: BudgetLinePreviousValues
+  previousValues?: UserPreviousValues
 }
 
 /*
@@ -14516,13 +14510,16 @@ export interface ClientContactConnection {
   aggregate: AggregateClientContact
 }
 
-export interface BudgetLinePreviousValues {
-  description: String
+export interface UserPreviousValues {
+  createdAt: DateTime
   id: ID_Output
-  quantity?: Int
-  total?: Float
-  unitPrice?: Float
-  value: Float
+  role: Role
+  updatedAt: DateTime
+  email: String
+  image?: String
+  name: String
+  password: String
+  language?: LanguageEnum
 }
 
 /*
@@ -14536,7 +14533,7 @@ export interface UserEdge {
 
 export interface Item extends Node {
   id: ID_Output
-  platTranslations?: ItemTranslation[]
+  itemTranslations?: ItemTranslation[]
   categories?: Category[]
   sectionItems?: SectionItem[]
 }
@@ -14545,11 +14542,11 @@ export interface AggregateItem {
   count: Int
 }
 
-export interface CategorySubscriptionPayload {
+export interface ClientContactSubscriptionPayload {
   mutation: MutationType
-  node?: Category
+  node?: ClientContact
   updatedFields?: String[]
-  previousValues?: CategoryPreviousValues
+  previousValues?: ClientContactPreviousValues
 }
 
 /*
@@ -14562,9 +14559,12 @@ export interface ItemConnection {
   aggregate: AggregateItem
 }
 
-export interface CategoryPreviousValues {
+export interface ClientContactPreviousValues {
+  email: String
   id: ID_Output
+  mobilePhone?: String
   name: String
+  phoneNumber?: String
 }
 
 /*
@@ -14602,15 +14602,64 @@ export interface SectionItem extends Node {
   y: Int
 }
 
+export interface AggregateOffer {
+  count: Int
+}
+
+export interface PlaceSubscriptionPayload {
+  mutation: MutationType
+  node?: Place
+  updatedFields?: String[]
+  previousValues?: PlacePreviousValues
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface OfferConnection {
+  pageInfo: PageInfo
+  edges: OfferEdge[]
+  aggregate: AggregateOffer
+}
+
+export interface PlacePreviousValues {
+  address: String
+  city: String
+  id: ID_Output
+  name: String
+  postalCode: String
+  country?: Country
+  note?: String
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface CommunicationEdge {
+  node: Communication
+  cursor: String
+}
+
+export interface PlaceContact extends Node {
+  email?: String
+  id: ID_Output
+  mobilePhone?: String
+  name: String
+  phoneNumber?: String
+  place?: Place
+}
+
 export interface AggregateClient {
   count: Int
 }
 
-export interface EmployeeSubscriptionPayload {
+export interface BudgetLineSubscriptionPayload {
   mutation: MutationType
-  node?: Employee
+  node?: BudgetLine
   updatedFields?: String[]
-  previousValues?: EmployeePreviousValues
+  previousValues?: BudgetLinePreviousValues
 }
 
 /*
@@ -14624,64 +14673,20 @@ export interface PageInfo {
   endCursor?: String
 }
 
-export interface EmployeePreviousValues {
-  endedAt?: DateTime
-  estimatedEndAt: DateTime
-  estimatedStartAt: DateTime
+export interface BudgetLinePreviousValues {
+  description: String
   id: ID_Output
-  startedAt?: DateTime
+  quantity?: Int
+  total?: Float
+  unitPrice?: Float
+  value: Float
 }
 
-export interface AggregateEvent {
-  count: Int
-}
-
-export interface PlaceContact extends Node {
-  email?: String
-  id: ID_Output
-  mobilePhone?: String
-  name: String
-  phoneNumber?: String
-  place?: Place
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface StuffEdge {
-  node: Stuff
-  cursor: String
-}
-
-export interface EmployeeEstimationSubscriptionPayload {
+export interface EventSubscriptionPayload {
   mutation: MutationType
-  node?: EmployeeEstimation
+  node?: Event
   updatedFields?: String[]
-  previousValues?: EmployeeEstimationPreviousValues
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface CommunicationConnection {
-  pageInfo: PageInfo
-  edges: CommunicationEdge[]
-  aggregate: AggregateCommunication
-}
-
-export interface EmployeeEstimationPreviousValues {
-  estimatedEndAt: DateTime
-  estimatedStartAt: DateTime
-  id: ID_Output
-  number: Int
-  pricePerHour: Float
-  total: Float
-}
-
-export interface AggregateTax {
-  count: Int
+  previousValues?: EventPreviousValues
 }
 
 export interface Place extends Node {
@@ -14700,34 +14705,34 @@ export interface Place extends Node {
  * An edge in a connection.
 
  */
-export interface SectionItemEdge {
-  node: SectionItem
+export interface VehicleEdge {
+  node: Vehicle
   cursor: String
 }
 
-export interface EventStuffSubscriptionPayload {
+export interface CategorySubscriptionPayload {
   mutation: MutationType
-  node?: EventStuff
+  node?: Category
   updatedFields?: String[]
-  previousValues?: EventStuffPreviousValues
+  previousValues?: CategoryPreviousValues
 }
 
 /*
  * A connection to a list of items.
 
  */
-export interface PlaceContactConnection {
+export interface TaxConnection {
   pageInfo: PageInfo
-  edges: PlaceContactEdge[]
-  aggregate: AggregatePlaceContact
+  edges: TaxEdge[]
+  aggregate: AggregateTax
 }
 
-export interface EventStuffPreviousValues {
+export interface CategoryPreviousValues {
   id: ID_Output
-  quantity: Int
+  name: String
 }
 
-export interface AggregateEventType {
+export interface AggregatePlaceContact {
   count: Int
 }
 
@@ -14741,34 +14746,37 @@ export interface EventType extends Node {
  * An edge in a connection.
 
  */
-export interface EventStuffEdge {
-  node: EventStuff
+export interface JobEdge {
+  node: Job
   cursor: String
 }
 
-export interface EventTypeSubscriptionPayload {
+export interface EmployeeSubscriptionPayload {
   mutation: MutationType
-  node?: EventType
+  node?: Employee
   updatedFields?: String[]
-  previousValues?: EventTypePreviousValues
+  previousValues?: EmployeePreviousValues
 }
 
 /*
  * A connection to a list of items.
 
  */
-export interface EmployeeEstimationConnection {
+export interface EventTypeConnection {
   pageInfo: PageInfo
-  edges: EmployeeEstimationEdge[]
-  aggregate: AggregateEmployeeEstimation
+  edges: EventTypeEdge[]
+  aggregate: AggregateEventType
 }
 
-export interface EventTypePreviousValues {
+export interface EmployeePreviousValues {
+  endedAt?: DateTime
+  estimatedEndAt: DateTime
+  estimatedStartAt: DateTime
   id: ID_Output
-  name: String
+  startedAt?: DateTime
 }
 
-export interface AggregateCategory {
+export interface AggregateEmployeeEstimation {
   count: Int
 }
 
@@ -14790,34 +14798,38 @@ export interface User extends Node {
  * An edge in a connection.
 
  */
-export interface BudgetLineEdge {
-  node: BudgetLine
+export interface EmployeeEdge {
+  node: Employee
   cursor: String
 }
 
-export interface JobSubscriptionPayload {
+export interface EmployeeEstimationSubscriptionPayload {
   mutation: MutationType
-  node?: Job
+  node?: EmployeeEstimation
   updatedFields?: String[]
-  previousValues?: JobPreviousValues
+  previousValues?: EmployeeEstimationPreviousValues
 }
 
 /*
  * A connection to a list of items.
 
  */
-export interface PlaceConnection {
+export interface CategoryConnection {
   pageInfo: PageInfo
-  edges: PlaceEdge[]
-  aggregate: AggregatePlace
+  edges: CategoryEdge[]
+  aggregate: AggregateCategory
 }
 
-export interface JobPreviousValues {
+export interface EmployeeEstimationPreviousValues {
+  estimatedEndAt: DateTime
+  estimatedStartAt: DateTime
   id: ID_Output
-  name: String
+  number: Int
+  pricePerHour: Float
+  total: Float
 }
 
-export interface AggregateUser {
+export interface AggregatePlace {
   count: Int
 }
 
@@ -14836,9 +14848,144 @@ export interface Employee extends Node {
  * An edge in a connection.
 
  */
-export interface ItemEdge {
-  node: Item
+export interface ClientContactEdge {
+  node: ClientContact
   cursor: String
+}
+
+export interface EventStuffSubscriptionPayload {
+  mutation: MutationType
+  node?: EventStuff
+  updatedFields?: String[]
+  previousValues?: EventStuffPreviousValues
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface UserConnection {
+  pageInfo: PageInfo
+  edges: UserEdge[]
+  aggregate: AggregateUser
+}
+
+export interface EventStuffPreviousValues {
+  id: ID_Output
+  quantity: Int
+}
+
+export interface AggregateItemTranslation {
+  count: Int
+}
+
+export interface Job extends Node {
+  employeeEstimations?: EmployeeEstimation[]
+  employees?: Employee[]
+  id: ID_Output
+  name: String
+  users?: User[]
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface OfferEdge {
+  node: Offer
+  cursor: String
+}
+
+export interface EventTypeSubscriptionPayload {
+  mutation: MutationType
+  node?: EventType
+  updatedFields?: String[]
+  previousValues?: EventTypePreviousValues
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface CommunicationConnection {
+  pageInfo: PageInfo
+  edges: CommunicationEdge[]
+  aggregate: AggregateCommunication
+}
+
+export interface EventTypePreviousValues {
+  id: ID_Output
+  name: String
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface ClientConnection {
+  pageInfo: PageInfo
+  edges: ClientEdge[]
+  aggregate: AggregateClient
+}
+
+export interface EmployeeEstimation extends Node {
+  estimatedEndAt: DateTime
+  estimatedStartAt: DateTime
+  id: ID_Output
+  job?: Job
+  number: Int
+  offer?: Offer
+  pricePerHour: Float
+  total: Float
+}
+
+export interface AggregateTax {
+  count: Int
+}
+
+export interface JobSubscriptionPayload {
+  mutation: MutationType
+  node?: Job
+  updatedFields?: String[]
+  previousValues?: JobPreviousValues
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface PlaceContactConnection {
+  pageInfo: PageInfo
+  edges: PlaceContactEdge[]
+  aggregate: AggregatePlaceContact
+}
+
+export interface JobPreviousValues {
+  id: ID_Output
+  name: String
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface EventStuffEdge {
+  node: EventStuff
+  cursor: String
+}
+
+export interface Communication extends Node {
+  id: ID_Output
+  message: String
+  subject: String
+  channel: Channel
+  date: DateTime
+  gmtOffset: String
+  offer?: Offer
+}
+
+export interface AggregateCategory {
+  count: Int
 }
 
 export interface PlaceContactSubscriptionPayload {
@@ -14852,10 +14999,10 @@ export interface PlaceContactSubscriptionPayload {
  * A connection to a list of items.
 
  */
-export interface ItemTranslationConnection {
+export interface PlaceConnection {
   pageInfo: PageInfo
-  edges: ItemTranslationEdge[]
-  aggregate: AggregateItemTranslation
+  edges: PlaceEdge[]
+  aggregate: AggregatePlace
 }
 
 export interface PlaceContactPreviousValues {
@@ -14870,17 +15017,19 @@ export interface PlaceContactPreviousValues {
  * An edge in a connection.
 
  */
-export interface OfferEdge {
-  node: Offer
+export interface ItemEdge {
+  node: Item
   cursor: String
 }
 
-export interface Job extends Node {
-  employeeEstimations?: EmployeeEstimation[]
-  employees?: Employee[]
+export interface ClientContact extends Node {
+  client?: Client
+  email: String
   id: ID_Output
+  mobilePhone?: String
   name: String
-  users?: User[]
+  phoneNumber?: String
+  offers?: Offer[]
 }
 
 export interface AggregateCommunication {
@@ -14898,10 +15047,10 @@ export interface SectionItemSubscriptionPayload {
  * A connection to a list of items.
 
  */
-export interface TaxConnection {
+export interface StuffConnection {
   pageInfo: PageInfo
-  edges: TaxEdge[]
-  aggregate: AggregateTax
+  edges: StuffEdge[]
+  aggregate: AggregateStuff
 }
 
 export interface SectionItemPreviousValues {
@@ -14928,103 +15077,7 @@ export interface SectionItemPreviousValues {
   y: Int
 }
 
-/*
- * An edge in a connection.
-
- */
-export interface JobEdge {
-  node: Job
-  cursor: String
-}
-
-export interface EmployeeEstimation extends Node {
-  estimatedEndAt: DateTime
-  estimatedStartAt: DateTime
-  id: ID_Output
-  job?: Job
-  number: Int
-  offer?: Offer
-  pricePerHour: Float
-  total: Float
-}
-
-export interface AggregateEmployeeEstimation {
-  count: Int
-}
-
-export interface TaxSubscriptionPayload {
-  mutation: MutationType
-  node?: Tax
-  updatedFields?: String[]
-  previousValues?: TaxPreviousValues
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface CategoryConnection {
-  pageInfo: PageInfo
-  edges: CategoryEdge[]
-  aggregate: AggregateCategory
-}
-
-export interface TaxPreviousValues {
-  id: ID_Output
-  name: String
-  value: Float
-}
-
-/*
- * An edge in a connection.
-
- */
-export interface ClientContactEdge {
-  node: ClientContact
-  cursor: String
-}
-
-export interface ClientContact extends Node {
-  client?: Client
-  email: String
-  id: ID_Output
-  mobilePhone?: String
-  name: String
-  phoneNumber?: String
-  offers?: Offer[]
-}
-
-export interface AggregateItemTranslation {
-  count: Int
-}
-
-export interface VehicleSubscriptionPayload {
-  mutation: MutationType
-  node?: Vehicle
-  updatedFields?: String[]
-  previousValues?: VehiclePreviousValues
-}
-
-/*
- * A connection to a list of items.
-
- */
-export interface EventConnection {
-  pageInfo: PageInfo
-  edges: EventEdge[]
-  aggregate: AggregateEvent
-}
-
-export interface VehiclePreviousValues {
-  color?: String
-  description?: String
-  id: ID_Output
-  name: String
-  plate: String
-  year?: Int
-}
-
-export interface AggregatePlaceContact {
+export interface AggregateEventType {
   count: Int
 }
 
@@ -15039,8 +15092,8 @@ export interface Tax extends Node {
  * An edge in a connection.
 
  */
-export interface EmployeeEdge {
-  node: Employee
+export interface BudgetLineEdge {
+  node: BudgetLine
   cursor: String
 }
 
@@ -15048,17 +15101,17 @@ export interface EmployeeEdge {
  * A connection to a list of items.
 
  */
-export interface UserConnection {
+export interface ItemTranslationConnection {
   pageInfo: PageInfo
-  edges: UserEdge[]
-  aggregate: AggregateUser
+  edges: ItemTranslationEdge[]
+  aggregate: AggregateItemTranslation
 }
 
-export interface StuffSubscriptionPayload {
+export interface VehicleSubscriptionPayload {
   mutation: MutationType
-  node?: Stuff
+  node?: Vehicle
   updatedFields?: String[]
-  previousValues?: StuffPreviousValues
+  previousValues?: VehiclePreviousValues
 }
 
 export interface BudgetLine extends Node {
@@ -15072,20 +15125,17 @@ export interface BudgetLine extends Node {
   value: Float
 }
 
-export interface CommunicationPreviousValues {
+export interface TaxPreviousValues {
   id: ID_Output
-  message: String
-  subject: String
-  channel: Channel
-  date: DateTime
-  gmtOffset: String
+  name: String
+  value: Float
 }
 
-export interface CommunicationSubscriptionPayload {
+export interface TaxSubscriptionPayload {
   mutation: MutationType
-  node?: Communication
+  node?: Tax
   updatedFields?: String[]
-  previousValues?: CommunicationPreviousValues
+  previousValues?: TaxPreviousValues
 }
 
 /*
@@ -15097,7 +15147,7 @@ export interface ClientEdge {
   cursor: String
 }
 
-export interface AggregatePlace {
+export interface AggregateUser {
   count: Int
 }
 
@@ -15105,25 +15155,26 @@ export interface AggregatePlace {
  * A connection to a list of items.
 
  */
-export interface EventTypeConnection {
+export interface EmployeeEstimationConnection {
   pageInfo: PageInfo
-  edges: EventTypeEdge[]
-  aggregate: AggregateEventType
+  edges: EmployeeEstimationEdge[]
+  aggregate: AggregateEmployeeEstimation
 }
 
 /*
  * An edge in a connection.
 
  */
-export interface VehicleEdge {
-  node: Vehicle
+export interface SectionItemEdge {
+  node: SectionItem
   cursor: String
 }
 
 /*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
 */
-export type Int = number
+export type Long = string
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
@@ -15137,10 +15188,9 @@ export type ID_Input = string | number
 export type ID_Output = string
 
 /*
-The `Long` scalar type represents non-fractional signed whole numeric values.
-Long can represent values between -(2^63) and 2^63 - 1.
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1. 
 */
-export type Long = string
+export type Int = number
 
 /*
 The `Boolean` scalar type represents `true` or `false`.
