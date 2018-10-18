@@ -1,13 +1,42 @@
 type Query {
   vehicle(where: VehicleWhereUniqueInput!): Vehicle
-  vehicles(where: VehicleWhereInput, orderBy: VehicleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vehicle]!
-  vehiclesConnection(where: VehicleWhereInput, orderBy: VehicleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): VehicleConnection!
-  vehiclesAvailable(startTime: DateTime, endTime: DateTime, orderBy: VehicleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vehicle]!
+  vehicles(
+    where: VehicleWhereInput
+    orderBy: VehicleOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Vehicle]!
+  vehiclesConnection(
+    where: VehicleWhereInput
+    orderBy: VehicleOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): VehicleConnection!
+  vehiclesAvailable(
+    filter: String
+    startTime: DateTime
+    endTime: DateTime
+    orderBy: VehicleOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [Vehicle]!
 }
 
 type Mutation {
   createVehicle(data: VehicleCreateInput!): Vehicle!
-  updateVehicle(data: VehicleUpdateInput!, where: VehicleWhereUniqueInput!): Vehicle
+  updateVehicle(
+    data: VehicleUpdateInput!
+    where: VehicleWhereUniqueInput!
+  ): Vehicle
   deleteVehicle(where: VehicleWhereUniqueInput!): Vehicle
 }
 
