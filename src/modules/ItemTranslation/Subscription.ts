@@ -1,7 +1,7 @@
 import { forwardTo } from 'prisma-binding'
 
 export default {
-  itemTranslation: {
+  item: {
     subscribe: forwardTo('db')
   }
 }

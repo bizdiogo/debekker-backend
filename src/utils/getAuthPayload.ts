@@ -11,7 +11,9 @@ export default (ctx: Context) => {
   throwError(!authorization, new UnauthorizedError())
 
   const token = authorization.replace('Bearer ', '')
-  const { userId } = jwt.verify(token, process.env.APP_SECRET) as { userId: string }
+  const { userId } = jwt.verify(token, process.env.APP_SECRET) as {
+    userId: string
+  }
 
   throwError(!userId, new InvalidTokenError())
 

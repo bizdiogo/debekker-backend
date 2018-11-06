@@ -1,15 +1,38 @@
 type Query {
-  item(where: ItemWhereUniqueInput!): Item
-  items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
-  itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
+  itemTranslation(where: ItemTranslationWhereUniqueInput!): ItemTranslation
+  itemTranslations(
+    where: ItemTranslationWhereInput
+    orderBy: ItemTranslationOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): [ItemTranslation]!
+  itemTranslationsConnection(
+    where: ItemTranslationWhereInput
+    orderBy: ItemTranslationOrderByInput
+    skip: Int
+    after: String
+    before: String
+    first: Int
+    last: Int
+  ): ItemTranslationConnection!
 }
 
 type Mutation {
-  createItem(data: ItemCreateInput!): Item!
-  updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
-  deleteItem(where: ItemWhereUniqueInput!): Item
+  createItemTranslation(data: ItemTranslationCreateInput!): ItemTranslation!
+  updateItemTranslation(
+    data: ItemTranslationUpdateInput!
+    where: ItemTranslationWhereUniqueInput!
+  ): ItemTranslation
+  deleteItemTranslation(
+    where: ItemTranslationWhereUniqueInput!
+  ): ItemTranslation
 }
 
 type Subscription {
-  item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
+  itemTranslation(
+    where: ItemTranslationSubscriptionWhereInput
+  ): ItemTranslationSubscriptionPayload
 }
