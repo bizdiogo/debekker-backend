@@ -50,10 +50,16 @@ enum SectionTypes {
   Subtitle
   Subheading
   Text
-  Items
+  Menu
 }
 
+enum Account {
+  Invoice
+  CreditNote
+}
 
-
-
-
+enum ItemProposalStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}

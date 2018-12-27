@@ -1,5 +1,14 @@
 # source: http://localhost:4466
-# timestamp: Thu Oct 11 2018 11:28:41 GMT-0300 (GMT-03:00)
+# timestamp: Thu Dec 27 2018 15:49:09 GMT-0200 (GMT-02:00)
+
+enum Account {
+  Invoice
+  CreditNote
+}
+
+type AggregateBudget {
+  count: Int!
+}
 
 type AggregateBudgetLine {
   count: Int!
@@ -41,7 +50,15 @@ type AggregateEventType {
   count: Int!
 }
 
+type AggregateInvoice {
+  count: Int!
+}
+
 type AggregateItem {
+  count: Int!
+}
+
+type AggregateItemProposal {
   count: Int!
 }
 
@@ -50,6 +67,10 @@ type AggregateItemTranslation {
 }
 
 type AggregateJob {
+  count: Int!
+}
+
+type AggregateMenu {
   count: Int!
 }
 
@@ -62,6 +83,10 @@ type AggregatePlace {
 }
 
 type AggregatePlaceContact {
+  count: Int!
+}
+
+type AggregateSection {
   count: Int!
 }
 
@@ -88,6 +113,70 @@ type AggregateVehicle {
 type BatchPayload {
   """The number of nodes that have been affected by the Batch operation."""
   count: Long!
+}
+
+type Budget implements Node {
+  description: String!
+  id: ID!
+  invoice(where: InvoiceWhereInput): Invoice
+  quantity: Int!
+  tax(where: TaxWhereInput): Tax
+  total: Float!
+  unitPrice: Float!
+}
+
+"""A connection to a list of items."""
+type BudgetConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [BudgetEdge]!
+  aggregate: AggregateBudget!
+}
+
+input BudgetCreateInput {
+  description: String!
+  quantity: Int!
+  total: Float!
+  unitPrice: Float!
+  invoice: InvoiceCreateOneWithoutBudgetsInput
+  tax: TaxCreateOneWithoutBudgetsInput
+}
+
+input BudgetCreateManyWithoutInvoiceInput {
+  create: [BudgetCreateWithoutInvoiceInput!]
+  connect: [BudgetWhereUniqueInput!]
+}
+
+input BudgetCreateManyWithoutTaxInput {
+  create: [BudgetCreateWithoutTaxInput!]
+  connect: [BudgetWhereUniqueInput!]
+}
+
+input BudgetCreateWithoutInvoiceInput {
+  description: String!
+  quantity: Int!
+  total: Float!
+  unitPrice: Float!
+  tax: TaxCreateOneWithoutBudgetsInput
+}
+
+input BudgetCreateWithoutTaxInput {
+  description: String!
+  quantity: Int!
+  total: Float!
+  unitPrice: Float!
+  invoice: InvoiceCreateOneWithoutBudgetsInput
+}
+
+"""An edge in a connection."""
+type BudgetEdge {
+  """The item at the end of the edge."""
+  node: Budget!
+
+  """A cursor for use in pagination."""
+  cursor: String!
 }
 
 type BudgetLine implements Node {
@@ -475,6 +564,298 @@ input BudgetLineWhereInput {
 }
 
 input BudgetLineWhereUniqueInput {
+  id: ID
+}
+
+enum BudgetOrderByInput {
+  description_ASC
+  description_DESC
+  id_ASC
+  id_DESC
+  quantity_ASC
+  quantity_DESC
+  total_ASC
+  total_DESC
+  unitPrice_ASC
+  unitPrice_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type BudgetPreviousValues {
+  description: String!
+  id: ID!
+  quantity: Int!
+  total: Float!
+  unitPrice: Float!
+}
+
+type BudgetSubscriptionPayload {
+  mutation: MutationType!
+  node: Budget
+  updatedFields: [String!]
+  previousValues: BudgetPreviousValues
+}
+
+input BudgetSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [BudgetSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [BudgetSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [BudgetSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: BudgetWhereInput
+}
+
+input BudgetUpdateInput {
+  description: String
+  quantity: Int
+  total: Float
+  unitPrice: Float
+  invoice: InvoiceUpdateOneWithoutBudgetsInput
+  tax: TaxUpdateOneWithoutBudgetsInput
+}
+
+input BudgetUpdateManyWithoutInvoiceInput {
+  create: [BudgetCreateWithoutInvoiceInput!]
+  connect: [BudgetWhereUniqueInput!]
+  disconnect: [BudgetWhereUniqueInput!]
+  delete: [BudgetWhereUniqueInput!]
+  update: [BudgetUpdateWithWhereUniqueWithoutInvoiceInput!]
+  upsert: [BudgetUpsertWithWhereUniqueWithoutInvoiceInput!]
+}
+
+input BudgetUpdateManyWithoutTaxInput {
+  create: [BudgetCreateWithoutTaxInput!]
+  connect: [BudgetWhereUniqueInput!]
+  disconnect: [BudgetWhereUniqueInput!]
+  delete: [BudgetWhereUniqueInput!]
+  update: [BudgetUpdateWithWhereUniqueWithoutTaxInput!]
+  upsert: [BudgetUpsertWithWhereUniqueWithoutTaxInput!]
+}
+
+input BudgetUpdateWithoutInvoiceDataInput {
+  description: String
+  quantity: Int
+  total: Float
+  unitPrice: Float
+  tax: TaxUpdateOneWithoutBudgetsInput
+}
+
+input BudgetUpdateWithoutTaxDataInput {
+  description: String
+  quantity: Int
+  total: Float
+  unitPrice: Float
+  invoice: InvoiceUpdateOneWithoutBudgetsInput
+}
+
+input BudgetUpdateWithWhereUniqueWithoutInvoiceInput {
+  where: BudgetWhereUniqueInput!
+  data: BudgetUpdateWithoutInvoiceDataInput!
+}
+
+input BudgetUpdateWithWhereUniqueWithoutTaxInput {
+  where: BudgetWhereUniqueInput!
+  data: BudgetUpdateWithoutTaxDataInput!
+}
+
+input BudgetUpsertWithWhereUniqueWithoutInvoiceInput {
+  where: BudgetWhereUniqueInput!
+  update: BudgetUpdateWithoutInvoiceDataInput!
+  create: BudgetCreateWithoutInvoiceInput!
+}
+
+input BudgetUpsertWithWhereUniqueWithoutTaxInput {
+  where: BudgetWhereUniqueInput!
+  update: BudgetUpdateWithoutTaxDataInput!
+  create: BudgetCreateWithoutTaxInput!
+}
+
+input BudgetWhereInput {
+  """Logical AND on all given filters."""
+  AND: [BudgetWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [BudgetWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [BudgetWhereInput!]
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  quantity: Int
+
+  """All values that are not equal to given value."""
+  quantity_not: Int
+
+  """All values that are contained in given list."""
+  quantity_in: [Int!]
+
+  """All values that are not contained in given list."""
+  quantity_not_in: [Int!]
+
+  """All values less than the given value."""
+  quantity_lt: Int
+
+  """All values less than or equal the given value."""
+  quantity_lte: Int
+
+  """All values greater than the given value."""
+  quantity_gt: Int
+
+  """All values greater than or equal the given value."""
+  quantity_gte: Int
+  total: Float
+
+  """All values that are not equal to given value."""
+  total_not: Float
+
+  """All values that are contained in given list."""
+  total_in: [Float!]
+
+  """All values that are not contained in given list."""
+  total_not_in: [Float!]
+
+  """All values less than the given value."""
+  total_lt: Float
+
+  """All values less than or equal the given value."""
+  total_lte: Float
+
+  """All values greater than the given value."""
+  total_gt: Float
+
+  """All values greater than or equal the given value."""
+  total_gte: Float
+  unitPrice: Float
+
+  """All values that are not equal to given value."""
+  unitPrice_not: Float
+
+  """All values that are contained in given list."""
+  unitPrice_in: [Float!]
+
+  """All values that are not contained in given list."""
+  unitPrice_not_in: [Float!]
+
+  """All values less than the given value."""
+  unitPrice_lt: Float
+
+  """All values less than or equal the given value."""
+  unitPrice_lte: Float
+
+  """All values greater than the given value."""
+  unitPrice_gt: Float
+
+  """All values greater than or equal the given value."""
+  unitPrice_gte: Float
+  invoice: InvoiceWhereInput
+  tax: TaxWhereInput
+}
+
+input BudgetWhereUniqueInput {
   id: ID
 }
 
@@ -2770,7 +3151,9 @@ type Event implements Node {
   offer(where: OfferWhereInput): Offer
   employees(where: EmployeeWhereInput, orderBy: EmployeeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Employee!]
   eventStuffs(where: EventStuffWhereInput, orderBy: EventStuffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EventStuff!]
+  invoice(where: InvoiceWhereInput): Invoice
   vehicles(where: VehicleWhereInput, orderBy: VehicleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vehicle!]
+  canceled: Boolean
 }
 
 """A connection to a list of items."""
@@ -2784,9 +3167,11 @@ type EventConnection {
 }
 
 input EventCreateInput {
+  canceled: Boolean
   offer: OfferCreateOneWithoutEventInput
   employees: EmployeeCreateManyWithoutEventInput
   eventStuffs: EventStuffCreateManyWithoutEventInput
+  invoice: InvoiceCreateOneWithoutEventInput
   vehicles: VehicleCreateManyWithoutEventsInput
 }
 
@@ -2810,33 +3195,54 @@ input EventCreateOneWithoutEventStuffsInput {
   connect: EventWhereUniqueInput
 }
 
+input EventCreateOneWithoutInvoiceInput {
+  create: EventCreateWithoutInvoiceInput
+  connect: EventWhereUniqueInput
+}
+
 input EventCreateOneWithoutOfferInput {
   create: EventCreateWithoutOfferInput
   connect: EventWhereUniqueInput
 }
 
 input EventCreateWithoutEmployeesInput {
+  canceled: Boolean
   offer: OfferCreateOneWithoutEventInput
   eventStuffs: EventStuffCreateManyWithoutEventInput
+  invoice: InvoiceCreateOneWithoutEventInput
   vehicles: VehicleCreateManyWithoutEventsInput
 }
 
 input EventCreateWithoutEventStuffsInput {
+  canceled: Boolean
   offer: OfferCreateOneWithoutEventInput
   employees: EmployeeCreateManyWithoutEventInput
+  invoice: InvoiceCreateOneWithoutEventInput
+  vehicles: VehicleCreateManyWithoutEventsInput
+}
+
+input EventCreateWithoutInvoiceInput {
+  canceled: Boolean
+  offer: OfferCreateOneWithoutEventInput
+  employees: EmployeeCreateManyWithoutEventInput
+  eventStuffs: EventStuffCreateManyWithoutEventInput
   vehicles: VehicleCreateManyWithoutEventsInput
 }
 
 input EventCreateWithoutOfferInput {
+  canceled: Boolean
   employees: EmployeeCreateManyWithoutEventInput
   eventStuffs: EventStuffCreateManyWithoutEventInput
+  invoice: InvoiceCreateOneWithoutEventInput
   vehicles: VehicleCreateManyWithoutEventsInput
 }
 
 input EventCreateWithoutVehiclesInput {
+  canceled: Boolean
   offer: OfferCreateOneWithoutEventInput
   employees: EmployeeCreateManyWithoutEventInput
   eventStuffs: EventStuffCreateManyWithoutEventInput
+  invoice: InvoiceCreateOneWithoutEventInput
 }
 
 """An edge in a connection."""
@@ -2851,6 +3257,8 @@ type EventEdge {
 enum EventOrderByInput {
   id_ASC
   id_DESC
+  canceled_ASC
+  canceled_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -2859,6 +3267,7 @@ enum EventOrderByInput {
 
 type EventPreviousValues {
   id: ID!
+  canceled: Boolean
 }
 
 type EventStuff implements Node {
@@ -3358,16 +3767,20 @@ input EventTypeWhereUniqueInput {
 }
 
 input EventUpdateDataInput {
+  canceled: Boolean
   offer: OfferUpdateOneWithoutEventInput
   employees: EmployeeUpdateManyWithoutEventInput
   eventStuffs: EventStuffUpdateManyWithoutEventInput
+  invoice: InvoiceUpdateOneWithoutEventInput
   vehicles: VehicleUpdateManyWithoutEventsInput
 }
 
 input EventUpdateInput {
+  canceled: Boolean
   offer: OfferUpdateOneWithoutEventInput
   employees: EmployeeUpdateManyWithoutEventInput
   eventStuffs: EventStuffUpdateManyWithoutEventInput
+  invoice: InvoiceUpdateOneWithoutEventInput
   vehicles: VehicleUpdateManyWithoutEventsInput
 }
 
@@ -3407,6 +3820,15 @@ input EventUpdateOneWithoutEventStuffsInput {
   upsert: EventUpsertWithoutEventStuffsInput
 }
 
+input EventUpdateOneWithoutInvoiceInput {
+  create: EventCreateWithoutInvoiceInput
+  connect: EventWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: EventUpdateWithoutInvoiceDataInput
+  upsert: EventUpsertWithoutInvoiceInput
+}
+
 input EventUpdateOneWithoutOfferInput {
   create: EventCreateWithoutOfferInput
   connect: EventWhereUniqueInput
@@ -3417,27 +3839,43 @@ input EventUpdateOneWithoutOfferInput {
 }
 
 input EventUpdateWithoutEmployeesDataInput {
+  canceled: Boolean
   offer: OfferUpdateOneWithoutEventInput
   eventStuffs: EventStuffUpdateManyWithoutEventInput
+  invoice: InvoiceUpdateOneWithoutEventInput
   vehicles: VehicleUpdateManyWithoutEventsInput
 }
 
 input EventUpdateWithoutEventStuffsDataInput {
+  canceled: Boolean
   offer: OfferUpdateOneWithoutEventInput
   employees: EmployeeUpdateManyWithoutEventInput
+  invoice: InvoiceUpdateOneWithoutEventInput
+  vehicles: VehicleUpdateManyWithoutEventsInput
+}
+
+input EventUpdateWithoutInvoiceDataInput {
+  canceled: Boolean
+  offer: OfferUpdateOneWithoutEventInput
+  employees: EmployeeUpdateManyWithoutEventInput
+  eventStuffs: EventStuffUpdateManyWithoutEventInput
   vehicles: VehicleUpdateManyWithoutEventsInput
 }
 
 input EventUpdateWithoutOfferDataInput {
+  canceled: Boolean
   employees: EmployeeUpdateManyWithoutEventInput
   eventStuffs: EventStuffUpdateManyWithoutEventInput
+  invoice: InvoiceUpdateOneWithoutEventInput
   vehicles: VehicleUpdateManyWithoutEventsInput
 }
 
 input EventUpdateWithoutVehiclesDataInput {
+  canceled: Boolean
   offer: OfferUpdateOneWithoutEventInput
   employees: EmployeeUpdateManyWithoutEventInput
   eventStuffs: EventStuffUpdateManyWithoutEventInput
+  invoice: InvoiceUpdateOneWithoutEventInput
 }
 
 input EventUpdateWithWhereUniqueNestedInput {
@@ -3458,6 +3896,11 @@ input EventUpsertWithoutEmployeesInput {
 input EventUpsertWithoutEventStuffsInput {
   update: EventUpdateWithoutEventStuffsDataInput!
   create: EventCreateWithoutEventStuffsInput!
+}
+
+input EventUpsertWithoutInvoiceInput {
+  update: EventUpdateWithoutInvoiceDataInput!
+  create: EventCreateWithoutInvoiceInput!
 }
 
 input EventUpsertWithoutOfferInput {
@@ -3526,6 +3969,10 @@ input EventWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
+  canceled: Boolean
+
+  """All values that are not equal to given value."""
+  canceled_not: Boolean
   offer: OfferWhereInput
   employees_every: EmployeeWhereInput
   employees_some: EmployeeWhereInput
@@ -3533,12 +3980,461 @@ input EventWhereInput {
   eventStuffs_every: EventStuffWhereInput
   eventStuffs_some: EventStuffWhereInput
   eventStuffs_none: EventStuffWhereInput
+  invoice: InvoiceWhereInput
   vehicles_every: VehicleWhereInput
   vehicles_some: VehicleWhereInput
   vehicles_none: VehicleWhereInput
 }
 
 input EventWhereUniqueInput {
+  id: ID
+}
+
+type Invoice implements Node {
+  address: String
+  budgets(where: BudgetWhereInput, orderBy: BudgetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Budget!]
+  date: DateTime
+  event(where: EventWhereInput): Event
+  id: ID!
+  name: String
+  paid: Boolean!
+  tva: String
+  number: Int
+  type: Account
+}
+
+"""A connection to a list of items."""
+type InvoiceConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [InvoiceEdge]!
+  aggregate: AggregateInvoice!
+}
+
+input InvoiceCreateInput {
+  address: String
+  date: DateTime
+  name: String
+  paid: Boolean
+  tva: String
+  number: Int
+  type: Account
+  budgets: BudgetCreateManyWithoutInvoiceInput
+  event: EventCreateOneWithoutInvoiceInput
+}
+
+input InvoiceCreateOneWithoutBudgetsInput {
+  create: InvoiceCreateWithoutBudgetsInput
+  connect: InvoiceWhereUniqueInput
+}
+
+input InvoiceCreateOneWithoutEventInput {
+  create: InvoiceCreateWithoutEventInput
+  connect: InvoiceWhereUniqueInput
+}
+
+input InvoiceCreateWithoutBudgetsInput {
+  address: String
+  date: DateTime
+  name: String
+  paid: Boolean
+  tva: String
+  number: Int
+  type: Account
+  event: EventCreateOneWithoutInvoiceInput
+}
+
+input InvoiceCreateWithoutEventInput {
+  address: String
+  date: DateTime
+  name: String
+  paid: Boolean
+  tva: String
+  number: Int
+  type: Account
+  budgets: BudgetCreateManyWithoutInvoiceInput
+}
+
+"""An edge in a connection."""
+type InvoiceEdge {
+  """The item at the end of the edge."""
+  node: Invoice!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum InvoiceOrderByInput {
+  address_ASC
+  address_DESC
+  date_ASC
+  date_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  paid_ASC
+  paid_DESC
+  tva_ASC
+  tva_DESC
+  number_ASC
+  number_DESC
+  type_ASC
+  type_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type InvoicePreviousValues {
+  address: String
+  date: DateTime
+  id: ID!
+  name: String
+  paid: Boolean!
+  tva: String
+  number: Int
+  type: Account
+}
+
+type InvoiceSubscriptionPayload {
+  mutation: MutationType!
+  node: Invoice
+  updatedFields: [String!]
+  previousValues: InvoicePreviousValues
+}
+
+input InvoiceSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [InvoiceSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [InvoiceSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [InvoiceSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: InvoiceWhereInput
+}
+
+input InvoiceUpdateInput {
+  address: String
+  date: DateTime
+  name: String
+  paid: Boolean
+  tva: String
+  number: Int
+  type: Account
+  budgets: BudgetUpdateManyWithoutInvoiceInput
+  event: EventUpdateOneWithoutInvoiceInput
+}
+
+input InvoiceUpdateOneWithoutBudgetsInput {
+  create: InvoiceCreateWithoutBudgetsInput
+  connect: InvoiceWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: InvoiceUpdateWithoutBudgetsDataInput
+  upsert: InvoiceUpsertWithoutBudgetsInput
+}
+
+input InvoiceUpdateOneWithoutEventInput {
+  create: InvoiceCreateWithoutEventInput
+  connect: InvoiceWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: InvoiceUpdateWithoutEventDataInput
+  upsert: InvoiceUpsertWithoutEventInput
+}
+
+input InvoiceUpdateWithoutBudgetsDataInput {
+  address: String
+  date: DateTime
+  name: String
+  paid: Boolean
+  tva: String
+  number: Int
+  type: Account
+  event: EventUpdateOneWithoutInvoiceInput
+}
+
+input InvoiceUpdateWithoutEventDataInput {
+  address: String
+  date: DateTime
+  name: String
+  paid: Boolean
+  tva: String
+  number: Int
+  type: Account
+  budgets: BudgetUpdateManyWithoutInvoiceInput
+}
+
+input InvoiceUpsertWithoutBudgetsInput {
+  update: InvoiceUpdateWithoutBudgetsDataInput!
+  create: InvoiceCreateWithoutBudgetsInput!
+}
+
+input InvoiceUpsertWithoutEventInput {
+  update: InvoiceUpdateWithoutEventDataInput!
+  create: InvoiceCreateWithoutEventInput!
+}
+
+input InvoiceWhereInput {
+  """Logical AND on all given filters."""
+  AND: [InvoiceWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [InvoiceWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [InvoiceWhereInput!]
+  address: String
+
+  """All values that are not equal to given value."""
+  address_not: String
+
+  """All values that are contained in given list."""
+  address_in: [String!]
+
+  """All values that are not contained in given list."""
+  address_not_in: [String!]
+
+  """All values less than the given value."""
+  address_lt: String
+
+  """All values less than or equal the given value."""
+  address_lte: String
+
+  """All values greater than the given value."""
+  address_gt: String
+
+  """All values greater than or equal the given value."""
+  address_gte: String
+
+  """All values containing the given string."""
+  address_contains: String
+
+  """All values not containing the given string."""
+  address_not_contains: String
+
+  """All values starting with the given string."""
+  address_starts_with: String
+
+  """All values not starting with the given string."""
+  address_not_starts_with: String
+
+  """All values ending with the given string."""
+  address_ends_with: String
+
+  """All values not ending with the given string."""
+  address_not_ends_with: String
+  date: DateTime
+
+  """All values that are not equal to given value."""
+  date_not: DateTime
+
+  """All values that are contained in given list."""
+  date_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  date_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  date_lt: DateTime
+
+  """All values less than or equal the given value."""
+  date_lte: DateTime
+
+  """All values greater than the given value."""
+  date_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  date_gte: DateTime
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  paid: Boolean
+
+  """All values that are not equal to given value."""
+  paid_not: Boolean
+  tva: String
+
+  """All values that are not equal to given value."""
+  tva_not: String
+
+  """All values that are contained in given list."""
+  tva_in: [String!]
+
+  """All values that are not contained in given list."""
+  tva_not_in: [String!]
+
+  """All values less than the given value."""
+  tva_lt: String
+
+  """All values less than or equal the given value."""
+  tva_lte: String
+
+  """All values greater than the given value."""
+  tva_gt: String
+
+  """All values greater than or equal the given value."""
+  tva_gte: String
+
+  """All values containing the given string."""
+  tva_contains: String
+
+  """All values not containing the given string."""
+  tva_not_contains: String
+
+  """All values starting with the given string."""
+  tva_starts_with: String
+
+  """All values not starting with the given string."""
+  tva_not_starts_with: String
+
+  """All values ending with the given string."""
+  tva_ends_with: String
+
+  """All values not ending with the given string."""
+  tva_not_ends_with: String
+  number: Int
+
+  """All values that are not equal to given value."""
+  number_not: Int
+
+  """All values that are contained in given list."""
+  number_in: [Int!]
+
+  """All values that are not contained in given list."""
+  number_not_in: [Int!]
+
+  """All values less than the given value."""
+  number_lt: Int
+
+  """All values less than or equal the given value."""
+  number_lte: Int
+
+  """All values greater than the given value."""
+  number_gt: Int
+
+  """All values greater than or equal the given value."""
+  number_gte: Int
+  type: Account
+
+  """All values that are not equal to given value."""
+  type_not: Account
+
+  """All values that are contained in given list."""
+  type_in: [Account!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [Account!]
+  budgets_every: BudgetWhereInput
+  budgets_some: BudgetWhereInput
+  budgets_none: BudgetWhereInput
+  event: EventWhereInput
+}
+
+input InvoiceWhereUniqueInput {
   id: ID
 }
 
@@ -3562,16 +4458,16 @@ type ItemConnection {
 input ItemCreateInput {
   itemTranslations: ItemTranslationCreateManyWithoutItemsInput
   categories: CategoryCreateManyWithoutItemsInput
-  sectionItems: SectionItemCreateManyWithoutItemsInput
+  sectionItems: SectionItemCreateManyInput
+}
+
+input ItemCreateManyInput {
+  create: [ItemCreateInput!]
+  connect: [ItemWhereUniqueInput!]
 }
 
 input ItemCreateManyWithoutCategoriesInput {
   create: [ItemCreateWithoutCategoriesInput!]
-  connect: [ItemWhereUniqueInput!]
-}
-
-input ItemCreateManyWithoutSectionItemsInput {
-  create: [ItemCreateWithoutSectionItemsInput!]
   connect: [ItemWhereUniqueInput!]
 }
 
@@ -3582,17 +4478,12 @@ input ItemCreateOneWithoutItemTranslationsInput {
 
 input ItemCreateWithoutCategoriesInput {
   itemTranslations: ItemTranslationCreateManyWithoutItemsInput
-  sectionItems: SectionItemCreateManyWithoutItemsInput
+  sectionItems: SectionItemCreateManyInput
 }
 
 input ItemCreateWithoutItemTranslationsInput {
   categories: CategoryCreateManyWithoutItemsInput
-  sectionItems: SectionItemCreateManyWithoutItemsInput
-}
-
-input ItemCreateWithoutSectionItemsInput {
-  itemTranslations: ItemTranslationCreateManyWithoutItemsInput
-  categories: CategoryCreateManyWithoutItemsInput
+  sectionItems: SectionItemCreateManyInput
 }
 
 """An edge in a connection."""
@@ -3615,6 +4506,209 @@ enum ItemOrderByInput {
 
 type ItemPreviousValues {
   id: ID!
+}
+
+type ItemProposal implements Node {
+  id: ID!
+  items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item!]
+  section(where: SectionWhereInput): Section
+  status: ItemProposalStatus!
+}
+
+"""A connection to a list of items."""
+type ItemProposalConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ItemProposalEdge]!
+  aggregate: AggregateItemProposal!
+}
+
+input ItemProposalCreateInput {
+  status: ItemProposalStatus!
+  items: ItemCreateManyInput
+  section: SectionCreateOneWithoutItemProposalsInput
+}
+
+input ItemProposalCreateManyWithoutSectionInput {
+  create: [ItemProposalCreateWithoutSectionInput!]
+  connect: [ItemProposalWhereUniqueInput!]
+}
+
+input ItemProposalCreateWithoutSectionInput {
+  status: ItemProposalStatus!
+  items: ItemCreateManyInput
+}
+
+"""An edge in a connection."""
+type ItemProposalEdge {
+  """The item at the end of the edge."""
+  node: ItemProposal!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ItemProposalOrderByInput {
+  id_ASC
+  id_DESC
+  status_ASC
+  status_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ItemProposalPreviousValues {
+  id: ID!
+  status: ItemProposalStatus!
+}
+
+enum ItemProposalStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+type ItemProposalSubscriptionPayload {
+  mutation: MutationType!
+  node: ItemProposal
+  updatedFields: [String!]
+  previousValues: ItemProposalPreviousValues
+}
+
+input ItemProposalSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ItemProposalSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ItemProposalSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ItemProposalSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ItemProposalWhereInput
+}
+
+input ItemProposalUpdateInput {
+  status: ItemProposalStatus
+  items: ItemUpdateManyInput
+  section: SectionUpdateOneWithoutItemProposalsInput
+}
+
+input ItemProposalUpdateManyWithoutSectionInput {
+  create: [ItemProposalCreateWithoutSectionInput!]
+  connect: [ItemProposalWhereUniqueInput!]
+  disconnect: [ItemProposalWhereUniqueInput!]
+  delete: [ItemProposalWhereUniqueInput!]
+  update: [ItemProposalUpdateWithWhereUniqueWithoutSectionInput!]
+  upsert: [ItemProposalUpsertWithWhereUniqueWithoutSectionInput!]
+}
+
+input ItemProposalUpdateWithoutSectionDataInput {
+  status: ItemProposalStatus
+  items: ItemUpdateManyInput
+}
+
+input ItemProposalUpdateWithWhereUniqueWithoutSectionInput {
+  where: ItemProposalWhereUniqueInput!
+  data: ItemProposalUpdateWithoutSectionDataInput!
+}
+
+input ItemProposalUpsertWithWhereUniqueWithoutSectionInput {
+  where: ItemProposalWhereUniqueInput!
+  update: ItemProposalUpdateWithoutSectionDataInput!
+  create: ItemProposalCreateWithoutSectionInput!
+}
+
+input ItemProposalWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ItemProposalWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ItemProposalWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ItemProposalWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  status: ItemProposalStatus
+
+  """All values that are not equal to given value."""
+  status_not: ItemProposalStatus
+
+  """All values that are contained in given list."""
+  status_in: [ItemProposalStatus!]
+
+  """All values that are not contained in given list."""
+  status_not_in: [ItemProposalStatus!]
+  items_every: ItemWhereInput
+  items_some: ItemWhereInput
+  items_none: ItemWhereInput
+  section: SectionWhereInput
+}
+
+input ItemProposalWhereUniqueInput {
+  id: ID
 }
 
 type ItemSubscriptionPayload {
@@ -3989,10 +5083,25 @@ input ItemTranslationWhereUniqueInput {
   id: ID
 }
 
+input ItemUpdateDataInput {
+  itemTranslations: ItemTranslationUpdateManyWithoutItemsInput
+  categories: CategoryUpdateManyWithoutItemsInput
+  sectionItems: SectionItemUpdateManyInput
+}
+
 input ItemUpdateInput {
   itemTranslations: ItemTranslationUpdateManyWithoutItemsInput
   categories: CategoryUpdateManyWithoutItemsInput
-  sectionItems: SectionItemUpdateManyWithoutItemsInput
+  sectionItems: SectionItemUpdateManyInput
+}
+
+input ItemUpdateManyInput {
+  create: [ItemCreateInput!]
+  connect: [ItemWhereUniqueInput!]
+  disconnect: [ItemWhereUniqueInput!]
+  delete: [ItemWhereUniqueInput!]
+  update: [ItemUpdateWithWhereUniqueNestedInput!]
+  upsert: [ItemUpsertWithWhereUniqueNestedInput!]
 }
 
 input ItemUpdateManyWithoutCategoriesInput {
@@ -4002,15 +5111,6 @@ input ItemUpdateManyWithoutCategoriesInput {
   delete: [ItemWhereUniqueInput!]
   update: [ItemUpdateWithWhereUniqueWithoutCategoriesInput!]
   upsert: [ItemUpsertWithWhereUniqueWithoutCategoriesInput!]
-}
-
-input ItemUpdateManyWithoutSectionItemsInput {
-  create: [ItemCreateWithoutSectionItemsInput!]
-  connect: [ItemWhereUniqueInput!]
-  disconnect: [ItemWhereUniqueInput!]
-  delete: [ItemWhereUniqueInput!]
-  update: [ItemUpdateWithWhereUniqueWithoutSectionItemsInput!]
-  upsert: [ItemUpsertWithWhereUniqueWithoutSectionItemsInput!]
 }
 
 input ItemUpdateOneWithoutItemTranslationsInput {
@@ -4024,17 +5124,17 @@ input ItemUpdateOneWithoutItemTranslationsInput {
 
 input ItemUpdateWithoutCategoriesDataInput {
   itemTranslations: ItemTranslationUpdateManyWithoutItemsInput
-  sectionItems: SectionItemUpdateManyWithoutItemsInput
+  sectionItems: SectionItemUpdateManyInput
 }
 
 input ItemUpdateWithoutItemTranslationsDataInput {
   categories: CategoryUpdateManyWithoutItemsInput
-  sectionItems: SectionItemUpdateManyWithoutItemsInput
+  sectionItems: SectionItemUpdateManyInput
 }
 
-input ItemUpdateWithoutSectionItemsDataInput {
-  itemTranslations: ItemTranslationUpdateManyWithoutItemsInput
-  categories: CategoryUpdateManyWithoutItemsInput
+input ItemUpdateWithWhereUniqueNestedInput {
+  where: ItemWhereUniqueInput!
+  data: ItemUpdateDataInput!
 }
 
 input ItemUpdateWithWhereUniqueWithoutCategoriesInput {
@@ -4042,26 +5142,21 @@ input ItemUpdateWithWhereUniqueWithoutCategoriesInput {
   data: ItemUpdateWithoutCategoriesDataInput!
 }
 
-input ItemUpdateWithWhereUniqueWithoutSectionItemsInput {
-  where: ItemWhereUniqueInput!
-  data: ItemUpdateWithoutSectionItemsDataInput!
-}
-
 input ItemUpsertWithoutItemTranslationsInput {
   update: ItemUpdateWithoutItemTranslationsDataInput!
   create: ItemCreateWithoutItemTranslationsInput!
+}
+
+input ItemUpsertWithWhereUniqueNestedInput {
+  where: ItemWhereUniqueInput!
+  update: ItemUpdateDataInput!
+  create: ItemCreateInput!
 }
 
 input ItemUpsertWithWhereUniqueWithoutCategoriesInput {
   where: ItemWhereUniqueInput!
   update: ItemUpdateWithoutCategoriesDataInput!
   create: ItemCreateWithoutCategoriesInput!
-}
-
-input ItemUpsertWithWhereUniqueWithoutSectionItemsInput {
-  where: ItemWhereUniqueInput!
-  update: ItemUpdateWithoutSectionItemsDataInput!
-  create: ItemCreateWithoutSectionItemsInput!
 }
 
 input ItemWhereInput {
@@ -4439,133 +5534,778 @@ Long can represent values between -(2^63) and 2^63 - 1.
 """
 scalar Long
 
+type Menu implements Node {
+  comment: String
+  endDate: DateTime
+  hasItemsCold: Boolean
+  hasItemsDessert: Boolean
+  hasItemsHot: Boolean
+  hasItemsZCold: Boolean
+  hasItemsZHot: Boolean
+  id: ID!
+  kitchenNotes: String
+  name: String!
+  offer(where: OfferWhereInput): Offer
+  people: Int
+  price: Float
+  sectionItem(where: SectionItemWhereInput): SectionItem
+  sections(where: SectionWhereInput, orderBy: SectionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Section!]
+  startDate: DateTime
+}
+
+"""A connection to a list of items."""
+type MenuConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [MenuEdge]!
+  aggregate: AggregateMenu!
+}
+
+input MenuCreateInput {
+  comment: String
+  endDate: DateTime
+  hasItemsCold: Boolean
+  hasItemsDessert: Boolean
+  hasItemsHot: Boolean
+  hasItemsZCold: Boolean
+  hasItemsZHot: Boolean
+  kitchenNotes: String
+  name: String!
+  people: Int
+  price: Float
+  startDate: DateTime
+  offer: OfferCreateOneWithoutMenusInput
+  sectionItem: SectionItemCreateOneWithoutMenuInput
+  sections: SectionCreateManyWithoutMenuInput
+}
+
+input MenuCreateManyWithoutOfferInput {
+  create: [MenuCreateWithoutOfferInput!]
+  connect: [MenuWhereUniqueInput!]
+}
+
+input MenuCreateOneWithoutSectionItemInput {
+  create: MenuCreateWithoutSectionItemInput
+  connect: MenuWhereUniqueInput
+}
+
+input MenuCreateOneWithoutSectionsInput {
+  create: MenuCreateWithoutSectionsInput
+  connect: MenuWhereUniqueInput
+}
+
+input MenuCreateWithoutOfferInput {
+  comment: String
+  endDate: DateTime
+  hasItemsCold: Boolean
+  hasItemsDessert: Boolean
+  hasItemsHot: Boolean
+  hasItemsZCold: Boolean
+  hasItemsZHot: Boolean
+  kitchenNotes: String
+  name: String!
+  people: Int
+  price: Float
+  startDate: DateTime
+  sectionItem: SectionItemCreateOneWithoutMenuInput
+  sections: SectionCreateManyWithoutMenuInput
+}
+
+input MenuCreateWithoutSectionItemInput {
+  comment: String
+  endDate: DateTime
+  hasItemsCold: Boolean
+  hasItemsDessert: Boolean
+  hasItemsHot: Boolean
+  hasItemsZCold: Boolean
+  hasItemsZHot: Boolean
+  kitchenNotes: String
+  name: String!
+  people: Int
+  price: Float
+  startDate: DateTime
+  offer: OfferCreateOneWithoutMenusInput
+  sections: SectionCreateManyWithoutMenuInput
+}
+
+input MenuCreateWithoutSectionsInput {
+  comment: String
+  endDate: DateTime
+  hasItemsCold: Boolean
+  hasItemsDessert: Boolean
+  hasItemsHot: Boolean
+  hasItemsZCold: Boolean
+  hasItemsZHot: Boolean
+  kitchenNotes: String
+  name: String!
+  people: Int
+  price: Float
+  startDate: DateTime
+  offer: OfferCreateOneWithoutMenusInput
+  sectionItem: SectionItemCreateOneWithoutMenuInput
+}
+
+"""An edge in a connection."""
+type MenuEdge {
+  """The item at the end of the edge."""
+  node: Menu!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum MenuOrderByInput {
+  comment_ASC
+  comment_DESC
+  endDate_ASC
+  endDate_DESC
+  hasItemsCold_ASC
+  hasItemsCold_DESC
+  hasItemsDessert_ASC
+  hasItemsDessert_DESC
+  hasItemsHot_ASC
+  hasItemsHot_DESC
+  hasItemsZCold_ASC
+  hasItemsZCold_DESC
+  hasItemsZHot_ASC
+  hasItemsZHot_DESC
+  id_ASC
+  id_DESC
+  kitchenNotes_ASC
+  kitchenNotes_DESC
+  name_ASC
+  name_DESC
+  people_ASC
+  people_DESC
+  price_ASC
+  price_DESC
+  startDate_ASC
+  startDate_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type MenuPreviousValues {
+  comment: String
+  endDate: DateTime
+  hasItemsCold: Boolean
+  hasItemsDessert: Boolean
+  hasItemsHot: Boolean
+  hasItemsZCold: Boolean
+  hasItemsZHot: Boolean
+  id: ID!
+  kitchenNotes: String
+  name: String!
+  people: Int
+  price: Float
+  startDate: DateTime
+}
+
+type MenuSubscriptionPayload {
+  mutation: MutationType!
+  node: Menu
+  updatedFields: [String!]
+  previousValues: MenuPreviousValues
+}
+
+input MenuSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [MenuSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [MenuSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [MenuSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: MenuWhereInput
+}
+
+input MenuUpdateInput {
+  comment: String
+  endDate: DateTime
+  hasItemsCold: Boolean
+  hasItemsDessert: Boolean
+  hasItemsHot: Boolean
+  hasItemsZCold: Boolean
+  hasItemsZHot: Boolean
+  kitchenNotes: String
+  name: String
+  people: Int
+  price: Float
+  startDate: DateTime
+  offer: OfferUpdateOneWithoutMenusInput
+  sectionItem: SectionItemUpdateOneWithoutMenuInput
+  sections: SectionUpdateManyWithoutMenuInput
+}
+
+input MenuUpdateManyWithoutOfferInput {
+  create: [MenuCreateWithoutOfferInput!]
+  connect: [MenuWhereUniqueInput!]
+  disconnect: [MenuWhereUniqueInput!]
+  delete: [MenuWhereUniqueInput!]
+  update: [MenuUpdateWithWhereUniqueWithoutOfferInput!]
+  upsert: [MenuUpsertWithWhereUniqueWithoutOfferInput!]
+}
+
+input MenuUpdateOneWithoutSectionItemInput {
+  create: MenuCreateWithoutSectionItemInput
+  connect: MenuWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: MenuUpdateWithoutSectionItemDataInput
+  upsert: MenuUpsertWithoutSectionItemInput
+}
+
+input MenuUpdateOneWithoutSectionsInput {
+  create: MenuCreateWithoutSectionsInput
+  connect: MenuWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: MenuUpdateWithoutSectionsDataInput
+  upsert: MenuUpsertWithoutSectionsInput
+}
+
+input MenuUpdateWithoutOfferDataInput {
+  comment: String
+  endDate: DateTime
+  hasItemsCold: Boolean
+  hasItemsDessert: Boolean
+  hasItemsHot: Boolean
+  hasItemsZCold: Boolean
+  hasItemsZHot: Boolean
+  kitchenNotes: String
+  name: String
+  people: Int
+  price: Float
+  startDate: DateTime
+  sectionItem: SectionItemUpdateOneWithoutMenuInput
+  sections: SectionUpdateManyWithoutMenuInput
+}
+
+input MenuUpdateWithoutSectionItemDataInput {
+  comment: String
+  endDate: DateTime
+  hasItemsCold: Boolean
+  hasItemsDessert: Boolean
+  hasItemsHot: Boolean
+  hasItemsZCold: Boolean
+  hasItemsZHot: Boolean
+  kitchenNotes: String
+  name: String
+  people: Int
+  price: Float
+  startDate: DateTime
+  offer: OfferUpdateOneWithoutMenusInput
+  sections: SectionUpdateManyWithoutMenuInput
+}
+
+input MenuUpdateWithoutSectionsDataInput {
+  comment: String
+  endDate: DateTime
+  hasItemsCold: Boolean
+  hasItemsDessert: Boolean
+  hasItemsHot: Boolean
+  hasItemsZCold: Boolean
+  hasItemsZHot: Boolean
+  kitchenNotes: String
+  name: String
+  people: Int
+  price: Float
+  startDate: DateTime
+  offer: OfferUpdateOneWithoutMenusInput
+  sectionItem: SectionItemUpdateOneWithoutMenuInput
+}
+
+input MenuUpdateWithWhereUniqueWithoutOfferInput {
+  where: MenuWhereUniqueInput!
+  data: MenuUpdateWithoutOfferDataInput!
+}
+
+input MenuUpsertWithoutSectionItemInput {
+  update: MenuUpdateWithoutSectionItemDataInput!
+  create: MenuCreateWithoutSectionItemInput!
+}
+
+input MenuUpsertWithoutSectionsInput {
+  update: MenuUpdateWithoutSectionsDataInput!
+  create: MenuCreateWithoutSectionsInput!
+}
+
+input MenuUpsertWithWhereUniqueWithoutOfferInput {
+  where: MenuWhereUniqueInput!
+  update: MenuUpdateWithoutOfferDataInput!
+  create: MenuCreateWithoutOfferInput!
+}
+
+input MenuWhereInput {
+  """Logical AND on all given filters."""
+  AND: [MenuWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [MenuWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [MenuWhereInput!]
+  comment: String
+
+  """All values that are not equal to given value."""
+  comment_not: String
+
+  """All values that are contained in given list."""
+  comment_in: [String!]
+
+  """All values that are not contained in given list."""
+  comment_not_in: [String!]
+
+  """All values less than the given value."""
+  comment_lt: String
+
+  """All values less than or equal the given value."""
+  comment_lte: String
+
+  """All values greater than the given value."""
+  comment_gt: String
+
+  """All values greater than or equal the given value."""
+  comment_gte: String
+
+  """All values containing the given string."""
+  comment_contains: String
+
+  """All values not containing the given string."""
+  comment_not_contains: String
+
+  """All values starting with the given string."""
+  comment_starts_with: String
+
+  """All values not starting with the given string."""
+  comment_not_starts_with: String
+
+  """All values ending with the given string."""
+  comment_ends_with: String
+
+  """All values not ending with the given string."""
+  comment_not_ends_with: String
+  endDate: DateTime
+
+  """All values that are not equal to given value."""
+  endDate_not: DateTime
+
+  """All values that are contained in given list."""
+  endDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  endDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  endDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  endDate_lte: DateTime
+
+  """All values greater than the given value."""
+  endDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  endDate_gte: DateTime
+  hasItemsCold: Boolean
+
+  """All values that are not equal to given value."""
+  hasItemsCold_not: Boolean
+  hasItemsDessert: Boolean
+
+  """All values that are not equal to given value."""
+  hasItemsDessert_not: Boolean
+  hasItemsHot: Boolean
+
+  """All values that are not equal to given value."""
+  hasItemsHot_not: Boolean
+  hasItemsZCold: Boolean
+
+  """All values that are not equal to given value."""
+  hasItemsZCold_not: Boolean
+  hasItemsZHot: Boolean
+
+  """All values that are not equal to given value."""
+  hasItemsZHot_not: Boolean
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  kitchenNotes: String
+
+  """All values that are not equal to given value."""
+  kitchenNotes_not: String
+
+  """All values that are contained in given list."""
+  kitchenNotes_in: [String!]
+
+  """All values that are not contained in given list."""
+  kitchenNotes_not_in: [String!]
+
+  """All values less than the given value."""
+  kitchenNotes_lt: String
+
+  """All values less than or equal the given value."""
+  kitchenNotes_lte: String
+
+  """All values greater than the given value."""
+  kitchenNotes_gt: String
+
+  """All values greater than or equal the given value."""
+  kitchenNotes_gte: String
+
+  """All values containing the given string."""
+  kitchenNotes_contains: String
+
+  """All values not containing the given string."""
+  kitchenNotes_not_contains: String
+
+  """All values starting with the given string."""
+  kitchenNotes_starts_with: String
+
+  """All values not starting with the given string."""
+  kitchenNotes_not_starts_with: String
+
+  """All values ending with the given string."""
+  kitchenNotes_ends_with: String
+
+  """All values not ending with the given string."""
+  kitchenNotes_not_ends_with: String
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  people: Int
+
+  """All values that are not equal to given value."""
+  people_not: Int
+
+  """All values that are contained in given list."""
+  people_in: [Int!]
+
+  """All values that are not contained in given list."""
+  people_not_in: [Int!]
+
+  """All values less than the given value."""
+  people_lt: Int
+
+  """All values less than or equal the given value."""
+  people_lte: Int
+
+  """All values greater than the given value."""
+  people_gt: Int
+
+  """All values greater than or equal the given value."""
+  people_gte: Int
+  price: Float
+
+  """All values that are not equal to given value."""
+  price_not: Float
+
+  """All values that are contained in given list."""
+  price_in: [Float!]
+
+  """All values that are not contained in given list."""
+  price_not_in: [Float!]
+
+  """All values less than the given value."""
+  price_lt: Float
+
+  """All values less than or equal the given value."""
+  price_lte: Float
+
+  """All values greater than the given value."""
+  price_gt: Float
+
+  """All values greater than or equal the given value."""
+  price_gte: Float
+  startDate: DateTime
+
+  """All values that are not equal to given value."""
+  startDate_not: DateTime
+
+  """All values that are contained in given list."""
+  startDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  startDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  startDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  startDate_lte: DateTime
+
+  """All values greater than the given value."""
+  startDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  startDate_gte: DateTime
+  offer: OfferWhereInput
+  sectionItem: SectionItemWhereInput
+  sections_every: SectionWhereInput
+  sections_some: SectionWhereInput
+  sections_none: SectionWhereInput
+}
+
+input MenuWhereUniqueInput {
+  id: ID
+}
+
 type Mutation {
   createClient(data: ClientCreateInput!): Client!
   createCommunication(data: CommunicationCreateInput!): Communication!
   createOffer(data: OfferCreateInput!): Offer!
   createItemTranslation(data: ItemTranslationCreateInput!): ItemTranslation!
-  createItem(data: ItemCreateInput!): Item!
   createUser(data: UserCreateInput!): User!
   createClientContact(data: ClientContactCreateInput!): ClientContact!
   createPlace(data: PlaceCreateInput!): Place!
+  createBudget(data: BudgetCreateInput!): Budget!
   createBudgetLine(data: BudgetLineCreateInput!): BudgetLine!
   createCategory(data: CategoryCreateInput!): Category!
   createEmployee(data: EmployeeCreateInput!): Employee!
   createEmployeeEstimation(data: EmployeeEstimationCreateInput!): EmployeeEstimation!
   createEventStuff(data: EventStuffCreateInput!): EventStuff!
   createEventType(data: EventTypeCreateInput!): EventType!
+  createInvoice(data: InvoiceCreateInput!): Invoice!
   createJob(data: JobCreateInput!): Job!
   createPlaceContact(data: PlaceContactCreateInput!): PlaceContact!
-  createSectionItem(data: SectionItemCreateInput!): SectionItem!
   createStuff(data: StuffCreateInput!): Stuff!
   createTax(data: TaxCreateInput!): Tax!
   createVehicle(data: VehicleCreateInput!): Vehicle!
+  createItemProposal(data: ItemProposalCreateInput!): ItemProposal!
+  createMenu(data: MenuCreateInput!): Menu!
+  createSection(data: SectionCreateInput!): Section!
+  createSectionItem(data: SectionItemCreateInput!): SectionItem!
   createEvent(data: EventCreateInput!): Event!
+  createItem(data: ItemCreateInput!): Item!
   updateClient(data: ClientUpdateInput!, where: ClientWhereUniqueInput!): Client
   updateCommunication(data: CommunicationUpdateInput!, where: CommunicationWhereUniqueInput!): Communication
   updateOffer(data: OfferUpdateInput!, where: OfferWhereUniqueInput!): Offer
   updateItemTranslation(data: ItemTranslationUpdateInput!, where: ItemTranslationWhereUniqueInput!): ItemTranslation
-  updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateClientContact(data: ClientContactUpdateInput!, where: ClientContactWhereUniqueInput!): ClientContact
   updatePlace(data: PlaceUpdateInput!, where: PlaceWhereUniqueInput!): Place
+  updateBudget(data: BudgetUpdateInput!, where: BudgetWhereUniqueInput!): Budget
   updateBudgetLine(data: BudgetLineUpdateInput!, where: BudgetLineWhereUniqueInput!): BudgetLine
   updateCategory(data: CategoryUpdateInput!, where: CategoryWhereUniqueInput!): Category
   updateEmployee(data: EmployeeUpdateInput!, where: EmployeeWhereUniqueInput!): Employee
   updateEmployeeEstimation(data: EmployeeEstimationUpdateInput!, where: EmployeeEstimationWhereUniqueInput!): EmployeeEstimation
   updateEventStuff(data: EventStuffUpdateInput!, where: EventStuffWhereUniqueInput!): EventStuff
   updateEventType(data: EventTypeUpdateInput!, where: EventTypeWhereUniqueInput!): EventType
+  updateInvoice(data: InvoiceUpdateInput!, where: InvoiceWhereUniqueInput!): Invoice
   updateJob(data: JobUpdateInput!, where: JobWhereUniqueInput!): Job
   updatePlaceContact(data: PlaceContactUpdateInput!, where: PlaceContactWhereUniqueInput!): PlaceContact
-  updateSectionItem(data: SectionItemUpdateInput!, where: SectionItemWhereUniqueInput!): SectionItem
   updateStuff(data: StuffUpdateInput!, where: StuffWhereUniqueInput!): Stuff
   updateTax(data: TaxUpdateInput!, where: TaxWhereUniqueInput!): Tax
   updateVehicle(data: VehicleUpdateInput!, where: VehicleWhereUniqueInput!): Vehicle
+  updateItemProposal(data: ItemProposalUpdateInput!, where: ItemProposalWhereUniqueInput!): ItemProposal
+  updateMenu(data: MenuUpdateInput!, where: MenuWhereUniqueInput!): Menu
+  updateSection(data: SectionUpdateInput!, where: SectionWhereUniqueInput!): Section
+  updateSectionItem(data: SectionItemUpdateInput!, where: SectionItemWhereUniqueInput!): SectionItem
   updateEvent(data: EventUpdateInput!, where: EventWhereUniqueInput!): Event
+  updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
   deleteClient(where: ClientWhereUniqueInput!): Client
   deleteCommunication(where: CommunicationWhereUniqueInput!): Communication
   deleteOffer(where: OfferWhereUniqueInput!): Offer
   deleteItemTranslation(where: ItemTranslationWhereUniqueInput!): ItemTranslation
-  deleteItem(where: ItemWhereUniqueInput!): Item
   deleteUser(where: UserWhereUniqueInput!): User
   deleteClientContact(where: ClientContactWhereUniqueInput!): ClientContact
   deletePlace(where: PlaceWhereUniqueInput!): Place
+  deleteBudget(where: BudgetWhereUniqueInput!): Budget
   deleteBudgetLine(where: BudgetLineWhereUniqueInput!): BudgetLine
   deleteCategory(where: CategoryWhereUniqueInput!): Category
   deleteEmployee(where: EmployeeWhereUniqueInput!): Employee
   deleteEmployeeEstimation(where: EmployeeEstimationWhereUniqueInput!): EmployeeEstimation
   deleteEventStuff(where: EventStuffWhereUniqueInput!): EventStuff
   deleteEventType(where: EventTypeWhereUniqueInput!): EventType
+  deleteInvoice(where: InvoiceWhereUniqueInput!): Invoice
   deleteJob(where: JobWhereUniqueInput!): Job
   deletePlaceContact(where: PlaceContactWhereUniqueInput!): PlaceContact
-  deleteSectionItem(where: SectionItemWhereUniqueInput!): SectionItem
   deleteStuff(where: StuffWhereUniqueInput!): Stuff
   deleteTax(where: TaxWhereUniqueInput!): Tax
   deleteVehicle(where: VehicleWhereUniqueInput!): Vehicle
+  deleteItemProposal(where: ItemProposalWhereUniqueInput!): ItemProposal
+  deleteMenu(where: MenuWhereUniqueInput!): Menu
+  deleteSection(where: SectionWhereUniqueInput!): Section
+  deleteSectionItem(where: SectionItemWhereUniqueInput!): SectionItem
   deleteEvent(where: EventWhereUniqueInput!): Event
+  deleteItem(where: ItemWhereUniqueInput!): Item
   upsertClient(where: ClientWhereUniqueInput!, create: ClientCreateInput!, update: ClientUpdateInput!): Client!
   upsertCommunication(where: CommunicationWhereUniqueInput!, create: CommunicationCreateInput!, update: CommunicationUpdateInput!): Communication!
   upsertOffer(where: OfferWhereUniqueInput!, create: OfferCreateInput!, update: OfferUpdateInput!): Offer!
   upsertItemTranslation(where: ItemTranslationWhereUniqueInput!, create: ItemTranslationCreateInput!, update: ItemTranslationUpdateInput!): ItemTranslation!
-  upsertItem(where: ItemWhereUniqueInput!, create: ItemCreateInput!, update: ItemUpdateInput!): Item!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertClientContact(where: ClientContactWhereUniqueInput!, create: ClientContactCreateInput!, update: ClientContactUpdateInput!): ClientContact!
   upsertPlace(where: PlaceWhereUniqueInput!, create: PlaceCreateInput!, update: PlaceUpdateInput!): Place!
+  upsertBudget(where: BudgetWhereUniqueInput!, create: BudgetCreateInput!, update: BudgetUpdateInput!): Budget!
   upsertBudgetLine(where: BudgetLineWhereUniqueInput!, create: BudgetLineCreateInput!, update: BudgetLineUpdateInput!): BudgetLine!
   upsertCategory(where: CategoryWhereUniqueInput!, create: CategoryCreateInput!, update: CategoryUpdateInput!): Category!
   upsertEmployee(where: EmployeeWhereUniqueInput!, create: EmployeeCreateInput!, update: EmployeeUpdateInput!): Employee!
   upsertEmployeeEstimation(where: EmployeeEstimationWhereUniqueInput!, create: EmployeeEstimationCreateInput!, update: EmployeeEstimationUpdateInput!): EmployeeEstimation!
   upsertEventStuff(where: EventStuffWhereUniqueInput!, create: EventStuffCreateInput!, update: EventStuffUpdateInput!): EventStuff!
   upsertEventType(where: EventTypeWhereUniqueInput!, create: EventTypeCreateInput!, update: EventTypeUpdateInput!): EventType!
+  upsertInvoice(where: InvoiceWhereUniqueInput!, create: InvoiceCreateInput!, update: InvoiceUpdateInput!): Invoice!
   upsertJob(where: JobWhereUniqueInput!, create: JobCreateInput!, update: JobUpdateInput!): Job!
   upsertPlaceContact(where: PlaceContactWhereUniqueInput!, create: PlaceContactCreateInput!, update: PlaceContactUpdateInput!): PlaceContact!
-  upsertSectionItem(where: SectionItemWhereUniqueInput!, create: SectionItemCreateInput!, update: SectionItemUpdateInput!): SectionItem!
   upsertStuff(where: StuffWhereUniqueInput!, create: StuffCreateInput!, update: StuffUpdateInput!): Stuff!
   upsertTax(where: TaxWhereUniqueInput!, create: TaxCreateInput!, update: TaxUpdateInput!): Tax!
   upsertVehicle(where: VehicleWhereUniqueInput!, create: VehicleCreateInput!, update: VehicleUpdateInput!): Vehicle!
+  upsertItemProposal(where: ItemProposalWhereUniqueInput!, create: ItemProposalCreateInput!, update: ItemProposalUpdateInput!): ItemProposal!
+  upsertMenu(where: MenuWhereUniqueInput!, create: MenuCreateInput!, update: MenuUpdateInput!): Menu!
+  upsertSection(where: SectionWhereUniqueInput!, create: SectionCreateInput!, update: SectionUpdateInput!): Section!
+  upsertSectionItem(where: SectionItemWhereUniqueInput!, create: SectionItemCreateInput!, update: SectionItemUpdateInput!): SectionItem!
   upsertEvent(where: EventWhereUniqueInput!, create: EventCreateInput!, update: EventUpdateInput!): Event!
+  upsertItem(where: ItemWhereUniqueInput!, create: ItemCreateInput!, update: ItemUpdateInput!): Item!
   updateManyClients(data: ClientUpdateInput!, where: ClientWhereInput): BatchPayload!
   updateManyCommunications(data: CommunicationUpdateInput!, where: CommunicationWhereInput): BatchPayload!
   updateManyOffers(data: OfferUpdateInput!, where: OfferWhereInput): BatchPayload!
   updateManyItemTranslations(data: ItemTranslationUpdateInput!, where: ItemTranslationWhereInput): BatchPayload!
-  updateManyItems(data: ItemUpdateInput!, where: ItemWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyClientContacts(data: ClientContactUpdateInput!, where: ClientContactWhereInput): BatchPayload!
   updateManyPlaces(data: PlaceUpdateInput!, where: PlaceWhereInput): BatchPayload!
+  updateManyBudgets(data: BudgetUpdateInput!, where: BudgetWhereInput): BatchPayload!
   updateManyBudgetLines(data: BudgetLineUpdateInput!, where: BudgetLineWhereInput): BatchPayload!
   updateManyCategories(data: CategoryUpdateInput!, where: CategoryWhereInput): BatchPayload!
   updateManyEmployees(data: EmployeeUpdateInput!, where: EmployeeWhereInput): BatchPayload!
   updateManyEmployeeEstimations(data: EmployeeEstimationUpdateInput!, where: EmployeeEstimationWhereInput): BatchPayload!
   updateManyEventStuffs(data: EventStuffUpdateInput!, where: EventStuffWhereInput): BatchPayload!
   updateManyEventTypes(data: EventTypeUpdateInput!, where: EventTypeWhereInput): BatchPayload!
+  updateManyInvoices(data: InvoiceUpdateInput!, where: InvoiceWhereInput): BatchPayload!
   updateManyJobs(data: JobUpdateInput!, where: JobWhereInput): BatchPayload!
   updateManyPlaceContacts(data: PlaceContactUpdateInput!, where: PlaceContactWhereInput): BatchPayload!
-  updateManySectionItems(data: SectionItemUpdateInput!, where: SectionItemWhereInput): BatchPayload!
   updateManyStuffs(data: StuffUpdateInput!, where: StuffWhereInput): BatchPayload!
   updateManyTaxes(data: TaxUpdateInput!, where: TaxWhereInput): BatchPayload!
   updateManyVehicles(data: VehicleUpdateInput!, where: VehicleWhereInput): BatchPayload!
+  updateManyItemProposals(data: ItemProposalUpdateInput!, where: ItemProposalWhereInput): BatchPayload!
+  updateManyMenus(data: MenuUpdateInput!, where: MenuWhereInput): BatchPayload!
+  updateManySections(data: SectionUpdateInput!, where: SectionWhereInput): BatchPayload!
+  updateManySectionItems(data: SectionItemUpdateInput!, where: SectionItemWhereInput): BatchPayload!
   updateManyEvents(data: EventUpdateInput!, where: EventWhereInput): BatchPayload!
+  updateManyItems(data: ItemUpdateInput!, where: ItemWhereInput): BatchPayload!
   deleteManyClients(where: ClientWhereInput): BatchPayload!
   deleteManyCommunications(where: CommunicationWhereInput): BatchPayload!
   deleteManyOffers(where: OfferWhereInput): BatchPayload!
   deleteManyItemTranslations(where: ItemTranslationWhereInput): BatchPayload!
-  deleteManyItems(where: ItemWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyClientContacts(where: ClientContactWhereInput): BatchPayload!
   deleteManyPlaces(where: PlaceWhereInput): BatchPayload!
+  deleteManyBudgets(where: BudgetWhereInput): BatchPayload!
   deleteManyBudgetLines(where: BudgetLineWhereInput): BatchPayload!
   deleteManyCategories(where: CategoryWhereInput): BatchPayload!
   deleteManyEmployees(where: EmployeeWhereInput): BatchPayload!
   deleteManyEmployeeEstimations(where: EmployeeEstimationWhereInput): BatchPayload!
   deleteManyEventStuffs(where: EventStuffWhereInput): BatchPayload!
   deleteManyEventTypes(where: EventTypeWhereInput): BatchPayload!
+  deleteManyInvoices(where: InvoiceWhereInput): BatchPayload!
   deleteManyJobs(where: JobWhereInput): BatchPayload!
   deleteManyPlaceContacts(where: PlaceContactWhereInput): BatchPayload!
-  deleteManySectionItems(where: SectionItemWhereInput): BatchPayload!
   deleteManyStuffs(where: StuffWhereInput): BatchPayload!
   deleteManyTaxes(where: TaxWhereInput): BatchPayload!
   deleteManyVehicles(where: VehicleWhereInput): BatchPayload!
+  deleteManyItemProposals(where: ItemProposalWhereInput): BatchPayload!
+  deleteManyMenus(where: MenuWhereInput): BatchPayload!
+  deleteManySections(where: SectionWhereInput): BatchPayload!
+  deleteManySectionItems(where: SectionItemWhereInput): BatchPayload!
   deleteManyEvents(where: EventWhereInput): BatchPayload!
+  deleteManyItems(where: ItemWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -4607,6 +6347,7 @@ type Offer implements Node {
   showTotalBudgetsPdf: Boolean
   startTime: DateTime
   version: Int
+  menus(where: MenuWhereInput, orderBy: MenuOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Menu!]
 }
 
 """A connection to a list of items."""
@@ -4644,6 +6385,7 @@ input OfferCreateInput {
   eventType: EventTypeCreateOneWithoutOffersInput
   place: PlaceCreateOneWithoutOfferInput
   sectionItems: SectionItemCreateManyWithoutOfferInput
+  menus: MenuCreateManyWithoutOfferInput
 }
 
 input OfferCreateManyWithoutClientContactInput {
@@ -4681,6 +6423,11 @@ input OfferCreateOneWithoutEventInput {
   connect: OfferWhereUniqueInput
 }
 
+input OfferCreateOneWithoutMenusInput {
+  create: OfferCreateWithoutMenusInput
+  connect: OfferWhereUniqueInput
+}
+
 input OfferCreateOneWithoutPlaceInput {
   create: OfferCreateWithoutPlaceInput
   connect: OfferWhereUniqueInput
@@ -4715,6 +6462,7 @@ input OfferCreateWithoutBudgetLinesInput {
   eventType: EventTypeCreateOneWithoutOffersInput
   place: PlaceCreateOneWithoutOfferInput
   sectionItems: SectionItemCreateManyWithoutOfferInput
+  menus: MenuCreateManyWithoutOfferInput
 }
 
 input OfferCreateWithoutClientContactInput {
@@ -4741,6 +6489,7 @@ input OfferCreateWithoutClientContactInput {
   eventType: EventTypeCreateOneWithoutOffersInput
   place: PlaceCreateOneWithoutOfferInput
   sectionItems: SectionItemCreateManyWithoutOfferInput
+  menus: MenuCreateManyWithoutOfferInput
 }
 
 input OfferCreateWithoutClientInput {
@@ -4767,6 +6516,7 @@ input OfferCreateWithoutClientInput {
   eventType: EventTypeCreateOneWithoutOffersInput
   place: PlaceCreateOneWithoutOfferInput
   sectionItems: SectionItemCreateManyWithoutOfferInput
+  menus: MenuCreateManyWithoutOfferInput
 }
 
 input OfferCreateWithoutCommunicationsInput {
@@ -4793,6 +6543,7 @@ input OfferCreateWithoutCommunicationsInput {
   eventType: EventTypeCreateOneWithoutOffersInput
   place: PlaceCreateOneWithoutOfferInput
   sectionItems: SectionItemCreateManyWithoutOfferInput
+  menus: MenuCreateManyWithoutOfferInput
 }
 
 input OfferCreateWithoutEmployeeEstimationsInput {
@@ -4819,6 +6570,7 @@ input OfferCreateWithoutEmployeeEstimationsInput {
   eventType: EventTypeCreateOneWithoutOffersInput
   place: PlaceCreateOneWithoutOfferInput
   sectionItems: SectionItemCreateManyWithoutOfferInput
+  menus: MenuCreateManyWithoutOfferInput
 }
 
 input OfferCreateWithoutEventInput {
@@ -4845,6 +6597,7 @@ input OfferCreateWithoutEventInput {
   eventType: EventTypeCreateOneWithoutOffersInput
   place: PlaceCreateOneWithoutOfferInput
   sectionItems: SectionItemCreateManyWithoutOfferInput
+  menus: MenuCreateManyWithoutOfferInput
 }
 
 input OfferCreateWithoutEventTypeInput {
@@ -4869,6 +6622,34 @@ input OfferCreateWithoutEventTypeInput {
   clientContact: ClientContactCreateOneWithoutOffersInput
   communications: CommunicationCreateManyWithoutOfferInput
   employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
+  place: PlaceCreateOneWithoutOfferInput
+  sectionItems: SectionItemCreateManyWithoutOfferInput
+  menus: MenuCreateManyWithoutOfferInput
+}
+
+input OfferCreateWithoutMenusInput {
+  customMessage: String
+  status: StatusOffer
+  language: LanguageEnum
+  address: String!
+  city: String!
+  endTime: DateTime
+  gmtOffset: String!
+  maxPersons: Int
+  minPersons: Int
+  name: String!
+  postalCode: String!
+  rev: String
+  showTotalBudgetsPdf: Boolean
+  startTime: DateTime
+  version: Int
+  client: ClientCreateOneWithoutOffersInput
+  event: EventCreateOneWithoutOfferInput
+  budgetLines: BudgetLineCreateManyWithoutOfferInput
+  clientContact: ClientContactCreateOneWithoutOffersInput
+  communications: CommunicationCreateManyWithoutOfferInput
+  employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
+  eventType: EventTypeCreateOneWithoutOffersInput
   place: PlaceCreateOneWithoutOfferInput
   sectionItems: SectionItemCreateManyWithoutOfferInput
 }
@@ -4897,6 +6678,7 @@ input OfferCreateWithoutPlaceInput {
   employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
   eventType: EventTypeCreateOneWithoutOffersInput
   sectionItems: SectionItemCreateManyWithoutOfferInput
+  menus: MenuCreateManyWithoutOfferInput
 }
 
 input OfferCreateWithoutSectionItemsInput {
@@ -4923,6 +6705,7 @@ input OfferCreateWithoutSectionItemsInput {
   employeeEstimations: EmployeeEstimationCreateManyWithoutOfferInput
   eventType: EventTypeCreateOneWithoutOffersInput
   place: PlaceCreateOneWithoutOfferInput
+  menus: MenuCreateManyWithoutOfferInput
 }
 
 """An edge in a connection."""
@@ -5057,6 +6840,7 @@ input OfferUpdateInput {
   eventType: EventTypeUpdateOneWithoutOffersInput
   place: PlaceUpdateOneWithoutOfferInput
   sectionItems: SectionItemUpdateManyWithoutOfferInput
+  menus: MenuUpdateManyWithoutOfferInput
 }
 
 input OfferUpdateManyWithoutClientContactInput {
@@ -5122,6 +6906,15 @@ input OfferUpdateOneWithoutEventInput {
   upsert: OfferUpsertWithoutEventInput
 }
 
+input OfferUpdateOneWithoutMenusInput {
+  create: OfferCreateWithoutMenusInput
+  connect: OfferWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: OfferUpdateWithoutMenusDataInput
+  upsert: OfferUpsertWithoutMenusInput
+}
+
 input OfferUpdateOneWithoutPlaceInput {
   create: OfferCreateWithoutPlaceInput
   connect: OfferWhereUniqueInput
@@ -5164,6 +6957,7 @@ input OfferUpdateWithoutBudgetLinesDataInput {
   eventType: EventTypeUpdateOneWithoutOffersInput
   place: PlaceUpdateOneWithoutOfferInput
   sectionItems: SectionItemUpdateManyWithoutOfferInput
+  menus: MenuUpdateManyWithoutOfferInput
 }
 
 input OfferUpdateWithoutClientContactDataInput {
@@ -5190,6 +6984,7 @@ input OfferUpdateWithoutClientContactDataInput {
   eventType: EventTypeUpdateOneWithoutOffersInput
   place: PlaceUpdateOneWithoutOfferInput
   sectionItems: SectionItemUpdateManyWithoutOfferInput
+  menus: MenuUpdateManyWithoutOfferInput
 }
 
 input OfferUpdateWithoutClientDataInput {
@@ -5216,6 +7011,7 @@ input OfferUpdateWithoutClientDataInput {
   eventType: EventTypeUpdateOneWithoutOffersInput
   place: PlaceUpdateOneWithoutOfferInput
   sectionItems: SectionItemUpdateManyWithoutOfferInput
+  menus: MenuUpdateManyWithoutOfferInput
 }
 
 input OfferUpdateWithoutCommunicationsDataInput {
@@ -5242,6 +7038,7 @@ input OfferUpdateWithoutCommunicationsDataInput {
   eventType: EventTypeUpdateOneWithoutOffersInput
   place: PlaceUpdateOneWithoutOfferInput
   sectionItems: SectionItemUpdateManyWithoutOfferInput
+  menus: MenuUpdateManyWithoutOfferInput
 }
 
 input OfferUpdateWithoutEmployeeEstimationsDataInput {
@@ -5268,6 +7065,7 @@ input OfferUpdateWithoutEmployeeEstimationsDataInput {
   eventType: EventTypeUpdateOneWithoutOffersInput
   place: PlaceUpdateOneWithoutOfferInput
   sectionItems: SectionItemUpdateManyWithoutOfferInput
+  menus: MenuUpdateManyWithoutOfferInput
 }
 
 input OfferUpdateWithoutEventDataInput {
@@ -5294,6 +7092,7 @@ input OfferUpdateWithoutEventDataInput {
   eventType: EventTypeUpdateOneWithoutOffersInput
   place: PlaceUpdateOneWithoutOfferInput
   sectionItems: SectionItemUpdateManyWithoutOfferInput
+  menus: MenuUpdateManyWithoutOfferInput
 }
 
 input OfferUpdateWithoutEventTypeDataInput {
@@ -5318,6 +7117,34 @@ input OfferUpdateWithoutEventTypeDataInput {
   clientContact: ClientContactUpdateOneWithoutOffersInput
   communications: CommunicationUpdateManyWithoutOfferInput
   employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
+  place: PlaceUpdateOneWithoutOfferInput
+  sectionItems: SectionItemUpdateManyWithoutOfferInput
+  menus: MenuUpdateManyWithoutOfferInput
+}
+
+input OfferUpdateWithoutMenusDataInput {
+  customMessage: String
+  status: StatusOffer
+  language: LanguageEnum
+  address: String
+  city: String
+  endTime: DateTime
+  gmtOffset: String
+  maxPersons: Int
+  minPersons: Int
+  name: String
+  postalCode: String
+  rev: String
+  showTotalBudgetsPdf: Boolean
+  startTime: DateTime
+  version: Int
+  client: ClientUpdateOneWithoutOffersInput
+  event: EventUpdateOneWithoutOfferInput
+  budgetLines: BudgetLineUpdateManyWithoutOfferInput
+  clientContact: ClientContactUpdateOneWithoutOffersInput
+  communications: CommunicationUpdateManyWithoutOfferInput
+  employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
+  eventType: EventTypeUpdateOneWithoutOffersInput
   place: PlaceUpdateOneWithoutOfferInput
   sectionItems: SectionItemUpdateManyWithoutOfferInput
 }
@@ -5346,6 +7173,7 @@ input OfferUpdateWithoutPlaceDataInput {
   employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
   eventType: EventTypeUpdateOneWithoutOffersInput
   sectionItems: SectionItemUpdateManyWithoutOfferInput
+  menus: MenuUpdateManyWithoutOfferInput
 }
 
 input OfferUpdateWithoutSectionItemsDataInput {
@@ -5372,6 +7200,7 @@ input OfferUpdateWithoutSectionItemsDataInput {
   employeeEstimations: EmployeeEstimationUpdateManyWithoutOfferInput
   eventType: EventTypeUpdateOneWithoutOffersInput
   place: PlaceUpdateOneWithoutOfferInput
+  menus: MenuUpdateManyWithoutOfferInput
 }
 
 input OfferUpdateWithWhereUniqueWithoutClientContactInput {
@@ -5407,6 +7236,11 @@ input OfferUpsertWithoutEmployeeEstimationsInput {
 input OfferUpsertWithoutEventInput {
   update: OfferUpdateWithoutEventDataInput!
   create: OfferCreateWithoutEventInput!
+}
+
+input OfferUpsertWithoutMenusInput {
+  update: OfferUpdateWithoutMenusDataInput!
+  create: OfferCreateWithoutMenusInput!
 }
 
 input OfferUpsertWithoutPlaceInput {
@@ -5939,6 +7773,9 @@ input OfferWhereInput {
   sectionItems_every: SectionItemWhereInput
   sectionItems_some: SectionItemWhereInput
   sectionItems_none: SectionItemWhereInput
+  menus_every: MenuWhereInput
+  menus_some: MenuWhereInput
+  menus_none: MenuWhereInput
 }
 
 input OfferWhereUniqueInput {
@@ -6798,65 +8635,80 @@ type Query {
   communications(where: CommunicationWhereInput, orderBy: CommunicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Communication]!
   offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer]!
   itemTranslations(where: ItemTranslationWhereInput, orderBy: ItemTranslationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ItemTranslation]!
-  items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   clientContacts(where: ClientContactWhereInput, orderBy: ClientContactOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ClientContact]!
   places(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Place]!
+  budgets(where: BudgetWhereInput, orderBy: BudgetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Budget]!
   budgetLines(where: BudgetLineWhereInput, orderBy: BudgetLineOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BudgetLine]!
   categories(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Category]!
   employees(where: EmployeeWhereInput, orderBy: EmployeeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Employee]!
   employeeEstimations(where: EmployeeEstimationWhereInput, orderBy: EmployeeEstimationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EmployeeEstimation]!
   eventStuffs(where: EventStuffWhereInput, orderBy: EventStuffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EventStuff]!
   eventTypes(where: EventTypeWhereInput, orderBy: EventTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [EventType]!
+  invoices(where: InvoiceWhereInput, orderBy: InvoiceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Invoice]!
   jobs(where: JobWhereInput, orderBy: JobOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Job]!
   placeContacts(where: PlaceContactWhereInput, orderBy: PlaceContactOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [PlaceContact]!
-  sectionItems(where: SectionItemWhereInput, orderBy: SectionItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SectionItem]!
   stuffs(where: StuffWhereInput, orderBy: StuffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Stuff]!
   taxes(where: TaxWhereInput, orderBy: TaxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Tax]!
   vehicles(where: VehicleWhereInput, orderBy: VehicleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vehicle]!
+  itemProposals(where: ItemProposalWhereInput, orderBy: ItemProposalOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ItemProposal]!
+  menus(where: MenuWhereInput, orderBy: MenuOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Menu]!
+  sections(where: SectionWhereInput, orderBy: SectionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Section]!
+  sectionItems(where: SectionItemWhereInput, orderBy: SectionItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [SectionItem]!
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
+  items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
   client(where: ClientWhereUniqueInput!): Client
   communication(where: CommunicationWhereUniqueInput!): Communication
   offer(where: OfferWhereUniqueInput!): Offer
   itemTranslation(where: ItemTranslationWhereUniqueInput!): ItemTranslation
-  item(where: ItemWhereUniqueInput!): Item
   user(where: UserWhereUniqueInput!): User
   clientContact(where: ClientContactWhereUniqueInput!): ClientContact
   place(where: PlaceWhereUniqueInput!): Place
+  budget(where: BudgetWhereUniqueInput!): Budget
   budgetLine(where: BudgetLineWhereUniqueInput!): BudgetLine
   category(where: CategoryWhereUniqueInput!): Category
   employee(where: EmployeeWhereUniqueInput!): Employee
   employeeEstimation(where: EmployeeEstimationWhereUniqueInput!): EmployeeEstimation
   eventStuff(where: EventStuffWhereUniqueInput!): EventStuff
   eventType(where: EventTypeWhereUniqueInput!): EventType
+  invoice(where: InvoiceWhereUniqueInput!): Invoice
   job(where: JobWhereUniqueInput!): Job
   placeContact(where: PlaceContactWhereUniqueInput!): PlaceContact
-  sectionItem(where: SectionItemWhereUniqueInput!): SectionItem
   stuff(where: StuffWhereUniqueInput!): Stuff
   tax(where: TaxWhereUniqueInput!): Tax
   vehicle(where: VehicleWhereUniqueInput!): Vehicle
+  itemProposal(where: ItemProposalWhereUniqueInput!): ItemProposal
+  menu(where: MenuWhereUniqueInput!): Menu
+  section(where: SectionWhereUniqueInput!): Section
+  sectionItem(where: SectionItemWhereUniqueInput!): SectionItem
   event(where: EventWhereUniqueInput!): Event
+  item(where: ItemWhereUniqueInput!): Item
   clientsConnection(where: ClientWhereInput, orderBy: ClientOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClientConnection!
   communicationsConnection(where: CommunicationWhereInput, orderBy: CommunicationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommunicationConnection!
   offersConnection(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OfferConnection!
   itemTranslationsConnection(where: ItemTranslationWhereInput, orderBy: ItemTranslationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemTranslationConnection!
-  itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   clientContactsConnection(where: ClientContactWhereInput, orderBy: ClientContactOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ClientContactConnection!
   placesConnection(where: PlaceWhereInput, orderBy: PlaceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlaceConnection!
+  budgetsConnection(where: BudgetWhereInput, orderBy: BudgetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BudgetConnection!
   budgetLinesConnection(where: BudgetLineWhereInput, orderBy: BudgetLineOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BudgetLineConnection!
   categoriesConnection(where: CategoryWhereInput, orderBy: CategoryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CategoryConnection!
   employeesConnection(where: EmployeeWhereInput, orderBy: EmployeeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EmployeeConnection!
   employeeEstimationsConnection(where: EmployeeEstimationWhereInput, orderBy: EmployeeEstimationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EmployeeEstimationConnection!
   eventStuffsConnection(where: EventStuffWhereInput, orderBy: EventStuffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventStuffConnection!
   eventTypesConnection(where: EventTypeWhereInput, orderBy: EventTypeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventTypeConnection!
+  invoicesConnection(where: InvoiceWhereInput, orderBy: InvoiceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): InvoiceConnection!
   jobsConnection(where: JobWhereInput, orderBy: JobOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): JobConnection!
   placeContactsConnection(where: PlaceContactWhereInput, orderBy: PlaceContactOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PlaceContactConnection!
-  sectionItemsConnection(where: SectionItemWhereInput, orderBy: SectionItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SectionItemConnection!
   stuffsConnection(where: StuffWhereInput, orderBy: StuffOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StuffConnection!
   taxesConnection(where: TaxWhereInput, orderBy: TaxOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): TaxConnection!
   vehiclesConnection(where: VehicleWhereInput, orderBy: VehicleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): VehicleConnection!
+  itemProposalsConnection(where: ItemProposalWhereInput, orderBy: ItemProposalOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemProposalConnection!
+  menusConnection(where: MenuWhereInput, orderBy: MenuOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MenuConnection!
+  sectionsConnection(where: SectionWhereInput, orderBy: SectionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SectionConnection!
+  sectionItemsConnection(where: SectionItemWhereInput, orderBy: SectionItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SectionItemConnection!
   eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
+  itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -6871,9 +8723,64 @@ enum Role {
   Employee
 }
 
+type Section implements Node {
+  id: ID!
+  itemProposals(where: ItemProposalWhereInput, orderBy: ItemProposalOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ItemProposal!]
+  menu(where: MenuWhereInput): Menu
+  name: String
+  showPdf: Boolean
+}
+
+"""A connection to a list of items."""
+type SectionConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [SectionEdge]!
+  aggregate: AggregateSection!
+}
+
+input SectionCreateInput {
+  name: String
+  showPdf: Boolean
+  itemProposals: ItemProposalCreateManyWithoutSectionInput
+  menu: MenuCreateOneWithoutSectionsInput
+}
+
+input SectionCreateManyWithoutMenuInput {
+  create: [SectionCreateWithoutMenuInput!]
+  connect: [SectionWhereUniqueInput!]
+}
+
+input SectionCreateOneWithoutItemProposalsInput {
+  create: SectionCreateWithoutItemProposalsInput
+  connect: SectionWhereUniqueInput
+}
+
+input SectionCreateWithoutItemProposalsInput {
+  name: String
+  showPdf: Boolean
+  menu: MenuCreateOneWithoutSectionsInput
+}
+
+input SectionCreateWithoutMenuInput {
+  name: String
+  showPdf: Boolean
+  itemProposals: ItemProposalCreateManyWithoutSectionInput
+}
+
+"""An edge in a connection."""
+type SectionEdge {
+  """The item at the end of the edge."""
+  node: Section!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
 type SectionItem implements Node {
   content: String
-  endTime: DateTime
   h: Int!
   i: String!
   id: ID!
@@ -6885,16 +8792,12 @@ type SectionItem implements Node {
   minW: Int
   moved: Boolean
   offer(where: OfferWhereInput): Offer
-  persons: Int
-  items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item!]
-  price: Float
   static: Boolean
-  startTime: DateTime
-  title: String
   type: SectionTypes!
   w: Int!
   x: Int!
   y: Int!
+  menu(where: MenuWhereInput): Menu
 }
 
 """A connection to a list of items."""
@@ -6909,7 +8812,6 @@ type SectionItemConnection {
 
 input SectionItemCreateInput {
   content: String
-  endTime: DateTime
   h: Int!
   i: String!
   isDraggable: Boolean
@@ -6919,21 +8821,17 @@ input SectionItemCreateInput {
   minH: Int
   minW: Int
   moved: Boolean
-  persons: Int
-  price: Float
   static: Boolean
-  startTime: DateTime
-  title: String
   type: SectionTypes
   w: Int!
   x: Int!
   y: Int
   offer: OfferCreateOneWithoutSectionItemsInput
-  items: ItemCreateManyWithoutSectionItemsInput
+  menu: MenuCreateOneWithoutSectionItemInput
 }
 
-input SectionItemCreateManyWithoutItemsInput {
-  create: [SectionItemCreateWithoutItemsInput!]
+input SectionItemCreateManyInput {
+  create: [SectionItemCreateInput!]
   connect: [SectionItemWhereUniqueInput!]
 }
 
@@ -6942,9 +8840,13 @@ input SectionItemCreateManyWithoutOfferInput {
   connect: [SectionItemWhereUniqueInput!]
 }
 
-input SectionItemCreateWithoutItemsInput {
+input SectionItemCreateOneWithoutMenuInput {
+  create: SectionItemCreateWithoutMenuInput
+  connect: SectionItemWhereUniqueInput
+}
+
+input SectionItemCreateWithoutMenuInput {
   content: String
-  endTime: DateTime
   h: Int!
   i: String!
   isDraggable: Boolean
@@ -6954,11 +8856,7 @@ input SectionItemCreateWithoutItemsInput {
   minH: Int
   minW: Int
   moved: Boolean
-  persons: Int
-  price: Float
   static: Boolean
-  startTime: DateTime
-  title: String
   type: SectionTypes
   w: Int!
   x: Int!
@@ -6968,7 +8866,6 @@ input SectionItemCreateWithoutItemsInput {
 
 input SectionItemCreateWithoutOfferInput {
   content: String
-  endTime: DateTime
   h: Int!
   i: String!
   isDraggable: Boolean
@@ -6978,16 +8875,12 @@ input SectionItemCreateWithoutOfferInput {
   minH: Int
   minW: Int
   moved: Boolean
-  persons: Int
-  price: Float
   static: Boolean
-  startTime: DateTime
-  title: String
   type: SectionTypes
   w: Int!
   x: Int!
   y: Int
-  items: ItemCreateManyWithoutSectionItemsInput
+  menu: MenuCreateOneWithoutSectionItemInput
 }
 
 """An edge in a connection."""
@@ -7002,8 +8895,6 @@ type SectionItemEdge {
 enum SectionItemOrderByInput {
   content_ASC
   content_DESC
-  endTime_ASC
-  endTime_DESC
   h_ASC
   h_DESC
   i_ASC
@@ -7024,16 +8915,8 @@ enum SectionItemOrderByInput {
   minW_DESC
   moved_ASC
   moved_DESC
-  persons_ASC
-  persons_DESC
-  price_ASC
-  price_DESC
   static_ASC
   static_DESC
-  startTime_ASC
-  startTime_DESC
-  title_ASC
-  title_DESC
   type_ASC
   type_DESC
   w_ASC
@@ -7050,7 +8933,6 @@ enum SectionItemOrderByInput {
 
 type SectionItemPreviousValues {
   content: String
-  endTime: DateTime
   h: Int!
   i: String!
   id: ID!
@@ -7061,11 +8943,7 @@ type SectionItemPreviousValues {
   minH: Int
   minW: Int
   moved: Boolean
-  persons: Int
-  price: Float
   static: Boolean
-  startTime: DateTime
-  title: String
   type: SectionTypes!
   w: Int!
   x: Int!
@@ -7111,9 +8989,8 @@ input SectionItemSubscriptionWhereInput {
   node: SectionItemWhereInput
 }
 
-input SectionItemUpdateInput {
+input SectionItemUpdateDataInput {
   content: String
-  endTime: DateTime
   h: Int
   i: String
   isDraggable: Boolean
@@ -7123,26 +9000,42 @@ input SectionItemUpdateInput {
   minH: Int
   minW: Int
   moved: Boolean
-  persons: Int
-  price: Float
   static: Boolean
-  startTime: DateTime
-  title: String
   type: SectionTypes
   w: Int
   x: Int
   y: Int
   offer: OfferUpdateOneWithoutSectionItemsInput
-  items: ItemUpdateManyWithoutSectionItemsInput
+  menu: MenuUpdateOneWithoutSectionItemInput
 }
 
-input SectionItemUpdateManyWithoutItemsInput {
-  create: [SectionItemCreateWithoutItemsInput!]
+input SectionItemUpdateInput {
+  content: String
+  h: Int
+  i: String
+  isDraggable: Boolean
+  isResizable: Boolean
+  maxH: Int
+  maxW: Int
+  minH: Int
+  minW: Int
+  moved: Boolean
+  static: Boolean
+  type: SectionTypes
+  w: Int
+  x: Int
+  y: Int
+  offer: OfferUpdateOneWithoutSectionItemsInput
+  menu: MenuUpdateOneWithoutSectionItemInput
+}
+
+input SectionItemUpdateManyInput {
+  create: [SectionItemCreateInput!]
   connect: [SectionItemWhereUniqueInput!]
   disconnect: [SectionItemWhereUniqueInput!]
   delete: [SectionItemWhereUniqueInput!]
-  update: [SectionItemUpdateWithWhereUniqueWithoutItemsInput!]
-  upsert: [SectionItemUpsertWithWhereUniqueWithoutItemsInput!]
+  update: [SectionItemUpdateWithWhereUniqueNestedInput!]
+  upsert: [SectionItemUpsertWithWhereUniqueNestedInput!]
 }
 
 input SectionItemUpdateManyWithoutOfferInput {
@@ -7154,9 +9047,17 @@ input SectionItemUpdateManyWithoutOfferInput {
   upsert: [SectionItemUpsertWithWhereUniqueWithoutOfferInput!]
 }
 
-input SectionItemUpdateWithoutItemsDataInput {
+input SectionItemUpdateOneWithoutMenuInput {
+  create: SectionItemCreateWithoutMenuInput
+  connect: SectionItemWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: SectionItemUpdateWithoutMenuDataInput
+  upsert: SectionItemUpsertWithoutMenuInput
+}
+
+input SectionItemUpdateWithoutMenuDataInput {
   content: String
-  endTime: DateTime
   h: Int
   i: String
   isDraggable: Boolean
@@ -7166,11 +9067,7 @@ input SectionItemUpdateWithoutItemsDataInput {
   minH: Int
   minW: Int
   moved: Boolean
-  persons: Int
-  price: Float
   static: Boolean
-  startTime: DateTime
-  title: String
   type: SectionTypes
   w: Int
   x: Int
@@ -7180,7 +9077,6 @@ input SectionItemUpdateWithoutItemsDataInput {
 
 input SectionItemUpdateWithoutOfferDataInput {
   content: String
-  endTime: DateTime
   h: Int
   i: String
   isDraggable: Boolean
@@ -7190,21 +9086,17 @@ input SectionItemUpdateWithoutOfferDataInput {
   minH: Int
   minW: Int
   moved: Boolean
-  persons: Int
-  price: Float
   static: Boolean
-  startTime: DateTime
-  title: String
   type: SectionTypes
   w: Int
   x: Int
   y: Int
-  items: ItemUpdateManyWithoutSectionItemsInput
+  menu: MenuUpdateOneWithoutSectionItemInput
 }
 
-input SectionItemUpdateWithWhereUniqueWithoutItemsInput {
+input SectionItemUpdateWithWhereUniqueNestedInput {
   where: SectionItemWhereUniqueInput!
-  data: SectionItemUpdateWithoutItemsDataInput!
+  data: SectionItemUpdateDataInput!
 }
 
 input SectionItemUpdateWithWhereUniqueWithoutOfferInput {
@@ -7212,10 +9104,15 @@ input SectionItemUpdateWithWhereUniqueWithoutOfferInput {
   data: SectionItemUpdateWithoutOfferDataInput!
 }
 
-input SectionItemUpsertWithWhereUniqueWithoutItemsInput {
+input SectionItemUpsertWithoutMenuInput {
+  update: SectionItemUpdateWithoutMenuDataInput!
+  create: SectionItemCreateWithoutMenuInput!
+}
+
+input SectionItemUpsertWithWhereUniqueNestedInput {
   where: SectionItemWhereUniqueInput!
-  update: SectionItemUpdateWithoutItemsDataInput!
-  create: SectionItemCreateWithoutItemsInput!
+  update: SectionItemUpdateDataInput!
+  create: SectionItemCreateInput!
 }
 
 input SectionItemUpsertWithWhereUniqueWithoutOfferInput {
@@ -7273,28 +9170,6 @@ input SectionItemWhereInput {
 
   """All values not ending with the given string."""
   content_not_ends_with: String
-  endTime: DateTime
-
-  """All values that are not equal to given value."""
-  endTime_not: DateTime
-
-  """All values that are contained in given list."""
-  endTime_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  endTime_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  endTime_lt: DateTime
-
-  """All values less than or equal the given value."""
-  endTime_lte: DateTime
-
-  """All values greater than the given value."""
-  endTime_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  endTime_gte: DateTime
   h: Int
 
   """All values that are not equal to given value."""
@@ -7497,116 +9372,10 @@ input SectionItemWhereInput {
 
   """All values that are not equal to given value."""
   moved_not: Boolean
-  persons: Int
-
-  """All values that are not equal to given value."""
-  persons_not: Int
-
-  """All values that are contained in given list."""
-  persons_in: [Int!]
-
-  """All values that are not contained in given list."""
-  persons_not_in: [Int!]
-
-  """All values less than the given value."""
-  persons_lt: Int
-
-  """All values less than or equal the given value."""
-  persons_lte: Int
-
-  """All values greater than the given value."""
-  persons_gt: Int
-
-  """All values greater than or equal the given value."""
-  persons_gte: Int
-  price: Float
-
-  """All values that are not equal to given value."""
-  price_not: Float
-
-  """All values that are contained in given list."""
-  price_in: [Float!]
-
-  """All values that are not contained in given list."""
-  price_not_in: [Float!]
-
-  """All values less than the given value."""
-  price_lt: Float
-
-  """All values less than or equal the given value."""
-  price_lte: Float
-
-  """All values greater than the given value."""
-  price_gt: Float
-
-  """All values greater than or equal the given value."""
-  price_gte: Float
   static: Boolean
 
   """All values that are not equal to given value."""
   static_not: Boolean
-  startTime: DateTime
-
-  """All values that are not equal to given value."""
-  startTime_not: DateTime
-
-  """All values that are contained in given list."""
-  startTime_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  startTime_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  startTime_lt: DateTime
-
-  """All values less than or equal the given value."""
-  startTime_lte: DateTime
-
-  """All values greater than the given value."""
-  startTime_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  startTime_gte: DateTime
-  title: String
-
-  """All values that are not equal to given value."""
-  title_not: String
-
-  """All values that are contained in given list."""
-  title_in: [String!]
-
-  """All values that are not contained in given list."""
-  title_not_in: [String!]
-
-  """All values less than the given value."""
-  title_lt: String
-
-  """All values less than or equal the given value."""
-  title_lte: String
-
-  """All values greater than the given value."""
-  title_gt: String
-
-  """All values greater than or equal the given value."""
-  title_gte: String
-
-  """All values containing the given string."""
-  title_contains: String
-
-  """All values not containing the given string."""
-  title_not_contains: String
-
-  """All values starting with the given string."""
-  title_starts_with: String
-
-  """All values not starting with the given string."""
-  title_not_starts_with: String
-
-  """All values ending with the given string."""
-  title_ends_with: String
-
-  """All values not ending with the given string."""
-  title_not_ends_with: String
   type: SectionTypes
 
   """All values that are not equal to given value."""
@@ -7684,13 +9453,69 @@ input SectionItemWhereInput {
   """All values greater than or equal the given value."""
   y_gte: Int
   offer: OfferWhereInput
-  items_every: ItemWhereInput
-  items_some: ItemWhereInput
-  items_none: ItemWhereInput
+  menu: MenuWhereInput
 }
 
 input SectionItemWhereUniqueInput {
   id: ID
+}
+
+enum SectionOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  showPdf_ASC
+  showPdf_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type SectionPreviousValues {
+  id: ID!
+  name: String
+  showPdf: Boolean
+}
+
+type SectionSubscriptionPayload {
+  mutation: MutationType!
+  node: Section
+  updatedFields: [String!]
+  previousValues: SectionPreviousValues
+}
+
+input SectionSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SectionSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SectionSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SectionSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: SectionWhereInput
 }
 
 enum SectionTypes {
@@ -7698,7 +9523,163 @@ enum SectionTypes {
   Subtitle
   Subheading
   Text
-  Items
+  Menu
+}
+
+input SectionUpdateInput {
+  name: String
+  showPdf: Boolean
+  itemProposals: ItemProposalUpdateManyWithoutSectionInput
+  menu: MenuUpdateOneWithoutSectionsInput
+}
+
+input SectionUpdateManyWithoutMenuInput {
+  create: [SectionCreateWithoutMenuInput!]
+  connect: [SectionWhereUniqueInput!]
+  disconnect: [SectionWhereUniqueInput!]
+  delete: [SectionWhereUniqueInput!]
+  update: [SectionUpdateWithWhereUniqueWithoutMenuInput!]
+  upsert: [SectionUpsertWithWhereUniqueWithoutMenuInput!]
+}
+
+input SectionUpdateOneWithoutItemProposalsInput {
+  create: SectionCreateWithoutItemProposalsInput
+  connect: SectionWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: SectionUpdateWithoutItemProposalsDataInput
+  upsert: SectionUpsertWithoutItemProposalsInput
+}
+
+input SectionUpdateWithoutItemProposalsDataInput {
+  name: String
+  showPdf: Boolean
+  menu: MenuUpdateOneWithoutSectionsInput
+}
+
+input SectionUpdateWithoutMenuDataInput {
+  name: String
+  showPdf: Boolean
+  itemProposals: ItemProposalUpdateManyWithoutSectionInput
+}
+
+input SectionUpdateWithWhereUniqueWithoutMenuInput {
+  where: SectionWhereUniqueInput!
+  data: SectionUpdateWithoutMenuDataInput!
+}
+
+input SectionUpsertWithoutItemProposalsInput {
+  update: SectionUpdateWithoutItemProposalsDataInput!
+  create: SectionCreateWithoutItemProposalsInput!
+}
+
+input SectionUpsertWithWhereUniqueWithoutMenuInput {
+  where: SectionWhereUniqueInput!
+  update: SectionUpdateWithoutMenuDataInput!
+  create: SectionCreateWithoutMenuInput!
+}
+
+input SectionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [SectionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [SectionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [SectionWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  showPdf: Boolean
+
+  """All values that are not equal to given value."""
+  showPdf_not: Boolean
+  itemProposals_every: ItemProposalWhereInput
+  itemProposals_some: ItemProposalWhereInput
+  itemProposals_none: ItemProposalWhereInput
+  menu: MenuWhereInput
+}
+
+input SectionWhereUniqueInput {
+  id: ID
 }
 
 enum StatusOffer {
@@ -7929,26 +9910,32 @@ type Subscription {
   communication(where: CommunicationSubscriptionWhereInput): CommunicationSubscriptionPayload
   offer(where: OfferSubscriptionWhereInput): OfferSubscriptionPayload
   itemTranslation(where: ItemTranslationSubscriptionWhereInput): ItemTranslationSubscriptionPayload
-  item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   clientContact(where: ClientContactSubscriptionWhereInput): ClientContactSubscriptionPayload
   place(where: PlaceSubscriptionWhereInput): PlaceSubscriptionPayload
+  budget(where: BudgetSubscriptionWhereInput): BudgetSubscriptionPayload
   budgetLine(where: BudgetLineSubscriptionWhereInput): BudgetLineSubscriptionPayload
   category(where: CategorySubscriptionWhereInput): CategorySubscriptionPayload
   employee(where: EmployeeSubscriptionWhereInput): EmployeeSubscriptionPayload
   employeeEstimation(where: EmployeeEstimationSubscriptionWhereInput): EmployeeEstimationSubscriptionPayload
   eventStuff(where: EventStuffSubscriptionWhereInput): EventStuffSubscriptionPayload
   eventType(where: EventTypeSubscriptionWhereInput): EventTypeSubscriptionPayload
+  invoice(where: InvoiceSubscriptionWhereInput): InvoiceSubscriptionPayload
   job(where: JobSubscriptionWhereInput): JobSubscriptionPayload
   placeContact(where: PlaceContactSubscriptionWhereInput): PlaceContactSubscriptionPayload
-  sectionItem(where: SectionItemSubscriptionWhereInput): SectionItemSubscriptionPayload
   stuff(where: StuffSubscriptionWhereInput): StuffSubscriptionPayload
   tax(where: TaxSubscriptionWhereInput): TaxSubscriptionPayload
   vehicle(where: VehicleSubscriptionWhereInput): VehicleSubscriptionPayload
+  itemProposal(where: ItemProposalSubscriptionWhereInput): ItemProposalSubscriptionPayload
+  menu(where: MenuSubscriptionWhereInput): MenuSubscriptionPayload
+  section(where: SectionSubscriptionWhereInput): SectionSubscriptionPayload
+  sectionItem(where: SectionItemSubscriptionWhereInput): SectionItemSubscriptionPayload
   event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
+  item(where: ItemSubscriptionWhereInput): ItemSubscriptionPayload
 }
 
 type Tax implements Node {
+  budgets(where: BudgetWhereInput, orderBy: BudgetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Budget!]
   budgetLines(where: BudgetLineWhereInput, orderBy: BudgetLineOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [BudgetLine!]
   id: ID!
   name: String!
@@ -7968,6 +9955,7 @@ type TaxConnection {
 input TaxCreateInput {
   name: String!
   value: Float!
+  budgets: BudgetCreateManyWithoutTaxInput
   budgetLines: BudgetLineCreateManyWithoutTaxInput
 }
 
@@ -7976,9 +9964,21 @@ input TaxCreateOneWithoutBudgetLinesInput {
   connect: TaxWhereUniqueInput
 }
 
+input TaxCreateOneWithoutBudgetsInput {
+  create: TaxCreateWithoutBudgetsInput
+  connect: TaxWhereUniqueInput
+}
+
 input TaxCreateWithoutBudgetLinesInput {
   name: String!
   value: Float!
+  budgets: BudgetCreateManyWithoutTaxInput
+}
+
+input TaxCreateWithoutBudgetsInput {
+  name: String!
+  value: Float!
+  budgetLines: BudgetLineCreateManyWithoutTaxInput
 }
 
 """An edge in a connection."""
@@ -8051,6 +10051,7 @@ input TaxSubscriptionWhereInput {
 input TaxUpdateInput {
   name: String
   value: Float
+  budgets: BudgetUpdateManyWithoutTaxInput
   budgetLines: BudgetLineUpdateManyWithoutTaxInput
 }
 
@@ -8063,14 +10064,35 @@ input TaxUpdateOneWithoutBudgetLinesInput {
   upsert: TaxUpsertWithoutBudgetLinesInput
 }
 
+input TaxUpdateOneWithoutBudgetsInput {
+  create: TaxCreateWithoutBudgetsInput
+  connect: TaxWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: TaxUpdateWithoutBudgetsDataInput
+  upsert: TaxUpsertWithoutBudgetsInput
+}
+
 input TaxUpdateWithoutBudgetLinesDataInput {
   name: String
   value: Float
+  budgets: BudgetUpdateManyWithoutTaxInput
+}
+
+input TaxUpdateWithoutBudgetsDataInput {
+  name: String
+  value: Float
+  budgetLines: BudgetLineUpdateManyWithoutTaxInput
 }
 
 input TaxUpsertWithoutBudgetLinesInput {
   update: TaxUpdateWithoutBudgetLinesDataInput!
   create: TaxCreateWithoutBudgetLinesInput!
+}
+
+input TaxUpsertWithoutBudgetsInput {
+  update: TaxUpdateWithoutBudgetsDataInput!
+  create: TaxCreateWithoutBudgetsInput!
 }
 
 input TaxWhereInput {
@@ -8184,6 +10206,9 @@ input TaxWhereInput {
 
   """All values greater than or equal the given value."""
   value_gte: Float
+  budgets_every: BudgetWhereInput
+  budgets_some: BudgetWhereInput
+  budgets_none: BudgetWhereInput
   budgetLines_every: BudgetLineWhereInput
   budgetLines_some: BudgetLineWhereInput
   budgetLines_none: BudgetLineWhereInput

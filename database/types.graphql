@@ -28,7 +28,9 @@ type Event {
   offer: Offer
   employees: [Employee!]!
   eventStuffs: [EventStuff!]!
+  invoice: Invoice
   vehicles: [Vehicle!]!
+  canceled: Boolean @default(value: false)
 }
 
 type Offer {
@@ -58,6 +60,7 @@ type Offer {
   showTotalBudgetsPdf: Boolean @default(value: false)
   startTime: DateTime
   version: Int @default(value: 1)
+  menus: [Menu!]!
 }
 
 type ItemTranslation {
@@ -112,6 +115,16 @@ type Place {
   placeContacts: [PlaceContact!]!
 }
 
+type Budget {
+  description: String!
+  id: ID! @unique
+  invoice: Invoice
+  quantity: Int!
+  tax: Tax
+  total: Float!
+  unitPrice: Float!
+}
+
 type BudgetLine {
   description: String!
   id: ID! @unique
@@ -164,6 +177,19 @@ type EventType {
   offers: [Offer!]!
 }
 
+type Invoice {
+  address: String
+  budgets: [Budget!]!
+  date: DateTime
+  event: Event
+  id: ID! @unique
+  name: String
+  paid: Boolean! @default(value: false)
+  tva: String
+  number: Int
+  type: Account
+}
+
 type Job {
   employeeEstimations: [EmployeeEstimation!]!
   employees: [Employee!]!
@@ -183,7 +209,6 @@ type PlaceContact {
 
 type SectionItem {
   content: String @default(value: "''")
-  endTime: DateTime
   h: Int!
   i: String!
   id: ID! @unique
@@ -195,16 +220,12 @@ type SectionItem {
   minW: Int
   moved: Boolean @default(value: false)
   offer: Offer
-  persons: Int @default(value: 0)
-  items: [Item!]!
-  price: Float @default(value: 0.0)
   static: Boolean @default(value: false)
-  startTime: DateTime
-  title: String @default(value: "''")
   type: SectionTypes! @default(value: Title)
   w: Int!
   x: Int!
   y: Int! @default(value: 0)
+  menu: Menu
 }
 
 type Stuff {
@@ -214,6 +235,7 @@ type Stuff {
 }
 
 type Tax {
+  budgets: [Budget!]!
   budgetLines: [BudgetLine!]!
   id: ID! @unique
   name: String!
@@ -228,4 +250,38 @@ type Vehicle {
   name: String!
   plate: String!
   year: Int
+}
+
+type ItemProposal {
+  id: ID! @unique
+  items: [Item!]!
+  section: Section
+  status: ItemProposalStatus!
+}
+
+type Menu {
+  comment: String
+  endDate: DateTime
+  hasItemsCold: Boolean @default(value: false)
+  hasItemsDessert: Boolean @default(value: false)
+  hasItemsHot: Boolean @default(value: false)
+  hasItemsZCold: Boolean @default(value: false)
+  hasItemsZHot: Boolean @default(value: false)
+  id: ID! @unique
+  kitchenNotes: String
+  name: String!
+  offer: Offer
+  people: Int
+  price: Float
+  sectionItem: SectionItem
+  sections: [Section!]!
+  startDate: DateTime
+}
+
+type Section {
+  id: ID! @unique
+  itemProposals: [ItemProposal!]!
+  menu: Menu
+  name: String
+  showPdf: Boolean @default(value: false)
 }
