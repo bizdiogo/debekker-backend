@@ -1,0 +1,15 @@
+type Query {
+  budget(where: BudgetWhereUniqueInput!): Budget
+  budgets(where: BudgetWhereInput, orderBy: BudgetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Budget]!
+  budgetsConnection(where: BudgetWhereInput, orderBy: BudgetOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): BudgetConnection!
+}
+
+type Mutation {
+  createBudget(data: BudgetCreateInput!): Budget!
+  updateBudget(data: BudgetUpdateInput!, where: BudgetWhereUniqueInput!): Budget
+  deleteBudget(where: BudgetWhereUniqueInput!): Budget
+}
+
+type Subscription {
+  budget(where: BudgetSubscriptionWhereInput): BudgetSubscriptionPayload
+}

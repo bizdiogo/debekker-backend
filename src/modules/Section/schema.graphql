@@ -1,0 +1,15 @@
+type Query {
+  section(where: SectionWhereUniqueInput!): Section
+  sections(where: SectionWhereInput, orderBy: SectionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Section]!
+  sectionsConnection(where: SectionWhereInput, orderBy: SectionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SectionConnection!
+}
+
+type Mutation {
+  createSection(data: SectionCreateInput!): Section!
+  updateSection(data: SectionUpdateInput!, where: SectionWhereUniqueInput!): Section
+  deleteSection(where: SectionWhereUniqueInput!): Section
+}
+
+type Subscription {
+  section(where: SectionSubscriptionWhereInput): SectionSubscriptionPayload
+}

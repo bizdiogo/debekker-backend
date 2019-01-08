@@ -1,7 +1,7 @@
 import * as R from 'ramda'
 
 const clearEmpties = o => {
-  for (var k in o) {
+  for (let k in o) {
     if (!o[k] || typeof o[k] !== 'object') {
       continue
     }

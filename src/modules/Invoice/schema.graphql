@@ -1,0 +1,15 @@
+type Query {
+  invoice(where: InvoiceWhereUniqueInput!): Invoice
+  invoices(where: InvoiceWhereInput, orderBy: InvoiceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Invoice]!
+  invoicesConnection(where: InvoiceWhereInput, orderBy: InvoiceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): InvoiceConnection!
+}
+
+type Mutation {
+  createInvoice(data: InvoiceCreateInput!): Invoice!
+  updateInvoice(data: InvoiceUpdateInput!, where: InvoiceWhereUniqueInput!): Invoice
+  deleteInvoice(where: InvoiceWhereUniqueInput!): Invoice
+}
+
+type Subscription {
+  invoice(where: InvoiceSubscriptionWhereInput): InvoiceSubscriptionPayload
+}

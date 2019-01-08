@@ -1,0 +1,15 @@
+type Query {
+  itemProposal(where: ItemProposalWhereUniqueInput!): ItemProposal
+  itemProposals(where: ItemProposalWhereInput, orderBy: ItemProposalOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ItemProposal]!
+  itemProposalsConnection(where: ItemProposalWhereInput, orderBy: ItemProposalOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemProposalConnection!
+}
+
+type Mutation {
+  createItemProposal(data: ItemProposalCreateInput!): ItemProposal!
+  updateItemProposal(data: ItemProposalUpdateInput!, where: ItemProposalWhereUniqueInput!): ItemProposal
+  deleteItemProposal(where: ItemProposalWhereUniqueInput!): ItemProposal
+}
+
+type Subscription {
+  itemProposal(where: ItemProposalSubscriptionWhereInput): ItemProposalSubscriptionPayload
+}

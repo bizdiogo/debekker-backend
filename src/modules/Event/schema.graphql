@@ -3,6 +3,8 @@ type Query {
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event]!
   eventsConnection(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): EventConnection!
   eventsCalendar(startTime: DateTime, endTime: DateTime, name: String): [Event]!
+  eventsNotInvoiced(filter: String, orderBy: EventOrderByInput, skip: Int, first: Int): [Event]!
+  eventsNotInvoicedConnection(filter: String, orderBy: EventOrderByInput, skip: Int, first: Int): EventConnection!
 }
 
 type Mutation {
@@ -13,4 +15,5 @@ type Mutation {
 
 type Subscription {
   event(where: EventSubscriptionWhereInput): EventSubscriptionPayload
+  eventsNotInvoiced(filter: String, orderBy: EventOrderByInput, skip: Int, first: Int): EventSubscriptionPayload
 }

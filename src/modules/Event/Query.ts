@@ -1,5 +1,6 @@
 import { forwardTo } from 'prisma-binding'
 import { Context, validateTwoDate } from '../../utils'
+import * as moment from 'moment'
 
 export default {
   event: forwardTo('db'),
@@ -23,6 +24,39 @@ export default {
                 client: { name_contains: name }
               }
             }
+          ]
+        }
+      },
+      info
+    )
+  },
+  eventsNotInvoiced: async (parent, { filter, orderBy, first, skip }, ctx: Context, info) => {
+    return ctx.db.query.events(
+      {
+        orderBy,
+        first,
+        skip,
+        where: {
+          AND: [
+            { offer: { endTime_lt: moment().toDate() } },
+            { offer: { client: { name_contains: filter } } },
+            { invoice: null },
+            { canceled: false }
+          ]
+        }
+      },
+      info
+    )
+  },
+  eventsNotInvoicedConnection: async (parent, { filter }, ctx: Context, info) => {
+    return ctx.db.query.eventsConnection(
+      {
+        where: {
+          AND: [
+            { offer: { endTime_lt: moment().toDate() } },
+            { offer: { client: { name_contains: filter } } },
+            { invoice: null },
+            { canceled: false }
           ]
         }
       },

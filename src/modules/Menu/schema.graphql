@@ -1,0 +1,15 @@
+type Query {
+  menu(where: MenuWhereUniqueInput!): Menu
+  menus(where: MenuWhereInput, orderBy: MenuOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Menu]!
+  menusConnection(where: MenuWhereInput, orderBy: MenuOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MenuConnection!
+}
+
+type Mutation {
+  createMenu(data: MenuCreateInput!): Menu!
+  updateMenu(data: MenuUpdateInput!, where: MenuWhereUniqueInput!): Menu
+  deleteMenu(where: MenuWhereUniqueInput!): Menu
+}
+
+type Subscription {
+  menu(where: MenuSubscriptionWhereInput): MenuSubscriptionPayload
+}
