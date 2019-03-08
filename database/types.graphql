@@ -11,6 +11,8 @@ type Client {
   clientContacts: [ClientContact!]!
   language: LanguageEnum
   type: ClientType @default(value: Prive)
+  country: Country
+  postalCode: String!
 }
 
 type Communication {
@@ -40,7 +42,6 @@ type Offer {
   event: Event
   id: ID! @unique
   status: StatusOffer! @default(value: Pending)
-  language: LanguageEnum @default(value: FR)
   address: String!
   budgetLines: [BudgetLine!]!
   city: String!
@@ -50,6 +51,7 @@ type Offer {
   endTime: DateTime
   eventType: EventType
   gmtOffset: String!
+  language: LanguageEnum @default(value: FR)
   maxPersons: Int @default(value: 0)
   minPersons: Int @default(value: 0)
   name: String!
@@ -72,11 +74,35 @@ type ItemTranslation {
   name: String
 }
 
+type ItemProposal {
+  id: ID! @unique
+  itemProposalFlags: [ItemProposalFlag!]!
+  items: [Item!]!
+  section: Section
+  status: ItemProposalStatus!
+}
+
+type ItemProposalFlag @model {
+  id: ID! @unique
+  itemProposal: ItemProposal
+  item: Item
+  showDescription: Boolean! @default(value: true)
+}
+
 type Item {
   id: ID! @unique
   itemTranslations: [ItemTranslation!]!
   categories: [Category!]!
-  sectionItems: [SectionItem!]!
+  itemProposalFlags: [ItemProposalFlag!]!
+  itemProposals: [ItemProposal!]!
+}
+
+type Section {
+  id: ID! @unique
+  itemProposals: [ItemProposal!]!
+  menu: Menu
+  name: String
+  showPdf: Boolean @default(value: false)
 }
 
 type User {
@@ -109,7 +135,6 @@ type Place {
   id: ID! @unique
   name: String!
   postalCode: String!
-  country: Country @default(value: BE)
   note: String
   offer: Offer
   placeContacts: [PlaceContact!]!
@@ -184,9 +209,14 @@ type Invoice {
   event: Event
   id: ID! @unique
   name: String
-  paid: Boolean! @default(value: false)
   tva: String
+  amountPayed: Float @default(value: 0.0)
+  clientRef: String
+  invoiceRef: String
+  language: LanguageEnum
+  message: String @default(value: "")
   number: Int
+  status: InvoiceStatus @default(value: PENDING)
   type: Account
 }
 
@@ -252,11 +282,10 @@ type Vehicle {
   year: Int
 }
 
-type ItemProposal {
+type Country @model {
+  clients: [Client!]!
   id: ID! @unique
-  items: [Item!]!
-  section: Section
-  status: ItemProposalStatus!
+  name: String!
 }
 
 type Menu {
@@ -276,12 +305,4 @@ type Menu {
   sectionItem: SectionItem
   sections: [Section!]!
   startDate: DateTime
-}
-
-type Section {
-  id: ID! @unique
-  itemProposals: [ItemProposal!]!
-  menu: Menu
-  name: String
-  showPdf: Boolean @default(value: false)
 }

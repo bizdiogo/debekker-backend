@@ -1,0 +1,15 @@
+type Query {
+  itemProposalFlag(where: ItemProposalFlagWhereUniqueInput!): ItemProposalFlag
+  itemProposalFlags(where: ItemProposalFlagWhereInput, orderBy: ItemProposalFlagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ItemProposalFlag]!
+  itemProposalFlagsConnection(where: ItemProposalFlagWhereInput, orderBy: ItemProposalFlagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemProposalFlagConnection!
+}
+
+type Mutation {
+  createItemProposalFlag(data: ItemProposalFlagCreateInput!): ItemProposalFlag!
+  updateItemProposalFlag(data: ItemProposalFlagUpdateInput!, where: ItemProposalFlagWhereUniqueInput!): ItemProposalFlag
+  deleteItemProposalFlag(where: ItemProposalFlagWhereUniqueInput!): ItemProposalFlag
+}
+
+type Subscription {
+  itemProposalFlag(where: ItemProposalFlagSubscriptionWhereInput): ItemProposalFlagSubscriptionPayload
+}

@@ -1,0 +1,15 @@
+type Query {
+  country(where: CountryWhereUniqueInput!): Country
+  countries(where: CountryWhereInput, orderBy: CountryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Country]!
+  countriesConnection(where: CountryWhereInput, orderBy: CountryOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CountryConnection!
+}
+
+type Mutation {
+  createCountry(data: CountryCreateInput!): Country!
+  updateCountry(data: CountryUpdateInput!, where: CountryWhereUniqueInput!): Country
+  deleteCountry(where: CountryWhereUniqueInput!): Country
+}
+
+type Subscription {
+  country(where: CountrySubscriptionWhereInput): CountrySubscriptionPayload
+}

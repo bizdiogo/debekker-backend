@@ -11,10 +11,6 @@ enum Channel {
   Message
 }
 
-enum Country {
-  BE
-}
-
 enum LanguageEnum {
   FR
   NL
@@ -51,6 +47,7 @@ enum SectionTypes {
   Subheading
   Text
   Menu
+  Budget
 }
 
 enum Account {
@@ -62,4 +59,10 @@ enum ItemProposalStatus {
   PENDING
   ACCEPTED
   REJECTED
+}
+
+enum InvoiceStatus {
+  PENDING
+  SEND
+  PAID
 }

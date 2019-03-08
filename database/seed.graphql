@@ -9,58 +9,58 @@ mutation {
   ) {
     id
   }
-  createClient(
-    data: {
-      name: "Tazli"
-      email: "info@tazli.com"
-      address: "lleida 16"
-      phone: "625397009"
-      language: EN
-      clientContacts: {
-        create: {
-          name: "Ivan Llorente"
-          email: "ivan@tazli.com"
-          mobilePhone: "6253970"
-          phoneNumber: "6253970099"
-        }
-      }
-    }
-  ) {
-    id
-    name
-  }
-  createEventType(data: { name: "Business lunch" }) {
-    id
-    name
-  }
-  createPlace(
-    data: {
-      name: "Vedao"
-      address: "les planes"
-      postalCode: "08970"
-      city: "sant joan despí"
-    }
-  ) {
-    id
-    name
-  }
-  createOffer(
-    data: {
-      name: "offer"
-      status: Pending
-      language: FR
-      startTime: "2018-08-31T21:01:30.000Z"
-      endTime: "2018-09-01T15:00:00.000Z"
-      gmtOffset: "-03:00"
-      place: { connect: { id: "cjlmrcz8c009g08436795hd2w" } }
-      address: "les planes"
-      city: "sant joan despí"
-      postalCode: "08970"
-      minPersons: 50
-      maxPersons: 60
-    }
-  ) {
-    id
-    name
-  }
+  # createClient(
+  #   data: {
+  #     name: "Tazli"
+  #     email: "info@tazli.com"
+  #     address: "lleida 16"
+  #     phone: "625397009"
+  #     language: EN
+  #     clientContacts: {
+  #       create: {
+  #         name: "Ivan Llorente"
+  #         email: "ivan@tazli.com"
+  #         mobilePhone: "6253970"
+  #         phoneNumber: "6253970099"
+  #       }
+  #     }
+  #   }
+  # ) {
+  #   id
+  #   name
+  # }
+  # createEventType(data: { name: "Business lunch" }) {
+  #   id
+  #   name
+  # }
+  # createPlace(
+  #   data: {
+  #     name: "Vedao"
+  #     address: "les planes"
+  #     postalCode: "08970"
+  #     city: "sant joan despí"
+  #   }
+  # ) {
+  #   id
+  #   name
+  # }
+  # createOffer(
+  #   data: {
+  #     name: "offer"
+  #     status: Pending
+  #     language: FR
+  #     startTime: "2018-08-31T21:01:30.000Z"
+  #     endTime: "2018-09-01T15:00:00.000Z"
+  #     gmtOffset: "-03:00"
+  #     place: { connect: { id: "cjlmrcz8c009g08436795hd2w" } }
+  #     address: "les planes"
+  #     city: "sant joan despí"
+  #     postalCode: "08970"
+  #     minPersons: 50
+  #     maxPersons: 60
+  #   }
+  # ) {
+  #   id
+  #   name
+  # }
 }
