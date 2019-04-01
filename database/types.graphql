@@ -1,5 +1,5 @@
 type Client {
-  address: String
+  address: String!
   createdAt: DateTime!
   email: String!
   events: [Event!]!
@@ -11,8 +11,9 @@ type Client {
   clientContacts: [ClientContact!]!
   language: LanguageEnum
   type: ClientType @default(value: Prive)
-  country: Country
+  country: Country!
   postalCode: String!
+  city: String!
 }
 
 type Communication {
@@ -33,6 +34,7 @@ type Event {
   invoice: Invoice
   vehicles: [Vehicle!]!
   canceled: Boolean @default(value: false)
+  deletedAt: DateTime
 }
 
 type Offer {
@@ -117,6 +119,7 @@ type User {
   employee: Employee
   jobs: [Job!]!
   language: LanguageEnum
+  phone: String
 }
 
 type ClientContact {

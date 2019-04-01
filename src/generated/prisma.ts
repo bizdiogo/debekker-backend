@@ -1441,7 +1441,7 @@ enum Channel {
 }
 
 type Client implements Node {
-  address: String
+  address: String!
   createdAt: DateTime!
   email: String!
   events(where: EventWhereInput, orderBy: EventOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Event!]
@@ -1453,8 +1453,9 @@ type Client implements Node {
   clientContacts(where: ClientContactWhereInput, orderBy: ClientContactOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ClientContact!]
   language: LanguageEnum
   type: ClientType
-  country(where: CountryWhereInput): Country
+  country(where: CountryWhereInput): Country!
   postalCode: String!
+  city: String!
 }
 
 """A connection to a list of items."""
@@ -1874,7 +1875,7 @@ input ClientContactWhereUniqueInput {
 }
 
 input ClientCreateInput {
-  address: String
+  address: String!
   email: String!
   name: String!
   phone: String!
@@ -1882,10 +1883,11 @@ input ClientCreateInput {
   language: LanguageEnum
   type: ClientType
   postalCode: String!
+  city: String!
   events: EventCreateManyInput
   offers: OfferCreateManyWithoutClientInput
   clientContacts: ClientContactCreateManyWithoutClientInput
-  country: CountryCreateOneWithoutClientsInput
+  country: CountryCreateOneWithoutClientsInput!
 }
 
 input ClientCreateManyWithoutCountryInput {
@@ -1904,7 +1906,7 @@ input ClientCreateOneWithoutOffersInput {
 }
 
 input ClientCreateWithoutClientContactsInput {
-  address: String
+  address: String!
   email: String!
   name: String!
   phone: String!
@@ -1912,13 +1914,14 @@ input ClientCreateWithoutClientContactsInput {
   language: LanguageEnum
   type: ClientType
   postalCode: String!
+  city: String!
   events: EventCreateManyInput
   offers: OfferCreateManyWithoutClientInput
-  country: CountryCreateOneWithoutClientsInput
+  country: CountryCreateOneWithoutClientsInput!
 }
 
 input ClientCreateWithoutCountryInput {
-  address: String
+  address: String!
   email: String!
   name: String!
   phone: String!
@@ -1926,13 +1929,14 @@ input ClientCreateWithoutCountryInput {
   language: LanguageEnum
   type: ClientType
   postalCode: String!
+  city: String!
   events: EventCreateManyInput
   offers: OfferCreateManyWithoutClientInput
   clientContacts: ClientContactCreateManyWithoutClientInput
 }
 
 input ClientCreateWithoutOffersInput {
-  address: String
+  address: String!
   email: String!
   name: String!
   phone: String!
@@ -1940,9 +1944,10 @@ input ClientCreateWithoutOffersInput {
   language: LanguageEnum
   type: ClientType
   postalCode: String!
+  city: String!
   events: EventCreateManyInput
   clientContacts: ClientContactCreateManyWithoutClientInput
-  country: CountryCreateOneWithoutClientsInput
+  country: CountryCreateOneWithoutClientsInput!
 }
 
 """An edge in a connection."""
@@ -1975,12 +1980,14 @@ enum ClientOrderByInput {
   type_DESC
   postalCode_ASC
   postalCode_DESC
+  city_ASC
+  city_DESC
   updatedAt_ASC
   updatedAt_DESC
 }
 
 type ClientPreviousValues {
-  address: String
+  address: String!
   createdAt: DateTime!
   email: String!
   id: ID!
@@ -1990,6 +1997,7 @@ type ClientPreviousValues {
   language: LanguageEnum
   type: ClientType
   postalCode: String!
+  city: String!
 }
 
 type ClientSubscriptionPayload {
@@ -2045,6 +2053,7 @@ input ClientUpdateInput {
   language: LanguageEnum
   type: ClientType
   postalCode: String
+  city: String
   events: EventUpdateManyInput
   offers: OfferUpdateManyWithoutClientInput
   clientContacts: ClientContactUpdateManyWithoutClientInput
@@ -2087,6 +2096,7 @@ input ClientUpdateWithoutClientContactsDataInput {
   language: LanguageEnum
   type: ClientType
   postalCode: String
+  city: String
   events: EventUpdateManyInput
   offers: OfferUpdateManyWithoutClientInput
   country: CountryUpdateOneWithoutClientsInput
@@ -2101,6 +2111,7 @@ input ClientUpdateWithoutCountryDataInput {
   language: LanguageEnum
   type: ClientType
   postalCode: String
+  city: String
   events: EventUpdateManyInput
   offers: OfferUpdateManyWithoutClientInput
   clientContacts: ClientContactUpdateManyWithoutClientInput
@@ -2115,6 +2126,7 @@ input ClientUpdateWithoutOffersDataInput {
   language: LanguageEnum
   type: ClientType
   postalCode: String
+  city: String
   events: EventUpdateManyInput
   clientContacts: ClientContactUpdateManyWithoutClientInput
   country: CountryUpdateOneWithoutClientsInput
@@ -2472,6 +2484,46 @@ input ClientWhereInput {
 
   """All values not ending with the given string."""
   postalCode_not_ends_with: String
+  city: String
+
+  """All values that are not equal to given value."""
+  city_not: String
+
+  """All values that are contained in given list."""
+  city_in: [String!]
+
+  """All values that are not contained in given list."""
+  city_not_in: [String!]
+
+  """All values less than the given value."""
+  city_lt: String
+
+  """All values less than or equal the given value."""
+  city_lte: String
+
+  """All values greater than the given value."""
+  city_gt: String
+
+  """All values greater than or equal the given value."""
+  city_gte: String
+
+  """All values containing the given string."""
+  city_contains: String
+
+  """All values not containing the given string."""
+  city_not_contains: String
+
+  """All values starting with the given string."""
+  city_starts_with: String
+
+  """All values not starting with the given string."""
+  city_not_starts_with: String
+
+  """All values ending with the given string."""
+  city_ends_with: String
+
+  """All values not ending with the given string."""
+  city_not_ends_with: String
   events_every: EventWhereInput
   events_some: EventWhereInput
   events_none: EventWhereInput
@@ -2953,7 +3005,6 @@ input CountryUpdateInput {
 input CountryUpdateOneWithoutClientsInput {
   create: CountryCreateWithoutClientsInput
   connect: CountryWhereUniqueInput
-  disconnect: Boolean
   delete: Boolean
   update: CountryUpdateWithoutClientsDataInput
   upsert: CountryUpsertWithoutClientsInput
@@ -3829,6 +3880,7 @@ type Event implements Node {
   invoice(where: InvoiceWhereInput): Invoice
   vehicles(where: VehicleWhereInput, orderBy: VehicleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Vehicle!]
   canceled: Boolean
+  deletedAt: DateTime
 }
 
 """A connection to a list of items."""
@@ -3843,6 +3895,7 @@ type EventConnection {
 
 input EventCreateInput {
   canceled: Boolean
+  deletedAt: DateTime
   offer: OfferCreateOneWithoutEventInput
   employees: EmployeeCreateManyWithoutEventInput
   eventStuffs: EventStuffCreateManyWithoutEventInput
@@ -3882,6 +3935,7 @@ input EventCreateOneWithoutOfferInput {
 
 input EventCreateWithoutEmployeesInput {
   canceled: Boolean
+  deletedAt: DateTime
   offer: OfferCreateOneWithoutEventInput
   eventStuffs: EventStuffCreateManyWithoutEventInput
   invoice: InvoiceCreateOneWithoutEventInput
@@ -3890,6 +3944,7 @@ input EventCreateWithoutEmployeesInput {
 
 input EventCreateWithoutEventStuffsInput {
   canceled: Boolean
+  deletedAt: DateTime
   offer: OfferCreateOneWithoutEventInput
   employees: EmployeeCreateManyWithoutEventInput
   invoice: InvoiceCreateOneWithoutEventInput
@@ -3898,6 +3953,7 @@ input EventCreateWithoutEventStuffsInput {
 
 input EventCreateWithoutInvoiceInput {
   canceled: Boolean
+  deletedAt: DateTime
   offer: OfferCreateOneWithoutEventInput
   employees: EmployeeCreateManyWithoutEventInput
   eventStuffs: EventStuffCreateManyWithoutEventInput
@@ -3906,6 +3962,7 @@ input EventCreateWithoutInvoiceInput {
 
 input EventCreateWithoutOfferInput {
   canceled: Boolean
+  deletedAt: DateTime
   employees: EmployeeCreateManyWithoutEventInput
   eventStuffs: EventStuffCreateManyWithoutEventInput
   invoice: InvoiceCreateOneWithoutEventInput
@@ -3914,6 +3971,7 @@ input EventCreateWithoutOfferInput {
 
 input EventCreateWithoutVehiclesInput {
   canceled: Boolean
+  deletedAt: DateTime
   offer: OfferCreateOneWithoutEventInput
   employees: EmployeeCreateManyWithoutEventInput
   eventStuffs: EventStuffCreateManyWithoutEventInput
@@ -3934,6 +3992,8 @@ enum EventOrderByInput {
   id_DESC
   canceled_ASC
   canceled_DESC
+  deletedAt_ASC
+  deletedAt_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -3943,6 +4003,7 @@ enum EventOrderByInput {
 type EventPreviousValues {
   id: ID!
   canceled: Boolean
+  deletedAt: DateTime
 }
 
 type EventStuff implements Node {
@@ -4443,6 +4504,7 @@ input EventTypeWhereUniqueInput {
 
 input EventUpdateDataInput {
   canceled: Boolean
+  deletedAt: DateTime
   offer: OfferUpdateOneWithoutEventInput
   employees: EmployeeUpdateManyWithoutEventInput
   eventStuffs: EventStuffUpdateManyWithoutEventInput
@@ -4452,6 +4514,7 @@ input EventUpdateDataInput {
 
 input EventUpdateInput {
   canceled: Boolean
+  deletedAt: DateTime
   offer: OfferUpdateOneWithoutEventInput
   employees: EmployeeUpdateManyWithoutEventInput
   eventStuffs: EventStuffUpdateManyWithoutEventInput
@@ -4515,6 +4578,7 @@ input EventUpdateOneWithoutOfferInput {
 
 input EventUpdateWithoutEmployeesDataInput {
   canceled: Boolean
+  deletedAt: DateTime
   offer: OfferUpdateOneWithoutEventInput
   eventStuffs: EventStuffUpdateManyWithoutEventInput
   invoice: InvoiceUpdateOneWithoutEventInput
@@ -4523,6 +4587,7 @@ input EventUpdateWithoutEmployeesDataInput {
 
 input EventUpdateWithoutEventStuffsDataInput {
   canceled: Boolean
+  deletedAt: DateTime
   offer: OfferUpdateOneWithoutEventInput
   employees: EmployeeUpdateManyWithoutEventInput
   invoice: InvoiceUpdateOneWithoutEventInput
@@ -4531,6 +4596,7 @@ input EventUpdateWithoutEventStuffsDataInput {
 
 input EventUpdateWithoutInvoiceDataInput {
   canceled: Boolean
+  deletedAt: DateTime
   offer: OfferUpdateOneWithoutEventInput
   employees: EmployeeUpdateManyWithoutEventInput
   eventStuffs: EventStuffUpdateManyWithoutEventInput
@@ -4539,6 +4605,7 @@ input EventUpdateWithoutInvoiceDataInput {
 
 input EventUpdateWithoutOfferDataInput {
   canceled: Boolean
+  deletedAt: DateTime
   employees: EmployeeUpdateManyWithoutEventInput
   eventStuffs: EventStuffUpdateManyWithoutEventInput
   invoice: InvoiceUpdateOneWithoutEventInput
@@ -4547,6 +4614,7 @@ input EventUpdateWithoutOfferDataInput {
 
 input EventUpdateWithoutVehiclesDataInput {
   canceled: Boolean
+  deletedAt: DateTime
   offer: OfferUpdateOneWithoutEventInput
   employees: EmployeeUpdateManyWithoutEventInput
   eventStuffs: EventStuffUpdateManyWithoutEventInput
@@ -4648,6 +4716,28 @@ input EventWhereInput {
 
   """All values that are not equal to given value."""
   canceled_not: Boolean
+  deletedAt: DateTime
+
+  """All values that are not equal to given value."""
+  deletedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  deletedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  deletedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  deletedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  deletedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  deletedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  deletedAt_gte: DateTime
   offer: OfferWhereInput
   employees_every: EmployeeWhereInput
   employees_some: EmployeeWhereInput
@@ -11422,6 +11512,7 @@ type User implements Node {
   employee(where: EmployeeWhereInput): Employee
   jobs(where: JobWhereInput, orderBy: JobOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Job!]
   language: LanguageEnum
+  phone: String
 }
 
 """A connection to a list of items."""
@@ -11441,6 +11532,7 @@ input UserCreateInput {
   name: String!
   password: String!
   language: LanguageEnum
+  phone: String
   employee: EmployeeCreateOneWithoutUserInput
   jobs: JobCreateManyWithoutUsersInput
 }
@@ -11462,6 +11554,7 @@ input UserCreateWithoutEmployeeInput {
   name: String!
   password: String!
   language: LanguageEnum
+  phone: String
   jobs: JobCreateManyWithoutUsersInput
 }
 
@@ -11472,6 +11565,7 @@ input UserCreateWithoutJobsInput {
   name: String!
   password: String!
   language: LanguageEnum
+  phone: String
   employee: EmployeeCreateOneWithoutUserInput
 }
 
@@ -11503,6 +11597,8 @@ enum UserOrderByInput {
   password_DESC
   language_ASC
   language_DESC
+  phone_ASC
+  phone_DESC
 }
 
 type UserPreviousValues {
@@ -11515,6 +11611,7 @@ type UserPreviousValues {
   name: String!
   password: String!
   language: LanguageEnum
+  phone: String
 }
 
 type UserSubscriptionPayload {
@@ -11563,6 +11660,7 @@ input UserUpdateInput {
   name: String
   password: String
   language: LanguageEnum
+  phone: String
   employee: EmployeeUpdateOneWithoutUserInput
   jobs: JobUpdateManyWithoutUsersInput
 }
@@ -11592,6 +11690,7 @@ input UserUpdateWithoutEmployeeDataInput {
   name: String
   password: String
   language: LanguageEnum
+  phone: String
   jobs: JobUpdateManyWithoutUsersInput
 }
 
@@ -11602,6 +11701,7 @@ input UserUpdateWithoutJobsDataInput {
   name: String
   password: String
   language: LanguageEnum
+  phone: String
   employee: EmployeeUpdateOneWithoutUserInput
 }
 
@@ -11894,6 +11994,46 @@ input UserWhereInput {
 
   """All values that are not contained in given list."""
   language_not_in: [LanguageEnum!]
+  phone: String
+
+  """All values that are not equal to given value."""
+  phone_not: String
+
+  """All values that are contained in given list."""
+  phone_in: [String!]
+
+  """All values that are not contained in given list."""
+  phone_not_in: [String!]
+
+  """All values less than the given value."""
+  phone_lt: String
+
+  """All values less than or equal the given value."""
+  phone_lte: String
+
+  """All values greater than the given value."""
+  phone_gt: String
+
+  """All values greater than or equal the given value."""
+  phone_gte: String
+
+  """All values containing the given string."""
+  phone_contains: String
+
+  """All values not containing the given string."""
+  phone_not_contains: String
+
+  """All values starting with the given string."""
+  phone_starts_with: String
+
+  """All values not starting with the given string."""
+  phone_not_starts_with: String
+
+  """All values ending with the given string."""
+  phone_ends_with: String
+
+  """All values not ending with the given string."""
+  phone_not_ends_with: String
   employee: EmployeeWhereInput
   jobs_every: JobWhereInput
   jobs_some: JobWhereInput
@@ -12332,6 +12472,8 @@ export type ClientOrderByInput =   'address_ASC' |
   'type_DESC' |
   'postalCode_ASC' |
   'postalCode_DESC' |
+  'city_ASC' |
+  'city_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC'
 
@@ -12544,7 +12686,9 @@ export type UserOrderByInput =   'createdAt_ASC' |
   'password_ASC' |
   'password_DESC' |
   'language_ASC' |
-  'language_DESC'
+  'language_DESC' |
+  'phone_ASC' |
+  'phone_DESC'
 
 export type Account =   'Invoice' |
   'CreditNote'
@@ -12689,6 +12833,8 @@ export type EventOrderByInput =   'id_ASC' |
   'id_DESC' |
   'canceled_ASC' |
   'canceled_DESC' |
+  'deletedAt_ASC' |
+  'deletedAt_DESC' |
   'updatedAt_ASC' |
   'updatedAt_DESC' |
   'createdAt_ASC' |
@@ -12926,6 +13072,20 @@ export interface ClientWhereInput {
   postalCode_not_starts_with?: String
   postalCode_ends_with?: String
   postalCode_not_ends_with?: String
+  city?: String
+  city_not?: String
+  city_in?: String[] | String
+  city_not_in?: String[] | String
+  city_lt?: String
+  city_lte?: String
+  city_gt?: String
+  city_gte?: String
+  city_contains?: String
+  city_not_contains?: String
+  city_starts_with?: String
+  city_not_starts_with?: String
+  city_ends_with?: String
+  city_not_ends_with?: String
   events_every?: EventWhereInput
   events_some?: EventWhereInput
   events_none?: EventWhereInput
@@ -12947,6 +13107,7 @@ export interface ClientUpdateWithoutOffersDataInput {
   language?: LanguageEnum
   type?: ClientType
   postalCode?: String
+  city?: String
   events?: EventUpdateManyInput
   clientContacts?: ClientContactUpdateManyWithoutClientInput
   country?: CountryUpdateOneWithoutClientsInput
@@ -14026,6 +14187,7 @@ export interface UserCreateWithoutEmployeeInput {
   name: String
   password: String
   language?: LanguageEnum
+  phone?: String
   jobs?: JobCreateManyWithoutUsersInput
 }
 
@@ -14080,6 +14242,7 @@ export interface UserCreateManyWithoutJobsInput {
 
 export interface EventUpdateInput {
   canceled?: Boolean
+  deletedAt?: DateTime
   offer?: OfferUpdateOneWithoutEventInput
   employees?: EmployeeUpdateManyWithoutEventInput
   eventStuffs?: EventStuffUpdateManyWithoutEventInput
@@ -14094,6 +14257,7 @@ export interface UserCreateWithoutJobsInput {
   name: String
   password: String
   language?: LanguageEnum
+  phone?: String
   employee?: EmployeeCreateOneWithoutUserInput
 }
 
@@ -14322,6 +14486,7 @@ export interface UserCreateInput {
   name: String
   password: String
   language?: LanguageEnum
+  phone?: String
   employee?: EmployeeCreateOneWithoutUserInput
   jobs?: JobCreateManyWithoutUsersInput
 }
@@ -14357,6 +14522,7 @@ export interface PlaceCreateInput {
 
 export interface EventUpdateWithoutVehiclesDataInput {
   canceled?: Boolean
+  deletedAt?: DateTime
   offer?: OfferUpdateOneWithoutEventInput
   employees?: EmployeeUpdateManyWithoutEventInput
   eventStuffs?: EventStuffUpdateManyWithoutEventInput
@@ -14588,6 +14754,7 @@ export interface EventUpsertWithoutEventStuffsInput {
 
 export interface EventCreateWithoutEventStuffsInput {
   canceled?: Boolean
+  deletedAt?: DateTime
   offer?: OfferCreateOneWithoutEventInput
   employees?: EmployeeCreateManyWithoutEventInput
   invoice?: InvoiceCreateOneWithoutEventInput
@@ -14761,6 +14928,7 @@ export interface UserUpdateInput {
   name?: String
   password?: String
   language?: LanguageEnum
+  phone?: String
   employee?: EmployeeUpdateOneWithoutUserInput
   jobs?: JobUpdateManyWithoutUsersInput
 }
@@ -14871,6 +15039,7 @@ export interface EventUpsertWithWhereUniqueNestedInput {
 
 export interface EventCreateWithoutVehiclesInput {
   canceled?: Boolean
+  deletedAt?: DateTime
   offer?: OfferCreateOneWithoutEventInput
   employees?: EmployeeCreateManyWithoutEventInput
   eventStuffs?: EventStuffCreateManyWithoutEventInput
@@ -14905,7 +15074,7 @@ export interface EmployeeUpsertWithWhereUniqueWithoutEventInput {
 }
 
 export interface ClientCreateWithoutCountryInput {
-  address?: String
+  address: String
   email: String
   name: String
   phone: String
@@ -14913,6 +15082,7 @@ export interface ClientCreateWithoutCountryInput {
   language?: LanguageEnum
   type?: ClientType
   postalCode: String
+  city: String
   events?: EventCreateManyInput
   offers?: OfferCreateManyWithoutClientInput
   clientContacts?: ClientContactCreateManyWithoutClientInput
@@ -14956,6 +15126,7 @@ export interface ClientUpdateInput {
   language?: LanguageEnum
   type?: ClientType
   postalCode?: String
+  city?: String
   events?: EventUpdateManyInput
   offers?: OfferUpdateManyWithoutClientInput
   clientContacts?: ClientContactUpdateManyWithoutClientInput
@@ -14979,7 +15150,6 @@ export interface EventUpdateManyInput {
 export interface CountryUpdateOneWithoutClientsInput {
   create?: CountryCreateWithoutClientsInput
   connect?: CountryWhereUniqueInput
-  disconnect?: Boolean
   delete?: Boolean
   update?: CountryUpdateWithoutClientsDataInput
   upsert?: CountryUpsertWithoutClientsInput
@@ -14998,6 +15168,7 @@ export interface EmployeeEstimationUpsertWithWhereUniqueWithoutOfferInput {
 
 export interface EventUpdateDataInput {
   canceled?: Boolean
+  deletedAt?: DateTime
   offer?: OfferUpdateOneWithoutEventInput
   employees?: EmployeeUpdateManyWithoutEventInput
   eventStuffs?: EventStuffUpdateManyWithoutEventInput
@@ -15063,6 +15234,7 @@ export interface UserUpdateWithoutJobsDataInput {
   name?: String
   password?: String
   language?: LanguageEnum
+  phone?: String
   employee?: EmployeeUpdateOneWithoutUserInput
 }
 
@@ -15172,7 +15344,7 @@ export interface VehicleWhereInput {
 }
 
 export interface ClientCreateInput {
-  address?: String
+  address: String
   email: String
   name: String
   phone: String
@@ -15180,10 +15352,11 @@ export interface ClientCreateInput {
   language?: LanguageEnum
   type?: ClientType
   postalCode: String
+  city: String
   events?: EventCreateManyInput
   offers?: OfferCreateManyWithoutClientInput
   clientContacts?: ClientContactCreateManyWithoutClientInput
-  country?: CountryCreateOneWithoutClientsInput
+  country: CountryCreateOneWithoutClientsInput
 }
 
 export interface EventStuffWhereInput {
@@ -15218,6 +15391,7 @@ export interface EventStuffWhereInput {
 
 export interface EventCreateInput {
   canceled?: Boolean
+  deletedAt?: DateTime
   offer?: OfferCreateOneWithoutEventInput
   employees?: EmployeeCreateManyWithoutEventInput
   eventStuffs?: EventStuffCreateManyWithoutEventInput
@@ -15253,7 +15427,7 @@ export interface OfferCreateWithoutEventInput {
 }
 
 export interface ClientCreateWithoutOffersInput {
-  address?: String
+  address: String
   email: String
   name: String
   phone: String
@@ -15261,9 +15435,10 @@ export interface ClientCreateWithoutOffersInput {
   language?: LanguageEnum
   type?: ClientType
   postalCode: String
+  city: String
   events?: EventCreateManyInput
   clientContacts?: ClientContactCreateManyWithoutClientInput
-  country?: CountryCreateOneWithoutClientsInput
+  country: CountryCreateOneWithoutClientsInput
 }
 
 export interface ClientContactUpdateWithoutClientDataInput {
@@ -15325,6 +15500,7 @@ export interface OfferUpdateWithWhereUniqueWithoutClientContactInput {
 
 export interface EventCreateWithoutOfferInput {
   canceled?: Boolean
+  deletedAt?: DateTime
   employees?: EmployeeCreateManyWithoutEventInput
   eventStuffs?: EventStuffCreateManyWithoutEventInput
   invoice?: InvoiceCreateOneWithoutEventInput
@@ -15384,6 +15560,7 @@ export interface JobCreateWithoutEmployeesInput {
 
 export interface EventUpdateWithoutOfferDataInput {
   canceled?: Boolean
+  deletedAt?: DateTime
   employees?: EmployeeUpdateManyWithoutEventInput
   eventStuffs?: EventStuffUpdateManyWithoutEventInput
   invoice?: InvoiceUpdateOneWithoutEventInput
@@ -15514,6 +15691,7 @@ export interface EmployeeEstimationUpdateManyWithoutJobInput {
 
 export interface EventCreateWithoutInvoiceInput {
   canceled?: Boolean
+  deletedAt?: DateTime
   offer?: OfferCreateOneWithoutEventInput
   employees?: EmployeeCreateManyWithoutEventInput
   eventStuffs?: EventStuffCreateManyWithoutEventInput
@@ -15605,7 +15783,7 @@ export interface BudgetLineUpdateManyWithoutOfferInput {
 }
 
 export interface ClientCreateWithoutClientContactsInput {
-  address?: String
+  address: String
   email: String
   name: String
   phone: String
@@ -15613,9 +15791,10 @@ export interface ClientCreateWithoutClientContactsInput {
   language?: LanguageEnum
   type?: ClientType
   postalCode: String
+  city: String
   events?: EventCreateManyInput
   offers?: OfferCreateManyWithoutClientInput
-  country?: CountryCreateOneWithoutClientsInput
+  country: CountryCreateOneWithoutClientsInput
 }
 
 export interface BudgetLineUpdateWithWhereUniqueWithoutOfferInput {
@@ -15722,6 +15901,7 @@ export interface BudgetUpdateWithWhereUniqueWithoutTaxInput {
 
 export interface EventCreateWithoutEmployeesInput {
   canceled?: Boolean
+  deletedAt?: DateTime
   offer?: OfferCreateOneWithoutEventInput
   eventStuffs?: EventStuffCreateManyWithoutEventInput
   invoice?: InvoiceCreateOneWithoutEventInput
@@ -15811,6 +15991,7 @@ export interface BudgetLineCreateWithoutTaxInput {
 
 export interface EventUpdateWithoutInvoiceDataInput {
   canceled?: Boolean
+  deletedAt?: DateTime
   offer?: OfferUpdateOneWithoutEventInput
   employees?: EmployeeUpdateManyWithoutEventInput
   eventStuffs?: EventStuffUpdateManyWithoutEventInput
@@ -16260,6 +16441,7 @@ export interface ClientUpdateWithoutClientContactsDataInput {
   language?: LanguageEnum
   type?: ClientType
   postalCode?: String
+  city?: String
   events?: EventUpdateManyInput
   offers?: OfferUpdateManyWithoutClientInput
   country?: CountryUpdateOneWithoutClientsInput
@@ -16633,6 +16815,7 @@ export interface ClientUpdateWithoutCountryDataInput {
   language?: LanguageEnum
   type?: ClientType
   postalCode?: String
+  city?: String
   events?: EventUpdateManyInput
   offers?: OfferUpdateManyWithoutClientInput
   clientContacts?: ClientContactUpdateManyWithoutClientInput
@@ -16710,6 +16893,7 @@ export interface JobUpdateInput {
 
 export interface EventUpdateWithoutEmployeesDataInput {
   canceled?: Boolean
+  deletedAt?: DateTime
   offer?: OfferUpdateOneWithoutEventInput
   eventStuffs?: EventStuffUpdateManyWithoutEventInput
   invoice?: InvoiceUpdateOneWithoutEventInput
@@ -16732,6 +16916,7 @@ export interface InvoiceUpdateOneWithoutEventInput {
 
 export interface EventUpdateWithoutEventStuffsDataInput {
   canceled?: Boolean
+  deletedAt?: DateTime
   offer?: OfferUpdateOneWithoutEventInput
   employees?: EmployeeUpdateManyWithoutEventInput
   invoice?: InvoiceUpdateOneWithoutEventInput
@@ -18231,6 +18416,20 @@ export interface UserWhereInput {
   language_not?: LanguageEnum
   language_in?: LanguageEnum[] | LanguageEnum
   language_not_in?: LanguageEnum[] | LanguageEnum
+  phone?: String
+  phone_not?: String
+  phone_in?: String[] | String
+  phone_not_in?: String[] | String
+  phone_lt?: String
+  phone_lte?: String
+  phone_gt?: String
+  phone_gte?: String
+  phone_contains?: String
+  phone_not_contains?: String
+  phone_starts_with?: String
+  phone_not_starts_with?: String
+  phone_ends_with?: String
+  phone_not_ends_with?: String
   employee?: EmployeeWhereInput
   jobs_every?: JobWhereInput
   jobs_some?: JobWhereInput
@@ -18672,6 +18871,7 @@ export interface UserUpdateWithoutEmployeeDataInput {
   name?: String
   password?: String
   language?: LanguageEnum
+  phone?: String
   jobs?: JobUpdateManyWithoutUsersInput
 }
 
@@ -18706,6 +18906,14 @@ export interface EventWhereInput {
   id_not_ends_with?: ID_Input
   canceled?: Boolean
   canceled_not?: Boolean
+  deletedAt?: DateTime
+  deletedAt_not?: DateTime
+  deletedAt_in?: DateTime[] | DateTime
+  deletedAt_not_in?: DateTime[] | DateTime
+  deletedAt_lt?: DateTime
+  deletedAt_lte?: DateTime
+  deletedAt_gt?: DateTime
+  deletedAt_gte?: DateTime
   offer?: OfferWhereInput
   employees_every?: EmployeeWhereInput
   employees_some?: EmployeeWhereInput
@@ -18740,6 +18948,7 @@ export interface Node {
 export interface EventPreviousValues {
   id: ID_Output
   canceled?: Boolean
+  deletedAt?: DateTime
 }
 
 /*
@@ -18765,7 +18974,7 @@ export interface EventSubscriptionPayload {
 }
 
 export interface Client extends Node {
-  address?: String
+  address: String
   createdAt: DateTime
   email: String
   events?: Event[]
@@ -18777,8 +18986,9 @@ export interface Client extends Node {
   clientContacts?: ClientContact[]
   language?: LanguageEnum
   type?: ClientType
-  country?: Country
+  country: Country
   postalCode: String
+  city: String
 }
 
 export interface Event extends Node {
@@ -18789,6 +18999,7 @@ export interface Event extends Node {
   invoice?: Invoice
   vehicles?: Vehicle[]
   canceled?: Boolean
+  deletedAt?: DateTime
 }
 
 /*
@@ -18892,7 +19103,7 @@ export interface TaxConnection {
 }
 
 export interface ClientPreviousValues {
-  address?: String
+  address: String
   createdAt: DateTime
   email: String
   id: ID_Output
@@ -18902,6 +19113,7 @@ export interface ClientPreviousValues {
   language?: LanguageEnum
   type?: ClientType
   postalCode: String
+  city: String
 }
 
 /*
@@ -19294,6 +19506,7 @@ export interface UserPreviousValues {
   name: String
   password: String
   language?: LanguageEnum
+  phone?: String
 }
 
 /*
@@ -19665,6 +19878,7 @@ export interface User extends Node {
   employee?: Employee
   jobs?: Job[]
   language?: LanguageEnum
+  phone?: String
 }
 
 /*
